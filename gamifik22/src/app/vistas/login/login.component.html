@@ -1,15 +1,17 @@
 <div class="wrapper fadeInDown">
     <div id="formContent">
 
-        <h2 class="active"> Sign In </h2>
-        <h2 class="inactive underlineHover">Sign Up </h2>
+        <h2 class="active">Loguearse </h2>
+        <h2 routerLink="/registro" class="inactive underlineHover">Registrarse </h2>
 
         <div class="fadeIn first">
-            <img src="assets/escuela.png" id="icon" width="10" height="150"/>
+            <img src="" id="icon" width="10" height="150" />
         </div>
 
         <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)">
-            <input type="text" id="login" name="username" placeholder="Username" class="fadeIn second" formControlName="username" [ngClass]="{ 'is-invalid': form.username.errors }">
+            <input type="text" id="login" name="username" placeholder="Username" class="fadeIn second"
+                formControlName="username" [ngClass]="{ 'is-invalid': form.username.errors }">
+
 
             <!-- Missatge quan esta malament-->
             <!-- <div *ngIf="form.username.errors" class="invalid-feedback">
@@ -17,20 +19,21 @@
                 <div *ngIf="form.username.errors.minlength">La contraseña debe contener al menos 6 carácteres</div>
             </div> -->
 
-            <input type="text" id="password" name="password" placeholder="Password" class="fadeIn third" formControlName="password" [ngClass]="{ 'is-invalid': form.password.errors }">
-
+            <input type="text" id="password" name="password" placeholder="Password" class="fadeIn third"
+                formControlName="password" [type]="passwordType" [ngClass]="{ 'is-invalid': form.password.errors }">
+            <p (click)="togglePassword()">hola</p>
             <!-- Missatge quan esta malament-->
             <!-- <div *ngIf="form.password.errors" class="invalid-feedback">
                 <div *ngIf="form.password.errors.required">La contraseña es necesaria</div>
                 <div *ngIf="form.password.errors.minlength">La contraseña debe contener al menos 6 carácteres</div>
             </div> -->
 
-            <input type="submit" value="Log In" class="fadeIn fourth" [disabled]="loginForm.invalid">
+            <input type="submit" value="Iniciar Sesión" class="fadeIn fourth" [disabled]="loginForm.invalid">
 
         </form>
 
         <div id="formFooter">
             <a class="underlineHover" href="">Forgot Password?</a>
-          </div>
+        </div>
     </div>
 </div>

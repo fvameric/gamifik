@@ -1,0 +1,50 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+
+        <h2 routerLink="/login" class="inactive underlineHover"> Sign In </h2>
+        <h2 class="active">Sign Up </h2>
+
+        <div class="fadeIn first">
+            <img src="" id="icon" width="10" height="150" />
+        </div>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onLogin(registerForm.value)">
+            <input type="text" id="login" name="username" placeholder="Usuario" class="fadeIn second"
+                formControlName="username" [ngClass]="{ 'is-invalid': form.username.errors }">
+
+            <!-- Missatge quan esta malament-->
+            <!-- <div *ngIf="form.username.errors" class="invalid-feedback">
+                <div *ngIf="form.username.errors.required">La contraseña es necesaria</div>
+                <div *ngIf="form.username.errors.minlength">La contraseña debe contener al menos 6 carácteres</div>
+            </div> -->
+            <input type="text" id="email" name="email" placeholder="Correo Electrónico" class="fadeIn third"
+                formControlName="email" [ngClass]="{ 'is-invalid': form.email.errors }">
+
+
+            <input type="text" id="password" name="password" placeholder="Contraseña" class="fadeIn third"
+                formControlName="password" [ngClass]="{ 'is-invalid': form.password.errors }">
+
+            <!-- Missatge quan esta malament-->
+            <!-- <div *ngIf="form.password.errors" class="invalid-feedback">
+                <div *ngIf="form.password.errors.required">La contraseña es necesaria</div>
+                <div *ngIf="form.password.errors.minlength">La contraseña debe contener al menos 6 carácteres</div>
+            </div> -->
+
+            <input type="text" id="confirmPassword" name="confirmPassword" placeholder="Confirmar Contraseña"
+                class="fadeIn third" formControlName="confirmPassword"
+                [ngClass]="{ 'is-invalid': form.confirmPassword.errors }">
+
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="fadeIn third"
+                formControlName="nombre" [ngClass]="{ 'is-invalid': form.nombre.errors }">
+
+            <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" class="fadeIn third"
+                formControlName="apellidos" [ngClass]="{ 'is-invalid': form.apellidos.errors }">
+
+            <!--Falta poner input fecha de nacimiento-->
+
+            <input type="submit" value="Registrarse" class="fadeIn fourth" [disabled]="registerForm.invalid">
+
+        </form>
+
+    </div>
+</div>
