@@ -5,6 +5,7 @@ import { DashboardComponent } from './vistas/dashboard/dashboard.component';
 import { PerfilComponent } from './vistas/perfil/perfil.component';
 import { RegistroComponent } from './vistas/registro/registro.component';
 
+
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },

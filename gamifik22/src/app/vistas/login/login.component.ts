@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -44,11 +45,11 @@ export class LoginComponent implements OnInit {
   public togglePassword() {
     if (this.passwordShown) {
       this.passwordShown = false;
-      this.passwordType = this.loginForm.get("password")?.value;
+      this.passwordType = 'password';
 
     } else {
       this.passwordShown = true;
-      this.passwordType = this.loginForm.get("password")?.value;
+      this.passwordType = 'text';
     }
   }
 

@@ -1,3 +1,5 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <div class="wrapper fadeInDown">
     <div id="formContent">
 
@@ -8,7 +10,7 @@
             <img src="" id="icon" width="10" height="150" />
         </div>
 
-        <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)">
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)" class="Icon-inside">
             <input type="text" id="login" name="username" placeholder="Username" class="fadeIn second"
                 formControlName="username" [ngClass]="{ 'is-invalid': form.username.errors }">
 
@@ -19,9 +21,16 @@
                 <div *ngIf="form.username.errors.minlength">La contraseña debe contener al menos 6 carácteres</div>
             </div> -->
 
-            <input type="text" id="password" name="password" placeholder="Password" class="fadeIn third"
+            <input type="text" id="password" name="password" placeholder="Password" class="fadeIn second"
                 formControlName="password" [type]="passwordType" [ngClass]="{ 'is-invalid': form.password.errors }">
-            <p (click)="togglePassword()">hola</p>
+
+            <i *ngIf="this.passwordShown" (click)="togglePassword()" class="material-icons">
+                visibility
+            </i>
+            <i *ngIf="!this.passwordShown" (click)="togglePassword()" class="material-icons">
+                visibility_off
+            </i>
+
             <!-- Missatge quan esta malament-->
             <!-- <div *ngIf="form.password.errors" class="invalid-feedback">
                 <div *ngIf="form.password.errors.required">La contraseña es necesaria</div>
