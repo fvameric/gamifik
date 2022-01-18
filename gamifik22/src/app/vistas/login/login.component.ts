@@ -14,12 +14,14 @@ export class LoginComponent implements OnInit {
   passwordShown:boolean = false;
   passwordType:string = 'password';
 
+  submitted: boolean = false;
+
   constructor(public formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group(
       {
-        username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+        username: ['', [Validators.required]],
         password: ['', [Validators.required, Validators.minLength(6)]]
       }
     );
@@ -37,6 +39,9 @@ export class LoginComponent implements OnInit {
 
   //Funció iniciar sessió
   onLogin(form: any) {
+
+    this.submitted = true;
+    console.log(this.submitted);
     console.log(form);
     this.onReset();
 
