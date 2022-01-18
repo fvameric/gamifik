@@ -9,6 +9,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
 
+  active = 1;
   loginForm!: FormGroup;
   passwordShown:boolean = false;
   passwordType:string = 'password';
