@@ -4,7 +4,7 @@
 <div class="wrapper fadeInDown">
     <div id="formContent">
 
-        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+        <ul ngbNav #nav="ngbNav" class="nav-tabs">
             <li [ngbNavItem]="1">
                 <a ngbNavLink>Login</a>
                 <ng-template ngbNavContent>
@@ -13,29 +13,30 @@
                     </div>
 
                     <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)" class="Icon-inside">
-                        <input type="text" id="login" name="username" placeholder="Username" class="fadeIn second" formControlName="username" [ngClass]="{ 'is-invalid': submitted && form.username.errors }">
+                        <input type="text" id="login" name="username" placeholder="Username" class="fadeIn second"
+                            formControlName="username" [ngClass]="{ 'is-invalid': submitted && form.username.errors }">
 
                         <!-- Missatge error nom -->
                         <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
                             <div *ngIf="form.username.errors.required">El nombre es necesario</div>
                         </div>
 
+                        <input type="text" id="password" name="password" placeholder="Password" class="fadeIn second"
+                            formControlName="password" [style]="" [type]="passwordType"
+                            [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
 
-                        <div class="test-pass">
-                            <input type="text" id="password" name="password" placeholder="Password" class="fadeIn second" formControlName="password" [style]="" [type]="passwordType" [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
-
-                            <i *ngIf="this.passwordShown" (click)="togglePassword()" class="material-icons">
-                                visibility
-                            </i>
-                            <i *ngIf="!this.passwordShown" (click)="togglePassword()" class="material-icons">
-                                visibility_off
-                            </i>
-                        </div>
-
+                        <i *ngIf="this.passwordShown" (click)="togglePassword()" class="material-icons">
+                            visibility
+                        </i>
+                        <i *ngIf="!this.passwordShown" (click)="togglePassword()" class="material-icons">
+                            visibility_off
+                        </i>
+                        
                         <!-- Missatge error password -->
                         <div *ngIf="submitted &&  form.password.errors" class="invalid-feedback">
                             <div *ngIf="form.password.errors.required">La contraseña es necesaria</div>
-                            <div *ngIf="form.password.errors.minlength">La contraseña debe contener al menos 6 carácteres</div>
+                            <div *ngIf="form.password.errors.minlength">La contraseña debe contener al menos 6
+                                carácteres</div>
                         </div>
 
                         <input type="submit" value="Iniciar Sesión" class="fadeIn fourth">

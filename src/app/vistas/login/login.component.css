@@ -165,17 +165,10 @@ input[type=text]:placeholder {
     position: relative;
 }
 
-.test-pass {
-    background-color: #39ace7;
-}
-
-.test-pass i {
-    position: relative;
-    right: 55px;
-    top: 10px;
-}
-
 .Icon-inside i {
+    position: absolute;
+    top: 80px;
+    right: 35px;
     padding: 10px 10px;
     color: #30A3F1;
     opacity: 0;

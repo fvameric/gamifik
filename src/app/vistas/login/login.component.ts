@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
+// imports conectividad
+import { HttpClient } from '@angular/common/http';
+import { ControladorService } from 'services/controlador.service';
+
+// interfaces
+import { Profesor } from 'app/interfaces/profesor';
+import { Alumno } from 'app/interfaces/alumno';
+
 
 @Component({
   selector: 'app-login',
@@ -9,14 +17,37 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
 
-  active = 1;
+  // variables formulario
   loginForm!: FormGroup;
-  passwordShown:boolean = false;
-  passwordType:string = 'password';
-
+  passwordShown: boolean = false;
+  passwordType: string = 'password';
   submitted: boolean = false;
 
-  constructor(public formBuilder: FormBuilder) { }
+  profeExiste: Boolean = false;
+
+  constructor(public formBuilder: FormBuilder, private controladorService: ControladorService, private http: HttpClient) { }
+
+  datosProfesor: Profesor = {
+    _id: 0,
+    nick: '',
+    email: '',
+    pass: '',
+    nombre: '',
+    apellidos: '',
+    centro: 0,
+    avatar: '',
+  }
+
+  datosAlumno: Alumno = {
+    _id: 0,
+    nick: '',
+    email: '',
+    pass: '',
+    nombre: '',
+    apellidos: '',
+    fecha_nacimiento: new Date,
+    avatar: '',
+  }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group(
@@ -39,14 +70,25 @@ export class LoginComponent implements OnInit {
 
   //Funció iniciar sessió
   onLogin(form: any) {
-
     this.submitted = true;
-    console.log(this.submitted);
-    console.log(form);
+
+    this.controladorService.obtenerDatosProfesor().subscribe((datos: Profesor) => {
+      this.datosProfesor = datos;
+      this.datosProfesor.forEach((profe: Profesor) => {
+        if (form.username == profe.nick && form.password == profe.pass) {
+          this.profeExiste = true;
+        }
+      });
+
+      if (this.profeExiste) {
+        alert("login");
+      }else {
+        alert("no login");
+      }
+    });
+
     this.onReset();
-
   }
-
 
   public togglePassword() {
     if (this.passwordShown) {
