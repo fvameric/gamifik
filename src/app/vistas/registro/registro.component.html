@@ -7,6 +7,7 @@
     <!-- Missatge quan esta malament-->
     <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
         <div *ngIf="form.username.errors.required">El nombre es necesario</div>
+        <div *ngIf="form.username.errors.pattern">Solo se permiten letras, numeros y guión bajo (_)</div>
     </div>
 
     <input type="text" id="email" name="email" placeholder="Correo Electrónico" class="fadeIn third" formControlName="email" [ngClass]="{ 'is-invalid': submitted && form.email.errors }">
@@ -19,9 +20,9 @@
     <!-- Missatge quan esta malament-->
     <div *ngIf="submitted &&  form.password.errors" class="invalid-feedback">
         <div *ngIf="form.password.errors.required">La contraseña es necesaria</div>
-        <div *ngIf="form.password.errors.minlength">La contraseña debe contener al menos 6
-            carácteres</div>
-    </div> 
+        <div *ngIf="form.password.errors.minlength">La contraseña debe contener al menos 6 carácteres
+        </div>
+    </div>
 
     <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar Contraseña" class="fadeIn third" formControlName="confirmPassword" [ngClass]="{ 'is-invalid':submitted && form.confirmPassword.errors }">
     <div *ngIf="submitted && form.confirmPassword.errors" class="invalid-feedback">
