@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
+import { HttpClient } from '@angular/common/http';
+import { ControladorService } from 'services/controlador.service';
+
+// interfaces
+import { Profesor } from 'app/interfaces/Profesor';
+import { Alumno } from 'app/interfaces/Alumno';
+
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -10,7 +17,7 @@ export class RegistroComponent implements OnInit {
 
   registerForm!: FormGroup;
 
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder, private controladorService: ControladorService, private http: HttpClient) { }
 
   ngOnInit(): void {
 
@@ -62,10 +69,13 @@ export class RegistroComponent implements OnInit {
   }
 
   //Funció que executa quan s'apreta el botó registre
-  onLogin(form: any) {
+  onRegistro(form: any) {
     console.log(form);
-    this.onReset();
 
+    // TO-DO insertar profesor al registrarse
+    //this.controladorService.insertarProfesor(form);
+
+    this.onReset();
   }
 
 }

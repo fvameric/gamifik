@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { ControladorService } from 'services/controlador.service';
 
 // interfaces
-import { Profesor } from 'app/interfaces/profesor';
-import { Alumno } from 'app/interfaces/alumno';
+import { Profesor } from 'app/interfaces/Profesor';
+import { Alumno } from 'app/interfaces/Alumno';
 
 
 @Component({

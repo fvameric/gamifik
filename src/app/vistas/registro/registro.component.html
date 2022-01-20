@@ -2,7 +2,7 @@
     <img src="" id="icon" width="10" height="150" />
 </div>
 
-<form [formGroup]="registerForm" (ngSubmit)="onLogin(registerForm.value)">
+<form [formGroup]="registerForm" (ngSubmit)="onRegistro(registerForm.value)">
     <input type="text" id="login" name="username" placeholder="Usuario" class="fadeIn second" formControlName="username" [ngClass]="{ 'is-invalid': form.username.errors }">
 
     <!-- Missatge quan esta malament-->

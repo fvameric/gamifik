@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Profesor } from 'app/interfaces/profesor';
-import { Alumno } from 'app/interfaces/alumno';
+import { Profesor } from 'app/interfaces/Profesor';
+import { Alumno } from 'app/interfaces/Alumno';
 
 @Injectable({
   providedIn: 'root'
@@ -23,4 +23,14 @@ export class ControladorService {
   obtenerDatosAlumno() {
     return this.http.get<Alumno>(`${this.URL}datosAlumno.php`);
   }
+
+  insertarProfesor(profe: Profesor) {
+    return this.http.post(`${this.URL}insertarProfesor.php`, JSON.stringify(profe));
+  }
+
+  eliminarProfesor(idProfesor: number) {
+    return this.http.get(`${this.URL}eliminarProfesor.php?id=${idProfesor}`)
+  }
+
+  // TO-DO modificar profe
 }
