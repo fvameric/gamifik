@@ -29,6 +29,17 @@
 
     <!--Falta poner input fecha de nacimiento-->
 
-    <input type="submit" value="Registrarse" class="fadeIn fourth" [disabled]="registerForm.invalid">
+    <br>
+    <label for="centro1">Centro 1</label>
+    <input type="radio" formControlName="centro" value="1"><br>
+
+    <label for="centro2">Centro 2</label>
+    <input type="radio" formControlName="centro" value="2"><br>
+
+    <label for="centro3">Centro 3</label>
+    <input type="radio" formControlName="centro" value="3"><br>
+
+    <br>
+    <input type="submit" value="Registrarse" class="fadeIn fourth">
 
 </form>

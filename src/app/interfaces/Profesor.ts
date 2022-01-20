@@ -1,5 +1,4 @@
 export interface Profesor {
-    [x: string]: any;
     _id: number;
     nick: string;
     email: string;
@@ -7,5 +6,4 @@ export interface Profesor {
     nombre: string;
     apellidos: string;
     centro: number;
-    avatar: string;
   }

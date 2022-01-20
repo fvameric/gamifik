@@ -29,8 +29,8 @@ export class RegistroComponent implements OnInit {
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
         nombre: ['', [Validators.required, Validators.minLength(1)]],
-        apellidos: ['', [Validators.required, Validators.minLength(2)]]
-
+        apellidos: ['', [Validators.required, Validators.minLength(2)]],
+        centro: ['', [Validators.required]]
       },
       {
         //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
@@ -70,10 +70,18 @@ export class RegistroComponent implements OnInit {
 
   //Funció que executa quan s'apreta el botó registre
   onRegistro(form: any) {
-    console.log(form);
 
-    // TO-DO insertar profesor al registrarse
-    //this.controladorService.insertarProfesor(form);
+    const nuevoProfe: Profesor = {
+      _id: 0,
+      nick: form.username,
+      email: form.email,
+      pass: form.password,
+      nombre: form.nombre,
+      apellidos: form.apellidos,
+      centro: form.centro
+    }
+
+    this.controladorService.insertarProfesor(nuevoProfe);
 
     this.onReset();
   }

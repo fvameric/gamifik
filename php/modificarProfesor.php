@@ -3,7 +3,7 @@
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
   header('Content-Type: text/html; charset=UTF-8');
 
-  require("db.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
+  require("bd.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
   $bd = new claseBD(); // CREA LA CONEXION
 

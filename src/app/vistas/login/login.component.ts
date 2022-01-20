@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder, private controladorService: ControladorService, private http: HttpClient) { }
 
+  profesores: any;
+
   datosProfesor: Profesor = {
     _id: 0,
     nick: '',
@@ -34,8 +36,7 @@ export class LoginComponent implements OnInit {
     pass: '',
     nombre: '',
     apellidos: '',
-    centro: 0,
-    avatar: '',
+    centro: 0
   }
 
   datosAlumno: Alumno = {
@@ -72,19 +73,23 @@ export class LoginComponent implements OnInit {
   onLogin(form: any) {
     this.submitted = true;
 
-    this.controladorService.obtenerDatosProfesor().subscribe((datos: Profesor) => {
-      this.datosProfesor = datos;
-      this.datosProfesor.forEach((profe: Profesor) => {
-        if (form.username == profe.nick && form.password == profe.pass) {
+    this.controladorService.obtenerDatosProfesor()
+    .subscribe((datos: any) => {
+      this.profesores = datos;
+      this.profesores.forEach((element: any) => {
+        console.log(element.nick);
+      });
+      /*
+      if (form.username == datos.nick && form.password == datos.pass) {
           this.profeExiste = true;
         }
-      });
-
+      
       if (this.profeExiste) {
         alert("login");
       }else {
         alert("no login");
       }
+      */
     });
 
     this.onReset();

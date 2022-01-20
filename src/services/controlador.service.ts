@@ -25,7 +25,10 @@ export class ControladorService {
   }
 
   insertarProfesor(profe: Profesor) {
-    return this.http.post(`${this.URL}insertarProfesor.php`, JSON.stringify(profe));
+    const jsonData = '{"id": "0", "nick": "asd", "email": "asd@gmail.com", "pass": "asd","nombre": "asd", "apellidos": "asd", "centro": "asd"}';
+    console.log(jsonData);
+    return this.http.post<any>(`${this.URL}insertarProfesor.php`, jsonData);
+    //return this.http.post(`${this.URL}insertarProfesor.php`, JSON.stringify(profe));
   }
 
   eliminarProfesor(idProfesor: number) {
