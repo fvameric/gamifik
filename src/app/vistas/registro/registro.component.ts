@@ -16,6 +16,7 @@ import { Alumno } from 'app/interfaces/Alumno';
 export class RegistroComponent implements OnInit {
 
   registerForm!: FormGroup;
+  submitted: boolean = false;
 
   constructor(public formBuilder: FormBuilder, private controladorService: ControladorService, private http: HttpClient) { }
 
@@ -27,10 +28,11 @@ export class RegistroComponent implements OnInit {
         username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
         email: ['', [Validators.required, Validators.email, Validators.minLength(3)]],
         password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', [Validators.required]],
         nombre: ['', [Validators.required, Validators.minLength(1)]],
         apellidos: ['', [Validators.required, Validators.minLength(2)]],
-        centro: ['', [Validators.required]]
+        centro: ['', [Validators.required]],
+        fechaNacimiento: ['', [Validators.required]]
       },
       {
         //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
@@ -50,12 +52,11 @@ export class RegistroComponent implements OnInit {
       }
 
       if (control.value !== matchingControl.value) {
-        matchingControl.setErrors({ mustMatch: true })
-
+        matchingControl.setErrors({ mustMatch: true });
       } else {
         matchingControl.setErrors(null);
       }
-    }
+    };
   }
 
   //Retorna els valors introduits al formulari
@@ -82,6 +83,18 @@ export class RegistroComponent implements OnInit {
     }
 
     this.controladorService.insertarProfesor(nuevoProfe);
+
+    this.submitted = true;
+
+    //Comprobar si es cumpleixen o no tots els errors
+    if (this.registerForm.invalid) {
+      console.log("invalido");
+
+    } else {
+      console.log("valid");
+    }
+    // TO-DO insertar profesor al registrarse
+    //this.controladorService.insertarProfesor(form);
 
     this.onReset();
   }

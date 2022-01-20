@@ -10,6 +10,7 @@ import { Profesor } from 'app/interfaces/Profesor';
 import { Alumno } from 'app/interfaces/Alumno';
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

@@ -22,7 +22,7 @@
                         </div>
 
                         <input type="text" id="password" name="password" placeholder="Password" class="fadeIn second"
-                            formControlName="password" [style]="" [type]="passwordType"
+                            formControlName="password" [type]="passwordType"
                             [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
 
                         <i *ngIf="this.passwordShown" (click)="togglePassword()" class="material-icons">
