@@ -1,3 +1,6 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+
 <div class="fadeIn first">
     <img src="" id="icon" width="10" height="150" />
 </div>
@@ -17,21 +20,45 @@
         <div *ngIf="form.email.errors.email">Correo electrónico no válido</div>
     </div>
 
-    <input type="password" id="password" name="password" placeholder="Contraseña" class="fadeIn third"
-        formControlName="password" [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
-    <!-- Missatge quan esta malament-->
-    <div *ngIf="submitted &&  form.password.errors" class="invalid-feedback">
-        <div *ngIf="form.password.errors.required">La contraseña es necesaria</div>
-        <div *ngIf="form.password.errors.minlength">La contraseña debe contener al menos 6
-            carácteres</div>
+    <div class="form-group">
+        <div class="input-group">
+            <input type="password" id="password" name="password" placeholder="Contraseña" class="fadeIn third"
+                formControlName="password" [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
+                <!-- Icono -->
+                <i *ngIf="this.passwordShown" (click)="togglePassword()" class="material-icons">
+                    visibility
+                </i>
+                <i *ngIf="!this.passwordShown" (click)="togglePassword()" class="material-icons">
+                    visibility_off
+                </i>
+            <!-- Missatge quan esta malament-->
+            <div *ngIf="submitted &&  form.password.errors" class="invalid-feedback">
+                <div *ngIf="form.password.errors.required">La contraseña es necesaria</div>
+                <div *ngIf="form.password.errors.minlength">La contraseña debe contener al menos 6
+                    carácteres</div>
+            </div>
+        </div>
     </div>
 
-    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar Contraseña"
-        class="fadeIn third" formControlName="confirmPassword"
-        [ngClass]="{ 'is-invalid':submitted && form.confirmPassword.errors }">
-    <div *ngIf="submitted && form.confirmPassword.errors" class="invalid-feedback">
-        <div *ngIf="form.confirmPassword.errors.required">Confirmar la contraseña es necesario</div>
-        <div *ngIf="form.confirmPassword.errors.MustMatch">Las contraseñas deben de coincidir</div>
+    <div class="form-group">
+        <div class="input-group">
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar Contraseña"
+                class="fadeIn third" formControlName="confirmPassword"
+                [ngClass]="{ 'is-invalid':submitted && form.confirmPassword.errors }">
+                <!-- Icono -->
+            <i *ngIf="this.passwordShown" (click)="togglePassword()" class="material-icons">
+                visibility
+            </i>
+            <i *ngIf="!this.passwordShown" (click)="togglePassword()" class="material-icons">
+                visibility_off
+            </i>
+            <div class="input-group-append">
+                <div *ngIf="submitted && form.confirmPassword.errors" class="invalid-feedback">
+                    <div *ngIf="form.confirmPassword.errors.required">Confirmar la contraseña es necesario</div>
+                    <div *ngIf="form.confirmPassword.errors.MustMatch">Las contraseñas deben de coincidir</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="fadeIn third" formControlName="nombre"

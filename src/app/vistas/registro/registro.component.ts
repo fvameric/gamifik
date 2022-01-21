@@ -17,6 +17,8 @@ export class RegistroComponent implements OnInit {
 
   registerForm!: FormGroup;
   submitted: boolean = false;
+  passwordShown: boolean = false;
+  passwordType: string = 'password';
 
   constructor(public formBuilder: FormBuilder, private controladorService: ControladorService, private http: HttpClient) { }
 
@@ -97,6 +99,17 @@ export class RegistroComponent implements OnInit {
     //this.controladorService.insertarProfesor(form);
 
     this.onReset();
+  }
+
+  public togglePassword() {
+    if (this.passwordShown) {
+      this.passwordShown = false;
+      this.passwordType = 'password';
+
+    } else {
+      this.passwordShown = true;
+      this.passwordType = 'text';
+    }
   }
 
 }
