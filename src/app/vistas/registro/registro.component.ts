@@ -20,7 +20,7 @@ export class RegistroComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder, private controladorService: ControladorService, private http: HttpClient) { }
 
-  ngOnInit(): void {
+  ngOnInit(){
 
     //Validadors registre
     this.registerForm = this.formBuilder.group(
@@ -28,11 +28,11 @@ export class RegistroComponent implements OnInit {
         username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
         email: ['', [Validators.required, Validators.email, Validators.minLength(3)]],
         password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', [Validators.required]],
+        confirmPassword: ['', Validators.required],
         nombre: ['', [Validators.required, Validators.minLength(1)]],
         apellidos: ['', [Validators.required, Validators.minLength(2)]],
-        centro: ['', [Validators.required]],
-        fechaNacimiento: ['', [Validators.required]]
+        centro: ['', Validators.required],
+        fechaNacimiento: ['', Validators.required]
       },
       {
         //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
