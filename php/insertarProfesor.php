@@ -2,7 +2,7 @@
   header('Access-Control-Allow-Origin: *');
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
   header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-  header('Content-Type: application/json; charset=UTF-8');
+  header('Content-Type: text/html; charset=UTF-8');
   
   include_once("bd.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
   $bd = new claseBD();
