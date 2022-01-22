@@ -25,10 +25,18 @@ export class ControladorService {
   }
 
   insertarProfesor(profe: Profesor) {
-    const jsonData = '{"id": "0", "nick": "asd", "email": "asd@gmail.com", "pass": "asd","nombre": "asd", "apellidos": "asd", "centro": "asd"}';
-    console.log(jsonData);
-    return this.http.post<any>(`${this.URL}insertarProfesor.php`, jsonData);
-    //return this.http.post(`${this.URL}insertarProfesor.php`, JSON.stringify(profe));
+    return this.http.post(`${this.URL}insertarProfesor.php`, JSON.stringify(profe)).subscribe
+      (
+        (val) => {
+          console.log("POST call successful value returned in body",
+            val);
+        },
+        response => {
+          console.log("POST call in error", response);
+        },
+        () => {
+          console.log("The POST observable is now completed.");
+        });
   }
 
   eliminarProfesor(idProfesor: number) {
