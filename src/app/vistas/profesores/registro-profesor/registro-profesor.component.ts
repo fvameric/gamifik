@@ -34,8 +34,7 @@ export class RegistroProfesorComponent implements OnInit {
         confirmPassword: ['', Validators.required],
         nombre: ['', [Validators.required, Validators.minLength(1)]],
         apellidos: ['', [Validators.required, Validators.minLength(2)]],
-        centro: ['', Validators.required],
-        fechaNacimiento: ['', Validators.required]
+        centro: ['', Validators.required]
       }, {
         //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
         validator: this.mustMatch("password", "confirmPassword")

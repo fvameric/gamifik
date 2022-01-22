@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { ControladorService } from 'services/controlador.service';
 
 // interfaces
-import { Profesor } from 'app/interfaces/Profesor';
 import { Alumno } from 'app/interfaces/Alumno';
 
 @Component({
@@ -34,7 +33,6 @@ export class RegistroComponent implements OnInit {
         confirmPassword: ['', Validators.required],
         nombre: ['', [Validators.required, Validators.minLength(1)]],
         apellidos: ['', [Validators.required, Validators.minLength(2)]],
-        centro: ['', Validators.required],
         fechaNacimiento: ['', Validators.required]
       }, {
         //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
@@ -78,14 +76,14 @@ export class RegistroComponent implements OnInit {
   onRegistro(form: any) {
     this.submitted = true;
 
-    const nuevoProfe: Profesor = {
+    const nuevoAlumno: Alumno = {
       id: form.id,
       nick: form.username,
       email: form.email,
       pass: form.password,
       nombre: form.nombre,
       apellidos: form.apellidos,
-      centro: form.centro
+      fecha_nacimiento: form.fechaNacimiento
     }
 
     //Comprobar si es cumpleixen o no tots els errors
@@ -93,7 +91,7 @@ export class RegistroComponent implements OnInit {
       console.log("invalido");
     } else {
       console.log("valid");
-      this.controladorService.insertarProfesor(nuevoProfe);
+      this.controladorService.insertarAlumno(nuevoAlumno);
     }
 
     //this.onReset();

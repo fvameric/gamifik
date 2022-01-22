@@ -108,12 +108,29 @@ export class ControladorService {
     return this.datosProfesor;
   }
 
+  insertarAlumno(alumno: Alumno) {
+    return this.http.post(`${this.URL}insertarAlumno.php`, JSON.stringify(alumno)).subscribe
+      (
+        (val) => {
+          console.log("POST call successful value returned in body", val);
+          // TO-DO guardar sesión y login si ha sido correcto
+          this.router.navigateByUrl('/dashboard');
+        },
+        response => {
+          console.log("POST call in error", response);
+        },
+        () => {
+          console.log("The POST observable is now completed.");
+        });
+  }
+
   insertarProfesor(profe: Profesor) {
     return this.http.post(`${this.URL}insertarProfesor.php`, JSON.stringify(profe)).subscribe
       (
         (val) => {
-          console.log("POST call successful value returned in body",
-            val);
+          console.log("POST call successful value returned in body", val);
+          // TO-DO guardar sesión y  login si ha sido correcto
+          this.router.navigateByUrl('/dashboardProfesor');
         },
         response => {
           console.log("POST call in error", response);
