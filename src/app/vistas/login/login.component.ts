@@ -9,8 +9,6 @@ import { ControladorService } from 'services/controlador.service';
 import { Profesor } from 'app/interfaces/Profesor';
 import { Alumno } from 'app/interfaces/Alumno';
 
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,11 +18,12 @@ export class LoginComponent implements OnInit {
 
   // variables formulario
   loginForm!: FormGroup;
+
   passShown: boolean = false;
   passType: string = 'password';
-  submitted: boolean = false;
 
-  profeExiste: Boolean = false;
+  submitted: boolean = false;
+  profeExiste: boolean = false;
 
   constructor(public formBuilder: FormBuilder, private controladorService: ControladorService, private http: HttpClient) { }
 
@@ -102,6 +101,4 @@ export class LoginComponent implements OnInit {
       this.passType = 'text';
     }
   }
-
-
 }

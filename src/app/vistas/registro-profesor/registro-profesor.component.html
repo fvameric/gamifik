@@ -71,10 +71,17 @@
         <div *ngIf="form.apellidos.errors.required">Los apellidos son necesarios</div>
     </div>
 
-    <input type="date" name="fechaNacimiento" id="fechaNacimiento" class="fadeIn fourth"
-        formControlName="fechaNacimiento">
-    <div *ngIf="submitted && form.fechaNacimiento.errors" class="invalid-feedback">
-        <div *ngIf="form.fechaNacimiento.errors.required">La fecha de nacimiento es necesaria</div>
+    <div class="form-group" class="fadeIn fifth">
+        <div class="input-group">
+            <label for="centro1">Centro 1</label>
+            <input type="radio" formControlName="centro" value="1"><br>
+
+            <label for="centro2">Centro 2</label>
+            <input type="radio" formControlName="centro" value="2"><br>
+
+            <label for="centro3">Centro 3</label>
+            <input type="radio" formControlName="centro" value="3"><br>
+        </div>
     </div>
 
     <input type="submit" value="Registrarse" class="fadeIn fifth">
