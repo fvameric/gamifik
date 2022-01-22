@@ -1,4 +1,5 @@
 export interface Profesor {
+    id: number;
     nick: string;
     email: string;
     pass: string;

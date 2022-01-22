@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 
 import { Profesor } from 'app/interfaces/Profesor';
 import { Alumno } from 'app/interfaces/Alumno';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,30 @@ import { Alumno } from 'app/interfaces/Alumno';
 export class ControladorService {
 
   URL = 'http://localhost:8080/';
+  alumnoExiste: boolean = false;
+  profesorExiste: boolean = false;
 
-  constructor(private http: HttpClient) { }
+  datosAlumno: Alumno = {
+    id: 0,
+    nick: '',
+    email: '',
+    pass: '',
+    nombre: '',
+    apellidos: '',
+    fecha_nacimiento: new Date()
+  }
+
+  datosProfesor: Profesor = {
+    id: 0,
+    nick: '',
+    email: '',
+    pass: '',
+    nombre: '',
+    apellidos: '',
+    centro: 0
+  }
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   obtenerDatosProfesor(): Observable<Profesor> {
     return this.http.get<Profesor>(`${this.URL}datosProfesor.php`);
@@ -22,6 +45,67 @@ export class ControladorService {
 
   obtenerDatosAlumno() {
     return this.http.get<Alumno>(`${this.URL}datosAlumno.php`);
+  }
+
+  validarLoginAlumno(form: any) {
+    this.obtenerDatosAlumno().subscribe((datos: any) => {
+        datos.forEach((element: any) => {
+          if (form.username == element.nick && form.password == element.pass) {
+            this.alumnoExiste = true;
+          }
+
+          // TO-DO guardar sesión
+          // esto no funciona como debería
+          if (this.alumnoExiste) {
+            this.alumnoExiste = false;
+            this.datosAlumno.id = element.id;
+            this.datosAlumno.nick = element.nick;
+            this.datosAlumno.email = element.email;
+            this.datosAlumno.pass = element.pass;
+            this.datosAlumno.nombre = element.nombre;
+            this.datosAlumno.apellidos = element.apellidos;
+            this.datosAlumno.fecha_nacimiento = element.fecha_nacimiento;
+            this.router.navigateByUrl('/dashboard');
+          }
+        });
+        if (!this.alumnoExiste) {
+          alert("Login incorrecto");
+      }
+      });
+  }
+
+  obtenerPerfilAlumno() {
+    return this.datosAlumno;
+  }
+
+  validarLoginProfesor(form: any) {
+    this.obtenerDatosProfesor().subscribe((datos: any) => {
+        datos.forEach((element: any) => {
+          if (form.username == element.nick && form.password == element.pass) {
+            this.profesorExiste = true;
+          }
+
+          // TO-DO guardar sesión
+          // esto no funciona como debería
+          if (this.profesorExiste) {
+            this.datosProfesor.id = element.id;
+            this.datosProfesor.nick = element.nick;
+            this.datosProfesor.email = element.email;
+            this.datosProfesor.pass = element.pass;
+            this.datosProfesor.nombre = element.nombre;
+            this.datosProfesor.apellidos = element.apellidos;
+            this.datosProfesor.centro = element.centro;
+            this.router.navigateByUrl('/dashboardProfesor');
+          }
+        });
+        if (!this.profesorExiste) {
+          alert("Login incorrecto");
+      }
+      });
+  }
+
+  obtenerPerfilProfesor() {
+    return this.datosProfesor;
   }
 
   insertarProfesor(profe: Profesor) {

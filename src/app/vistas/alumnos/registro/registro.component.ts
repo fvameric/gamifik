@@ -9,11 +9,11 @@ import { Profesor } from 'app/interfaces/Profesor';
 import { Alumno } from 'app/interfaces/Alumno';
 
 @Component({
-  selector: 'app-registro-profesor',
-  templateUrl: './registro-profesor.component.html',
-  styleUrls: ['./registro-profesor.component.css']
+  selector: 'app-registro',
+  templateUrl: './registro.component.html',
+  styleUrls: ['./registro.component.css']
 })
-export class RegistroProfesorComponent implements OnInit {
+export class RegistroComponent implements OnInit {
 
   registerForm!: FormGroup;
   submitted: boolean = false;
@@ -79,6 +79,7 @@ export class RegistroProfesorComponent implements OnInit {
     this.submitted = true;
 
     const nuevoProfe: Profesor = {
+      id: form.id,
       nick: form.username,
       email: form.email,
       pass: form.password,

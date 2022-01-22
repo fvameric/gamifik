@@ -1,0 +1,27 @@
+#elementos {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#elementos td,
+#customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#elementos tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#elementos tr:hover {
+    background-color: #ddd;
+}
+
+#elementos th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #56baed;
+    color: white;
+}

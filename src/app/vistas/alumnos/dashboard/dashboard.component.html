@@ -1,0 +1,46 @@
+<h1>Dashboard Alumnos</h1>
+<a [routerLink]="['/perfil']">Ir al perfil de {{perfil.nick}}</a>
+
+<h3>Alumnos:</h3>
+<table id="elementos">
+  <tr>
+    <th>id</th>
+    <th>nick</th>
+    <th>email</th>
+    <th>pass</th>
+    <th>nombre</th>
+    <th>apellidos</th>
+    <th>fecha de nacimiento</th>
+  </tr>
+  <tr *ngFor="let alumno of alumnos">
+    <td>{{alumno.id}}</td>
+    <td>{{alumno.nick}}</td>
+    <td>{{alumno.email}}</td>
+    <td>{{alumno.pass}}</td>
+    <td>{{alumno.nombre}}</td>
+    <td>{{alumno.apellidos}}</td>
+    <td>{{alumno.fecha_nacimiento}}</td>
+  </tr>
+</table>
+
+<h3>Profesores:</h3>
+<table id="elementos">
+  <tr>
+    <th>id</th>
+    <th>nick</th>
+    <th>email</th>
+    <th>pass</th>
+    <th>nombre</th>
+    <th>apellidos</th>
+    <th>centro</th>
+  </tr>
+  <tr *ngFor="let profe of profesores">
+    <td>{{profe.id}}</td>
+    <td>{{profe.nick}}</td>
+    <td>{{profe.email}}</td>
+    <td>{{profe.pass}}</td>
+    <td>{{profe.nombre}}</td>
+    <td>{{profe.apellidos}}</td>
+    <td>{{profe.centro}}</td>
+  </tr>
+</table>

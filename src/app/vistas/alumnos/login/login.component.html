@@ -1,0 +1,45 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+
+<!-- logo -->
+<div class="fadeIn first">
+    <img src="" id="icon" width="10" height="150" />
+</div>
+
+<!-- Formulario login -->
+<form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)" class="Icon-inside">
+    <input type="text" id="login" formControlName="username" class="fadeIn second"
+        [ngClass]="{ 'is-invalid': submitted && form.username.errors }" placeholder="Username">
+    
+    <!-- Missatge error nom -->
+    <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
+        <div *ngIf="form.username.errors.required">El nombre es necesario</div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            <input type="password" id="password" formControlName="password" class="fadeIn third" [type]="passType"
+                [ngClass]="{ 'is-invalid': submitted && form.password.errors }" placeholder="Password">
+            
+            <!-- Icono -->
+            <i *ngIf="this.passShown" (click)="togglePass()" class="material-icons">
+                visibility
+            </i>
+            <i *ngIf="!this.passShown" (click)="togglePass()" class="material-icons">
+                visibility_off
+            </i>
+            <!-- Missatge error password -->
+            <div *ngIf="submitted && form.password.errors">
+                <div *ngIf="form.password.errors.required">La contraseña es necesaria</div>
+                <div *ngIf="form.password.errors.minlength">La contraseña debe contener al menos 6
+                    carácteres</div>
+            </div>
+        </div>
+    </div>
+    
+    <input type="submit" value="Iniciar Sesión" class="fadeIn fourth">
+</form>
+
+<div id="formFooter">
+    <a class="underlineHover" href="">Forgot Password?</a>
+</div>

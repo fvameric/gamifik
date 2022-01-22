@@ -9,6 +9,8 @@ import { ControladorService } from 'services/controlador.service';
 import { Profesor } from 'app/interfaces/Profesor';
 import { Alumno } from 'app/interfaces/Alumno';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,35 +25,20 @@ export class LoginComponent implements OnInit {
   passType: string = 'password';
 
   submitted: boolean = false;
-  profeExiste: boolean = false;
+  alumnoExiste: boolean = false;
 
-  constructor(public formBuilder: FormBuilder, private controladorService: ControladorService, private http: HttpClient) { }
+  alumnos: any;
 
-  profesores: any;
-
-  datosProfesor: Profesor = {
-    nick: '',
-    email: '',
-    pass: '',
-    nombre: '',
-    apellidos: '',
-    centro: 0
-  }
-
-  datosAlumno: Alumno = {
-    nick: '',
-    email: '',
-    pass: '',
-    nombre: '',
-    apellidos: '',
-    fecha_nacimiento: new Date
-  }
+  constructor(
+    public formBuilder: FormBuilder,
+    private controladorService: ControladorService,
+    private http: HttpClient) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-        username: ['', Validators.required],
-        password: ['', [Validators.required, Validators.minLength(6)]]
-      }
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    }
     );
   }
 
@@ -68,27 +55,9 @@ export class LoginComponent implements OnInit {
   //Funció iniciar sessió
   onLogin(form: any) {
     this.submitted = true;
+    this.controladorService.validarLoginAlumno(form);
 
-    this.controladorService.obtenerDatosProfesor()
-    .subscribe((datos: any) => {
-      this.profesores = datos;
-      this.profesores.forEach((element: any) => {
-        console.log(element.nick);
-      });
-      /*
-      if (form.username == datos.nick && form.password == datos.pass) {
-          this.profeExiste = true;
-        }
-      
-      if (this.profeExiste) {
-        alert("login");
-      }else {
-        alert("no login");
-      }
-      */
-    });
-
-    this.onReset();
+    //this.onReset();
   }
 
   public togglePass() {
