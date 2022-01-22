@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
 
 import { HttpClient } from '@angular/common/http';
 import { ControladorService } from 'services/controlador.service';
@@ -17,16 +17,17 @@ export class RegistroComponent implements OnInit {
 
   registerForm!: FormGroup;
   submitted: boolean = false;
-  passwordShown: boolean = false;
-  passwordType: string = 'password';
+  passShown: boolean = false;
+  confirmPassShown: boolean = false;
+  passType: string = 'password';
+  confirmPassType: string = 'password';
 
   constructor(public formBuilder: FormBuilder, private controladorService: ControladorService, private http: HttpClient) { }
 
   ngOnInit(){
 
     //Validadors registre
-    this.registerForm = this.formBuilder.group(
-      {
+    this.registerForm = this.formBuilder.group({
         username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(".*\\S.*[a-zA-z0-9_]")]],
         email: ['', [Validators.required, Validators.email, Validators.minLength(3)]],
         password: ['', [Validators.required, Validators.minLength(6)]],
@@ -35,16 +36,15 @@ export class RegistroComponent implements OnInit {
         apellidos: ['', [Validators.required, Validators.minLength(2)]],
         centro: ['', Validators.required],
         fechaNacimiento: ['', Validators.required]
-      },
-      {
+      }, {
         //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
-        validator: this.MustMatch("password", "confirmPassword")
+        validator: this.mustMatch("password", "confirmPassword")
       }
     );
   }
-
-  //
-  MustMatch(controlName: string, matchingControlName: string) {
+  
+  // funció per controlar que camps password i confirmarpassword siguin iguals
+  mustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
       const matchingControl = formGroup.controls[matchingControlName];
@@ -60,22 +60,25 @@ export class RegistroComponent implements OnInit {
       }
     };
   }
+  
 
   //Retorna els valors introduits al formulari
   get form() {
     return this.registerForm.controls;
   }
 
+  /*
   //Funció que reseteja els valors del formulari
   onReset() {
     this.registerForm.reset();
   }
+  */
 
   //Funció que executa quan s'apreta el botó registre
   onRegistro(form: any) {
+    this.submitted = true;
 
     const nuevoProfe: Profesor = {
-      _id: 0,
       nick: form.username,
       email: form.email,
       pass: form.password,
@@ -84,31 +87,36 @@ export class RegistroComponent implements OnInit {
       centro: form.centro
     }
 
-    this.controladorService.insertarProfesor(nuevoProfe);
-
-    this.submitted = true;
-
     //Comprobar si es cumpleixen o no tots els errors
     if (this.registerForm.invalid) {
       console.log("invalido");
-
     } else {
       console.log("valid");
+      this.controladorService.insertarProfesor(nuevoProfe);
     }
-    // TO-DO insertar profesor al registrarse
-    //this.controladorService.insertarProfesor(form);
 
-    this.onReset();
+    //this.onReset();
   }
 
-  public togglePassword() {
-    if (this.passwordShown) {
-      this.passwordShown = false;
-      this.passwordType = 'password';
+  public togglePass() {
+    if (this.passShown) {
+      this.passShown = false;
+      this.passType = 'password';
 
     } else {
-      this.passwordShown = true;
-      this.passwordType = 'text';
+      this.passShown = true;
+      this.passType = 'text';
+    }
+  }
+
+  public toggleConfirmPass() {
+    if (this.confirmPassShown) {
+      this.confirmPassShown = false;
+      this.confirmPassType = 'password';
+
+    } else {
+      this.confirmPassShown = true;
+      this.confirmPassType = 'text';
     }
   }
 

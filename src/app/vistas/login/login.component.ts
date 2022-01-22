@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit {
 
   // variables formulario
   loginForm!: FormGroup;
-  passwordShown: boolean = false;
-  passwordType: string = 'password';
+  passShown: boolean = false;
+  passType: string = 'password';
   submitted: boolean = false;
 
   profeExiste: Boolean = false;
@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
   profesores: any;
 
   datosProfesor: Profesor = {
-    _id: 0,
     nick: '',
     email: '',
     pass: '',
@@ -41,20 +40,17 @@ export class LoginComponent implements OnInit {
   }
 
   datosAlumno: Alumno = {
-    _id: 0,
     nick: '',
     email: '',
     pass: '',
     nombre: '',
     apellidos: '',
-    fecha_nacimiento: new Date,
-    avatar: '',
+    fecha_nacimiento: new Date
   }
 
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group(
-      {
-        username: ['', [Validators.required]],
+    this.loginForm = this.formBuilder.group({
+        username: ['', Validators.required],
         password: ['', [Validators.required, Validators.minLength(6)]]
       }
     );
@@ -96,14 +92,14 @@ export class LoginComponent implements OnInit {
     this.onReset();
   }
 
-  public togglePassword() {
-    if (this.passwordShown) {
-      this.passwordShown = false;
-      this.passwordType = 'password';
+  public togglePass() {
+    if (this.passShown) {
+      this.passShown = false;
+      this.passType = 'password';
 
     } else {
-      this.passwordShown = true;
-      this.passwordType = 'text';
+      this.passShown = true;
+      this.passType = 'text';
     }
   }
 
