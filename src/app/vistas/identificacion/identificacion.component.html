@@ -1,48 +1,75 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
 
-<div class="wrapper fadeInDown">
-    <!-- contraseña acceso profes -->
-    <div id="acceso-profes">
-        <input type="password" [(ngModel)]="passAcceso" placeholder="1234">
-        <input type="submit" value="Acceso profes" (click)="accesoProfe()">
-    </div>
+<!--Waves Container-->
+<div class="header">
 
-    <!-- pestañas de cada componente -->
-    <div id="formContent" *ngIf="this.accesoProfeFlag;else form_alumno">
-        <ul ngbNav #nav="ngbNav" class="nav-tabs">
-            <li [ngbNavItem]="1">
-                <a ngbNavLink>Login Profe</a>
-                <ng-template ngbNavContent>
-                    <app-login-profesor></app-login-profesor>
-                </ng-template>
-            </li>
-            <li [ngbNavItem]="2">
-                <a ngbNavLink>Registro Profe</a>
-                <ng-template ngbNavContent>
-                    <app-registro-profesor></app-registro-profesor>
-                </ng-template>
-            </li>
-        </ul>
-        <div [ngbNavOutlet]="nav" class="mt-2"></div>
-    </div>
-    <ng-template #form_alumno>
-        <div id="formContent">
+    <div class="wrapper fadeInDown">
+        <!-- pestañas de cada componente -->
+        <div id="formContent" *ngIf="this.accesoProfeFlag;else form_alumno">
+            <h1>Acceso Profesores</h1>
             <ul ngbNav #nav="ngbNav" class="nav-tabs">
                 <li [ngbNavItem]="1">
-                    <a ngbNavLink>Login Alumno</a>
+                    <a ngbNavLink>Login Profe</a>
                     <ng-template ngbNavContent>
-                        <app-login></app-login>
+                        <app-login-profesor></app-login-profesor>
                     </ng-template>
                 </li>
                 <li [ngbNavItem]="2">
-                    <a ngbNavLink>Registro Alumno</a>
+                    <a ngbNavLink>Registro Profe</a>
                     <ng-template ngbNavContent>
-                        <app-registro></app-registro>
+                        <app-registro-profesor></app-registro-profesor>
                     </ng-template>
+                </li>
+                <li [ngbNavItem]="3">
+                    <a ngbNavLink (click)="accesoAlumno()">Acceso alumno</a>
                 </li>
             </ul>
             <div [ngbNavOutlet]="nav" class="mt-2"></div>
         </div>
-    </ng-template>
+        <ng-template #form_alumno>
+            <div id="formContent">
+                <h1>Acceso alumnos</h1>
+                <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                    <li [ngbNavItem]="1">
+                        <a ngbNavLink>Login Alumno</a>
+                        <ng-template ngbNavContent>
+                            <app-login></app-login>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="2">
+                        <a ngbNavLink>Registro Alumno</a>
+                        <ng-template ngbNavContent>
+                            <app-registro></app-registro>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="3">
+                        <a ngbNavLink>Acceso profe</a>
+                        <ng-template ngbNavContent>
+                            <!-- contraseña acceso profes -->
+                            <div id="acceso-profes">
+                                <input type="password" [(ngModel)]="passAcceso" placeholder="1234">
+                                <input type="submit" value="Acceso profes" (click)="accesoProfe()">
+                            </div>
+                        </ng-template>
+                    </li>
+                </ul>
+                <div [ngbNavOutlet]="nav" class="mt-2"></div>
+            </div>
+        </ng-template>
+
+        <div class="footer-waves">
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="parallax">
+            <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(51, 221, 255,0.7" />
+            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(45, 94, 160 ,0.5)" />
+            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(135, 228, 253,0.3)" />
+            </g>
+            </svg>
+        </div>
+    </div>
 </div>
+<!--Waves end-->

@@ -1,11 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 /* BASIC */
 
-html {
-    background-color: #56baed;
-}
+html {}
 
 body {
     font-family: "Poppins", sans-serif;
@@ -43,6 +42,7 @@ h2:hover {
     justify-content: center;
     width: 100%;
     min-height: 100%;
+    background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
     padding: 20px;
 }
 
@@ -83,7 +83,8 @@ h2.active {
 
 
 /* FORM TYPOGRAPHY*/
-.input-group{
+
+.input-group {
     margin-bottom: 1rem;
     display: inline-block !important;
     flex-direction: column;

@@ -5,7 +5,7 @@
 
   global $datos; 
 
-  include_once("bd.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
+  include_once("../conexion/bd.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
   $bd = new claseBD();
   // REALIZA LA QUERY A LA DB
   $registros = mysqli_query($bd->obtenerConexion(), "SELECT * FROM alumno");

@@ -21,4 +21,8 @@ export class IdentificacionComponent implements OnInit {
     }
   }
 
+  accesoAlumno() {
+    this.accesoProfeFlag = false;
+  }
+
 }

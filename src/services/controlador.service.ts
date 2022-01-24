@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 //importamos httpCliente para poder enviar datos de un lado a otro
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { Profesor } from 'app/interfaces/Profesor';
 import { Alumno } from 'app/interfaces/Alumno';
@@ -16,6 +16,7 @@ export class ControladorService {
   URL = 'http://localhost:8080/';
   alumnoExiste: boolean = false;
   profesorExiste: boolean = false;
+  subs: Subscription = new Subscription;
 
   datosAlumno: Alumno = {
     id: 0,
@@ -40,16 +41,16 @@ export class ControladorService {
   constructor(private http: HttpClient, private router: Router) { }
 
   obtenerDatosProfesor(): Observable<Profesor> {
-    return this.http.get<Profesor>(`${this.URL}datosProfesor.php`);
+    return this.http.get<Profesor>(`${this.URL}profesores/datosProfesor.php`);
   }
 
-  obtenerDatosAlumno() {
-    return this.http.get<Alumno>(`${this.URL}datosAlumno.php`);
+  obtenerDatosAlumno(): Observable<Alumno> {
+    return this.http.get<Alumno>(`${this.URL}alumnos/datosAlumno.php`);
   }
 
   validarLoginAlumno(form: any) {
     this.obtenerDatosAlumno().subscribe((datos: any) => {
-        datos.forEach((element: any) => {
+      datos.forEach((element: any) => {
           if (form.username == element.nick && form.password == element.pass) {
             this.alumnoExiste = true;
           }
@@ -83,11 +84,16 @@ export class ControladorService {
         datos.forEach((element: any) => {
           if (form.username == element.nick && form.password == element.pass) {
             this.profesorExiste = true;
+            console.log(form.username + " - " + element.nick);
+          } else {
+            console.log("else: " + form.username + " - " + element.nick);
           }
 
           // TO-DO guardar sesión
           // esto no funciona como debería
           if (this.profesorExiste) {
+            this.ngOnDestroy();
+            console.log("profe esta dins");
             this.datosProfesor.id = element.id;
             this.datosProfesor.nick = element.nick;
             this.datosProfesor.email = element.email;
@@ -98,10 +104,18 @@ export class ControladorService {
             this.router.navigateByUrl('/dashboardProfesor');
           }
         });
+
+        
         if (!this.profesorExiste) {
+          console.log("profe NO esta");
           alert("Login incorrecto");
       }
       });
+  }
+
+  ngOnDestroy() {
+    console.log("unsuscribe");
+    this.subs.unsubscribe();
   }
 
   obtenerPerfilProfesor() {
@@ -109,7 +123,7 @@ export class ControladorService {
   }
 
   insertarAlumno(alumno: Alumno) {
-    return this.http.post(`${this.URL}insertarAlumno.php`, JSON.stringify(alumno)).subscribe
+    return this.http.post(`${this.URL}alumnos/insertarAlumno.php`, JSON.stringify(alumno)).subscribe
       (
         (val) => {
           console.log("POST call successful value returned in body", val);
@@ -125,7 +139,7 @@ export class ControladorService {
   }
 
   insertarProfesor(profe: Profesor) {
-    return this.http.post(`${this.URL}insertarProfesor.php`, JSON.stringify(profe)).subscribe
+    return this.http.post(`${this.URL}profesores/insertarProfesor.php`, JSON.stringify(profe)).subscribe
       (
         (val) => {
           console.log("POST call successful value returned in body", val);
@@ -141,7 +155,7 @@ export class ControladorService {
   }
 
   eliminarProfesor(idProfesor: number) {
-    return this.http.get(`${this.URL}eliminarProfesor.php?id=${idProfesor}`)
+    return this.http.get(`${this.URL}profesores/eliminarProfesor.php?id=${idProfesor}`)
   }
 
   // TO-DO modificar profe
