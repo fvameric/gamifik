@@ -9,6 +9,7 @@ html {}
 body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
+    background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
 }
 
 a {
@@ -35,21 +36,21 @@ h2:hover {
 
 /* STRUCTURE */
 
-.wrapper {
+.wrapperTest {
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
     width: 100%;
     min-height: 100%;
-    background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
     padding: 20px;
+    background-color: transparent !important;
 }
 
 #formContent {
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
-    background: #fff;
+    background: #0000008c;
     padding: 30px;
     width: 90%;
     max-width: 450px;
@@ -186,12 +187,14 @@ input[type=text]:placeholder {
     animation-duration: 2s;
 }
 
-.form-group{
+.form-group {
     margin-bottom: 0 !important;
 }
-.input-group{
+
+.input-group {
     margin-bottom: 0;
 }
+
 
 /* ANIMATIONS */
 
