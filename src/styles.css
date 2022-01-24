@@ -185,6 +185,12 @@ input[type=text]:placeholder {
     animation-duration: 2s;
 }
 
+.form-group{
+    margin-bottom: 0 !important;
+}
+.input-group{
+    margin-bottom: 0;
+}
 
 /* ANIMATIONS */
 
