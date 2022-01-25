@@ -76,7 +76,7 @@
         <div *ngIf="form.apellidos.errors.required">Los apellidos son necesarios</div>
     </div>
 
-    <input type="date" name="fechaNacimiento" id="fechaNacimiento" class="fadeIn fourth"
+    <input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Date" class="fadeIn fourth"
         formControlName="fechaNacimiento">
     <!-- Missatge error fecha de nacimiento -->
     <div *ngIf="submitted && form.fechaNacimiento.errors" class="invalid-feedback">

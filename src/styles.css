@@ -181,6 +181,10 @@ input[type=password]:focus {
     border-bottom: 2px solid #5fbae9;
 }
 
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
 input[type=text]:placeholder {
     color: #cccccc;
 }
