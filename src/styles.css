@@ -19,6 +19,19 @@ a {
     font-weight: 400;
 }
 
+h1{
+    /* background: -webkit-linear-gradient(rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%); */
+    color: #007bff;
+  /* -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: rgb(95 186 233 / 40%) !important;
+    background-color: #ffffff26 !important;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
 h2 {
     text-align: center;
     font-size: 16px;
@@ -143,7 +156,7 @@ input[type=password],
 input[type=date] {
     background-color: #f6f6f600;
     border: none;
-    color: #0d0d0d;
+    color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -163,7 +176,8 @@ input[type=date] {
 
 input[type=text]:focus,
 input[type=password]:focus {
-    background-color: #fff;
+    color: white;
+    background-color: transparent;
     border-bottom: 2px solid #5fbae9;
 }
 
@@ -325,7 +339,7 @@ input[type=text]:placeholder {
 }
 
 .underlineHover:hover {
-    color: #0d0d0d;
+    color: white;
     text-decoration: none;
 }
 
