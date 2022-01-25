@@ -41,7 +41,7 @@ body {
     border-radius: 5px;
     float: left;
     width: 100%;
-    background-color: #eb524a;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(18,17,104,1) 26%, rgba(23,22,125,1) 52%, rgba(26,25,137,1) 73%, rgba(29,29,152,1) 100%);
 }
 .contact main section .content {
     float: left;
@@ -164,11 +164,11 @@ body {
 .contact nav a .arrow path {
     fill: #e6e6e6;
 }
-.contact nav a.gmail .icon svg {
+.contact nav a.mis-cursos .icon svg {
     background-color: #d14836;
 }
-.contact nav a.gmail .content h1 {
-    color: #d14836;
+.contact nav a.mis-cursos .content h1 {
+    color: #007bff;
 }
 .contact nav a.facebook .icon svg {
     background-color: #3b5998;
@@ -208,4 +208,8 @@ body {
     color: #b3b3b3;
     display: block;
     letter-spacing: 0.4px;
+}
+
+.icono-flecha:hover{
+    fill: red !important;
 }
