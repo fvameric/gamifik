@@ -12,6 +12,7 @@ import { Profesor } from 'app/interfaces/Profesor';
 export class DashboardProfesorComponent implements OnInit {
   profesores: any;
   alumnos: any;
+  mostrarRankingsVisual:boolean = false;
 
   perfil: Profesor = {
     id: 0,
@@ -42,5 +43,13 @@ export class DashboardProfesorComponent implements OnInit {
 
   obtenerProfesor() {
     this.perfil = this.controladorService.obtenerPerfilProfesor();
+  }
+
+  mostrarRankings(){
+    if (this.mostrarRankingsVisual == false) {
+      this.mostrarRankingsVisual  = true;
+    }else{
+      this.mostrarRankingsVisual = false;
+    }
   }
 }
