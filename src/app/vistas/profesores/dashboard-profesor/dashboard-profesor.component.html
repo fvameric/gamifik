@@ -16,7 +16,7 @@
 
 
       <nav>
-        <a (click)="mostrarRankings()" class="mis-cursos">
+        <a (click)="mostrarRankings()" class="mis-rankings">
           <div class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book"
               viewBox="0 0 16 16">
@@ -36,14 +36,14 @@
           </svg>
         </a>
 
-        <div *ngIf="this.mostrarRankingsVisual" class="Rankings-Profe">
-          <div class="Cursos_Profe">
-            <h2 class="h2-perfil">Rankings Rankings</h2>
+        <div *ngIf="this.mostrarRankingsVisual" class="rankings-profe">
+          <div class="cursos-profe">
+            <h2 class="h2-perfil">Rankings</h2>
             <hr>
           </div>
         </div>
 
-        <a class="facebook">
+        <a (click)="mostrarConfiguracion()" class="configuracion">
           <div class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear"
               viewBox="0 0 16 16">
@@ -63,14 +63,14 @@
             </g>
           </svg>
         </a>
-        <div class="Rankings-Profe">
-          <div class="Cursos_Profe">
+        <div *ngIf="this.mostrarConfiguracionVisual" class="configuracion-profe">
+          <div class="cursos-profe">
             <h2 class="h2-perfil">Configuración</h2>
             <hr>
           </div>
         </div>
 
-        <a class="twitter">
+        <a (click)="mostrarCerrar()" class="cerrar-sesion">
           <div class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-box-arrow-right" viewBox="0 0 16 16">
@@ -91,6 +91,15 @@
             </g>
           </svg>
         </a>
+        <div *ngIf="this.mostrarCerrarVisual" class="cerrar-profe">
+          <h2 class="h2-perfil">¿Estas seguro?</h2>
+          <div class="cursos-profe">
+            <div class="align-cerrar-sesion">
+              <button class="boton-cerrar">Cerrar Sesion</button>
+              <button class="boton-cancelar">Cancelar</button>
+            </div>
+          </div>
+        </div>
       </nav>
 
     </main>

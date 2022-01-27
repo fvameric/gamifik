@@ -200,17 +200,16 @@ svg{
     letter-spacing: 0.4px;
 }
 
-.Rankings-Profe{
+.rankings-profe{
     float: left;
     width: 100%;
-    margin-top: 18px;
     background-color: #fff;
     padding: 18px 20px;
     border-radius: 5px;
     text-decoration: none;
     transition: all 0.3s;
     opacity: 1;
-    transform: translateY(-10px);
+    transform: translateY(10px);
     position: fixed;
     left: 100%;
 }
@@ -222,3 +221,69 @@ hr{
     color: #007bff; 
 }
 
+.configuracion-profe {
+    float: left;
+    width: 100%;
+    background-color: #fff;
+    padding: 18px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s;
+    opacity: 1;
+    transform: translateY(114px);
+    position: fixed;
+    left: 100%;
+}
+
+.cerrar-profe{
+    float: left;
+    width: 100%;
+    background-color: #fff;
+    padding: 18px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s;
+    opacity: 1;
+    transform: translateY(216px);
+    position: fixed;
+    left: 100%;
+}
+.configuracion:hover{
+    cursor: pointer;
+}
+.mis-rankings{
+    cursor: pointer;
+}
+.cerrar-sesion{
+    cursor: pointer;
+}
+
+.boton-cerrar{
+    padding: 10px;
+    margin-right: 1rem;
+    border-radius: 5px;
+    background-color: green;
+    color: white;
+    border: none;
+}
+.boton-cancelar{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(33, 33, 175);
+    color: white;
+    border: none;
+}
+
+.boton-cerrar:hover{
+    transform: scale(1.1);
+    transition: 1s;
+}
+
+.boton-cancelar:hover{
+    transform: scale(1.1);
+    transition: 1s;
+}
+
+.boton-cerrar:hover::before {
+    transform: scale(1);
+  }
