@@ -16,6 +16,10 @@ export class DashboardProfesorComponent implements OnInit {
   mostrarRankingsVisual: boolean = false;
   mostrarConfiguracionVisual: boolean = false;
   mostrarCerrarVisual: boolean = false;
+  editableEmail: boolean = true;
+  editableNombre: boolean = true;
+  editableApellidos: boolean = true;
+
 
   perfil: Profesor = {
     id: 0,
@@ -79,4 +83,30 @@ export class DashboardProfesorComponent implements OnInit {
 
     }
   }
+
+  editarEmail() {
+    if (this.editableEmail == true) {
+      this.editableEmail = false;
+    } else {
+      this.editableEmail = true;
+
+    }
+  }
+
+  editarNombre() {
+    if (this.editableNombre == true) {
+      this.editableNombre = false;
+    }else{
+      this.editableNombre = true;
+    }
+  }
+
+  editarApellidos() {
+    if (this.editableApellidos == true) {
+      this.editableApellidos = false;
+    }else{
+      this.editableApellidos = true;
+    }
+  }
+
 }

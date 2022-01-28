@@ -302,7 +302,22 @@ hr{
     display: flex;
    
 }
-.icon-configuracion{
- float: right;
-margin-left: 73%;
+
+
+.pruebaConfiguracion{
+float: right;
+width: 100%;
+}
+
+#iconos-configuracion{
+    float: right;
+}
+#iconos-configuracion:hover{
+    cursor: pointer;
+}
+
+.inputEmail{
+    color: black !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
