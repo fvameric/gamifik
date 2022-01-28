@@ -287,3 +287,22 @@ hr{
 .boton-cerrar:hover::before {
     transform: scale(1);
   }
+
+.button-configuarcion{
+    margin-left: 2%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(33, 33, 175);
+    color: white;
+    border: none;
+}
+
+.centrar-configuracion{
+    margin: 10px;
+    display: flex;
+   
+}
+.icon-configuracion{
+ float: right;
+margin-left: 73%;
+}
