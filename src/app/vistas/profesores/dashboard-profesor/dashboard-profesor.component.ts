@@ -8,7 +8,7 @@ import { isThisTypeNode } from 'typescript';
 @Component({
   selector: 'app-dashboard-profesor',
   templateUrl: './dashboard-profesor.component.html',
-  styleUrls: ['./dashboard-profesor.component.css']
+  styleUrls: ['./dashboard-profesor.component.css'],
 })
 export class DashboardProfesorComponent implements OnInit {
   profesores: any;
@@ -20,7 +20,6 @@ export class DashboardProfesorComponent implements OnInit {
   editableNombre: boolean = true;
   editableApellidos: boolean = true;
 
-
   perfil: Profesor = {
     id: 0,
     nick: '',
@@ -28,10 +27,13 @@ export class DashboardProfesorComponent implements OnInit {
     pass: '',
     nombre: '',
     apellidos: '',
-    centro: 0
-  }
+    centro: 0,
+  };
 
-  constructor(private controladorService: ControladorService, private http: HttpClient) { }
+  constructor(
+    private controladorService: ControladorService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
     this.obtenerProfesor();
@@ -39,13 +41,13 @@ export class DashboardProfesorComponent implements OnInit {
   }
 
   obtenerDatos() {
-    this.controladorService.obtenerDatosProfesor().subscribe(
-      datos => this.profesores = datos
-    );
+    this.controladorService
+      .obtenerDatosProfesor()
+      .subscribe((datos) => (this.profesores = datos));
 
-    this.controladorService.obtenerDatosAlumno().subscribe(
-      datos => this.alumnos = datos
-    );
+    this.controladorService
+      .obtenerDatosAlumno()
+      .subscribe((datos) => (this.alumnos = datos));
   }
 
   obtenerProfesor() {
@@ -69,7 +71,6 @@ export class DashboardProfesorComponent implements OnInit {
       this.mostrarCerrarVisual = false;
     } else {
       this.mostrarConfiguracionVisual = false;
-
     }
   }
 
@@ -80,7 +81,6 @@ export class DashboardProfesorComponent implements OnInit {
       this.mostrarConfiguracionVisual = false;
     } else {
       this.mostrarCerrarVisual = false;
-
     }
   }
 
@@ -88,15 +88,22 @@ export class DashboardProfesorComponent implements OnInit {
     if (this.editableEmail == true) {
       this.editableEmail = false;
     } else {
+      let valorInputNombre = (<HTMLInputElement>(
+        document.getElementById('inputEmail')
+      )).value;
+      (<HTMLInputElement>document.getElementById('inputEmail')).value = '';
       this.editableEmail = true;
-
     }
   }
 
   editarNombre() {
     if (this.editableNombre == true) {
       this.editableNombre = false;
-    }else{
+    } else {
+      let valorInputNombre = (<HTMLInputElement>(
+        document.getElementById('inputNombre')
+      )).value;
+      (<HTMLInputElement>document.getElementById('inputNombre')).value = '';
       this.editableNombre = true;
     }
   }
@@ -104,9 +111,12 @@ export class DashboardProfesorComponent implements OnInit {
   editarApellidos() {
     if (this.editableApellidos == true) {
       this.editableApellidos = false;
-    }else{
+    } else {
+      let valorInputNombre = (<HTMLInputElement>(
+        document.getElementById('inputApellidos')
+      )).value;
+      (<HTMLInputElement>document.getElementById('inputApellidos')).value = '';
       this.editableApellidos = true;
     }
   }
-
 }
