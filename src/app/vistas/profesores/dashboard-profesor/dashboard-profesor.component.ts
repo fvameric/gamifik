@@ -30,6 +30,10 @@ export class DashboardProfesorComponent implements OnInit {
     centro: 0,
   };
 
+  nombre:string = 'funciona Fran';
+  apellidos:string = 'funciona Fran Olga';
+  email:string = 'funcionaFran@gmail.com';
+
   constructor(
     private controladorService: ControladorService,
     private http: HttpClient
@@ -88,7 +92,7 @@ export class DashboardProfesorComponent implements OnInit {
     if (this.editableEmail == true) {
       this.editableEmail = false;
     } else {
-      let valorInputNombre = (<HTMLInputElement>(
+      (<HTMLInputElement>(
         document.getElementById('inputEmail')
       )).value;
       (<HTMLInputElement>document.getElementById('inputEmail')).value = '';
@@ -100,7 +104,10 @@ export class DashboardProfesorComponent implements OnInit {
     if (this.editableNombre == true) {
       this.editableNombre = false;
     } else {
-      let valorInputNombre = (<HTMLInputElement>(
+      if (document.getElementById('guardarNombre')) {
+      }
+
+      (<HTMLInputElement>(
         document.getElementById('inputNombre')
       )).value;
       (<HTMLInputElement>document.getElementById('inputNombre')).value = '';
@@ -112,11 +119,33 @@ export class DashboardProfesorComponent implements OnInit {
     if (this.editableApellidos == true) {
       this.editableApellidos = false;
     } else {
-      let valorInputNombre = (<HTMLInputElement>(
+      (<HTMLInputElement>(
         document.getElementById('inputApellidos')
       )).value;
       (<HTMLInputElement>document.getElementById('inputApellidos')).value = '';
       this.editableApellidos = true;
     }
+  }
+
+  guardarNombre() {
+    this.editableNombre = true;
+    this.nombre = (<HTMLInputElement>(
+      document.getElementById('inputNombre')
+    )).value;
+
+  }
+
+  guardarApellidos() {
+    this.editableApellidos = true;
+    this.apellidos = (<HTMLInputElement>(
+      document.getElementById('inputApellidos')
+    )).value;
+  }
+
+  guardarEmail() {
+    this.editableEmail = true;
+    this.email = (<HTMLInputElement>(
+      document.getElementById('inputEmail')
+    )).value;
   }
 }

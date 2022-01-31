@@ -72,10 +72,10 @@
             <hr>
             <div class="centrar-configuracion">
               <h5>Nombre: </h5>
-              <input class="inputEmail" type="text" placeholder="Nombre" id="inputNombre" [readonly]="this.editableNombre">
+              <input class="inputEditar" type="text" [placeholder]="this.nombre" id="inputNombre" [readonly]="this.editableNombre">
               <div class="pruebaConfiguracion">
                 <!-- Tick nombre-->
-                <svg *ngIf="!this.editableNombre" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                <svg *ngIf="!this.editableNombre" (click)="guardarNombre()" id="guardarNombre" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                   fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                   <path
                     d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
@@ -99,10 +99,10 @@
             </div>
             <div class="centrar-configuracion">
               <h5>Apellidos:</h5>
-              <input class="inputEmail" type="text" placeholder="Apellido" id="inputApellidos" [readonly]="this.editableApellidos">
+              <input class="inputEditar" type="text" [placeholder]="this.apellidos" id="inputApellidos" [readonly]="this.editableApellidos">
               <div class="pruebaConfiguracion">
                 <!-- Tick apellidos -->
-                <svg *ngIf="!this.editableApellidos" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                <svg *ngIf="!this.editableApellidos" (click)="guardarApellidos()" id="guardarApellidos" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                   fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                   <path
                     d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
@@ -128,11 +128,11 @@
             <!-- Div para cada linia ej. :  Nombre, apellidos, email... -->
             <div class="centrar-configuracion">
               <h5>Email: </h5>
-              <input class="inputEmail" type="text" placeholder="Email" id="inputEmail" [readonly]="this.editableEmail">
+              <input class="inputEditar" type="text" [placeholder]="this.email" id="inputEmail" [readonly]="this.editableEmail">
               <!-- Div que divide las imagenes -->
               <div class="pruebaConfiguracion">
                 <!-- Tick -->
-                <svg *ngIf="!this.editableEmail" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                <svg *ngIf="!this.editableEmail" (click)="guardarEmail()" id="guardarEmail" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                   fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                   <path
                     d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
