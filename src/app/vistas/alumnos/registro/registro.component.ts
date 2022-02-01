@@ -21,7 +21,11 @@ export class RegistroComponent implements OnInit {
   passType: string = 'password';
   confirmPassType: string = 'password';
 
-  constructor(public formBuilder: FormBuilder, private controladorService: ControladorService, private http: HttpClient) { }
+  registroProfe: boolean = false;
+
+  constructor(
+    public formBuilder: FormBuilder,
+    private controladorService: ControladorService) { }
 
   ngOnInit(){
 
@@ -59,7 +63,6 @@ export class RegistroComponent implements OnInit {
     };
   }
   
-
   //Retorna els valors introduits al formulari
   get form() {
     return this.registerForm.controls;

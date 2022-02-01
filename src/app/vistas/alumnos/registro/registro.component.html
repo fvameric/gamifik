@@ -6,82 +6,144 @@
     <img src="../../../../assets/Logo/logotipo_rescalado.png" id="icon" width="150" height="100" />
 </div>
 
-<!-- formulario registro profes -->
-<form [formGroup]="registerForm" (ngSubmit)="onRegistro(registerForm.value)" class="Icon-inside">
-    <input type="text" id="login" formControlName="username" placeholder="Usuario" class="fadeIn first"
-        [ngClass]="{ 'is-invalid': form.username.errors }">
-    <!-- Missatge error nom usuari -->
-    <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
-        <div *ngIf="form.username.errors.required">El nombre de usuario es necesario</div>
-    </div>
+<div *ngIf="registroProfe;else registroAlumno">
+    <!-- formulario registro profes -->
+    <form [formGroup]="registerForm" (ngSubmit)="onRegistro(registerForm.value)" class="Icon-inside">
+        <input type="text" id="login" formControlName="username" placeholder="Usuario" class="fadeIn first" [ngClass]="{ 'is-invalid': form.username.errors }">
+        <!-- Missatge error nom usuari -->
+        <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
+            <div *ngIf="form.username.errors.required">El nombre de usuario es necesario</div>
+        </div>
 
-    <input type="text" id="email" formControlName="email" placeholder="Correo Electrónico" class="fadeIn second"
-        [ngClass]="{ 'is-invalid': submitted && form.email.errors }">
-    <!-- Missatge error email -->
-    <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
-        <div *ngIf="form.email.errors.required">El correo electrónico es necesario</div>
-        <div *ngIf="form.email.errors.email">Correo electrónico no válido</div>
-    </div>
+        <input type="text" id="email" formControlName="email" placeholder="Correo Electrónico" class="fadeIn second" [ngClass]="{ 'is-invalid': submitted && form.email.errors }">
+        <!-- Missatge error email -->
+        <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+            <div *ngIf="form.email.errors.required">El correo electrónico es necesario</div>
+            <div *ngIf="form.email.errors.email">Correo electrónico no válido</div>
+        </div>
 
-    <div class="form-group">
-        <div class="input-group">
-            <input id="password" placeholder="Password" formControlName="password" class="fadeIn second"
-                [type]="passType" [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
-            <!-- Icono -->
-            <i *ngIf="this.passShown" (click)="togglePass()" class="material-icons">
+        <div class="form-group">
+            <div class="input-group">
+                <input id="password" placeholder="Password" formControlName="password" class="fadeIn second" [type]="passType" [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
+                <!-- Icono -->
+                <i *ngIf="this.passShown" (click)="togglePass()" class="material-icons">
                 visibility
             </i>
-            <i *ngIf="!this.passShown" (click)="togglePass()" class="material-icons">
+                <i *ngIf="!this.passShown" (click)="togglePass()" class="material-icons">
                 visibility_off
             </i>
-            <!-- Missatge error pass -->
-            <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
-                <div *ngIf="form.password.errors.required">La contraseña es necesaria</div>
-                <div *ngIf="form.password.errors.minlength">La contraseña debe contener al menos 6 carácteres</div>
+                <!-- Missatge error pass -->
+                <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
+                    <div *ngIf="form.password.errors.required">La contraseña es necesaria</div>
+                    <div *ngIf="form.password.errors.minlength">La contraseña debe contener al menos 6 carácteres</div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="input-group">
-            <input id="confirmPassword" placeholder="Confirmar Contraseña" class="fadeIn third"
-                formControlName="confirmPassword" [type]="confirmPassType"
-                [ngClass]="{ 'is-invalid':submitted && form.confirmPassword.errors }">
-            <!-- Icono -->
-            <i *ngIf="this.confirmPassShown" (click)="toggleConfirmPass()" class="material-icons">
+        <div class="form-group">
+            <div class="input-group">
+                <input id="confirmPassword" placeholder="Confirmar Contraseña" class="fadeIn third" formControlName="confirmPassword" [type]="confirmPassType" [ngClass]="{ 'is-invalid':submitted && form.confirmPassword.errors }">
+                <!-- Icono -->
+                <i *ngIf="this.confirmPassShown" (click)="toggleConfirmPass()" class="material-icons">
                 visibility
             </i>
-            <i *ngIf="!this.confirmPassShown" (click)="toggleConfirmPass()" class="material-icons">
+                <i *ngIf="!this.confirmPassShown" (click)="toggleConfirmPass()" class="material-icons">
                 visibility_off
             </i>
-            <!-- Missatge error confirmar pass -->
-            <div *ngIf="submitted && form.confirmPassword.errors" class="invalid-feedback">
-                <div *ngIf="form.confirmPassword.errors.required">Confirmar la contraseña es necesario</div>
-                <div *ngIf="form.confirmPassword.errors.mustMatch">Las contraseñas deben de coincidir</div>
+                <!-- Missatge error confirmar pass -->
+                <div *ngIf="submitted && form.confirmPassword.errors" class="invalid-feedback">
+                    <div *ngIf="form.confirmPassword.errors.required">Confirmar la contraseña es necesario</div>
+                    <div *ngIf="form.confirmPassword.errors.mustMatch">Las contraseñas deben de coincidir</div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="fadeIn third" formControlName="nombre"
-        [ngClass]="{ 'is-invalid': form.nombre.errors }">
-    <!-- Missatge error nombre -->
-    <div *ngIf="submitted && form.nombre.errors" class="invalid-feedback">
-        <div *ngIf="form.nombre.errors.required">El nombre es necesario</div>
-    </div>
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="fadeIn third" formControlName="nombre" [ngClass]="{ 'is-invalid': form.nombre.errors }">
+        <!-- Missatge error nombre -->
+        <div *ngIf="submitted && form.nombre.errors" class="invalid-feedback">
+            <div *ngIf="form.nombre.errors.required">El nombre es necesario</div>
+        </div>
 
-    <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" class="fadeIn fourth"
-        formControlName="apellidos" [ngClass]="{ 'is-invalid': form.apellidos.errors }">
-    <!-- Missatge error apellidos -->
-    <div *ngIf="submitted && form.apellidos.errors" class="invalid-feedback">
-        <div *ngIf="form.apellidos.errors.required">Los apellidos son necesarios</div>
-    </div>
+        <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" class="fadeIn fourth" formControlName="apellidos" [ngClass]="{ 'is-invalid': form.apellidos.errors }">
+        <!-- Missatge error apellidos -->
+        <div *ngIf="submitted && form.apellidos.errors" class="invalid-feedback">
+            <div *ngIf="form.apellidos.errors.required">Los apellidos son necesarios</div>
+        </div>
 
-    <input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Date" class="fadeIn fourth"
-        formControlName="fechaNacimiento">
-    <!-- Missatge error fecha de nacimiento -->
-    <div *ngIf="submitted && form.fechaNacimiento.errors" class="invalid-feedback">
-        <div *ngIf="form.fechaNacimiento.errors.required">La fecha de nacimiento es necesaria</div>
-    </div>
+        <input type="submit" value="Registrarse" class="fadeIn fifth">
+    </form>
+</div>
 
-    <input type="submit" value="Registrarse" class="fadeIn fifth">
-</form>
+<ng-template #registroAlumno>
+    <!-- formulario registro alumnos  -->
+    <form [formGroup]="registerForm" (ngSubmit)="onRegistro(registerForm.value)" class="Icon-inside">
+        <input type="text" id="login" formControlName="username" placeholder="Usuario" class="fadeIn first" [ngClass]="{ 'is-invalid': form.username.errors }">
+        <!-- Missatge error nom usuari -->
+        <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
+            <div *ngIf="form.username.errors.required">El nombre de usuario es necesario</div>
+        </div>
+
+        <input type="text" id="email" formControlName="email" placeholder="Correo Electrónico" class="fadeIn second" [ngClass]="{ 'is-invalid': submitted && form.email.errors }">
+        <!-- Missatge error email -->
+        <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+            <div *ngIf="form.email.errors.required">El correo electrónico es necesario</div>
+            <div *ngIf="form.email.errors.email">Correo electrónico no válido</div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <input id="password" placeholder="Password" formControlName="password" class="fadeIn second" [type]="passType" [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
+                <!-- Icono -->
+                <i *ngIf="this.passShown" (click)="togglePass()" class="material-icons">
+                    visibility
+                </i>
+                <i *ngIf="!this.passShown" (click)="togglePass()" class="material-icons">
+                    visibility_off
+                </i>
+                <!-- Missatge error pass -->
+                <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
+                    <div *ngIf="form.password.errors.required">La contraseña es necesaria</div>
+                    <div *ngIf="form.password.errors.minlength">La contraseña debe contener al menos 6 carácteres</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <input id="confirmPassword" placeholder="Confirmar Contraseña" class="fadeIn third" formControlName="confirmPassword" [type]="confirmPassType" [ngClass]="{ 'is-invalid':submitted && form.confirmPassword.errors }">
+                <!-- Icono -->
+                <i *ngIf="this.confirmPassShown" (click)="toggleConfirmPass()" class="material-icons">
+                    visibility
+                </i>
+                <i *ngIf="!this.confirmPassShown" (click)="toggleConfirmPass()" class="material-icons">
+                    visibility_off
+                </i>
+                <!-- Missatge error confirmar pass -->
+                <div *ngIf="submitted && form.confirmPassword.errors" class="invalid-feedback">
+                    <div *ngIf="form.confirmPassword.errors.required">Confirmar la contraseña es necesario</div>
+                    <div *ngIf="form.confirmPassword.errors.mustMatch">Las contraseñas deben de coincidir</div>
+                </div>
+            </div>
+        </div>
+
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="fadeIn third" formControlName="nombre" [ngClass]="{ 'is-invalid': form.nombre.errors }">
+        <!-- Missatge error nombre -->
+        <div *ngIf="submitted && form.nombre.errors" class="invalid-feedback">
+            <div *ngIf="form.nombre.errors.required">El nombre es necesario</div>
+        </div>
+
+        <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" class="fadeIn fourth" formControlName="apellidos" [ngClass]="{ 'is-invalid': form.apellidos.errors }">
+        <!-- Missatge error apellidos -->
+        <div *ngIf="submitted && form.apellidos.errors" class="invalid-feedback">
+            <div *ngIf="form.apellidos.errors.required">Los apellidos son necesarios</div>
+        </div>
+
+        <input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Date" class="fadeIn fourth" formControlName="fechaNacimiento">
+        <!-- Missatge error fecha de nacimiento -->
+        <div *ngIf="submitted && form.fechaNacimiento.errors" class="invalid-feedback">
+            <div *ngIf="form.fechaNacimiento.errors.required">La fecha de nacimiento es necesaria</div>
+        </div>
+
+        <input type="submit" value="Registrarse" class="fadeIn fifth">
+    </form>
+</ng-template>
