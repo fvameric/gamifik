@@ -91,7 +91,8 @@ export class RegistroComponent implements OnInit {
       pass: form.password,
       nombre: form.nombre,
       apellidos: form.apellidos,
-      fecha_nacimiento: form.fechaNacimiento
+      fecha_nacimiento: form.fechaNacimiento,
+      tipo: 0
     }
 
     //Comprobar si es cumpleixen o no tots els errors

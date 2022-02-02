@@ -6,4 +6,5 @@ export interface Profesor {
     nombre: string;
     apellidos: string;
     centro: number;
+    tipo: number;
   }

@@ -16,7 +16,8 @@ export class PerfilComponent implements OnInit {
     pass: '',
     nombre: '',
     apellidos: '',
-    fecha_nacimiento: new Date
+    fecha_nacimiento: new Date,
+    tipo: 0
   }
 
   constructor(private controladorService: ControladorService) { }

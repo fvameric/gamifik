@@ -30,7 +30,8 @@ export class ControladorService {
     pass: '',
     nombre: '',
     apellidos: '',
-    fecha_nacimiento: new Date()
+    fecha_nacimiento: new Date(),
+    tipo: 0
   }
 
   datosProfesor: Profesor = {
@@ -40,7 +41,8 @@ export class ControladorService {
     pass: '',
     nombre: '',
     apellidos: '',
-    centro: 0
+    centro: 0,
+    tipo: 1
   }
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -54,9 +56,12 @@ export class ControladorService {
   }
 
   loginUser(user: User) {
-    if (!this.profesorExiste) {
-      this.http.post<Alumno[]>(`${this.URL}alumnos/loginAlumno.php`, JSON.stringify(user)).subscribe((val) => {
-        if (val) {
+      return this.http.post<User>(`${this.URL}identificacion/loginUser.php`, JSON.stringify(user));
+    /*
+
+
+
+if (val) {
           val.forEach(element => {
             this.alumnoExiste = true;
             localStorage.setItem('userLocalStorage', JSON.stringify(element));
@@ -64,8 +69,8 @@ export class ControladorService {
             this.router.navigate(['/dashboard']);
           });
         }
-      });
-    }
+
+
 
     if (!this.alumnoExiste) {
       this.http.post<User[]>(`${this.URL}profesores/loginProfesor.php`, JSON.stringify(user)).subscribe((val) => {
@@ -82,6 +87,7 @@ export class ControladorService {
 
     this.alumnoExiste = false;
     this.profesorExiste = false;
+    */
   }
 
   obtenerPerfilAlumno() {

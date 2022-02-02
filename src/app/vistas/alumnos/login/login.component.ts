@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
+
+import Swal from 'sweetalert2';
+
 // imports conectividad
 import { HttpClient } from '@angular/common/http';
 import { ControladorService } from 'services/controlador.service';
@@ -28,12 +31,26 @@ export class LoginComponent implements OnInit {
   submitted: boolean = false;
   alumnoExiste: boolean = false;
 
+  userNoExiste: boolean = false;
+
   alumnos: any;
+
+  datosUser: User = {
+    id: 0,
+    nick: '',
+    email: '',
+    pass: '',
+    nombre: '',
+    apellidos: '',
+    fecha_nacimiento: new Date(),
+    centro: 0,
+    tipo: 1
+  };
 
   constructor(
     public formBuilder: FormBuilder,
     private controladorService: ControladorService,
-    private http: HttpClient) { }
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -60,7 +77,19 @@ export class LoginComponent implements OnInit {
       pass: form.password
     }
     this.submitted = true;
-    this.controladorService.loginUser(user);
+    this.controladorService.loginUser(user).subscribe(val => {
+      if (val != null) {
+        this.datosUser = val;
+        localStorage.setItem('userLocalStorage', JSON.stringify(this.datosUser));
+        this.router.navigate(['/dashboard']);
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error de identificación',
+          text: 'Este usuario no existe'
+        })
+      }
+    });
   }
 
   public togglePass() {

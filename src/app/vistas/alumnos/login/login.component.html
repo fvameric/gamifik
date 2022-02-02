@@ -29,11 +29,14 @@
                 visibility_off
             </i>
             <!-- Missatge error password -->
-            <div *ngIf="submitted && form.password.errors">
+            <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
                 <div *ngIf="form.password.errors.required">La contraseña es necesaria</div>
-
             </div>
         </div>
+    </div>
+
+    <div *ngIf="submitted && userNoExiste" class="invalid-feedback">
+        <div *ngIf="userNoExiste">user no existe</div>
     </div>
     
     <input type="submit" value="Iniciar Sesión" class="fadeIn fourth">

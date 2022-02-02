@@ -6,4 +6,5 @@ export interface Alumno {
     nombre: string;
     apellidos: string;
     fecha_nacimiento: Date;
+    tipo: number;
   }

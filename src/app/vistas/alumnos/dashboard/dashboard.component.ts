@@ -46,6 +46,7 @@ export class DashboardComponent implements OnInit {
     nombre: '',
     apellidos: '',
     centro: 0,
+    tipo: 1
   };
 
   datosAlumno: Alumno = {
@@ -56,6 +57,7 @@ export class DashboardComponent implements OnInit {
     nombre: '',
     apellidos: '',
     fecha_nacimiento: new Date(),
+    tipo: 0
   };
 
   tipoUser: any;
@@ -71,8 +73,8 @@ export class DashboardComponent implements OnInit {
   }
 
   obtenerDatos() {
-    this.tipoUser = localStorage.getItem('tipoUser');
-    if (this.tipoUser == 1) {
+    this.tipoUser = localStorage.getItem('userLocalStorage');
+    if (this.tipoUser.tipo == 0) {
       this.obtenerAlumno();
     } else {
       this.obtenerProfesor();
