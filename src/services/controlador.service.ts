@@ -82,34 +82,6 @@ export class ControladorService {
 
     this.alumnoExiste = false;
     this.profesorExiste = false;
-
-
-    /*
-    this.obtenerDatosAlumno().subscribe((datos: any) => {
-      datos.forEach((element: any) => {
-          if (form.username == element.nick && form.password == element.pass) {
-            this.alumnoExiste = true;
-          }
-
-          // TO-DO guardar sesión
-          // esto no funciona como debería
-          if (this.alumnoExiste) {
-            this.alumnoExiste = false;
-            this.datosAlumno.id = element.id;
-            this.datosAlumno.nick = element.nick;
-            this.datosAlumno.email = element.email;
-            this.datosAlumno.pass = element.pass;
-            this.datosAlumno.nombre = element.nombre;
-            this.datosAlumno.apellidos = element.apellidos;
-            this.datosAlumno.fecha_nacimiento = element.fecha_nacimiento;
-            this.router.navigateByUrl('/dashboard');
-          }
-        });
-        if (!this.alumnoExiste) {
-          alert("Login incorrecto");
-      }
-      });
-      */
   }
 
   obtenerPerfilAlumno() {
