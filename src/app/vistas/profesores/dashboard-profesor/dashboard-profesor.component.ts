@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { ControladorService } from 'services/controlador.service';
-import { Alumno } from 'app/interfaces/Alumno';
-import { Profesor } from '../../../interfaces/Profesor';
+import { Profesor } from 'app/interfaces/Profesor';
+import { isThisTypeNode } from 'typescript';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-dashboard-profesor',
+  templateUrl: './dashboard-profesor.component.html',
+  styleUrls: ['./dashboard-profesor.component.css'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardProfesorComponent implements OnInit {
   profesores: any;
   alumnos: any;
   mostrarRankingsVisual: boolean = false;
