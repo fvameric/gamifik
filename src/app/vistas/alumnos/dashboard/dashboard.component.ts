@@ -9,7 +9,7 @@ import { User } from 'app/interfaces/User';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
   profesores: any;
@@ -20,6 +20,14 @@ export class DashboardComponent implements OnInit {
   editableEmail: boolean = true;
   editableNombre: boolean = true;
   editableApellidos: boolean = true;
+
+  passType: string = 'password';
+  passTypeNew: string = 'password';
+  passTypeConfirmNew: string = 'password';
+
+  antiguaContrasena: boolean = false;
+  nuevaContrasena: boolean = false;
+  confirmarNuevaContrasena: boolean = false;
 
   mostrarEditarContrasena: boolean = false;
 
@@ -47,7 +55,7 @@ export class DashboardComponent implements OnInit {
     pass: '',
     nombre: '',
     apellidos: '',
-    fecha_nacimiento: new Date()
+    fecha_nacimiento: new Date(),
   };
 
   tipoUser: any;
@@ -63,7 +71,6 @@ export class DashboardComponent implements OnInit {
   }
 
   obtenerDatos() {
-
     this.tipoUser = localStorage.getItem('tipoUser');
     if (this.tipoUser == 1) {
       this.obtenerAlumno();
@@ -78,7 +85,7 @@ export class DashboardComponent implements OnInit {
 
     this.nombre = this.datosProfesor.nombre;
     this.apellidos = this.datosProfesor.apellidos;
-    this.email =  this.datosProfesor.email;
+    this.email = this.datosProfesor.email;
   }
 
   obtenerAlumno() {
@@ -87,7 +94,7 @@ export class DashboardComponent implements OnInit {
 
     this.nombre = this.datosAlumno.nombre;
     this.apellidos = this.datosAlumno.apellidos;
-    this.email =  this.datosAlumno.email;
+    this.email = this.datosAlumno.email;
   }
 
   mostrarRankings() {
@@ -179,6 +186,35 @@ export class DashboardComponent implements OnInit {
       this.mostrarEditarContrasena = false;
     } else {
       this.mostrarEditarContrasena = true;
+    }
+  }
+
+  visualizarAntiguaContrasena() {
+    if (this.antiguaContrasena == false) {
+      this.antiguaContrasena = true;
+      this.passType = 'text';
+    } else {
+      this.antiguaContrasena = false;
+      this.passType = 'password';
+    }
+  }
+
+  visualizarNuevaContrasena() {
+    if (this.nuevaContrasena == false) {
+      this.nuevaContrasena = true;
+      this.passTypeNew = 'text';
+    } else {
+      this.nuevaContrasena = false;
+      this.passTypeNew = 'password';
+    }
+  }
+  visualizarConfirmarNuevaContrasena() {
+    if (this.confirmarNuevaContrasena == false) {
+      this.confirmarNuevaContrasena = true;
+      this.passTypeConfirmNew = 'text';
+    } else {
+      this.confirmarNuevaContrasena = false;
+      this.passTypeConfirmNew = 'password';
     }
   }
 }

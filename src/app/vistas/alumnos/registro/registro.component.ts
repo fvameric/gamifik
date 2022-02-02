@@ -26,6 +26,8 @@ export class RegistroComponent implements OnInit {
   accesoProfeFlag: boolean = false;
   passAcceso: string = '';
 
+  imgSrc: string = "../../../../assets/avatardefault.png";
+
   constructor(
     public formBuilder: FormBuilder,
     private controladorService: ControladorService) { }
@@ -136,4 +138,12 @@ export class RegistroComponent implements OnInit {
     }
   }
 
+  readURL(event: any) {
+    if (event.target.files && event.target.files[0]) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = e => this.imgSrc = reader.result as string;
+        reader.readAsDataURL(file);
+    }
+}
 }
