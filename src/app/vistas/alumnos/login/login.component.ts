@@ -10,6 +10,7 @@ import { Profesor } from 'app/interfaces/Profesor';
 import { Alumno } from 'app/interfaces/Alumno';
 
 import { Router } from '@angular/router';
+import { User } from 'app/interfaces/User';
 
 @Component({
   selector: 'app-login',
@@ -54,10 +55,12 @@ export class LoginComponent implements OnInit {
 
   //Funció iniciar sessió
   onLogin(form: any) {
+    const user: User = {
+      nick: form.username,
+      pass: form.password
+    }
     this.submitted = true;
-    this.controladorService.validarLoginAlumno(form);
-
-    //this.onReset();
+    this.controladorService.loginUser(user);
   }
 
   public togglePass() {

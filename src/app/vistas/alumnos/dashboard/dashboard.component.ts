@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ControladorService } from 'services/controlador.service';
 import { Alumno } from 'app/interfaces/Alumno';
 import { Profesor } from '../../../interfaces/Profesor';
+import { User } from 'app/interfaces/User';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,7 +30,7 @@ export class DashboardComponent implements OnInit {
   apellidos: string = 'funciona Fran Olga';
   email: string = 'funcionaFran@gmail.com';
 
-  perfil: Profesor = {
+  datosProfesor: Profesor = {
     id: 0,
     nick: '',
     email: '',
@@ -39,28 +40,54 @@ export class DashboardComponent implements OnInit {
     centro: 0,
   };
 
+  datosAlumno: Alumno = {
+    id: 0,
+    nick: '',
+    email: '',
+    pass: '',
+    nombre: '',
+    apellidos: '',
+    fecha_nacimiento: new Date()
+  };
+
+  tipoUser: any;
+  datosStorage: any;
+
   constructor(
     private controladorService: ControladorService,
     private http: HttpClient
   ) {}
 
   ngOnInit(): void {
-    this.obtenerProfesor();
     this.obtenerDatos();
   }
 
   obtenerDatos() {
-    this.controladorService
-      .obtenerDatosProfesor()
-      .subscribe((datos) => (this.profesores = datos));
 
-    this.controladorService
-      .obtenerDatosAlumno()
-      .subscribe((datos) => (this.alumnos = datos));
+    this.tipoUser = localStorage.getItem('tipoUser');
+    if (this.tipoUser == 1) {
+      this.obtenerAlumno();
+    } else {
+      this.obtenerProfesor();
+    }
   }
 
   obtenerProfesor() {
-    this.perfil = this.controladorService.obtenerPerfilProfesor();
+    this.datosStorage = localStorage.getItem('userLocalStorage');
+    this.datosProfesor = JSON.parse(this.datosStorage);
+
+    this.nombre = this.datosProfesor.nombre;
+    this.apellidos = this.datosProfesor.apellidos;
+    this.email =  this.datosProfesor.email;
+  }
+
+  obtenerAlumno() {
+    this.datosStorage = localStorage.getItem('userLocalStorage');
+    this.datosAlumno = JSON.parse(this.datosStorage);
+
+    this.nombre = this.datosAlumno.nombre;
+    this.apellidos = this.datosAlumno.apellidos;
+    this.email =  this.datosAlumno.email;
   }
 
   mostrarRankings() {
