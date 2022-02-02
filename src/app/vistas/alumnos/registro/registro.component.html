@@ -98,8 +98,13 @@
     <!-- formulario registro alumnos  -->
     <form [formGroup]="registerForm" (ngSubmit)="onRegistro(registerForm.value)" class="Icon-inside" enctype="multipart/form-data">
 
-        <img id="preview" [src]="imgSrc">
-        <input type="file" (change)="readURL($event)" placeholder="Avatar" accept="image/png, image/gif, image/jpeg"><br>
+        <div class="image-upload">
+            <label for="file-input">
+                <img id="preview" [src]="imgSrc">
+              </label>
+
+            <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg"><br>
+        </div>
 
         <input type="text" id="login" formControlName="username" placeholder="Usuario" class="fadeIn first" [ngClass]="{ 'is-invalid': form.username.errors }">
         <!-- Missatge error nom usuari -->
