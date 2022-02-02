@@ -23,6 +23,9 @@ export class RegistroComponent implements OnInit {
 
   registroProfe: boolean = false;
 
+  accesoProfeFlag: boolean = false;
+  passAcceso: string = '';
+
   constructor(
     public formBuilder: FormBuilder,
     private controladorService: ControladorService) { }
@@ -119,6 +122,17 @@ export class RegistroComponent implements OnInit {
     } else {
       this.confirmPassShown = true;
       this.confirmPassType = 'text';
+    }
+  }
+
+  profe() {
+    if (this.registroProfe) {
+      this.registroProfe = false;
+    }
+
+    if (this.passAcceso == "12") {
+      this.passAcceso = "";
+      this.registroProfe = true;
     }
   }
 

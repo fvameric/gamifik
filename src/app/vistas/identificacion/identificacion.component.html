@@ -5,57 +5,24 @@
 <div class="header">
     <div class="wrapperTest fadeInDown">
         <!-- pestañas de cada componente -->
-        <div id="formContent" *ngIf="this.accesoProfeFlag;else form_alumno">
-            <h1>Acceso Profesores</h1>
+        <div id="formContent">
+            <h1>Acceso</h1>
             <ul ngbNav #nav="ngbNav" class="nav-tabs">
                 <li [ngbNavItem]="1">
-                    <a ngbNavLink>Login Profe</a>
+                    <a ngbNavLink>Login</a>
                     <ng-template ngbNavContent>
                         <app-login></app-login>
                     </ng-template>
                 </li>
                 <li [ngbNavItem]="2">
-                    <a ngbNavLink>Registro Profe</a>
+                    <a ngbNavLink>Registro</a>
                     <ng-template ngbNavContent>
                         <app-registro></app-registro>
                     </ng-template>
                 </li>
-                <li [ngbNavItem]="3">
-                    <a ngbNavLink (click)="accesoAlumno()">Acceso alumno</a>
-                </li>
             </ul>
             <div [ngbNavOutlet]="nav" class="mt-2"></div>
         </div>
-        <ng-template #form_alumno>
-            <div id="formContent">
-                <h1>Acceso alumnos</h1>
-                <ul ngbNav #nav="ngbNav" class="nav-tabs">
-                    <li [ngbNavItem]="1">
-                        <a ngbNavLink>Login Alumno</a>
-                        <ng-template ngbNavContent>
-                            <app-login></app-login>
-                        </ng-template>
-                    </li>
-                    <li [ngbNavItem]="2">
-                        <a ngbNavLink>Registro Alumno</a>
-                        <ng-template ngbNavContent>
-                            <app-registro></app-registro>
-                        </ng-template>
-                    </li>
-                    <li [ngbNavItem]="3">
-                        <a ngbNavLink>Acceso profe</a>
-                        <ng-template ngbNavContent>
-                            <!-- contraseña acceso profes -->
-                            <div id="acceso-profes">
-                                <input type="password" [(ngModel)]="passAcceso" placeholder="1234">
-                                <input type="submit" value="Acceso profes" (click)="accesoProfe()">
-                            </div>
-                        </ng-template>
-                    </li>
-                </ul>
-                <div [ngbNavOutlet]="nav" class="mt-2"></div>
-            </div>
-        </ng-template>
     </div>
     <div class="footer-waves">
         <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">

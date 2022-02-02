@@ -6,23 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./identificacion.component.css']
 })
 export class IdentificacionComponent implements OnInit {
-
-  accesoProfeFlag: boolean = false;
-  passAcceso: string = '';
   
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  accesoProfe() {
-    if (this.passAcceso == "1234") {
-      this.accesoProfeFlag = true;
-    }
-  }
-
-  accesoAlumno() {
-    this.accesoProfeFlag = false;
   }
 
 }
