@@ -15,6 +15,15 @@
 
     <!-- formulario registro profes -->
     <form [formGroup]="registerForm" (ngSubmit)="onRegistro(registerForm.value)" class="Icon-inside">
+
+        <div class="image-upload">
+            <label for="file-input">
+                <img id="preview" [src]="imgSrc">
+              </label>
+
+            <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg"><br>
+        </div>
+
         <input type="text" id="login" formControlName="username" placeholder="Usuario" class="fadeIn first" [ngClass]="{ 'is-invalid': form.username.errors }">
         <!-- Missatge error nom usuari -->
         <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
