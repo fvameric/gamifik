@@ -63,17 +63,14 @@ export class DashboardComponent implements OnInit {
   tipoUser: any;
   datosStorage: any;
 
-  constructor(
-    private controladorService: ControladorService,
-    private http: HttpClient
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.obtenerDatos();
   }
 
   obtenerDatos() {
-    this.tipoUser = localStorage.getItem('userLocalStorage');
+    this.tipoUser = JSON.parse(localStorage.getItem('userLocalStorage') || '{}');
     if (this.tipoUser.tipo == 0) {
       this.obtenerAlumno();
     } else {

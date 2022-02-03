@@ -13,6 +13,10 @@ h1 {
 }
 */
 
+.titulo {
+    padding: 20px;
+}
+
 p {
     font-family: 'Lato', sans-serif;
     letter-spacing: 1px;
@@ -20,12 +24,15 @@ p {
     color: #333333;
 }
 
+
+/*
 .header {
     position: relative;
     text-align: center;
     height: 100%;
     z-index: 10;
 }
+*/
 
 .logo {
     width: 50px;
