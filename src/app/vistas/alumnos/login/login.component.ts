@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 
 import Swal from 'sweetalert2';
 
@@ -18,10 +22,9 @@ import { User } from 'app/interfaces/User';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
   // variables formulario
   loginForm!: FormGroup;
 
@@ -44,20 +47,20 @@ export class LoginComponent implements OnInit {
     apellidos: '',
     fecha_nacimiento: new Date(),
     centro: 0,
-    tipo: 1
+    tipo: 1,
   };
 
   constructor(
     public formBuilder: FormBuilder,
     private controladorService: ControladorService,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
-    }
-    );
+      password: ['', Validators.required],
+    });
   }
 
   //Funció rebre valors del formulari
@@ -74,20 +77,23 @@ export class LoginComponent implements OnInit {
   onLogin(form: any) {
     const user: User = {
       nick: form.username,
-      pass: form.password
-    }
+      pass: form.password,
+    };
     this.submitted = true;
-    this.controladorService.loginUser(user).subscribe(val => {
+    this.controladorService.loginUser(user).subscribe((val) => {
       if (val != null) {
         this.datosUser = val;
-        localStorage.setItem('userLocalStorage', JSON.stringify(this.datosUser));
+        localStorage.setItem(
+          'userLocalStorage',
+          JSON.stringify(this.datosUser)
+        );
         this.router.navigate(['/dashboard']);
       } else {
         Swal.fire({
           icon: 'error',
           title: 'Error de identificación',
-          text: 'Este usuario no existe'
-        })
+          text: 'Este usuario no existe',
+        });
       }
     });
   }
@@ -96,7 +102,6 @@ export class LoginComponent implements OnInit {
     if (this.passShown) {
       this.passShown = false;
       this.passType = 'password';
-
     } else {
       this.passShown = true;
       this.passType = 'text';

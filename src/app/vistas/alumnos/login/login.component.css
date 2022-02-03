@@ -1,56 +1,56 @@
 .join-login-form {
-    background-color: #202027;
-    width: 50vw;
-    max-width: 50%;
-    padding: 2rem 4rem;
-    border-radius: 20px;
-  }
-  
-  .input-group {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-  }
-  .input-group label{
-    color : #fff;
-    font-family : tahoma;
-  }
-  .input-group span{
-    color : #888;
-    font-family : tahoma;
-    font-size: 11px;
-  }
-  .input-icon-container{
-    display: flex;
-    flex-direction: row;
-    border: 1px solid #374669;
-    border-radius: 5px;
-    background : #fff;
-    align-items : center;
-    overflow: hidden;
-  }
-  .input-icon-container.error{
-    border: 1px solid red;
-    background : #fdd3d3;
-  }
-  .input-icon-container input {
-    outline: none;
-    border: none;
-    background: none;
-    font-size: 1em;
-    padding: .5em;
-    color: inherit;
-    flex : auto 1 1;
-    width : 100%;
-    background : none;
-    background-color : transperant;
-  }
-  
-  .input-icon-container .fa{
-    padding : 10px;
-  }
-  
-  .fa.fa-user{
-    background : #374669;
-    color: #fff;
-  }
+  background-color: #202027;
+  width: 50vw;
+  max-width: 50%;
+  padding: 2rem 4rem;
+  border-radius: 20px;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.input-group label {
+  color: #fff;
+  font-family: tahoma;
+}
+.input-group span {
+  color: #888;
+  font-family: tahoma;
+  font-size: 11px;
+}
+.input-icon-container {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #374669;
+  border-radius: 5px;
+  background: #fff;
+  align-items: center;
+  overflow: hidden;
+}
+.input-icon-container.error {
+  border: 1px solid red;
+  background: #fdd3d3;
+}
+.input-icon-container input {
+  outline: none;
+  border: none;
+  background: none;
+  font-size: 1em;
+  padding: 0.5em;
+  color: inherit;
+  flex: auto 1 1;
+  width: 100%;
+  background: none;
+  background-color: transperant;
+}
+
+.input-icon-container .fa {
+  padding: 10px;
+}
+
+.fa.fa-user {
+  background: #374669;
+  color: #fff;
+}

@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
     nombre: '',
     apellidos: '',
     centro: 0,
-    tipo: 1
+    tipo: 1,
   };
 
   datosAlumno: Alumno = {
@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
     nombre: '',
     apellidos: '',
     fecha_nacimiento: new Date(),
-    tipo: 0
+    tipo: 0,
   };
 
   tipoUser: any;

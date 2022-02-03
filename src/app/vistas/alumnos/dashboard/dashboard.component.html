@@ -206,14 +206,17 @@
               </div>
               <div class="centrar-configuracion">
                 <h5>Confirmar Contraseña: </h5>
-                <input class="inputEditar" [type]="passTypeConfirmNew" placeholder="Confirmar contraseña" id="contrasenaAntigua">
+                <input class="inputEditar" [type]="passTypeConfirmNew" placeholder="Confirmar contraseña"
+                  id="contrasenaAntigua">
                 <!-- Div que divide las imagenes -->
                 <div class="pruebaConfiguracion">
                   <!-- Lápiz -->
-                  <i *ngIf="this.confirmarNuevaContrasena" (click)="visualizarConfirmarNuevaContrasena()" class="material-icons">
+                  <i *ngIf="this.confirmarNuevaContrasena" (click)="visualizarConfirmarNuevaContrasena()"
+                    class="material-icons">
                     visibility
                   </i>
-                  <i *ngIf="!this.confirmarNuevaContrasena" (click)="visualizarConfirmarNuevaContrasena()" class="material-icons">
+                  <i *ngIf="!this.confirmarNuevaContrasena" (click)="visualizarConfirmarNuevaContrasena()"
+                    class="material-icons">
                     visibility_off
                   </i>
                 </div>

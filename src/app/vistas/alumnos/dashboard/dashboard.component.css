@@ -8,7 +8,11 @@
   box-sizing: border-box;
 }
 body {
-  background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
+  background: linear-gradient(
+    60deg,
+    rgba(84, 58, 183, 1) 0%,
+    rgba(0, 172, 193, 1) 100%
+  );
   font-family: "Poppins", sans-serif;
 }
 /* CONTACT ========================================== */
@@ -26,7 +30,7 @@ body {
   margin: 0 auto;
 }
 @media (min-width: 1024px) {
-  .contact {
+  /* .contact {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -35,6 +39,22 @@ body {
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+  } */
+  .contact[_ngcontent-hca-c51] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .configuracion-profe {
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  .contact-area {
+    top: 0;
   }
 }
 .contact main {
@@ -90,6 +110,34 @@ body {
     width: 60%;
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .cerrar-profe {
+    width: auto !important;
+    transform: none !important;
+    left: 0 !important;
+    top: 0 !important;
+    margin: 0 !important;
+    position: inherit !important;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .configuracion-profe {
+    transform: none !important;
+    left: 0 !important;
+    top: 0 !important;
+    margin: 0 !important;
+    position: inherit !important;
+  }
+}
+
+@media (min-width: 414px) {
+  .contact-area {
+    top: 0;
+  }
+}
+
 .contact main section .content aside h1 {
   font-weight: 100;
   font-size: 22px;
@@ -217,8 +265,9 @@ svg {
   transition: all 0.3s;
   opacity: 1;
   transform: translateY(10px);
-  position: fixed;
+  position: absolute;
   left: 100%;
+  margin-left: 5%;
 }
 .h2-perfil {
   color: #007bff;
@@ -237,13 +286,14 @@ hr {
   transition: all 0.3s;
   opacity: 1;
   transform: translateY(114px);
-  position: fixed;
+  position: absolute;
   left: 100%;
+  margin-left: 5%;
 }
 
 .cerrar-profe {
   float: left;
-  width: 70%;
+  width: 80%;
   background-color: #fff;
   padding: 18px 20px;
   border-radius: 5px;
@@ -251,8 +301,9 @@ hr {
   transition: all 0.3s;
   opacity: 1;
   transform: translateY(216px);
-  position: fixed;
+  position: absolute;
   left: 100%;
+  margin-left: 5%;
 }
 .configuracion:hover {
   cursor: pointer;
@@ -271,7 +322,7 @@ hr {
   background-color: green;
   color: white;
   border: none;
-  transition: 0.5s ease-in-out
+  transition: 0.5s ease-in-out;
 }
 
 .boton-cerrar:hover {
@@ -285,7 +336,7 @@ hr {
   background-color: rgb(33, 33, 175);
   color: white;
   border: none;
-  transition: 0.5s ease-in-out
+  transition: 0.5s ease-in-out;
 }
 
 .boton-cancelar:hover {

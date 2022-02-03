@@ -10,7 +10,7 @@
 <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)" class="Icon-inside">
     <input type="text" id="login" formControlName="username" class="fadeIn second"
         [ngClass]="{ 'is-invalid': submitted && form.username.errors }" placeholder="Username">
-    
+
     <!-- Missatge error nom -->
     <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
         <div *ngIf="form.username.errors.required">El nombre es necesario</div>
@@ -20,7 +20,7 @@
         <div class="input-group">
             <input type="password" id="password" formControlName="password" class="fadeIn third" [type]="passType"
                 [ngClass]="{ 'is-invalid': submitted && form.password.errors }" placeholder="Password">
-            
+
             <!-- Icono -->
             <i *ngIf="this.passShown" (click)="togglePass()" class="material-icons">
                 visibility
@@ -38,7 +38,7 @@
     <div *ngIf="submitted && userNoExiste" class="invalid-feedback">
         <div *ngIf="userNoExiste">user no existe</div>
     </div>
-    
+
     <input type="submit" value="Iniciar Sesión" class="fadeIn fourth">
 </form>
 
