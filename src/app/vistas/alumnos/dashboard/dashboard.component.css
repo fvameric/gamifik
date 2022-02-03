@@ -271,13 +271,7 @@ hr {
   background-color: green;
   color: white;
   border: none;
-}
-.boton-cancelar {
-  padding: 10px;
-  border-radius: 5px;
-  background-color: rgb(33, 33, 175);
-  color: white;
-  border: none;
+  transition: 0.5s ease-in-out
 }
 
 .boton-cerrar:hover {
@@ -285,13 +279,18 @@ hr {
   transition: 1s;
 }
 
+.boton-cancelar {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgb(33, 33, 175);
+  color: white;
+  border: none;
+  transition: 0.5s ease-in-out
+}
+
 .boton-cancelar:hover {
   transform: scale(1.1);
   transition: 1s;
-}
-
-.boton-cerrar:hover::before {
-  transform: scale(1);
 }
 
 .button-configuracion {
