@@ -171,6 +171,10 @@ input[type=date] {
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
 }
+input[type="date"]{
+color: #636c72 !important;    
+width: 89% !important;
+}
 
 .select-Centros {
     text-align: center;
