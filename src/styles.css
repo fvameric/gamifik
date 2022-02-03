@@ -8,6 +8,8 @@ body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
     background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 a {
@@ -24,11 +26,25 @@ h1 {
   -webkit-text-fill-color: transparent; */
 }
 
-.nav-tabs .nav-item.show .nav-link,
+.nav {
+    justify-content: center;
+    border-color: #dce8f13d !important;
+}
+
+.nav-tabs .nav-item .nav-item.show .nav-link,
 .nav-tabs .nav-link.active {
-    color: rgb(95 186 233 / 40%) !important;
+    color: rgb(255, 255, 255) !important;
     background-color: #ffffff26 !important;
-    border-color: #dee2e6 #dee2e6 #fff;
+    border-color: #dce8f13d !important;
+    border-bottom: transparent !important;
+    width: 150px;
+    /*border-color: #dee2e6 #dee2e6 #fff;*/
+}
+
+.nav-item a:hover {
+    color: white;
+    border-color: #dce8f13d !important;
+    border-bottom: transparent !important;
 }
 
 h2 {
@@ -71,6 +87,7 @@ h2:hover {
     -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
     box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
     text-align: center;
+    backdrop-filter: blur(6px);
 }
 
 #formFooter {
@@ -171,9 +188,10 @@ input[type=date] {
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
 }
-input[type="date"]{
-color: #636c72 !important;    
-width: 89% !important;
+
+input[type="date"] {
+    color: #636c72 !important;
+    width: 89% !important;
 }
 
 .select-Centros {
