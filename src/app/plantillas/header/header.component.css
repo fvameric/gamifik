@@ -1,0 +1,34 @@
+.container-navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #0000008c;
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    border-radius: 0px 0px 2px 2px;
+    animation: animacion-navbar linear .6s
+}
+
+@keyframes animacion-navbar {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+li {
+    float: left;
+    list-style: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
