@@ -1,15 +1,9 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
 
-<!-- logo -->
-<div class="fadeIn first">
-    <img src="../../../../assets/Logo/logotipo_rescalado.png" id="icon" width="150" height="100" />
-</div>
-
 <!-- Formulario login -->
 <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)" class="Icon-inside">
-    <input type="text" id="login" formControlName="username" class="fadeIn second"
-        [ngClass]="{ 'is-invalid': submitted && form.username.errors }" placeholder="Username">
+    <input type="text" id="login" formControlName="username" class="fadeIn second" [ngClass]="{ 'is-invalid': submitted && form.username.errors }" placeholder="Username">
 
     <!-- Missatge error nom -->
     <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
@@ -18,8 +12,7 @@
 
     <div class="form-group">
         <div class="input-group">
-            <input type="password" id="password" formControlName="password" class="fadeIn third" [type]="passType"
-                [ngClass]="{ 'is-invalid': submitted && form.password.errors }" placeholder="Password">
+            <input type="password" id="password" formControlName="password" class="fadeIn third" [type]="passType" [ngClass]="{ 'is-invalid': submitted && form.password.errors }" placeholder="Password">
 
             <!-- Icono -->
             <i *ngIf="this.passShown" (click)="togglePass()" class="material-icons">
