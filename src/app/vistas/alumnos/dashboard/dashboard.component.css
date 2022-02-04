@@ -52,6 +52,7 @@ body {
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    
   }
   .contact-area {
     top: 0;
@@ -129,6 +130,7 @@ body {
     top: 0 !important;
     margin: 0 !important;
     position: inherit !important;
+    animation: fadeInResponsive linear .6s !important;
   }
   .rankings-profe {
     transform: none !important;
@@ -296,7 +298,28 @@ hr {
   position: absolute;
   left: 100%;
   margin-left: 5%;
+  animation: fadeIn linear 0.6s;
 }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeInResponsive {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 
 .cerrar-profe {
   float: left;
