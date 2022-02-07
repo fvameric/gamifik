@@ -23,9 +23,17 @@ header.sticky {
 }
 
 
+.header-items-right{
+  float: right;
+}
+
 li {
   float: left;
   list-style: none;
+}
+
+.header-items-right:hover{
+  background-color: aqua;
 }
 
 li a {
@@ -36,6 +44,50 @@ li a {
   text-decoration: none;
 }
 
+.header-toggle,
+.header-close{
+    display: none;
+}
+
+
+@media screen and (max-width: 768px){
+  .header{
+    height: 48px;
+    justify-content: space-between;
+    padding: 0 28px;
+  }
+  .header-toggle{
+    display: inline;
+    color: #eee;
+  }
+  .header-close{
+    position: absolute;
+    right: 24px;
+    display: block;
+    border-radius: 50%;
+  }
+  .header-close:hover{
+    background-color: blue;
+  }
+  .nav{
+    position: fixed;
+    top: 0;
+    right: -100%;
+    background-color: #0000008c;
+    color: #eee;
+    width: 60%;
+    height: 100vh;
+    padding: 24px 0;
+    transition: 0.5s;
+    z-index: 100;
+    border-radius: 0 0 0 50%;
+  }  
+}
+
+
+.show{
+  right: 0;
+}
 
 
 @keyframes animacion-navbar {

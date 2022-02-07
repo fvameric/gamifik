@@ -13,4 +13,15 @@ export class HeaderComponent implements OnInit {
 window.addEventListener("scroll", function () {
   let header = <HTMLElement>document.getElementById("header");
   header.classList.toggle("sticky", window.scrollY > 0);
-})
+});
+
+// const navMenu = <HTMLElement> document.getElementById('nav-menu'),
+// toggleMenu = <HTMLElement> document.getElementById('toggle-menu'),
+// closeMenu = <HTMLElement> document.getElementById('close-menu');
+
+// toggleMenu.addEventListener('click',()=>{
+//   navMenu.classList.toggle('show');
+// });
+// closeMenu.addEventListener('click',()=>{
+//   navMenu.classList.remove('show');
+// });
