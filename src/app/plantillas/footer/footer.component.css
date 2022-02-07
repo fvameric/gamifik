@@ -1,0 +1,46 @@
+html {
+    position: relative;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    background: #0000008c;
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
+    border-radius: 0px 0px 2px 2px;
+    padding: 20px 50px;
+    text-align: center;
+  }
+  
+  .icons a {
+    text-decoration: none;
+    font-size: 2rem;
+    margin: 0.5rem;
+    color: var(--dorado);
+  }
+  .icons a :hover{
+      transition: 1s;
+      color: #5fbae9;
+  }
+  
+  .company-name {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+  
+  @media (max-width: 500px) {
+    html {
+      font-size: 50%;
+    }
+  }
+  
+  @media (min-width: 501px) and (max-width: 768px) {
+    html {
+      font-size: 50%;
+    }
+  }
+  
