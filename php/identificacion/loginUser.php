@@ -1,27 +1,25 @@
 <?php
   header('Access-Control-Allow-Origin: *');
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+  header('Content-Type: application/json');
 
   $json = file_get_contents('php://input');
   $user = json_decode($json);
-
-  global $datos;
-
-  include_once("../conexion/bd.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
+  
+  include_once("../conexion/bd.php");
   $bd = new claseBD();
-  // REALIZA LA QUERY A LA DB
-  //$registros = mysqli_query($bd->obtenerConexion(), "SELECT * FROM alumno WHERE nick='$user->nick' and pass='$user->pass'");
+
+  // buscamos user en alumno
   $registros = mysqli_query($bd->obtenerConexion(), "SELECT * FROM alumno WHERE nick='$user->nick' and pass='$user->pass'");
   $resultado = mysqli_fetch_array($registros);
 
+  // si no existe y obtenemos nulo, entonces buscamos en profesor
   if (is_null($resultado)) {
     $registros = mysqli_query($bd->obtenerConexion(), "SELECT * FROM profesor WHERE nick='$user->nick' and pass='$user->pass'");
     $resultado = mysqli_fetch_array($registros);
   }
   
-  $json = json_encode($resultado); // GENERA EL JSON CON LOS DATOS OBTENIDOS
-
-  header('Content-Type: application/json'); //envía el encabezado http json al navegador para informarle qué tipo de datos espera.
-
-  echo $json; // MUESTRA EL JSON GENERADO AL EJECUTAR DIRECTAMENTE EL LOCALHOST 
+  // devolvemos el resultado del select
+  $json = json_encode($resultado);
+  echo $json;
 ?>
