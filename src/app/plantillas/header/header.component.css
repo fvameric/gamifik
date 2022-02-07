@@ -1,34 +1,49 @@
-.container-navbar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background: #0000008c;
-    -webkit-backdrop-filter: blur(6px);
-    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-    border-radius: 0px 0px 2px 2px;
-    animation: animacion-navbar linear .6s
+header {
+  list-style-type: none;
+  margin: 0;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background: transparent;
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 0px 0px 2px 2px;
+  animation: animacion-navbar linear 0.6s;
+  transition: 0.5s;
+  position: fixed;
+  width: 100%;
+  padding: 20px 50px;
+  z-index: 100000;
 }
 
-@keyframes animacion-navbar {
-    0% {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    100% {
-        opacity: 1;
-    }
+header.sticky {
+  padding: 8px 50px;
+  background: #0000008c;
+  box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+  backdrop-filter: blur(6px);
 }
+
 
 li {
-    float: left;
-    list-style: none;
+  float: left;
+  list-style: none;
 }
 
 li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+
+
+@keyframes animacion-navbar {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+  }
 }
