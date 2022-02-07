@@ -131,59 +131,47 @@ p {
 
 /* logo animado */
 
-.titulo {
-    padding: 40px;
-    padding-top: 110px;
-}
-
 .logotest {
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    padding: 40px;
+    padding-top: 110px;
+}
+
+.logotest>div {
+    position: absolute;
+    width: 25px;
+    margin: 2px;
+    border-radius: 100px 100px 0 0;
 }
 
 .barralogo1 {
-    position: absolute;
-    width: 25px;
     background-color: rgb(20, 129, 255);
-    border-radius: 100px 100px 0 0;
     animation: barra1 0.2s forwards;
     animation-delay: 0.8s;
     right: 250px;
 }
 
 .barralogo2 {
-    position: absolute;
-    width: 25px;
     background-color: rgb(71, 212, 255);
-    border-radius: 100px 100px 0 0;
     animation: barra2 0.2s forwards;
     animation-delay: 1s;
     right: 220px;
 }
 
 .barralogo3 {
-    position: absolute;
-    width: 25px;
     background-color: rgb(74, 159, 255);
-    border-radius: 100px 100px 0 0;
-    animation: barra3 0.1s forwards;
+    animation: barra3 0.2s forwards;
     animation-delay: 1.2s;
     right: 190px;
 }
 
 .barralogo4 {
-    position: absolute;
-    width: 25px;
     background-color: rgb(71, 212, 255);
-    border-radius: 100px 100px 0 0;
-    animation: barra4 0.1s forwards;
+    animation: barra4 0.2s forwards;
     animation-delay: 1.4s;
     right: 160px;
-}
-
-.espacio {
-    margin: 2px;
 }
 
 @keyframes barra1 {
