@@ -2,262 +2,238 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="contact-area">
-  <div class="contact">
-    <main>
-      <section>
-        <div class="content">
-          <img src="" alt="ImagenPerfil">
+    <div class="contact">
+        <main>
+            <section>
+                <div class="content">
+                    <img src="" alt="ImagenPerfil">
 
-          <aside *ngIf="tipoUser == 1;else tipoProfesor">
-            <h1>{{datosAlumno.nombre}}</h1>
-            <p>Alumno</p>
-          </aside>
+                    <aside *ngIf="tipoUser.tipo == 0;else tipoProfesor">
+                        <h1>{{datosAlumno.nombre}}</h1>
+                        <p>Alumno</p>
+                    </aside>
 
-          <ng-template #tipoProfesor>
-            <aside>
-              <h1>{{datosProfesor.nombre}}</h1>
-              <p>Profesor</p>
-            </aside>
-          </ng-template>
-        </div>
-      </section>
+                    <ng-template #tipoProfesor>
+                        <aside>
+                            <h1>{{datosProfesor.nombre}}</h1>
+                            <p>Profesor</p>
+                        </aside>
+                    </ng-template>
+                </div>
+            </section>
 
 
-      <nav>
-        <!--Mostrar Rankings-->
-        <a (click)="mostrarRankings()" class="mis-rankings">
-          <div class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book"
-              viewBox="0 0 16 16">
+            <nav>
+                <!--Mostrar Rankings-->
+                <a (click)="mostrarRankings()" class="mis-rankings">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
               <path
                 d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
             </svg>
-          </div>
+                    </div>
 
-          <div class="content">
-            <h1>Mis Rankings</h1>
-          </div>
+                    <div class="content">
+                        <h1>Mis Rankings</h1>
+                    </div>
 
-          <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
             <g class="nc-icon-wrapper" fill="#444444">
               <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z" class="icono-flecha"></path>
             </g>
           </svg>
-        </a>
+                </a>
 
-        <div *ngIf="this.mostrarRankingsVisual" class="rankings-profe">
-          <div class="cursos-profe">
-            <h2 class="h2-perfil">Rankings</h2>
-            <hr>
-          </div>
-        </div>
-        <!--Mostrar Configurarcion-->
-        <a (click)="mostrarConfiguracion()" class="configuracion">
-          <div class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear"
-              viewBox="0 0 16 16">
+                <div *ngIf="this.mostrarRankingsVisual" class="rankings-profe">
+                    <div class="cursos-profe">
+                        <h2 class="h2-perfil">Rankings</h2>
+                        <hr>
+                    </div>
+                </div>
+                <!--Mostrar Configurarcion-->
+                <a (click)="mostrarConfiguracion()" class="configuracion">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
               <path
                 d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
               <path
                 d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
             </svg>
-          </div>
+                    </div>
 
-          <div class="content">
-            <h1>Configuración</h1>
-          </div>
-          <div class="pruebaConfiguracion">
-            <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+                    <div class="content">
+                        <h1>Configuración</h1>
+                    </div>
+                    <div class="pruebaConfiguracion">
+                        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
               <g class="nc-icon-wrapper" fill="#444444">
                 <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z" class="icono-flecha"></path>
               </g>
             </svg>
-          </div>
-        </a>
-        <div *ngIf="this.mostrarConfiguracionVisual" class="configuracion-profe">
-          <div class="cursos-profe">
-            <h2 class="h2-perfil">Configuración</h2>
-            <hr>
-            <div class="centrar-configuracion">
-              <h5>Nombre: </h5>
-              <input class="inputEditar" type="text" [placeholder]="this.nombre" id="inputNombre"
-                [readonly]="this.editableNombre">
-              <div class="pruebaConfiguracion">
-                <!-- Tick nombre-->
-                <svg *ngIf="!this.editableNombre" (click)="guardarNombre()" id="guardarNombre"
-                  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2"
-                  viewBox="0 0 16 16">
+                    </div>
+                </a>
+                <div *ngIf="this.mostrarConfiguracionVisual" class="configuracion-profe">
+                    <div class="cursos-profe">
+                        <h2 class="h2-perfil">Configuración</h2>
+                        <hr>
+                        <div class="centrar-configuracion">
+                            <h5>Nombre: </h5>
+                            <input class="inputEditar" type="text" [placeholder]="this.nombre" id="inputNombre" [readonly]="this.editableNombre">
+                            <div class="pruebaConfiguracion">
+                                <!-- Tick nombre-->
+                                <svg *ngIf="!this.editableNombre" (click)="guardarNombre()" id="guardarNombre" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                   <path
                     d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
                 </svg>
-                <!-- Lapiz nombre -->
-                <svg *ngIf="this.editableNombre" (click)="editarNombre()" xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-pencil" id="iconos-configuracion" viewBox="0 0 16 16">
+                                <!-- Lapiz nombre -->
+                                <svg *ngIf="this.editableNombre" (click)="editarNombre()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" id="iconos-configuracion" viewBox="0 0 16 16">
                   <path
                     d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
                 </svg>
-                <!-- Cruz editable nombre -->
-                <svg *ngIf="!this.editableNombre" (click)="editarNombre()" id="iconos-configuracion"
-                  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
-                  viewBox="0 0 16 16">
+                                <!-- Cruz editable nombre -->
+                                <svg *ngIf="!this.editableNombre" (click)="editarNombre()" id="iconos-configuracion" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
                     d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
                   <path fill-rule="evenodd"
                     d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
                 </svg>
-              </div>
-            </div>
-            <div class="centrar-configuracion">
-              <h5>Apellidos:</h5>
-              <input class="inputEditar" type="text" [placeholder]="this.apellidos" id="inputApellidos"
-                [readonly]="this.editableApellidos">
-              <div class="pruebaConfiguracion">
-                <!-- Tick apellidos -->
-                <svg *ngIf="!this.editableApellidos" (click)="guardarApellidos()" id="guardarApellidos"
-                  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2"
-                  viewBox="0 0 16 16">
+                            </div>
+                        </div>
+                        <div class="centrar-configuracion">
+                            <h5>Apellidos:</h5>
+                            <input class="inputEditar" type="text" [placeholder]="this.apellidos" id="inputApellidos" [readonly]="this.editableApellidos">
+                            <div class="pruebaConfiguracion">
+                                <!-- Tick apellidos -->
+                                <svg *ngIf="!this.editableApellidos" (click)="guardarApellidos()" id="guardarApellidos" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                   <path
                     d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
                 </svg>
-                <!-- Lápiz Apellidos -->
-                <svg *ngIf="this.editableApellidos" (click)="editarApellidos()" xmlns="http://www.w3.org/2000/svg"
-                  width="16" height="16" fill="currentColor" class="bi bi-pencil" id="iconos-configuracion"
-                  viewBox="0 0 16 16">
+                                <!-- Lápiz Apellidos -->
+                                <svg *ngIf="this.editableApellidos" (click)="editarApellidos()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" id="iconos-configuracion" viewBox="0 0 16 16">
                   <path
                     d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
                 </svg>
-                <!-- Cruz apellidos -->
-                <svg *ngIf="!this.editableApellidos" (click)="editarApellidos()" xmlns="http://www.w3.org/2000/svg"
-                  width="16" height="16" fill="currentColor" id="iconos-configuracion" class="bi bi-x-lg"
-                  viewBox="0 0 16 16">
+                                <!-- Cruz apellidos -->
+                                <svg *ngIf="!this.editableApellidos" (click)="editarApellidos()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" id="iconos-configuracion" class="bi bi-x-lg" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
                     d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
                   <path fill-rule="evenodd"
                     d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
                 </svg>
-              </div>
-            </div>
-            <!-- Div para cada linia ej. :  Nombre, apellidos, email... -->
-            <div class="centrar-configuracion">
-              <h5>Email: </h5>
-              <input class="inputEditar" type="text" [placeholder]="this.email" id="inputEmail"
-                [readonly]="this.editableEmail">
-              <!-- Div que divide las imagenes -->
-              <div class="pruebaConfiguracion">
-                <!-- Tick -->
-                <svg *ngIf="!this.editableEmail" (click)="guardarEmail()" id="guardarEmail"
-                  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2"
-                  viewBox="0 0 16 16">
+                            </div>
+                        </div>
+                        <!-- Div para cada linia ej. :  Nombre, apellidos, email... -->
+                        <div class="centrar-configuracion">
+                            <h5>Email: </h5>
+                            <input class="inputEditar" type="text" [placeholder]="this.email" id="inputEmail" [readonly]="this.editableEmail">
+                            <!-- Div que divide las imagenes -->
+                            <div class="pruebaConfiguracion">
+                                <!-- Tick -->
+                                <svg *ngIf="!this.editableEmail" (click)="guardarEmail()" id="guardarEmail" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                   <path
                     d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
                 </svg>
-                <!-- Lápiz -->
-                <svg *ngIf="this.editableEmail" (click)="editarEmail()" xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-pencil" id="iconos-configuracion" viewBox="0 0 16 16">
+                                <!-- Lápiz -->
+                                <svg *ngIf="this.editableEmail" (click)="editarEmail()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" id="iconos-configuracion" viewBox="0 0 16 16">
                   <path
                     d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
                 </svg>
-                <!-- Cruz email -->
-                <svg *ngIf="!this.editableEmail" (click)="editarEmail()" xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" id="iconos-configuracion" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                <!-- Cruz email -->
+                                <svg *ngIf="!this.editableEmail" (click)="editarEmail()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" id="iconos-configuracion" class="bi bi-x-lg" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
                     d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
                   <path fill-rule="evenodd"
                     d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
                 </svg>
-              </div>
-            </div>
-            <div class="centrar-configuracion">
-              <h5>Contraseña: </h5>
-              <button class="button-configuracion" (click)="mostrarEditarContra()">Cambiar Contraseña</button>
-            </div>
+                            </div>
+                        </div>
+                        <div class="centrar-configuracion">
+                            <h5>Contraseña: </h5>
+                            <button class="button-configuracion" (click)="mostrarEditarContra()">Cambiar Contraseña</button>
+                        </div>
 
 
 
-            <div *ngIf="mostrarEditarContrasena">
-              <div class="centrar-configuracion">
-                <h5>Contraseña: </h5>
-                <input class="inputEditar" [type]="passType" placeholder="Contraseña actual" id="contrasenaAntigua">
-                <!-- Div que divide las imagenes -->
-                <div class="pruebaConfiguracion">
-                  <!-- Lápiz -->
-                  <i *ngIf="this.antiguaContrasena" (click)="visualizarAntiguaContrasena()" class="material-icons">
+                        <div *ngIf="mostrarEditarContrasena">
+                            <div class="centrar-configuracion">
+                                <h5>Contraseña: </h5>
+                                <input class="inputEditar" [type]="passType" placeholder="Contraseña actual" id="contrasenaAntigua">
+                                <!-- Div que divide las imagenes -->
+                                <div class="pruebaConfiguracion">
+                                    <!-- Lápiz -->
+                                    <i *ngIf="this.antiguaContrasena" (click)="visualizarAntiguaContrasena()" class="material-icons">
                     visibility
                   </i>
-                  <i *ngIf="!this.antiguaContrasena" (click)="visualizarAntiguaContrasena()" class="material-icons">
+                                    <i *ngIf="!this.antiguaContrasena" (click)="visualizarAntiguaContrasena()" class="material-icons">
                     visibility_off
                   </i>
-                </div>
-              </div>
+                                </div>
+                            </div>
 
-              <div class="centrar-configuracion">
-                <h5>Nueva Contraseña: </h5>
-                <input class="inputEditar" [type]="passTypeNew" placeholder="Nueva contraseña" id="contrasenaAntigua">
-                <!-- Div que divide las imagenes -->
-                <div class="pruebaConfiguracion">
-                  <!-- Lápiz -->
-                  <i *ngIf="this.nuevaContrasena" (click)="visualizarNuevaContrasena()" class="material-icons">
+                            <div class="centrar-configuracion">
+                                <h5>Nueva Contraseña: </h5>
+                                <input class="inputEditar" [type]="passTypeNew" placeholder="Nueva contraseña" id="contrasenaAntigua">
+                                <!-- Div que divide las imagenes -->
+                                <div class="pruebaConfiguracion">
+                                    <!-- Lápiz -->
+                                    <i *ngIf="this.nuevaContrasena" (click)="visualizarNuevaContrasena()" class="material-icons">
                     visibility
                   </i>
-                  <i *ngIf="!this.nuevaContrasena" (click)="visualizarNuevaContrasena()" class="material-icons">
+                                    <i *ngIf="!this.nuevaContrasena" (click)="visualizarNuevaContrasena()" class="material-icons">
                     visibility_off
                   </i>
-                </div>
-              </div>
-              <div class="centrar-configuracion">
-                <h5>Confirmar Contraseña: </h5>
-                <input class="inputEditar" [type]="passTypeConfirmNew" placeholder="Confirmar contraseña"
-                  id="contrasenaAntigua">
-                <!-- Div que divide las imagenes -->
-                <div class="pruebaConfiguracion">
-                  <!-- Lápiz -->
-                  <i *ngIf="this.confirmarNuevaContrasena" (click)="visualizarConfirmarNuevaContrasena()"
-                    class="material-icons">
+                                </div>
+                            </div>
+                            <div class="centrar-configuracion">
+                                <h5>Confirmar Contraseña: </h5>
+                                <input class="inputEditar" [type]="passTypeConfirmNew" placeholder="Confirmar contraseña" id="contrasenaAntigua">
+                                <!-- Div que divide las imagenes -->
+                                <div class="pruebaConfiguracion">
+                                    <!-- Lápiz -->
+                                    <i *ngIf="this.confirmarNuevaContrasena" (click)="visualizarConfirmarNuevaContrasena()" class="material-icons">
                     visibility
                   </i>
-                  <i *ngIf="!this.confirmarNuevaContrasena" (click)="visualizarConfirmarNuevaContrasena()"
-                    class="material-icons">
+                                    <i *ngIf="!this.confirmarNuevaContrasena" (click)="visualizarConfirmarNuevaContrasena()" class="material-icons">
                     visibility_off
                   </i>
+                                </div>
+                            </div>
+                            <button class="button-configuracion">Confirmar</button>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <button class="button-configuracion">Confirmar</button>
-            </div>
-          </div>
-        </div>
-        <!--Mostrar cajita cerrar sesión-->
-        <a (click)="mostrarCerrar()" class="cerrar-sesion">
-          <div class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-              class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                <!--Mostrar cajita cerrar sesión-->
+                <a (click)="mostrarCerrar()" class="cerrar-sesion">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
               <path fill-rule="evenodd"
                 d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
               <path fill-rule="evenodd"
                 d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
             </svg>
-          </div>
+                    </div>
 
-          <div class="content">
-            <h1>Cerrar Sesión</h1>
-            <span></span>
-          </div>
-          <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+                    <div class="content">
+                        <h1>Cerrar Sesión</h1>
+                        <span></span>
+                    </div>
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
             <g class="nc-icon-wrapper" fill="#444444">
               <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z"></path>
             </g>
           </svg>
-        </a>
-        <!-- Cajita que muestra los botones de cerrar sesión o cancelar -->
-        <div *ngIf="this.mostrarCerrarVisual" class="cerrar-profe">
-          <h2 class="h2-perfil">¿Estas seguro?</h2>
-          <div class="cursos-profe">
-            <div class="align-cerrar-sesion">
-              <button class="boton-cerrar" routerLink="/identificacion">Cerrar Sesion</button>
-              <button class="boton-cancelar">Cancelar</button>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </main>
-  </div>
+                </a>
+                <!-- Cajita que muestra los botones de cerrar sesión o cancelar -->
+                <div *ngIf="this.mostrarCerrarVisual" class="cerrar-profe">
+                    <h2 class="h2-perfil">¿Estas seguro?</h2>
+                    <div class="cursos-profe">
+                        <div class="align-cerrar-sesion">
+                            <button class="boton-cerrar" routerLink="/identificacion">Cerrar Sesion</button>
+                            <button class="boton-cancelar">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </main>
+    </div>
 </div>
