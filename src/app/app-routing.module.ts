@@ -6,6 +6,7 @@ import { RegistroComponent } from './vistas/alumnos/registro/registro.component'
 import { IdentificacionComponent } from './vistas/identificacion/identificacion.component';
 import { HeaderComponent } from './plantillas/header/header.component';
 import { FooterComponent } from './plantillas/footer/footer.component';
+import { PerfilComponent } from './vistas/alumnos/perfil/perfil.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'identificacion', pathMatch: 'full' },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'header', component: HeaderComponent},
-  {path: 'footer', component: FooterComponent }
+  { path: 'footer', component: FooterComponent },
+  { path: 'perfil', component: PerfilComponent}
 ];
 
 @NgModule({
@@ -26,5 +28,8 @@ export const routingComponents = [
   IdentificacionComponent,
   LoginComponent,
   DashboardComponent,
-  RegistroComponent
+  RegistroComponent,
+  PerfilComponent,
+  HeaderComponent,
+  FooterComponent
 ];
