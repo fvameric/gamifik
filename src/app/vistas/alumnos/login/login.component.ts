@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
           'userLocalStorage',
           JSON.stringify(this.datosUser)
         );
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/perfil']);
       } else {
         Swal.fire({
           icon: 'error',
