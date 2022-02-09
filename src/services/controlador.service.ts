@@ -73,7 +73,7 @@ export class ControladorService {
         (val) => {
           console.log("POST call successful value returned in body", val);
           // TO-DO guardar sesión y login si ha sido correcto
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/perfil');
         },
         response => {
           console.log("POST call in error", response);

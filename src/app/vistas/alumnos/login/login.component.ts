@@ -18,7 +18,10 @@ import { Alumno } from 'app/interfaces/Alumno';
 
 import { Router } from '@angular/router';
 import { User } from 'app/interfaces/User';
+import { AuthService } from 'services/auth.service';
+import { TokenService } from 'services/token.service';
 
+const USER_LS = 'userLocalStorage';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -33,11 +36,9 @@ export class LoginComponent implements OnInit {
 
   submitted: boolean = false;
   alumnoExiste: boolean = false;
-
   userNoExiste: boolean = false;
 
   alumnos: any;
-
   datosUser: User = {
     id: 0,
     nick: '',
@@ -53,6 +54,8 @@ export class LoginComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     private controladorService: ControladorService,
+    private tokenService: TokenService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -80,12 +83,13 @@ export class LoginComponent implements OnInit {
       pass: form.password,
     };
     this.submitted = true;
-    this.controladorService.loginUser(user).subscribe((val) => {
+    this.authService.loginUser(user).subscribe((val) => {
       if (val != null) {
+        // to-do
+        //this.tokenService.saveToken(val.accessToken)
         this.datosUser = val;
-        localStorage.setItem(
-          'userLocalStorage',
-          JSON.stringify(this.datosUser)
+        localStorage.removeItem(USER_LS);
+        localStorage.setItem(USER_LS, JSON.stringify(this.datosUser)
         );
         this.router.navigate(['/perfil']);
       } else {

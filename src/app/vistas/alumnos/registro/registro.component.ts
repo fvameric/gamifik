@@ -6,6 +6,7 @@ import { ControladorService } from 'services/controlador.service';
 
 // interfaces
 import { Alumno } from 'app/interfaces/Alumno';
+import { AuthService } from 'services/auth.service';
 
 @Component({
   selector: 'app-registro',
@@ -30,7 +31,8 @@ export class RegistroComponent implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    private controladorService: ControladorService) { }
+    private controladorService: ControladorService,
+    private authService: AuthService) { }
 
   ngOnInit(){
 
@@ -101,6 +103,14 @@ export class RegistroComponent implements OnInit {
     } else {
       console.log("valid");
       this.controladorService.insertarAlumno(nuevoAlumno);
+      this.authService.registroUser(nuevoAlumno).subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          console.log(err.error.message);
+        }
+      )
     }
 
     //this.onReset();
