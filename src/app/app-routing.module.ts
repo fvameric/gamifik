@@ -7,6 +7,7 @@ import { IdentificacionComponent } from './vistas/identificacion/identificacion.
 import { HeaderComponent } from './plantillas/header/header.component';
 import { FooterComponent } from './plantillas/footer/footer.component';
 import { PerfilComponent } from './vistas/alumnos/perfil/perfil.component';
+import { PruebaHeaderComponent } from './plantillas/prueba-header/prueba-header.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'identificacion', pathMatch: 'full' },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'registro', component: RegistroComponent },
   { path: 'header', component: HeaderComponent},
   { path: 'footer', component: FooterComponent },
-  { path: 'perfil', component: PerfilComponent}
+  { path: 'perfil', component: PerfilComponent},
+  { path: 'prueba-header', component: PruebaHeaderComponent}
 ];
 
 @NgModule({
@@ -31,5 +33,6 @@ export const routingComponents = [
   RegistroComponent,
   PerfilComponent,
   HeaderComponent,
-  FooterComponent
+  FooterComponent,
+  PruebaHeaderComponent
 ];
