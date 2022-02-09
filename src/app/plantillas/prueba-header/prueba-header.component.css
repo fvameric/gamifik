@@ -14,6 +14,20 @@ header {
     padding: 20px 50px;
     z-index: 100000;
   }
+
+  .logo{
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  #abrir-menu{
+    padding: 14px;
+    color: white;
+  }
   
   header.sticky {
     padding: 8px 50px;
@@ -22,7 +36,7 @@ header {
     backdrop-filter: blur(6px);
   }
   
-  .header-items-right {
+  .nav-items-right {
     float: right;
   }
   
@@ -31,7 +45,7 @@ header {
     list-style: none;
   }
   
-  .header-items-right:hover {
+  .nav-items-right:hover {
     background-color: aqua;
   }
   
@@ -65,50 +79,49 @@ header {
       opacity: 1;
     }
   }
+
+  #abrir-menu{
+    display: none;
+  }
   
 
-
-
-
-#hamburger-icon div{
-    width: 35px;
-    height: 3px;
-    background-color: white;
-    margin: 6px 0;
-    transition: 0.4s;
-}
-.open .bar1{
-    -webkit-transform: rotate(-45deg) translate(-6px, 6px);
-    transform: rotate(-45deg) translate(-6px, 6px);
-}
-
-.open .bar2{
-    -webkit-transform: rotate(-45deg) translate(-6px, 6px);
-    transform: rotate(-45deg) translate(-6px, 6px);
-}
-
-.open .bar3{
-    -webkit-transform: rotate(-45deg) translate(-6px, 6px);
-    transform: rotate(-45deg) translate(-6px, 6px);
-}
-
-.open .mobil-design{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
-.mobil-design{
-    display: block;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    height: calc(100vh-50px);
-    width: 100%;
-}
-
-@media only screen and (max-width: 600px){
-    header{
-        display: none;
+  @media screen and (max-width:768px){
+    body{
+      padding: 90px 20px 0;
     }
-}  
+    #header{
+      height: 80px;
+    }
+    #nav-menu{
+      flex-direction: column;
+      align-items: center;
+      margin-right: 20px;
+      position: fixed;
+      left: 0;
+      display: none;
+      background-color: #5e7487;
+      top: 80px;
+      width: 100%;
+      padding: 20px 0;
+
+      height: calc(100% - 60px);
+      overflow-y: auto;
+    }
+    .nav-items-right{
+      font-size: 18px;
+      margin: 0 10px;
+      line-height: 80px;
+      text-transform: uppercase;
+      width: max-content;
+    }
+
+    #abrir-menu{
+      float: right;
+      display: block;
+    }
+
+    .mostrar{
+      display: flex !important;
+    }
+
+  }

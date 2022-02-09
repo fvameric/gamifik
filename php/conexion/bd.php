@@ -1,8 +1,8 @@
 <?php
 class claseBD {
-    private $servidor   = 'localhost';
+    private $servidor   = '127.0.0.1';
     private $usuario    = 'root';
-    private $pass       = 'usbw';
+    private $pass       = '';
     private $bd         = 'gamifik';
     private $con;
 

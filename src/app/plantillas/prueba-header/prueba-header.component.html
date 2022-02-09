@@ -1,21 +1,15 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <header id="header">
-    <ul>
-        <li></li>
-        <li><a href="#">Logo</a></li>
-        <li class="header-items-right"><a href="#">Perfil</a></li>
-        <li class="header-items-right"><a href="#">Mis Rankins</a></li>
-    </ul>
-    <div id="hamburger-icon">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-        <ul class="mobil-design">
-            <li></li>
-            <li class="header-items-right"><a href="#">Perfil</a></li>
-            <li class="header-items-right"><a href="#">Mis Rankins</a></li>
+    <nav class="navbar-todo">
+        
+        <ul id="nav-menu">
+            <li class="nav-items-right"><a href="#">Perfil</a></li>
+            <li class="nav-items-right"><a href="#">Mis Rankins</a></li>
         </ul>
-    </div>
-
+        <a href="#" class="logo">Logo</a>
+        <span id="abrir-menu" class="material-icons" (click)="onclickToggle()">
+            reorder
+        </span>
+    </nav>
 </header>
