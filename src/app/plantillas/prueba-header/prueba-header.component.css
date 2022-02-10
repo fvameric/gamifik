@@ -1,127 +1,129 @@
 header {
-    list-style-type: none;
-    margin: 0;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    background: transparent;
-    -webkit-backdrop-filter: blur(6px);
-    border-radius: 0px 0px 2px 2px;
-    animation: animacion-navbar linear 0.6s;
-    transition: 0.5s;
+  list-style-type: none;
+  margin: 0;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background: transparent;
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 0px 0px 2px 2px;
+  animation: animacion-navbar linear 0.6s;
+  transition: 0.5s;
+  position: fixed;
+  width: 100%;
+  padding: 20px 50px;
+  z-index: 100000;
+}
+
+.logo {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+#abrir-menu {
+  padding: 14px;
+  color: white;
+}
+
+header.sticky {
+  padding: 8px 50px;
+  background: #0000008c;
+  box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+  backdrop-filter: blur(6px);
+}
+
+.nav-items-right {
+  float: right;
+}
+
+#nav-menu {
+  display: block;
+}
+
+li {
+  float: left;
+  list-style: none;
+}
+
+.nav-items-right:hover {
+  background-color: aqua;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.header-toggle,
+.header-close {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    height: 48px;
+    justify-content: space-between;
+    padding: 0 28px;
+  }
+}
+
+@keyframes animacion-navbar {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#abrir-menu {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    padding: 90px 20px 0;
+  }
+  #header {
+    height: 80px;
+  }
+  #nav-menu {
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
     position: fixed;
+    left: 0;
+    display: none;
+    background-color: #5e7487;
+    top: 80px;
     width: 100%;
-    padding: 20px 50px;
-    z-index: 100000;
-  }
+    padding: 20px 0;
 
-  .logo{
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+    height: calc(100% - 60px);
+    overflow-y: auto;
   }
-
-  #abrir-menu{
-    padding: 14px;
-    color: white;
-  }
-  
-  header.sticky {
-    padding: 8px 50px;
-    background: #0000008c;
-    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-    backdrop-filter: blur(6px);
-  }
-  
   .nav-items-right {
+    font-size: 18px;
+    margin: 0 10px;
+    line-height: 80px;
+    text-transform: uppercase;
+    width: max-content;
+  }
+
+  #abrir-menu {
     float: right;
-  }
-  
-  li {
-    float: left;
-    list-style: none;
-  }
-  
-  .nav-items-right:hover {
-    background-color: aqua;
-  }
-  
-  li a {
     display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
-  .header-toggle,
-  .header-close {
-    display: none;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .header {
-      height: 48px;
-      justify-content: space-between;
-      padding: 0 28px;
-    }
-  }
-  
-  @keyframes animacion-navbar {
-    0% {
-      opacity: 0;
-      transform: translateY(-50px);
-    }
-    100% {
-      opacity: 1;
-    }
   }
 
-  #abrir-menu{
-    display: none;
+  .mostrar {
+    display: flex !important;
   }
-  
-
-  @media screen and (max-width:768px){
-    body{
-      padding: 90px 20px 0;
-    }
-    #header{
-      height: 80px;
-    }
-    #nav-menu{
-      flex-direction: column;
-      align-items: center;
-      margin-right: 20px;
-      position: fixed;
-      left: 0;
-      display: none;
-      background-color: #5e7487;
-      top: 80px;
-      width: 100%;
-      padding: 20px 0;
-
-      height: calc(100% - 60px);
-      overflow-y: auto;
-    }
-    .nav-items-right{
-      font-size: 18px;
-      margin: 0 10px;
-      line-height: 80px;
-      text-transform: uppercase;
-      width: max-content;
-    }
-
-    #abrir-menu{
-      float: right;
-      display: block;
-    }
-
-    .mostrar{
-      display: flex !important;
-    }
-
-  }
+}
