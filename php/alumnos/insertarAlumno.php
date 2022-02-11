@@ -1,25 +1,36 @@
 <?php
+  // headers
   header('Access-Control-Allow-Origin: *');
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-    
-  $json = file_get_contents('php://input');
-  $datosAlumno = json_decode($json);
-
-  include_once("../conexion/bd.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
+  header('Content-Type: application/json');
+  // includes
+  include_once("../conexion/bd.php");
+  
+  // clases
   $bd = new claseBD();
-
-  // REALIZA LA QUERY A LA DB
-  mysqli_query($bd->obtenerConexion(),"INSERT INTO `alumno` (`id`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `fecha_nacimiento`) VALUES (NULL, '$datosAlumno->nick', '$datosAlumno->email', '$datosAlumno->pass', '$datosAlumno->nombre', '$datosAlumno->apellidos', '$datosAlumno->fecha_nacimiento');");
+  $con = $bd->obtenerConexion();
 
   class Result {}
-
-  // GENERA LOS DATOS DE RESPUESTA
   $response = new Result();
-  $response->resultado = 'OK';
-  $response->mensaje = 'EL ALUMNO SE INSERTO EXITOSAMENTE';
+    
+  // input body
+  $json = file_get_contents('php://input');
+  $alumno = json_decode($json);
 
-  header('Content-Type: application/json');
+  // query
+  $query = "INSERT INTO `alumno` (`id`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `fecha_nacimiento`) VALUES
+  (NULL, '$alumno->nick', '$alumno->email', '$alumno->pass', '$alumno->nombre', '$alumno->apellidos', '$alumno->fecha_nacimiento')";
+  
+  $reg = mysqli_query($con, $query);
 
-  echo json_encode($response); // MUESTRA EL JSON GENERADO
-
+  // validacion de la query
+  if ($reg) {
+    $response->resultado = 'ok';
+    $response->mensaje = 'Se registró correctamente';
+    echo json_encode($response);
+  } else {
+    $response->resultado = 'error';
+    $response->mensaje = 'Hubo un error al registrar al alumno';
+    echo json_encode($response);
+  }
 ?>

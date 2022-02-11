@@ -7,6 +7,7 @@ import { ControladorService } from 'services/controlador.service';
 // interfaces
 import { Alumno } from 'app/interfaces/Alumno';
 import { AuthService } from 'services/auth.service';
+import { Profesor } from 'app/interfaces/Profesor';
 
 @Component({
   selector: 'app-registro',
@@ -15,43 +16,69 @@ import { AuthService } from 'services/auth.service';
 })
 export class RegistroComponent implements OnInit {
 
+  // formulario
   registerForm!: FormGroup;
+
+  // flags del formulario
   submitted: boolean = false;
   passShown: boolean = false;
   confirmPassShown: boolean = false;
+
+  // para mostrar la contraseña introducida en el input
   passType: string = 'password';
   confirmPassType: string = 'password';
 
+  // ngIf en caso de querer registrarnos como profesor
   registroProfe: boolean = false;
 
-  accesoProfeFlag: boolean = false;
+  // input para acceder como profesor
   passAcceso: string = '';
 
-  imgSrc: string = "../../../../assets/avatardefault.png";
+  // avatar por defecto al registrarse
+  imgSrc: string = "/assets/avatardefault.png";
 
   constructor(
     public formBuilder: FormBuilder,
-    private controladorService: ControladorService,
     private authService: AuthService) { }
 
-  ngOnInit(){
+  ngOnInit() {
+    this.crearFormAlumno();
+  }
 
+  crearFormAlumno() {
     //Validadors registre
     this.registerForm = this.formBuilder.group({
-        username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(".*\\S.*[a-zA-z0-9_]")]],
-        email: ['', [Validators.required, Validators.email, Validators.minLength(3)]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', Validators.required],
-        nombre: ['', [Validators.required, Validators.minLength(1)]],
-        apellidos: ['', [Validators.required, Validators.minLength(2)]],
-        fechaNacimiento: ['', Validators.required]
-      }, {
-        //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
-        validator: this.mustMatch("password", "confirmPassword")
-      }
+      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(".*\\S.*[a-zA-z0-9_]")]],
+      email: ['', [Validators.required, Validators.email, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required],
+      nombre: ['', [Validators.required, Validators.minLength(1)]],
+      apellidos: ['', [Validators.required, Validators.minLength(2)]],
+      fechaNacimiento: ['', Validators.required]
+    }, {
+      //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
+      validator: this.mustMatch("password", "confirmPassword")
+    }
     );
   }
-  
+
+  crearFormProfesor() {
+    //Validadors registre
+    this.registerForm = this.formBuilder.group({
+      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(".*\\S.*[a-zA-z0-9_]")]],
+      email: ['', [Validators.required, Validators.email, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required],
+      nombre: ['', [Validators.required, Validators.minLength(1)]],
+      apellidos: ['', [Validators.required, Validators.minLength(2)]],
+      centro: ['', Validators.required]
+    }, {
+      //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
+      validator: this.mustMatch("password", "confirmPassword")
+    }
+    );
+  }
+
   // funció per controlar que camps password i confirmarpassword siguin iguals
   mustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
@@ -69,51 +96,10 @@ export class RegistroComponent implements OnInit {
       }
     };
   }
-  
+
   //Retorna els valors introduits al formulari
   get form() {
     return this.registerForm.controls;
-  }
-
-  /*
-  //Funció que reseteja els valors del formulari
-  onReset() {
-    this.registerForm.reset();
-  }
-  */
-
-  //Funció que executa quan s'apreta el botó registre
-  onRegistro(form: any) {
-    this.submitted = true;
-
-    const nuevoAlumno: Alumno = {
-      id: form.id,
-      nick: form.username,
-      email: form.email,
-      pass: form.password,
-      nombre: form.nombre,
-      apellidos: form.apellidos,
-      fecha_nacimiento: form.fechaNacimiento,
-      tipo: 0
-    }
-
-    //Comprobar si es cumpleixen o no tots els errors
-    if (this.registerForm.invalid) {
-      console.log("invalido");
-    } else {
-      console.log("valid");
-      this.controladorService.insertarAlumno(nuevoAlumno);
-      this.authService.registroUser(nuevoAlumno).subscribe(
-        data => {
-          console.log(data);
-        },
-        err => {
-          console.log(err.error.message);
-        }
-      )
-    }
-
-    //this.onReset();
   }
 
   public togglePass() {
@@ -140,21 +126,59 @@ export class RegistroComponent implements OnInit {
 
   profe() {
     if (this.registroProfe) {
+      this.crearFormAlumno();
       this.registroProfe = false;
     }
 
     if (this.passAcceso == "12") {
       this.passAcceso = "";
+      this.crearFormProfesor();
       this.registroProfe = true;
     }
   }
 
   readURL(event: any) {
     if (event.target.files && event.target.files[0]) {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = e => this.imgSrc = reader.result as string;
-        reader.readAsDataURL(file);
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = e => this.imgSrc = reader.result as string;
+      reader.readAsDataURL(file);
     }
-}
+  }
+  
+  //Funció que executa quan s'apreta el botó registre
+  onRegistro(form: any) {
+    this.submitted = true;
+    if (this.registroProfe) {
+      //Comprobar si es cumpleixen o no tots els errors
+      if (!this.registerForm.invalid) {
+        const nuevoProfesor: Profesor = {
+          id: 0,
+          nick: form.username,
+          email: form.email,
+          pass: form.password,
+          nombre: form.nombre,
+          apellidos: form.apellidos,
+          centro: form.centro,
+          tipo: 1
+        }
+        this.authService.registroProfesor(nuevoProfesor);
+      }
+    } else {  
+      //Comprobar si es cumpleixen o no tots els errors
+      if (!this.registerForm.invalid) {
+        const nuevoAlumno: Alumno = {
+          id: 0,
+          nick: form.username,
+          email: form.email,
+          pass: form.password,
+          nombre: form.nombre,
+          apellidos: form.apellidos,
+          fecha_nacimiento: form.fechaNacimiento,
+          tipo: 0
+        }
+        this.authService.registroAlumno(nuevoAlumno);
+      }
+    }
+  }
 }
