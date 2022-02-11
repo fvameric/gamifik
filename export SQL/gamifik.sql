@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-01-2022 a las 16:30:02
+-- Tiempo de generación: 11-02-2022 a las 17:33:29
 -- Versión del servidor: 5.6.13
 -- Versión de PHP: 5.4.17
 
@@ -36,16 +36,17 @@ CREATE TABLE IF NOT EXISTS `alumno` (
   `nombre` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(60) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `fecha_nacimiento` date NOT NULL,
+  `tipo` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Volcado de datos para la tabla `alumno`
 --
 
-INSERT INTO `alumno` (`id`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `fecha_nacimiento`) VALUES
-(1, 'alumne1', 'alumne1@gmail.com', 'alumne1', 'alumne1', 'alumne1', '2022-01-03'),
-(2, 'alumne2', 'alumne2@gmail.com', 'alumne2', 'alumne2', 'alumne2', '2022-01-16');
+INSERT INTO `alumno` (`id`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `fecha_nacimiento`, `tipo`) VALUES
+(1, 'alumne1', 'alumne1@gmail.com', 'alumne1', 'alumne1', 'alumne1', '2022-01-03', 0),
+(2, 'alumne2', 'alumne2@gmail.com', 'alumne2', 'alumne2', 'alumne2', '2022-01-16', 0);
 
 -- --------------------------------------------------------
 
@@ -61,16 +62,17 @@ CREATE TABLE IF NOT EXISTS `profesor` (
   `nombre` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(60) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `centro` int(11) NOT NULL,
+  `tipo` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `profesor`
 --
 
-INSERT INTO `profesor` (`id`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `centro`) VALUES
-(1, 'profe1', 'profe1@gmail.com', 'profe1', 'profesor uno', 'dos tres', 1),
-(2, 'profe2', 'profe2@gmail.com', 'profe2', 'profesor dos', 'tres cuatro', 2);
+INSERT INTO `profesor` (`id`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `centro`, `tipo`) VALUES
+(1, 'profe1', 'profe1@gmail.com', 'profe1', 'profesor uno', 'dos tres', 1, 1),
+(2, 'profe2', 'profe2@gmail.com', 'profe2', 'profesor dos', 'tres cuatro', 2, 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
