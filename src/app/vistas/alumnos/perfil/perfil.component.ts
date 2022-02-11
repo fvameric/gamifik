@@ -4,8 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { Alumno } from 'app/interfaces/Alumno';
 import { Profesor } from '../../../interfaces/Profesor';
 import { User } from 'app/interfaces/User';
+import { UsersService } from 'services/users.service';
 
-const URL_LOCALSTORAGE = 'userLocalStorage';
+const USER_LS = 'userLocalStorage';
 
 @Component({
   selector: 'app-perfil',
@@ -48,6 +49,7 @@ export class PerfilComponent implements OnInit {
     apellidos: '',
     centro: 0,
     tipo: 1,
+    imagen: ''
   };
 
   datosAlumno: Alumno = {
@@ -59,19 +61,20 @@ export class PerfilComponent implements OnInit {
     apellidos: '',
     fecha_nacimiento: new Date(),
     tipo: 0,
+    imagen: ''
   };
 
   userLocStorage: any;
   datosStorage: any;
 
-  constructor() {}
+  constructor(private usersServices: UsersService) {}
 
   ngOnInit(): void {
     this.obtenerDatos();
   }
 
   obtenerDatos() {
-    this.userLocStorage = JSON.parse(localStorage.getItem(URL_LOCALSTORAGE) || '{}');
+    this.userLocStorage = JSON.parse(localStorage.getItem(USER_LS) || '{}');
     if (this.userLocStorage.tipo == 0) {
       this.obtenerAlumno();
     } else {
@@ -80,7 +83,7 @@ export class PerfilComponent implements OnInit {
   }
 
   obtenerProfesor() {
-    this.datosStorage = localStorage.getItem(URL_LOCALSTORAGE);
+    this.datosStorage = localStorage.getItem(USER_LS);
     this.datosProfesor = JSON.parse(this.datosStorage);
 
     this.nombre = this.datosProfesor.nombre;
@@ -89,7 +92,7 @@ export class PerfilComponent implements OnInit {
   }
 
   obtenerAlumno() {
-    this.datosStorage = localStorage.getItem(URL_LOCALSTORAGE);
+    this.datosStorage = localStorage.getItem(USER_LS);
     this.datosAlumno = JSON.parse(this.datosStorage);
 
     this.nombre = this.datosAlumno.nombre;
@@ -216,5 +219,22 @@ export class PerfilComponent implements OnInit {
       this.confirmarNuevaContrasena = false;
       this.passTypeConfirmNew = 'password';
     }
+  }
+
+  confirmarModif() {
+    const userModif: User = {
+      id: this.userLocStorage.id,
+      email: this.email,
+      pass: this.userLocStorage.pass,
+      nombre: this.nombre,
+      apellidos: this.apellidos
+    }
+    this.usersServices.modificarAlumno(userModif).subscribe((val: any) => {
+      console.log(val);
+      /*
+      localStorage.removeItem(USER_LS);
+      localStorage.setItem(USER_LS, JSON.stringify(val.data));
+      */
+    });
   }
 }

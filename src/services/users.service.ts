@@ -38,7 +38,8 @@ export class UsersService {
     nombre: '',
     apellidos: '',
     fecha_nacimiento: new Date(),
-    tipo: 0
+    tipo: 0,
+    imagen: ''
   }
 
   datosProfesor: Profesor = {
@@ -49,7 +50,8 @@ export class UsersService {
     nombre: '',
     apellidos: '',
     centro: 0,
-    tipo: 1
+    tipo: 1,
+    imagen: ''
   }
 
   constructor(private http: HttpClient) { }
@@ -66,8 +68,8 @@ export class UsersService {
   }
 
   // update alumno
-  modificarAlumno() {
-    return this.http.get(URL_UPDATE_ALUMNOS);
+  modificarAlumno(user: User) {
+    return this.http.put(URL_UPDATE_ALUMNOS, JSON.stringify(user));
   }
   // delete alumno
   eliminarAlumno() {

@@ -16,7 +16,7 @@
                 <img id="preview" [src]="imgSrc">
               </label>
 
-            <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg"><br>
+            <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg" formControlName="userImage"><br>
         </div>
 
         <input type="text" id="login" formControlName="username" placeholder="Usuario" class="fadeIn first" [ngClass]="{ 'is-invalid': form.username.errors }">
@@ -107,7 +107,7 @@
                 <img id="preview" [src]="imgSrc">
               </label>
 
-            <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg"><br>
+            <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg" formControlName="userImage"><br>
         </div>
 
         <input type="text" id="login" formControlName="username" placeholder="Usuario" class="fadeIn first" [ngClass]="{ 'is-invalid': form.username.errors }">
