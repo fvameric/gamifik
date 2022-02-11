@@ -5,6 +5,7 @@ import { Alumno } from 'app/interfaces/Alumno';
 import { Profesor } from '../../../interfaces/Profesor';
 import { User } from 'app/interfaces/User';
 import { UsersService } from 'services/users.service';
+import { Router } from '@angular/router';
 
 const USER_LS = 'userLocalStorage';
 
@@ -67,7 +68,7 @@ export class PerfilComponent implements OnInit {
   userLocStorage: any;
   datosStorage: any;
 
-  constructor(private usersServices: UsersService) {}
+  constructor(private usersServices: UsersService, private router: Router) {}
 
   ngOnInit(): void {
     this.obtenerDatos();
@@ -230,11 +231,9 @@ export class PerfilComponent implements OnInit {
       apellidos: this.apellidos
     }
     this.usersServices.modificarAlumno(userModif).subscribe((val: any) => {
-      console.log(val);
-      /*
       localStorage.removeItem(USER_LS);
       localStorage.setItem(USER_LS, JSON.stringify(val.data));
-      */
+      this.ngOnInit();
     });
   }
 }

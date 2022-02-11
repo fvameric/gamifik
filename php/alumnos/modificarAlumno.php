@@ -19,10 +19,11 @@
 
   $querySelect = "SELECT * FROM `alumno` WHERE id= $alumno->id";
   $resultadoSelect = mysqli_query($con, $querySelect);
+  $data = mysqli_fetch_array($resultadoSelect);
 
   $response->resultado = 'OK';
   $response->mensaje = 'EL USUARIO SE MODIFICO EXITOSAMENTE';
-  $response->data = $resultadoSelect;
+  $response->data = $data;
   
   echo json_encode($response);
 ?>
