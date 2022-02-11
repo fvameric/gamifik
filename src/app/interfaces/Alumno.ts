@@ -7,4 +7,5 @@ export interface Alumno {
     apellidos: string;
     fecha_nacimiento: Date;
     tipo: number;
+    imagen: string;
   }

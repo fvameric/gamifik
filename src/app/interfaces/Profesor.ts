@@ -7,4 +7,5 @@ export interface Profesor {
     apellidos: string;
     centro: number;
     tipo: number;
+    imagen: string;
   }

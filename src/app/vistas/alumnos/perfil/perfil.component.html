@@ -6,23 +6,21 @@
         <main>
             <section>
                 <div class="content">
-                    <img src="" alt="ImagenPerfil">
-
                     <aside *ngIf="userLocStorage.tipo == 0;else tipoProfesor">
+                        <img src={{datosAlumno.imagen}} alt="ImagenPerfil">
                         <h1>{{datosAlumno.nombre}}</h1>
                         <p>Alumno</p>
                     </aside>
 
                     <ng-template #tipoProfesor>
                         <aside>
+                            <img src={{datosProfesor.imagen}} alt="ImagenPerfil">
                             <h1>{{datosProfesor.nombre}}</h1>
                             <p>Profesor</p>
                         </aside>
                     </ng-template>
                 </div>
             </section>
-
-
             <nav>
                 <!--Mostrar Rankings-->
                 <a (click)="mostrarRankings()" class="mis-rankings">
@@ -152,8 +150,6 @@
                             <button class="button-configuracion" (click)="mostrarEditarContra()">Cambiar Contraseña</button>
                         </div>
 
-
-
                         <div *ngIf="mostrarEditarContrasena">
                             <div class="centrar-configuracion">
                                 <h5>Contraseña: </h5>
@@ -198,8 +194,9 @@
                   </i>
                                 </div>
                             </div>
-                            <button class="button-configuracion">Confirmar</button>
                         </div>
+
+                        <button class="button-configuracion" (click)="confirmarModif()">Confirmar</button>
                     </div>
                 </div>
                 <!--Mostrar cajita cerrar sesión-->
