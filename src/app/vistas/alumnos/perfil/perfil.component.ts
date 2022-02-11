@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
 import { Alumno } from 'app/interfaces/Alumno';
 import { Profesor } from '../../../interfaces/Profesor';
 import { User } from 'app/interfaces/User';
 import { UsersService } from 'services/users.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
 
 const USER_LS = 'userLocalStorage';
 
@@ -31,11 +31,7 @@ export class PerfilComponent implements OnInit {
   antiguaContrasena: boolean = false;
   nuevaContrasena: boolean = false;
   confirmarNuevaContrasena: boolean = false;
-
   mostrarEditarContrasena: boolean = false;
-
-  password: string = 'password';
-  text: string = 'text';
 
   nombre: string = 'funciona Fran';
   apellidos: string = 'funciona Fran Olga';
@@ -68,10 +64,48 @@ export class PerfilComponent implements OnInit {
   userLocStorage: any;
   datosStorage: any;
 
-  constructor(private usersServices: UsersService, private router: Router) {}
+  // formulario
+  registerForm!: FormGroup;
+
+  oldPass: string = '';
+  newPass: string = '';
+  newConfPass: string = '';
+
+  constructor(private usersServices: UsersService, public formBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
+    this.crearForm();
+  }
+
+  crearForm() {
+    //Validadors registre
+    this.registerForm = this.formBuilder.group({
+      newPass: [''],
+      confNewPass: ['', Validators.required]
+    }, {
+      //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
+      validator: this.mustMatch("newPass", "confNewPass")
+    }
+    );
+  }
+
+  // funció per controlar que camps password i confirmarpassword siguin iguals
+  mustMatch(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+
+      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+        return;
+      }
+
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ mustMatch: true });
+      } else {
+        matchingControl.setErrors(null);
+      }
+    };
   }
 
   obtenerDatos() {
@@ -223,17 +257,49 @@ export class PerfilComponent implements OnInit {
   }
 
   confirmarModif() {
-    const userModif: User = {
+    let userModif: User = {
       id: this.userLocStorage.id,
       email: this.email,
       pass: this.userLocStorage.pass,
       nombre: this.nombre,
       apellidos: this.apellidos
     }
-    this.usersServices.modificarAlumno(userModif).subscribe((val: any) => {
-      localStorage.removeItem(USER_LS);
-      localStorage.setItem(USER_LS, JSON.stringify(val.data));
-      this.ngOnInit();
-    });
+    // en caso de que se quiera cambiar el email, nombre o apellidos
+    // pero no la password
+    if (this.oldPass == '' && this.newPass == '' && this.newConfPass == '') {
+      this.usersServices.modificarAlumno(userModif).subscribe((val: any) => {
+        localStorage.removeItem(USER_LS);
+        localStorage.setItem(USER_LS, JSON.stringify(val.data));
+        this.ngOnInit();
+      });
+    } else {
+      if (this.oldPass == this.userLocStorage.pass) {
+        if (this.newPass == '' || this.newConfPass == '') {
+        } else {
+
+          // en caso de que se quiera cambiar cualquier dato y
+          // además, la password
+          if (this.newPass == this.newConfPass) {
+            let userModif: User = {
+              id: this.userLocStorage.id,
+              email: this.email,
+              pass: this.newConfPass,
+              nombre: this.nombre,
+              apellidos: this.apellidos
+            }
+
+            this.usersServices.modificarAlumno(userModif).subscribe((val: any) => {
+              localStorage.removeItem(USER_LS);
+              localStorage.setItem(USER_LS, JSON.stringify(val.data));
+              this.ngOnInit();
+            });
+          } else {
+            console.log('las pass tienen que coincidir');
+          }
+        }
+      } else {
+        console.log('la antigua pass no concuerda');
+      }
+    }
   }
 }

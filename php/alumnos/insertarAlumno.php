@@ -3,13 +3,13 @@
   header('Access-Control-Allow-Origin: *');
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
   header('Content-Type: application/json');
+
   // includes
   include_once("../conexion/bd.php");
   
   // clases
   $bd = new claseBD();
   $con = $bd->obtenerConexion();
-
   class Result {}
   $response = new Result();
     
@@ -18,9 +18,9 @@
   $alumno = json_decode($json);
 
   // query
-  $queryInsert = "INSERT INTO `alumno` (`id`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `fecha_nacimiento`, `imagen`) VALUES
-  (NULL, '$alumno->nick', '$alumno->email', '$alumno->pass', '$alumno->nombre', '$alumno->apellidos', '$alumno->fecha_nacimiento', '$alumno->imagen')";
-
+  $queryInsert = "INSERT INTO `alumno`(`id`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `fecha_nacimiento`, `tipo`, `imagen`) VALUES
+  (NULL,'$alumno->nick','$alumno->email','$alumno->pass','$alumno->nombre','$alumno->apellidos','$alumno->fecha_nacimiento','$alumno->tipo' ,'$alumno->imagen')";
+  
   $querySelect = "SELECT * FROM `alumno` WHERE nick = '$alumno->nick' AND email = '$alumno->email'";
 
   $insertResult = mysqli_query($con, $queryInsert);
