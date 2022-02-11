@@ -1,25 +1,70 @@
 <?php
+  // headers
   header('Access-Control-Allow-Origin: *');
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
   header('Content-Type: application/json');
 
   $json = file_get_contents('php://input');
   $user = json_decode($json);
-  
+
+  // includes
   include_once("../conexion/bd.php");
+
+  // clases
   $bd = new claseBD();
+  $con = $bd->obtenerConexion();
+  class Result{}
+  $response = new Result();
 
-  // buscamos user en alumno
-  $registros = mysqli_query($bd->obtenerConexion(), "SELECT * FROM alumno WHERE nick='$user->nick' and pass='$user->pass'");
-  $resultado = mysqli_fetch_array($registros);
+  // query
+  $queryAlumno = "SELECT * FROM alumno WHERE nick='$user->nick' and pass='$user->pass'";
+  $queryProfesor = "SELECT * FROM profesor WHERE nick='$user->nick' and pass='$user->pass'";
 
-  // si no existe y obtenemos nulo, entonces buscamos en profesor
-  if (is_null($resultado)) {
-    $registros = mysqli_query($bd->obtenerConexion(), "SELECT * FROM profesor WHERE nick='$user->nick' and pass='$user->pass'");
-    $resultado = mysqli_fetch_array($registros);
+  $regAlumno = mysqli_query($con, $queryAlumno);
+
+  // si la query ha sido correcta entramos
+  if ($regAlumno) {
+    $dataAlumno = mysqli_fetch_array($regAlumno);
+    $response->select = 'Select a base de datos correcto';
+
+    // si este alumno existe, devolvemos sus datos
+    if (!is_null($dataAlumno)) {
+      $response->resultado = 'ok';
+      $response->mensaje = 'Se encontró al alumno';
+      json_encode($dataAlumno);
+      $response->data = $dataAlumno;
+      echo json_encode($response);
+    } else {
+
+      // miramos que sea un profesor
+      $regProfesor = mysqli_query($con, $queryProfesor);
+      if ($regProfesor) {
+        $dataProfesor = mysqli_fetch_array($regProfesor);
+        $response->select = 'Select a base de datos correcto';
+
+        // si este profesor existe, devolvemos sus datos
+        if (!is_null($dataProfesor)) {
+          $response->resultado = 'ok';
+          $response->mensaje = 'Se encontró al profesor';
+          json_encode($dataProfesor);
+          $response->data = $dataProfesor;
+          echo json_encode($response);
+        } else {
+
+          // en caso de que no exista ni como alumno ni como profe devolvemos error
+          $response->resultado = 'error';
+          $response->mensaje = 'No se encontró este usuario';
+          echo json_encode($response);
+        }
+      } else {
+        $response->resultado = 'error';
+        $response->mensaje = 'No se pudo realizar el select a base de datos';
+        echo json_encode($response);
+      }
+    }
+  } else {
+    $response->resultado = 'error';
+    $response->mensaje = 'No se pudo realizar el select a base de datos';
+    echo json_encode($response);
   }
-  
-  // devolvemos el resultado del select
-  $json = json_encode($resultado);
-  echo $json;
 ?>

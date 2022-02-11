@@ -6,8 +6,6 @@ import {
   FormControl,
 } from '@angular/forms';
 
-import Swal from 'sweetalert2';
-
 // imports conectividad
 import { HttpClient } from '@angular/common/http';
 import { ControladorService } from 'services/controlador.service';
@@ -21,7 +19,6 @@ import { User } from 'app/interfaces/User';
 import { AuthService } from 'services/auth.service';
 import { TokenService } from 'services/token.service';
 
-const USER_LS = 'userLocalStorage';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -83,23 +80,7 @@ export class LoginComponent implements OnInit {
       pass: form.password,
     };
     this.submitted = true;
-    this.authService.loginUser(user).subscribe((val) => {
-      if (val != null) {
-        // to-do
-        //this.tokenService.saveToken(val.accessToken)
-        this.datosUser = val;
-        localStorage.removeItem(USER_LS);
-        localStorage.setItem(USER_LS, JSON.stringify(this.datosUser)
-        );
-        this.router.navigate(['/perfil']);
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error de identificación',
-          text: 'Este usuario no existe',
-        });
-      }
-    });
+    this.authService.loginUser(user);
   }
 
   public togglePass() {
