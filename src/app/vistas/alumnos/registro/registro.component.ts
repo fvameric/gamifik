@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
 
 import { HttpClient } from '@angular/common/http';
-import { ControladorService } from 'services/controlador.service';
 
 // interfaces
 import { Alumno } from 'app/interfaces/Alumno';

@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-import { HttpClient } from '@angular/common/http';
-import { ControladorService } from 'services/controlador.service';
 import { Alumno } from 'app/interfaces/Alumno';
 import { Profesor } from '../../../interfaces/Profesor';
 import { User } from 'app/interfaces/User';

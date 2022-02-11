@@ -8,7 +8,7 @@
   $bd = new claseBD(); // CREA LA CONEXION
 
   // REALIZA LA QUERY A LA DB
-  //mysqli_query($bd->obtenerConexion(), "UPDATE profesor SET nombre_ranking = 'R_$_GET[nuevoNombre]' WHERE nombre_ranking ='$_GET[nombreRanking]';");
+  //mysqli_query($bd->obtenerConexion(), "UPDATE alumno SET nombre_ranking = 'R_$_GET[nuevoNombre]' WHERE nombre_ranking ='$_GET[nombreRanking]';");
 
   class Result {}
 

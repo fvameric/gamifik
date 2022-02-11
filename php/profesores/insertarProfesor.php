@@ -18,15 +18,23 @@
   $profe = json_decode($json);
 
   // query
-  $query = "INSERT INTO `profesor` (`id`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `centro`) VALUES
+  $queryInsert = "INSERT INTO `profesor` (`id`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `centro`) VALUES
   (NULL, '$profe->nick', '$profe->email', '$profe->pass', '$profe->nombre', '$profe->apellidos', '$profe->centro')";
 
-  $reg = mysqli_query($con, $query);
+  $querySelect = "SELECT * FROM `profesor` WHERE nick = '$profe->nick' AND email = '$profe->email'";
+
+  $insertResult = mysqli_query($con, $queryInsert);
 
   // validacion de la query
-  if ($reg) {
+  if ($insertResult) {
     $response->resultado = 'ok';
     $response->mensaje = 'Se registró correctamente';
+
+    // devolvemos el user que se acaba de registrar
+    $selectResult = mysqli_query($con, $querySelect);
+    $data = mysqli_fetch_array($selectResult);
+    
+    $response->data = $data;
     echo json_encode($response);
   } else {
     $response->resultado = 'error';

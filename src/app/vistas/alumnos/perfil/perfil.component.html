@@ -8,7 +8,7 @@
                 <div class="content">
                     <img src="" alt="ImagenPerfil">
 
-                    <aside *ngIf="tipoUser.tipo == 0;else tipoProfesor">
+                    <aside *ngIf="userLocStorage.tipo == 0;else tipoProfesor">
                         <h1>{{datosAlumno.nombre}}</h1>
                         <p>Alumno</p>
                     </aside>

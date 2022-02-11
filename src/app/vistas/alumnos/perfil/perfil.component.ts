@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-import { ControladorService } from 'services/controlador.service';
 import { Alumno } from 'app/interfaces/Alumno';
 import { Profesor } from '../../../interfaces/Profesor';
 import { User } from 'app/interfaces/User';
+
+const URL_LOCALSTORAGE = 'userLocalStorage';
 
 @Component({
   selector: 'app-perfil',
@@ -60,7 +61,7 @@ export class PerfilComponent implements OnInit {
     tipo: 0,
   };
 
-  tipoUser: any;
+  userLocStorage: any;
   datosStorage: any;
 
   constructor() {}
@@ -70,8 +71,8 @@ export class PerfilComponent implements OnInit {
   }
 
   obtenerDatos() {
-    this.tipoUser = JSON.parse(localStorage.getItem('userLocalStorage') || '{}');
-    if (this.tipoUser.tipo == 0) {
+    this.userLocStorage = JSON.parse(localStorage.getItem(URL_LOCALSTORAGE) || '{}');
+    if (this.userLocStorage.tipo == 0) {
       this.obtenerAlumno();
     } else {
       this.obtenerProfesor();
@@ -79,7 +80,7 @@ export class PerfilComponent implements OnInit {
   }
 
   obtenerProfesor() {
-    this.datosStorage = localStorage.getItem('userLocalStorage');
+    this.datosStorage = localStorage.getItem(URL_LOCALSTORAGE);
     this.datosProfesor = JSON.parse(this.datosStorage);
 
     this.nombre = this.datosProfesor.nombre;
@@ -88,7 +89,7 @@ export class PerfilComponent implements OnInit {
   }
 
   obtenerAlumno() {
-    this.datosStorage = localStorage.getItem('userLocalStorage');
+    this.datosStorage = localStorage.getItem(URL_LOCALSTORAGE);
     this.datosAlumno = JSON.parse(this.datosStorage);
 
     this.nombre = this.datosAlumno.nombre;
