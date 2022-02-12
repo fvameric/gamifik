@@ -18,7 +18,7 @@ const URL_CREATE_PROFESORES = 'http://localhost:8080/profesores/insertarProfesor
 const URL_READ_PROFESORES = 'http://localhost:8080/profesores/datosProfesor.php';       // read
 const URL_UPDATE_PROFESORES = 'http://localhost:8080/profesores/modificarProfesor.php'; // update
 const URL_DELETE_PROFESORES = 'http://localhost:8080/profesores/eliminarProfesor.php';  // delete
-const URL_GET_PROFESOR_ID = 'http://localhost:8080/profesores/getProfesorId.php';          // obtener profesores específicos según su ID
+const URL_GET_PROFESOR_ID = 'http://localhost:8080/profesores/getProfesorId.php';       // obtener profesores específicos según su ID
 
 @Injectable({
   providedIn: 'root'
@@ -93,11 +93,11 @@ export class UsersService {
   }
 
   // update profesores
-  modificarProfesores() {
-    return this.http.get(URL_UPDATE_PROFESORES);
+  modificarProfesor(user: User) {
+    return this.http.put(URL_UPDATE_PROFESORES, JSON.stringify(user));
   }
   // delete profesores
-  eliminarProfesores() {
+  eliminarProfesor() {
     return this.http.get(URL_DELETE_PROFESORES);
   }
 

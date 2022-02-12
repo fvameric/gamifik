@@ -55,8 +55,14 @@ export class AuthService {
   }
 
   guardarLocalStorage(data: any) {
-    localStorage.removeItem(USER_LS);
-    localStorage.setItem(USER_LS, JSON.stringify(data));
-    this.router.navigate(['/perfil']);
+    if (data.tipo == 0) {
+      localStorage.removeItem(USER_LS);
+      localStorage.setItem(USER_LS, JSON.stringify(data));
+      this.router.navigate(['/perfil']);
+    } else {
+      localStorage.removeItem(USER_LS);
+      localStorage.setItem(USER_LS, JSON.stringify(data));
+      this.router.navigate(['/perfilprofesor']);
+    }
   }
 }

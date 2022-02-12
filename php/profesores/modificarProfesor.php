@@ -1,23 +1,51 @@
 <?php
+  // headers
   header('Access-Control-Allow-Origin: *');
+  header("Access-Control-Allow-Methods: PUT");
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-  header('Content-Type: text/html; charset=UTF-8');
 
-  include_once("../conexion/bd.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
+  // includes
+  include_once("../conexion/bd.php");
 
-  $bd = new claseBD(); // CREA LA CONEXION
+  // clases
+  // clase conexión
+  $bd = new claseBD();
+  $con = $bd->obtenerConexion();
 
-  // REALIZA LA QUERY A LA DB
-  //mysqli_query($bd->obtenerConexion(), "UPDATE profesor SET nombre_ranking = 'R_$_GET[nuevoNombre]' WHERE nombre_ranking ='$_GET[nombreRanking]';");
-
+  // clase respuesta
   class Result {}
-
-  // GENERA LOS DATOS DE RESPUESTA
   $response = new Result();
-  $response->resultado = 'OK';
-  $response->mensaje = 'EL USUARIO SE MODIFICO EXITOSAMENTE';
 
-  header('Content-Type: application/json');
+  // input body
+  $json = file_get_contents('php://input');
+  $profesor = json_decode($json);
 
-  echo json_encode($response); // MUESTRA EL JSON GENERADO
+  // query
+  $queryUpdate = "UPDATE `profesor` SET `email`='$profesor->email',`pass`='$profesor->pass',`nombre`='$profesor->nombre',`apellidos`='$profesor->apellidos', `centro`='$profesor->centro' WHERE id = $profesor->id";
+  $querySelect = "SELECT * FROM `profesor` WHERE id = $profesor->id";
+
+  $resUpdate = mysqli_query($con, $queryUpdate);
+
+  // validacion de la query
+  // si se hace bien el insert
+  if ($resUpdate) {
+
+    // si se hace bien el select devolvemos el profesor recién registrado
+    $resSelect = mysqli_query($con, $querySelect);
+    if ($resSelect) {
+      $response->resultado = 'ok';
+      $response->mensaje = 'Se modificó al profesor con éxito';
+      $data = mysqli_fetch_array($resSelect);
+      $response->data = $data;
+      echo json_encode($response);
+    } else {
+      $response->resultado = 'error';
+      $response->mensaje = 'Hubo un error al cargar el profesor insertado';
+      echo json_encode($response);
+    }
+  } else {
+    $response->resultado = 'error';
+    $response->mensaje = 'Hubo un error al registrar al profesor';
+    echo json_encode($response);
+  }
 ?>

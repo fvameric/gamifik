@@ -1,29 +1,51 @@
 <?php
+  // headers
   header('Access-Control-Allow-Origin: *');
   header("Access-Control-Allow-Methods: PUT");
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
-  include_once("../conexion/bd.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
+  // includes
+  include_once("../conexion/bd.php");
+
+  // clases
+  // clase conexión
+  $bd = new claseBD();
+  $con = $bd->obtenerConexion();
+
+  // clase respuesta
+  class Result {}
+  $response = new Result();
 
   // input body
   $json = file_get_contents('php://input');
   $alumno = json_decode($json);
 
-  $bd = new claseBD(); // CREA LA CONEXION
-  $con = $bd->obtenerConexion();
-  class Result {}
-  $response = new Result();
-
+  // query
   $queryUpdate = "UPDATE `alumno` SET `email`='$alumno->email',`pass`='$alumno->pass',`nombre`='$alumno->nombre',`apellidos`='$alumno->apellidos' WHERE id = $alumno->id";
-  $resultadoUpdate = mysqli_query($con, $queryUpdate);
+  $querySelect = "SELECT * FROM `alumno` WHERE id = $alumno->id";
 
-  $querySelect = "SELECT * FROM `alumno` WHERE id= $alumno->id";
-  $resultadoSelect = mysqli_query($con, $querySelect);
-  $data = mysqli_fetch_array($resultadoSelect);
+  $resUpdate = mysqli_query($con, $queryUpdate);
 
-  $response->resultado = 'OK';
-  $response->mensaje = 'EL USUARIO SE MODIFICO EXITOSAMENTE';
-  $response->data = $data;
-  
-  echo json_encode($response);
+  // validacion de la query
+  // si se hace bien el insert
+  if ($resUpdate) {
+
+    // si se hace bien el select devolvemos el alumno recién registrado
+    $resSelect = mysqli_query($con, $querySelect);
+    if ($resSelect) {
+      $response->resultado = 'ok';
+      $response->mensaje = 'Se modificó al alumno con éxito';
+      $data = mysqli_fetch_array($resSelect);
+      $response->data = $data;
+      echo json_encode($response);
+    } else {
+      $response->resultado = 'error';
+      $response->mensaje = 'Hubo un error al cargar el alumno insertado';
+      echo json_encode($response);
+    }
+  } else {
+    $response->resultado = 'error';
+    $response->mensaje = 'Hubo un error al registrar al alumno';
+    echo json_encode($response);
+  }
 ?>

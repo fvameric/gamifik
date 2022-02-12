@@ -19,7 +19,7 @@
 
   // query
   $queryInsert = "INSERT INTO `profesor` (`id`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `centro`, `tipo`, `imagen`) VALUES
-  (NULL, '$profe->nick', '$profe->email', '$profe->pass', '$profe->nombre', '$profe->apellidos', '$profe->centro', '$profe->tipo' '$profe->imagen')";
+  (NULL, '$profe->nick', '$profe->email', '$profe->pass', '$profe->nombre', '$profe->apellidos', '$profe->centro', '$profe->tipo', '$profe->imagen')";
 
   $querySelect = "SELECT * FROM `profesor` WHERE nick = '$profe->nick' AND email = '$profe->email'";
 

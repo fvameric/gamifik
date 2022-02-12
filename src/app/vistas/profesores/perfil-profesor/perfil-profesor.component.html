@@ -7,9 +7,9 @@
             <section>
                 <div class="content">
                     <aside>
-                        <img src={{datosAlumno.imagen}} alt="ImagenPerfil">
-                        <h1>{{datosAlumno.nombre}}</h1>
-                        <p>Alumno</p>
+                        <img src={{datosProfesor.imagen}} alt="ImagenPerfil">
+                        <h1>{{datosProfesor.nombre}}</h1>
+                        <p>Profesor</p>
                     </aside>
                 </div>
             </section>
@@ -71,10 +71,11 @@
                     <div class="cursos-profe">
                         <h2 class="h2-perfil">Configuración</h2>
                         <hr>
+                        <!-- Modificar nombre -->
                         <div class="centrar-configuracion">
                             <h5>Nombre: </h5>
-                            <input class="inputEditar" type="text" [placeholder]="this.nombre" [value]="this.nombre" id="inputNombre"
-                                [readonly]="this.editableNombre">
+                            <input class="inputEditar" type="text" [placeholder]="this.nombre" [value]="this.nombre"
+                                id="inputNombre" [readonly]="this.editableNombre">
                             <div class="pruebaConfiguracion">
                                 <!-- Tick nombre-->
                                 <svg *ngIf="!this.editableNombre" (click)="guardarNombre()" id="guardarNombre"
@@ -101,10 +102,11 @@
                                 </svg>
                             </div>
                         </div>
+                        <!-- Modificar apellidos -->
                         <div class="centrar-configuracion">
                             <h5>Apellidos:</h5>
-                            <input class="inputEditar" type="text" [placeholder]="this.apellidos" [value]="this.apellidos" id="inputApellidos"
-                                [readonly]="this.editableApellidos">
+                            <input class="inputEditar" type="text" [placeholder]="this.apellidos"
+                                [value]="this.apellidos" id="inputApellidos" [readonly]="this.editableApellidos">
                             <div class="pruebaConfiguracion">
                                 <!-- Tick apellidos -->
                                 <svg *ngIf="!this.editableApellidos" (click)="guardarApellidos()" id="guardarApellidos"
@@ -131,11 +133,11 @@
                                 </svg>
                             </div>
                         </div>
-                        <!-- Div para cada linia ej. :  Nombre, apellidos, email... -->
+                        <!-- Modificar email -->
                         <div class="centrar-configuracion">
                             <h5>Email: </h5>
-                            <input class="inputEditar" type="text" [placeholder]="this.email" [value]="this.email" id="inputEmail"
-                                [readonly]="this.editableEmail">
+                            <input class="inputEditar" type="text" [placeholder]="this.email" [value]="this.email"
+                                id="inputEmail" [readonly]="this.editableEmail">
                             <!-- Div que divide las imagenes -->
                             <div class="pruebaConfiguracion">
                                 <!-- Tick -->
@@ -163,17 +165,42 @@
                                 </svg>
                             </div>
                         </div>
+                        <!-- Modificar centro -->
+                        <div class="centrar-configuracion">
+                            <h5>Centro: </h5>
+
+                            <select class="select-Centros" [(ngModel)]="centroSelec">
+                                <option [value]="centro.id" *ngFor="let centro of listaCentros" [selected]="centro.id === centroSelec">
+                                    {{centro.nombre}}
+                                </option>
+                            </select>
+
+                            <!-- Tick -->
+                            <svg *ngIf="!this.editableEmail" (click)="guardarEmail()" id="guardarEmail"
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-check2" viewBox="0 0 16 16">
+                                <path
+                                    d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                            </svg>
+                            <!-- Lápiz -->
+                            <svg *ngIf="this.editableEmail" (click)="editarEmail()" xmlns="http://www.w3.org/2000/svg"
+                                width="16" height="16" fill="currentColor" class="bi bi-pencil"
+                                id="iconos-configuracion" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                            </svg>
+                        </div>
                         <div class="centrar-configuracion">
                             <h5>Contraseña: </h5>
                             <button class="button-configuracion" (click)="mostrarEditarContra()">Cambiar
                                 Contraseña</button>
                         </div>
-                        
+
                         <div *ngIf="mostrarEditarContrasena">
                             <div class="centrar-configuracion">
                                 <h5>Contraseña: </h5>
-                                <input class="inputEditar" [type]="passType" [(ngModel)]="this.oldPass" placeholder="Contraseña actual"
-                                    id="contrasenaAntigua">
+                                <input class="inputEditar" [type]="passType" [(ngModel)]="this.oldPass"
+                                    placeholder="Contraseña actual" id="contrasenaAntigua">
                                 <!-- Div que divide las imagenes -->
                                 <div class="pruebaConfiguracion">
                                     <!-- Lápiz -->
@@ -190,8 +217,8 @@
 
                             <div class="centrar-configuracion">
                                 <h5>Nueva Contraseña: </h5>
-                                <input class="inputEditar" [type]="passTypeNew" [(ngModel)]="this.newPass" placeholder="Nueva contraseña"
-                                    id="contrasenaAntigua">
+                                <input class="inputEditar" [type]="passTypeNew" [(ngModel)]="this.newPass"
+                                    placeholder="Nueva contraseña" id="contrasenaAntigua">
                                 <!-- Div que divide las imagenes -->
                                 <div class="pruebaConfiguracion">
                                     <!-- Lápiz -->
@@ -207,7 +234,7 @@
                             </div>
                             <div class="centrar-configuracion">
                                 <h5>Confirmar Contraseña: </h5>
-                                <input class="inputEditar" [type]="passTypeConfirmNew" [(ngModel)]="this.newConfPass" 
+                                <input class="inputEditar" [type]="passTypeConfirmNew" [(ngModel)]="this.newConfPass"
                                     placeholder="Confirmar contraseña" id="contrasenaAntigua">
                                 <!-- Div que divide las imagenes -->
                                 <div class="pruebaConfiguracion">

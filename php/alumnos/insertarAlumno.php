@@ -8,8 +8,11 @@
   include_once("../conexion/bd.php");
   
   // clases
+  // clase conexión
   $bd = new claseBD();
   $con = $bd->obtenerConexion();
+
+  // clase
   class Result {}
   $response = new Result();
     
@@ -20,22 +23,26 @@
   // query
   $queryInsert = "INSERT INTO `alumno`(`id`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `fecha_nacimiento`, `tipo`, `imagen`) VALUES
   (NULL,'$alumno->nick','$alumno->email','$alumno->pass','$alumno->nombre','$alumno->apellidos','$alumno->fecha_nacimiento','$alumno->tipo' ,'$alumno->imagen')";
-  
   $querySelect = "SELECT * FROM `alumno` WHERE nick = '$alumno->nick' AND email = '$alumno->email'";
 
-  $insertResult = mysqli_query($con, $queryInsert);
+  $resInsert = mysqli_query($con, $queryInsert);
 
   // validacion de la query
-  if ($insertResult) {
-    $response->resultado = 'ok';
-    $response->mensaje = 'Se registró correctamente';
+  if ($resInsert) {
 
-    // devolvemos el user que se acaba de registrar
-    $selectResult = mysqli_query($con, $querySelect);
-    $data = mysqli_fetch_array($selectResult);
-
-    $response->data = $data;
-    echo json_encode($response);
+    // si se hace bien el select devolvemos el profesor recién registrado
+    $resSelect = mysqli_query($con, $querySelect);
+    if ($resSelect) {
+      $response->resultado = 'ok';
+      $response->mensaje = 'Se registró correctamente';
+      $data = mysqli_fetch_array($resSelect);
+      $response->data = $data;
+      echo json_encode($response);
+    } else {
+      $response->resultado = 'error';
+      $response->mensaje = 'Hubo un error al cargar el alumno insertado';
+      echo json_encode($response);
+    }
   } else {
     $response->resultado = 'error';
     $response->mensaje = 'Hubo un error al registrar al alumno';

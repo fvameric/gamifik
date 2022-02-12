@@ -9,11 +9,11 @@ import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from
 const USER_LS = 'userLocalStorage';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.css']
+  selector: 'app-perfil-profesor',
+  templateUrl: './perfil-profesor.component.html',
+  styleUrls: ['./perfil-profesor.component.css']
 })
-export class PerfilComponent implements OnInit {
+export class PerfilProfesorComponent implements OnInit {
   profesores: any;
   alumnos: any;
   mostrarRankingsVisual: boolean = false;
@@ -48,18 +48,7 @@ export class PerfilComponent implements OnInit {
     imagen: ''
   };
 
-  datosAlumno: Alumno = {
-    id: 0,
-    nick: '',
-    email: '',
-    pass: '',
-    nombre: '',
-    apellidos: '',
-    fecha_nacimiento: new Date(),
-    tipo: 0,
-    imagen: ''
-  };
-
+  userLocStorage: any;
   datosStorage: any;
 
   // formulario
@@ -69,11 +58,20 @@ export class PerfilComponent implements OnInit {
   newPass: string = '';
   newConfPass: string = '';
 
-  constructor(private usersServices: UsersService, public formBuilder: FormBuilder,) { }
+  centroSelec: number = 0;
+
+  listaCentros = [
+    { id: 0, nombre: 'Ilerna'},
+    { id: 1, nombre: 'Caparrella'},
+    { id: 2, nombre: 'Almenar'}
+  ]
+
+  constructor(private usersService: UsersService, public formBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
-    this.obtenerDatosAlumno();
+    this.obtenerDatosProfesor();
     this.crearForm();
+    this.oldCentro();
   }
 
   crearForm() {
@@ -106,13 +104,17 @@ export class PerfilComponent implements OnInit {
     };
   }
 
-  obtenerDatosAlumno() {
+  obtenerDatosProfesor() {
     this.datosStorage = localStorage.getItem(USER_LS);
-    this.datosAlumno = JSON.parse(this.datosStorage);
+    this.datosProfesor = JSON.parse(this.datosStorage);
 
-    this.nombre = this.datosAlumno.nombre;
-    this.apellidos = this.datosAlumno.apellidos;
-    this.email = this.datosAlumno.email;
+    this.nombre = this.datosProfesor.nombre;
+    this.apellidos = this.datosProfesor.apellidos;
+    this.email = this.datosProfesor.email;
+  }
+
+  oldCentro() {
+    this.centroSelec = this.datosProfesor.centro;
   }
 
   mostrarRankings() {
@@ -238,22 +240,24 @@ export class PerfilComponent implements OnInit {
 
   confirmarModif() {
     let userModif: User = {
-      id: this.datosAlumno.id,
+      id: this.datosProfesor.id,
       email: this.email,
-      pass: this.datosAlumno.pass,
+      pass: this.datosProfesor.pass,
       nombre: this.nombre,
-      apellidos: this.apellidos
+      apellidos: this.apellidos,
+      centro: this.centroSelec
     }
+
     // en caso de que se quiera cambiar el email, nombre o apellidos
     // pero no la password
     if (this.oldPass == '' && this.newPass == '' && this.newConfPass == '') {
-      this.usersServices.modificarAlumno(userModif).subscribe((val: any) => {
+      this.usersService.modificarProfesor(userModif).subscribe((val: any) => {
         localStorage.removeItem(USER_LS);
         localStorage.setItem(USER_LS, JSON.stringify(val.data));
         this.ngOnInit();
       });
     } else {
-      if (this.oldPass == this.datosAlumno.pass) {
+      if (this.oldPass == this.datosProfesor.pass) {
         if (this.newPass == '' || this.newConfPass == '') {
         } else {
 
@@ -261,14 +265,14 @@ export class PerfilComponent implements OnInit {
           // además, la password
           if (this.newPass == this.newConfPass) {
             let userModif: User = {
-              id: this.datosAlumno.id,
+              id: this.datosProfesor.id,
               email: this.email,
               pass: this.newConfPass,
               nombre: this.nombre,
               apellidos: this.apellidos
             }
 
-            this.usersServices.modificarAlumno(userModif).subscribe((val: any) => {
+            this.usersService.modificarAlumno(userModif).subscribe((val: any) => {
               localStorage.removeItem(USER_LS);
               localStorage.setItem(USER_LS, JSON.stringify(val.data));
               this.ngOnInit();
