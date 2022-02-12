@@ -7,7 +7,7 @@
 body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
-    background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
+    background: linear-gradient(60deg, rgb(15, 65, 156) 0%, rgb(11, 143, 219) 100%);
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
