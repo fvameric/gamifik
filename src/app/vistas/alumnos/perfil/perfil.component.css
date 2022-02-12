@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins");
+
 *,
 *:before,
 *:after {
@@ -69,7 +70,7 @@ body {
     border-radius: 5px;
     float: left;
     width: 100%;
-    background: linear-gradient( 90deg, rgba(2, 0, 36, 1) 0%, rgba(18, 17, 104, 1) 26%, rgba(23, 22, 125, 1) 52%, rgba(26, 25, 137, 1) 73%, rgba(29, 29, 152, 1) 100%);
+    background: linear-gradient(10deg, rgb(0, 44, 100) 0%, rgb(0, 91, 165) 100%);
 }
 
 .contact main section .content {
@@ -377,7 +378,7 @@ hr {
 }
 
 .boton-cerrar:hover {
-    background-color: rgb(255, 0, 21);
+    background-color: rgb(150, 3, 15);
 }
 
 .boton-cancelar {
@@ -389,7 +390,7 @@ hr {
 }
 
 .boton-cancelar:hover {
-    background-color: rgb(81, 81, 199);
+    background-color: rgb(9, 53, 134);
 }
 
 .button-configuracion {
@@ -403,7 +404,7 @@ hr {
 }
 
 .button-configuracion:hover {
-    background-color: rgb(81, 81, 199);
+    background-color: rgb(9, 53, 134);
 }
 
 .centrar-configuracion {
