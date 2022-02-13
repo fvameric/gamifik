@@ -40,6 +40,9 @@
                     <div class="cursos-profe">
                         <h2 class="h2-perfil">Rankings</h2>
                         <hr>
+                        <div *ngFor="let rank of arrRankings">
+                            {{rank.id_rank}}. {{rank.nom_rank}} - {{rank.alumnos}} alumnos
+                        </div>
                     </div>
                 </div>
                 <!--Mostrar Configurarcion-->

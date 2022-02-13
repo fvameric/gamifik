@@ -1,5 +1,5 @@
 export interface Alumno {
-    id: number;
+    id_alumno: number;
     nick: string;
     email: string;
     pass: string;

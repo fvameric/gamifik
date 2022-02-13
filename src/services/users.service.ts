@@ -31,7 +31,7 @@ export class UsersService {
   pass: string = "";
 
   datosAlumno: Alumno = {
-    id: 0,
+    id_alumno: 0,
     nick: '',
     email: '',
     pass: '',
@@ -43,7 +43,7 @@ export class UsersService {
   }
 
   datosProfesor: Profesor = {
-    id: 0,
+    id_profe: 0,
     nick: '',
     email: '',
     pass: '',

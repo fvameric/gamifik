@@ -21,8 +21,8 @@
   $profesor = json_decode($json);
 
   // query
-  $queryUpdate = "UPDATE `profesor` SET `email`='$profesor->email',`pass`='$profesor->pass',`nombre`='$profesor->nombre',`apellidos`='$profesor->apellidos', `centro`='$profesor->centro' WHERE id = $profesor->id";
-  $querySelect = "SELECT * FROM `profesor` WHERE id = $profesor->id";
+  $queryUpdate = "UPDATE `profesor` SET `email`='$profesor->email',`pass`='$profesor->pass',`nombre`='$profesor->nombre',`apellidos`='$profesor->apellidos', `centro`='$profesor->centro' WHERE id_profe = $profesor->id";
+  $querySelect = "SELECT * FROM `profesor` WHERE id_profe = $profesor->id";
 
   $resUpdate = mysqli_query($con, $queryUpdate);
 

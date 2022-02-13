@@ -1,5 +1,5 @@
 export interface Profesor {
-    id: number;
+    id_profe: number;
     nick: string;
     email: string;
     pass: string;

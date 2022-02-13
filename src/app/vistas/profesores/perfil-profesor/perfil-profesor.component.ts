@@ -5,6 +5,7 @@ import { User } from 'app/interfaces/User';
 import { UsersService } from 'services/users.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { RankingService } from 'services/ranking.service';
 
 const USER_LS = 'userLocalStorage';
 
@@ -37,7 +38,7 @@ export class PerfilProfesorComponent implements OnInit {
   email: string = 'funcionaFran@gmail.com';
 
   datosProfesor: Profesor = {
-    id: 0,
+    id_profe: 0,
     nick: '',
     email: '',
     pass: '',
@@ -47,6 +48,10 @@ export class PerfilProfesorComponent implements OnInit {
     tipo: 1,
     imagen: ''
   };
+
+  rankingIds: any;
+  datosRanking: any;
+  arrRankings: any[] = [];
 
   userLocStorage: any;
   datosStorage: any;
@@ -66,12 +71,16 @@ export class PerfilProfesorComponent implements OnInit {
     { id: 2, nombre: 'Almenar'}
   ]
 
-  constructor(private usersService: UsersService, public formBuilder: FormBuilder,) { }
+  constructor(
+    private usersService: UsersService,
+    private rankingService: RankingService,
+    public formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.obtenerDatosProfesor();
     this.crearForm();
     this.oldCentro();
+    this.obtenerDatosRanking();
   }
 
   crearForm() {
@@ -111,6 +120,17 @@ export class PerfilProfesorComponent implements OnInit {
     this.nombre = this.datosProfesor.nombre;
     this.apellidos = this.datosProfesor.apellidos;
     this.email = this.datosProfesor.email;
+  }
+
+  obtenerDatosRanking() {
+    this.rankingService.obtenerRankingProfeId(this.datosProfesor.id_profe).subscribe((val: any) => {
+      val.forEach((element: any) => {
+        this.rankingService.obtenerRankingPorId(element.id_rank).subscribe((val: any) => {
+          this.datosRanking = val;
+          this.arrRankings.push(this.datosRanking.data);
+        });
+      });
+    });
   }
 
   oldCentro() {
@@ -240,7 +260,7 @@ export class PerfilProfesorComponent implements OnInit {
 
   confirmarModif() {
     let userModif: User = {
-      id: this.datosProfesor.id,
+      id: this.datosProfesor.id_profe,
       email: this.email,
       pass: this.datosProfesor.pass,
       nombre: this.nombre,
@@ -265,7 +285,7 @@ export class PerfilProfesorComponent implements OnInit {
           // además, la password
           if (this.newPass == this.newConfPass) {
             let userModif: User = {
-              id: this.datosProfesor.id,
+              id: this.datosProfesor.id_profe,
               email: this.email,
               pass: this.newConfPass,
               nombre: this.nombre,

@@ -5,6 +5,8 @@ import { User } from 'app/interfaces/User';
 import { UsersService } from 'services/users.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { RankingService } from 'services/ranking.service';
+import { Ranking } from 'app/interfaces/Ranking';
 
 const USER_LS = 'userLocalStorage';
 
@@ -36,20 +38,8 @@ export class PerfilComponent implements OnInit {
   apellidos: string = 'funciona Fran Olga';
   email: string = 'funcionaFran@gmail.com';
 
-  datosProfesor: Profesor = {
-    id: 0,
-    nick: '',
-    email: '',
-    pass: '',
-    nombre: '',
-    apellidos: '',
-    centro: 0,
-    tipo: 1,
-    imagen: ''
-  };
-
   datosAlumno: Alumno = {
-    id: 0,
+    id_alumno: 0,
     nick: '',
     email: '',
     pass: '',
@@ -60,6 +50,10 @@ export class PerfilComponent implements OnInit {
     imagen: ''
   };
 
+  rankingIds: any;
+  datosRanking: any;
+  arrRankings: any[] = [];
+
   datosStorage: any;
 
   // formulario
@@ -69,11 +63,15 @@ export class PerfilComponent implements OnInit {
   newPass: string = '';
   newConfPass: string = '';
 
-  constructor(private usersServices: UsersService, public formBuilder: FormBuilder,) { }
+  constructor(
+    private usersServices: UsersService,
+    private rankingService: RankingService,
+    public formBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
     this.obtenerDatosAlumno();
     this.crearForm();
+    this.obtenerDatosRanking();
   }
 
   crearForm() {
@@ -113,6 +111,17 @@ export class PerfilComponent implements OnInit {
     this.nombre = this.datosAlumno.nombre;
     this.apellidos = this.datosAlumno.apellidos;
     this.email = this.datosAlumno.email;
+  }
+
+  obtenerDatosRanking() {
+    this.rankingService.obtenerRankingAlumnosId(this.datosAlumno.id_alumno).subscribe((val: any) => {
+      val.forEach((element: any) => {
+        this.rankingService.obtenerRankingPorId(element.id_rank).subscribe((val: any) => {
+          this.datosRanking = val;
+          this.arrRankings.push(this.datosRanking.data);
+        });
+      });
+    });
   }
 
   mostrarRankings() {
@@ -238,7 +247,7 @@ export class PerfilComponent implements OnInit {
 
   confirmarModif() {
     let userModif: User = {
-      id: this.datosAlumno.id,
+      id: this.datosAlumno.id_alumno,
       email: this.email,
       pass: this.datosAlumno.pass,
       nombre: this.nombre,
@@ -261,7 +270,7 @@ export class PerfilComponent implements OnInit {
           // además, la password
           if (this.newPass == this.newConfPass) {
             let userModif: User = {
-              id: this.datosAlumno.id,
+              id: this.datosAlumno.id_alumno,
               email: this.email,
               pass: this.newConfPass,
               nombre: this.nombre,

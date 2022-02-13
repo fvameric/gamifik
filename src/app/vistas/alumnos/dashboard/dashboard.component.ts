@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
   email: string = 'funcionaFran@gmail.com';
 
   datosProfesor: Profesor = {
-    id: 0,
+    id_profe: 0,
     nick: '',
     email: '',
     pass: '',
@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
   };
 
   datosAlumno: Alumno = {
-    id: 0,
+    id_alumno: 0,
     nick: '',
     email: '',
     pass: '',

@@ -155,7 +155,7 @@ export class RegistroComponent implements OnInit {
       //Comprobar si es cumpleixen o no tots els errors
       if (!this.registerForm.invalid) {
         const nuevoProfesor: Profesor = {
-          id: 0,
+          id_profe: 0,
           nick: form.username,
           email: form.email,
           pass: form.password,
@@ -171,7 +171,7 @@ export class RegistroComponent implements OnInit {
       //Comprobar si es cumpleixen o no tots els errors
       if (!this.registerForm.invalid) {
         const nuevoAlumno: Alumno = {
-          id: 0,
+          id_alumno: 0,
           nick: form.username,
           email: form.email,
           pass: form.password,

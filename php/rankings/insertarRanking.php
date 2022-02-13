@@ -12,25 +12,24 @@
   $bd = new claseBD();
   $con = $bd->obtenerConexion();
 
-  // clase respuesta
+  // clase
   class Result {}
   $response = new Result();
     
   // input body
   $json = file_get_contents('php://input');
-  $alumno = json_decode($json);
+  $ranking = json_decode($json);
 
   // query
-  $queryInsert = "INSERT INTO `alumno`(`id_alumno`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `fecha_nacimiento`, `tipo`, `imagen`) VALUES
-  (NULL,'$alumno->nick','$alumno->email','$alumno->pass','$alumno->nombre','$alumno->apellidos','$alumno->fecha_nacimiento','$alumno->tipo' ,'$alumno->imagen')";
-  $querySelect = "SELECT * FROM `alumno` WHERE nick = '$alumno->nick' AND email = '$alumno->email'";
+  $queryInsert = "INSERT INTO `ranking`(`id_rank`, `nom_rank`, `alumnos`, `cod_rank`) VALUES (NULL,'$ranking->nom_rank',$ranking->alumnos,'$ranking->cod_rank')";
+  $querySelect = "SELECT * FROM `ranking` WHERE nom_rank = '$ranking->nom_rank'";
 
   $resInsert = mysqli_query($con, $queryInsert);
 
   // validacion de la query
   if ($resInsert) {
 
-    // si se hace bien el select devolvemos el profesor recién registrado
+    // si se hace bien el select devolvemos el ranking recién registrado
     $resSelect = mysqli_query($con, $querySelect);
     if ($resSelect) {
       $response->resultado = 'ok';
@@ -40,12 +39,12 @@
       echo json_encode($response);
     } else {
       $response->resultado = 'error';
-      $response->mensaje = 'Hubo un error al cargar el alumno insertado';
+      $response->mensaje = 'Hubo un error al cargar el ranking insertado';
       echo json_encode($response);
     }
   } else {
     $response->resultado = 'error';
-    $response->mensaje = 'Hubo un error al registrar al alumno';
+    $response->mensaje = 'Hubo un error al registrar el ranking';
     echo json_encode($response);
   }
 ?>

@@ -15,21 +15,32 @@
   // clase respuesta
   class Result {}
   $response = new Result();
+
+  // variable donde guardar los datos del fetch
+  global $datos;
   
   // query
-  $query = "SELECT * FROM `alumno` WHERE id_alumno=$_GET[id]";
+  $query = "SELECT * FROM `rank_alumnos` WHERE id_alumno=$_GET[id]";
   $res = mysqli_query($con, $query);
 
   // validación de la query
   if ($res) {
+    while ($registros = mysqli_fetch_array($res))
+    {
+      $datos[] = $registros;
+    }
+  
+    $data = json_encode($datos);
+    echo $data;
+    /*
     $response->resultado = 'ok';
-    $response->mensaje = 'Se selecciono el user con éxito';
-    $data = mysqli_fetch_array($res);
+    $response->mensaje = 'Se seleccionó el ranking con éxito';
     $response->data = $data;
-    echo json_encode($response);  
+    echo json_encode($response);*/
+
   } else {
     $response->resultado = 'error';
-    $response->mensaje = 'No se encontró al alumno';
+    $response->mensaje = 'No se encontró el ranking';
     echo json_encode($response);
   }
 ?>

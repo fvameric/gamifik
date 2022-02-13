@@ -1,6 +1,6 @@
 <?php
   // headers
-  header('Access-Control-Allow-Origin: *');
+  header('Access-Control-Allow-Origin: *'); 
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
   header('Content-Type: application/json');
 
@@ -15,26 +15,20 @@
   // clase respuesta
   class Result {}
   $response = new Result();
-  
-  // variable donde guardar los datos del fetch
-  global $datos;
 
   // query
-  $query = "SELECT * FROM `alumno` WHERE 1";
-  $registros = mysqli_query($con, $query);
+  $query = "DELETE FROM ranking WHERE id_rank='$_GET[id]'";
+  $res = mysqli_query($con, $query);
 
-  // si la query ha sido correcta hacemos fetch
-  if ($registros) {
-    while ($resultado = mysqli_fetch_array($registros))
-    {
-      $datos[] = $resultado;
-    }
-  
-    $json = json_encode($datos);
-    echo $json;
+  // validación de la query
+  if ($res) {
+    $response->resultado = 'ok';
+    $response->mensaje = 'El ranking se eliminó con éxito';
+    echo json_encode($response);
   } else {
     $response->resultado = 'error';
     $response->mensaje = 'Hubo un problema con la base de datos.';
     echo json_encode($response);
   }
 ?>
+

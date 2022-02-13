@@ -5,7 +5,7 @@
   include_once("../conexion/bd.php");
   $bd = new claseBD();
   
-  $reg = mysqli_query($bd->obtenerConexion(),"SELECT * FROM `profesor` WHERE id=$_GET[id]");
+  $reg = mysqli_query($bd->obtenerConexion(),"SELECT * FROM `profesor` WHERE id_profe=$_GET[id]");
   $data = mysqli_fetch_array($reg);
 
   class Result {}
