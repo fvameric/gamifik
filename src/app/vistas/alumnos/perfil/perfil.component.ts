@@ -50,6 +50,7 @@ export class PerfilComponent implements OnInit {
     imagen: ''
   };
 
+  flagRanks: boolean = false;
   rankingIds: any;
   datosRanking: any;
   arrRankings: any[] = [];
@@ -62,6 +63,8 @@ export class PerfilComponent implements OnInit {
   oldPass: string = '';
   newPass: string = '';
   newConfPass: string = '';
+
+  imgSrc: string = '';
 
   constructor(
     private usersServices: UsersService,
@@ -111,16 +114,32 @@ export class PerfilComponent implements OnInit {
     this.nombre = this.datosAlumno.nombre;
     this.apellidos = this.datosAlumno.apellidos;
     this.email = this.datosAlumno.email;
+    this.imgSrc = this.datosAlumno.imagen;
+  }
+
+  readURL(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e: any) =>
+      this.imgSrc = e.target.result;
+      reader.readAsDataURL(file);
+    }
   }
 
   obtenerDatosRanking() {
     this.rankingService.obtenerRankingAlumnosId(this.datosAlumno.id_alumno).subscribe((val: any) => {
-      val.forEach((element: any) => {
-        this.rankingService.obtenerRankingPorId(element.id_rank).subscribe((val: any) => {
-          this.datosRanking = val;
-          this.arrRankings.push(this.datosRanking.data);
+      if (val == null) {
+        this.flagRanks = true;
+      } else {
+        this.flagRanks = false;
+        val.forEach((element: any) => {
+          this.rankingService.obtenerRankingPorId(element.id_rank).subscribe((val: any) => {
+            this.datosRanking = val;
+            this.arrRankings.push(this.datosRanking.data);
+          });
         });
-      });
+      }
     });
   }
 

@@ -7,7 +7,13 @@
             <section>
                 <div class="content">
                     <aside>
-                        <img src={{datosProfesor.imagen}} alt="ImagenPerfil">
+                        <div class="image-upload">
+                            <label for="file-input">
+                                <img id="preview" [src]="imgSrc" alt="ImagenPerfil">
+                              </label>
+                
+                            <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg"><br>
+                        </div>
                         <h1>{{datosProfesor.nombre}}</h1>
                         <p>Profesor</p>
                     </aside>
@@ -40,9 +46,14 @@
                     <div class="cursos-profe">
                         <h2 class="h2-perfil">Rankings</h2>
                         <hr>
-                        <div *ngFor="let rank of arrRankings">
-                            {{rank.id_rank}}. {{rank.nom_rank}} - {{rank.alumnos}} alumnos
+                        <div *ngIf="flagRanks;else tieneRankings">
+                            No tiene rankings.
                         </div>
+                        <ng-template #tieneRankings>
+                            <div *ngFor="let rank of arrRankings">
+                                {{rank.id_rank}}. {{rank.nom_rank}} - {{rank.alumnos}} alumnos
+                            </div>
+                        </ng-template>
                     </div>
                 </div>
                 <!--Mostrar Configurarcion-->

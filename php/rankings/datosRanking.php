@@ -20,7 +20,7 @@
   global $datos;
 
   // query
-  $query = "SELECT * FROM `ranking` WHERE 1";
+  $query = "SELECT * FROM `ranking` WHERE 1 ORDER BY `ranking`.`id_rank` ASC";
   $registros = mysqli_query($con, $query);
   
   // si la query ha sido correcta hacemos fetch

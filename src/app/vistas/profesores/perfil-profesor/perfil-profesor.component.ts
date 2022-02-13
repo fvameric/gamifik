@@ -49,6 +49,7 @@ export class PerfilProfesorComponent implements OnInit {
     imagen: ''
   };
 
+  flagRanks: boolean = false;
   rankingIds: any;
   datosRanking: any;
   arrRankings: any[] = [];
@@ -66,10 +67,12 @@ export class PerfilProfesorComponent implements OnInit {
   centroSelec: number = 0;
 
   listaCentros = [
-    { id: 0, nombre: 'Ilerna'},
-    { id: 1, nombre: 'Caparrella'},
-    { id: 2, nombre: 'Almenar'}
-  ]
+    { id: 0, nombre: 'Ilerna' },
+    { id: 1, nombre: 'Caparrella' },
+    { id: 2, nombre: 'Almenar' }
+  ];
+
+  imgSrc: string = '';
 
   constructor(
     private usersService: UsersService,
@@ -120,16 +123,32 @@ export class PerfilProfesorComponent implements OnInit {
     this.nombre = this.datosProfesor.nombre;
     this.apellidos = this.datosProfesor.apellidos;
     this.email = this.datosProfesor.email;
+    this.imgSrc = this.datosProfesor.imagen;
+  }
+
+  readURL(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e: any) =>
+        this.imgSrc = e.target.result;
+      reader.readAsDataURL(file);
+    }
   }
 
   obtenerDatosRanking() {
     this.rankingService.obtenerRankingProfeId(this.datosProfesor.id_profe).subscribe((val: any) => {
-      val.forEach((element: any) => {
-        this.rankingService.obtenerRankingPorId(element.id_rank).subscribe((val: any) => {
-          this.datosRanking = val;
-          this.arrRankings.push(this.datosRanking.data);
+      if (val == null) {
+        this.flagRanks = true;
+      } else {
+        this.flagRanks = false;
+        val.forEach((element: any) => {
+          this.rankingService.obtenerRankingPorId(element.id_rank).subscribe((val: any) => {
+            this.datosRanking = val;
+            this.arrRankings.push(this.datosRanking.data);
+          });
         });
-      });
+      }
     });
   }
 

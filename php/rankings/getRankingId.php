@@ -22,7 +22,7 @@
   $queryUpdateAlumnos = "UPDATE ranking SET alumnos = (SELECT COUNT(*) FROM rank_alumnos WHERE id_rank=$_GET[id]) WHERE id_rank = $_GET[id]";
   mysqli_query($con, $queryUpdateAlumnos);
   /* test */
-  $query = "SELECT * FROM `ranking` WHERE id_rank=$_GET[id] ORDER BY `ranking`.`id_rank` ASC";
+  $query = "SELECT * FROM `ranking` WHERE id_rank=$_GET[id] ORDER BY `ranking`.`id_rank` DESC";
   $res = mysqli_query($con, $query);
 
   // validación de la query

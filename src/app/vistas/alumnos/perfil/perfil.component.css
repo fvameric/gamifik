@@ -445,3 +445,7 @@ hr {
     padding: 0 !important;
     margin: 0 !important;
 }
+
+.image-upload>input {
+    display: none;
+}
