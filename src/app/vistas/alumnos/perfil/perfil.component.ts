@@ -136,6 +136,7 @@ export class PerfilComponent implements OnInit {
   }
 
   obtenerDatosRanking() {
+    this.arrRankings = [];
     this.rankingService.obtenerRankingAlumnosId(this.datosAlumno.id_alumno).subscribe((val: any) => {
       if (val == null) {
         this.flagRanks = true;

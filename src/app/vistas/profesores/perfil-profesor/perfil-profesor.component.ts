@@ -145,6 +145,7 @@ export class PerfilProfesorComponent implements OnInit {
   }
 
   obtenerDatosRanking() {
+    this.arrRankings = [];
     this.rankingService.obtenerRankingProfeId(this.datosProfesor.id_profe).subscribe((val: any) => {
       if (val == null) {
         this.flagRanks = true;
@@ -362,5 +363,5 @@ export class PerfilProfesorComponent implements OnInit {
       });
     }
   }
-  
+
 }
