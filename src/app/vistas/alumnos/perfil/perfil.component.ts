@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { RankingService } from 'services/ranking.service';
 import { Ranking } from 'app/interfaces/Ranking';
+import Swal from 'sweetalert2';
 
 const USER_LS = 'userLocalStorage';
 
@@ -66,8 +67,15 @@ export class PerfilComponent implements OnInit {
 
   imgSrc: string = '';
 
+  arrSwal: any = [
+    { id: 0, icon: 'success', title: 'Ok', text: 'Se han guardaron los cambios' },
+    { id: 1, icon: 'error', title: 'Error', text: 'Contraseña y confirmar contraseña no pueden quedar vacíos' },
+    { id: 2, icon: 'error', title: 'Error', text: 'Las contraseñas tienen que coincidir' },
+    { id: 3, icon: 'error', title: 'Error', text: 'La contraseña actual no es correcta' }
+  ];
+
   constructor(
-    private usersServices: UsersService,
+    private usersService: UsersService,
     private rankingService: RankingService,
     public formBuilder: FormBuilder,) { }
 
@@ -275,16 +283,12 @@ export class PerfilComponent implements OnInit {
     // en caso de que se quiera cambiar el email, nombre o apellidos
     // pero no la password
     if (this.oldPass == '' && this.newPass == '' && this.newConfPass == '') {
-      this.usersServices.modificarAlumno(userModif).subscribe((val: any) => {
-        localStorage.removeItem(USER_LS);
-        localStorage.setItem(USER_LS, JSON.stringify(val.data));
-        this.ngOnInit();
-      });
+      this.generarSwal(this.arrSwal[0], userModif);
     } else {
       if (this.oldPass == this.datosAlumno.pass) {
         if (this.newPass == '' || this.newConfPass == '') {
+          this.generarSwal(this.arrSwal[1]);
         } else {
-
           // en caso de que se quiera cambiar cualquier dato y
           // además, la password
           if (this.newPass == this.newConfPass) {
@@ -295,19 +299,50 @@ export class PerfilComponent implements OnInit {
               nombre: this.nombre,
               apellidos: this.apellidos
             }
+            this.generarSwal(this.arrSwal[0], userModif);
+          } else {
+            this.generarSwal(this.arrSwal[2]);
+          }
+        }
+      } else {
+        this.generarSwal(this.arrSwal[3]);
+      }
+    }
+  }
 
-            this.usersServices.modificarAlumno(userModif).subscribe((val: any) => {
+  generarSwal(swal: any, user?: User) {
+    if (swal.id == 0) {
+      if (user != undefined || user != null) {
+        Swal.fire({
+          title: '¿Quieres guardar los cambios?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              icon: swal.icon,
+              title: swal.title,
+              text: swal.text
+            });
+  
+            this.usersService.modificarAlumno(user).subscribe((val: any) => {
               localStorage.removeItem(USER_LS);
               localStorage.setItem(USER_LS, JSON.stringify(val.data));
               this.ngOnInit();
             });
-          } else {
-            console.log('las pass tienen que coincidir');
           }
-        }
-      } else {
-        console.log('la antigua pass no concuerda');
+        });
       }
+    } else {
+      Swal.fire({
+        icon: swal.icon,
+        title: swal.title,
+        text: swal.text
+      });
     }
   }
+
 }
