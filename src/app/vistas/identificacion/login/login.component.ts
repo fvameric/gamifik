@@ -6,14 +6,6 @@ import {
   FormControl,
 } from '@angular/forms';
 
-// imports conectividad
-import { HttpClient } from '@angular/common/http';
-import { ControladorService } from 'services/controlador.service';
-
-// interfaces
-import { Profesor } from 'app/interfaces/Profesor';
-import { Alumno } from 'app/interfaces/Alumno';
-
 import { Router } from '@angular/router';
 import { User } from 'app/interfaces/User';
 import { AuthService } from 'services/auth.service';
@@ -25,6 +17,7 @@ import { TokenService } from 'services/token.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  
   // variables formulario
   loginForm!: FormGroup;
 
@@ -36,21 +29,9 @@ export class LoginComponent implements OnInit {
   userNoExiste: boolean = false;
 
   alumnos: any;
-  datosUser: User = {
-    id: 0,
-    nick: '',
-    email: '',
-    pass: '',
-    nombre: '',
-    apellidos: '',
-    fecha_nacimiento: new Date(),
-    centro: 0,
-    tipo: 1,
-  };
 
   constructor(
     public formBuilder: FormBuilder,
-    private controladorService: ControladorService,
     private tokenService: TokenService,
     private authService: AuthService,
     private router: Router

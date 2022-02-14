@@ -1,6 +1,6 @@
 <?php
   // headers
-  header('Access-Control-Allow-Origin: *');
+  header('Access-Control-Allow-Origin: *'); 
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
   header('Content-Type: application/json');
 
@@ -20,9 +20,9 @@
   global $datos;
 
   // query
-  $query = "SELECT * FROM `alumno` WHERE 1";
+  $query = "SELECT * FROM `rank_profes` WHERE 1";
   $registros = mysqli_query($con, $query);
-
+  
   // si la query ha sido correcta hacemos fetch
   if ($registros) {
     while ($resultado = mysqli_fetch_array($registros))

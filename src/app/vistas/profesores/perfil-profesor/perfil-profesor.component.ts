@@ -6,17 +6,16 @@ import { UsersService } from 'services/users.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { RankingService } from 'services/ranking.service';
-import { Ranking } from 'app/interfaces/Ranking';
 import Swal from 'sweetalert2';
 
 const USER_LS = 'userLocalStorage';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.css']
+  selector: 'app-perfil-profesor',
+  templateUrl: './perfil-profesor.component.html',
+  styleUrls: ['./perfil-profesor.component.css']
 })
-export class PerfilComponent implements OnInit {
+export class PerfilProfesorComponent implements OnInit {
   profesores: any;
   alumnos: any;
   mostrarRankingsVisual: boolean = false;
@@ -39,15 +38,15 @@ export class PerfilComponent implements OnInit {
   apellidos: string = 'funciona Fran Olga';
   email: string = 'funcionaFran@gmail.com';
 
-  datosAlumno: Alumno = {
-    id_alumno: 0,
+  datosProfesor: Profesor = {
+    id_profe: 0,
     nick: '',
     email: '',
     pass: '',
     nombre: '',
     apellidos: '',
-    fecha_nacimiento: new Date(),
-    tipo: 0,
+    centro: 0,
+    tipo: 1,
     imagen: ''
   };
 
@@ -56,6 +55,7 @@ export class PerfilComponent implements OnInit {
   datosRanking: any;
   arrRankings: any[] = [];
 
+  userLocStorage: any;
   datosStorage: any;
 
   // formulario
@@ -64,6 +64,14 @@ export class PerfilComponent implements OnInit {
   oldPass: string = '';
   newPass: string = '';
   newConfPass: string = '';
+
+  centroSelec: number = 0;
+
+  listaCentros = [
+    { id: 0, nombre: 'Ilerna' },
+    { id: 1, nombre: 'Caparrella' },
+    { id: 2, nombre: 'Almenar' }
+  ];
 
   imgSrc: string = '';
 
@@ -77,11 +85,12 @@ export class PerfilComponent implements OnInit {
   constructor(
     private usersService: UsersService,
     private rankingService: RankingService,
-    public formBuilder: FormBuilder,) { }
+    public formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.obtenerDatosAlumno();
+    this.obtenerDatosProfesor();
     this.crearForm();
+    this.oldCentro();
     this.obtenerDatosRanking();
   }
 
@@ -115,14 +124,14 @@ export class PerfilComponent implements OnInit {
     };
   }
 
-  obtenerDatosAlumno() {
+  obtenerDatosProfesor() {
     this.datosStorage = localStorage.getItem(USER_LS);
-    this.datosAlumno = JSON.parse(this.datosStorage);
+    this.datosProfesor = JSON.parse(this.datosStorage);
 
-    this.nombre = this.datosAlumno.nombre;
-    this.apellidos = this.datosAlumno.apellidos;
-    this.email = this.datosAlumno.email;
-    this.imgSrc = this.datosAlumno.imagen;
+    this.nombre = this.datosProfesor.nombre;
+    this.apellidos = this.datosProfesor.apellidos;
+    this.email = this.datosProfesor.email;
+    this.imgSrc = this.datosProfesor.imagen;
   }
 
   readURL(event: any) {
@@ -130,14 +139,14 @@ export class PerfilComponent implements OnInit {
       const file = event.target.files[0];
       const reader = new FileReader();
       reader.onload = (e: any) =>
-      this.imgSrc = e.target.result;
+        this.imgSrc = e.target.result;
       reader.readAsDataURL(file);
     }
   }
 
   obtenerDatosRanking() {
     this.arrRankings = [];
-    this.rankingService.obtenerRankingAlumnosId(this.datosAlumno.id_alumno).subscribe((val: any) => {
+    this.rankingService.obtenerRankingProfeId(this.datosProfesor.id_profe).subscribe((val: any) => {
       if (val == null) {
         this.flagRanks = true;
       } else {
@@ -150,6 +159,10 @@ export class PerfilComponent implements OnInit {
         });
       }
     });
+  }
+
+  oldCentro() {
+    this.centroSelec = this.datosProfesor.centro;
   }
 
   mostrarRankings() {
@@ -275,31 +288,36 @@ export class PerfilComponent implements OnInit {
 
   confirmarModif() {
     let userModif: User = {
-      id: this.datosAlumno.id_alumno,
+      id: this.datosProfesor.id_profe,
       email: this.email,
-      pass: this.datosAlumno.pass,
+      pass: this.datosProfesor.pass,
       nombre: this.nombre,
-      apellidos: this.apellidos
+      apellidos: this.apellidos,
+      centro: this.centroSelec
     }
+
     // en caso de que se quiera cambiar el email, nombre o apellidos
     // pero no la password
     if (this.oldPass == '' && this.newPass == '' && this.newConfPass == '') {
       this.generarSwal(this.arrSwal[0], userModif);
     } else {
-      if (this.oldPass == this.datosAlumno.pass) {
+      if (this.oldPass == this.datosProfesor.pass) {
         if (this.newPass == '' || this.newConfPass == '') {
           this.generarSwal(this.arrSwal[1]);
         } else {
+
           // en caso de que se quiera cambiar cualquier dato y
           // además, la password
           if (this.newPass == this.newConfPass) {
             let userModif: User = {
-              id: this.datosAlumno.id_alumno,
+              id: this.datosProfesor.id_profe,
               email: this.email,
               pass: this.newConfPass,
               nombre: this.nombre,
-              apellidos: this.apellidos
+              apellidos: this.apellidos,
+              centro: this.centroSelec
             }
+
             this.generarSwal(this.arrSwal[0], userModif);
           } else {
             this.generarSwal(this.arrSwal[2]);
@@ -329,7 +347,7 @@ export class PerfilComponent implements OnInit {
               text: swal.text
             });
   
-            this.usersService.modificarAlumno(user).subscribe((val: any) => {
+            this.usersService.modificarProfesor(user).subscribe((val: any) => {
               localStorage.removeItem(USER_LS);
               localStorage.setItem(USER_LS, JSON.stringify(val.data));
               this.ngOnInit();

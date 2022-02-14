@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-import { HttpClient } from '@angular/common/http';
-import { ControladorService } from 'services/controlador.service';
 import { Alumno } from 'app/interfaces/Alumno';
 import { Profesor } from '../../../interfaces/Profesor';
 import { User } from 'app/interfaces/User';
@@ -39,7 +36,7 @@ export class DashboardComponent implements OnInit {
   email: string = 'funcionaFran@gmail.com';
 
   datosProfesor: Profesor = {
-    id: 0,
+    id_profe: 0,
     nick: '',
     email: '',
     pass: '',
@@ -47,10 +44,11 @@ export class DashboardComponent implements OnInit {
     apellidos: '',
     centro: 0,
     tipo: 1,
+    imagen: ''
   };
 
   datosAlumno: Alumno = {
-    id: 0,
+    id_alumno: 0,
     nick: '',
     email: '',
     pass: '',
@@ -58,6 +56,7 @@ export class DashboardComponent implements OnInit {
     apellidos: '',
     fecha_nacimiento: new Date(),
     tipo: 0,
+    imagen: ''
   };
 
   tipoUser: any;

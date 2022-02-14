@@ -1,5 +1,5 @@
 export interface Alumno {
-    id: number;
+    id_alumno: number;
     nick: string;
     email: string;
     pass: string;
@@ -7,4 +7,5 @@ export interface Alumno {
     apellidos: string;
     fecha_nacimiento: Date;
     tipo: number;
+    imagen: string;
   }

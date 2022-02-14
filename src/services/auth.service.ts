@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { User } from 'app/interfaces/User';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
@@ -19,36 +18,20 @@ export class AuthService {
 
   loginUser(user: User) {
     return this.http.post(URL_LOGIN, JSON.stringify(user)).subscribe((val: any) => {
-      console.log(val);
-
       if (val.resultado == "error") {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error de identificación',
-          text: val.mensaje,
-        });
+        this.generarSwal(val.mensaje);
       } else {
-        localStorage.removeItem(USER_LS);
-        localStorage.setItem(USER_LS, JSON.stringify(val.data));
-        this.router.navigate(['/perfil']);
+        this.guardarLocalStorage(val.data);
       }
     });
   }
 
   registroAlumno(user: User) {
-    return this.http.post(URL_REGISTRO_ALUMNO, JSON.stringify(user)).subscribe((val: any) => {
+    this.http.post(URL_REGISTRO_ALUMNO, JSON.stringify(user)).subscribe((val: any) => {
       if (val.resultado == 'error') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error de registro',
-          text: val.mensaje,
-        });
+        this.generarSwal(val.mensaje);
       } else {
-        /*
-        localStorage.removeItem(USER_LS);
-        localStorage.setItem(USER_LS, JSON.stringify(val.data));
-        this.router.navigate(['/perfil']);
-        */
+        this.guardarLocalStorage(val.data);
       }
     });
   }
@@ -56,19 +39,30 @@ export class AuthService {
   registroProfesor(user: User) {
     return this.http.post(URL_REGISTRO_PROFESOR, JSON.stringify(user)).subscribe((val: any) => {
       if (val.resultado == 'error') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error de registro',
-          text: val.mensaje,
-        });
+        this.generarSwal(val.mensaje);
       } else {
-        /*
-        localStorage.removeItem(USER_LS);
-        localStorage.setItem(USER_LS, JSON.stringify(val.data));
-        this.router.navigate(['/perfil']);
-        */
+        this.guardarLocalStorage(val.data);
       }
     });
-    
+  }
+
+  generarSwal(mensaje: string) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: mensaje,
+    });
+  }
+
+  guardarLocalStorage(data: any) {
+    if (data.tipo == 0) {
+      localStorage.removeItem(USER_LS);
+      localStorage.setItem(USER_LS, JSON.stringify(data));
+      this.router.navigate(['/perfil']);
+    } else {
+      localStorage.removeItem(USER_LS);
+      localStorage.setItem(USER_LS, JSON.stringify(data));
+      this.router.navigate(['/perfilprofesor']);
+    }
   }
 }

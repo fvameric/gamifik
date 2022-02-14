@@ -18,11 +18,6 @@
                         </div>
                     </div>
                 </div>
-                <!--
-                <div class="fadeIn first">
-                    <img src="../../../../assets/Logo/logotipo_rescalado.png" id="icon" width="150" height="100" />
-                </div>
-                -->
             </div>
             <ul ngbNav #nav="ngbNav" class="nav-tabs">
                 <li [ngbNavItem]="1">
@@ -42,15 +37,28 @@
         </div>
     </div>
     <div class="footer-waves">
-        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-        <defs>
-        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-        </defs>
-        <g class="parallax">
-        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(4,192,240,1" />
-        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(190, 237, 252, 1)" />
-        <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(4,164,244,0.8)" />
-        </g>
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+                <linearGradient id="grad1" x1="0%" y1="50%" x2="100%" y2="50%">
+                    <stop offset="5%" stop-color="#32a7ff"></stop>
+                    <stop offset="95%" stop-color="#d1ebff"></stop>
+                </linearGradient>
+                <linearGradient id="grad2" x1="0%" y1="50%" x2="100%" y2="50%">
+                    <stop offset="5%" stop-color="#2a9cf4"></stop>
+                    <stop offset="95%" stop-color="#86caff"></stop>
+                </linearGradient>
+                <linearGradient id="grad3" x1="0%" y1="50%" x2="100%" y2="50%">
+                    <stop offset="5%" stop-color="#0174ce"></stop>
+                    <stop offset="95%" stop-color="#30a4ff"></stop>
+                </linearGradient>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="url(#grad1)" />
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="url(#grad2)" />
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="url(#grad3)" />
+            </g>
         </svg>
     </div>
 </div>

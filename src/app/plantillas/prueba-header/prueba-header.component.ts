@@ -17,6 +17,7 @@ export class PruebaHeaderComponent implements OnInit {
     if (this.toggleMenu) {
       this.toggleMenu = false;
       navMenu.classList.remove('mostrar');
+      navMenu.classList.add('fadeOut');
     } else {
       this.toggleMenu = true;
       navMenu.classList.add('mostrar');
@@ -25,6 +26,12 @@ export class PruebaHeaderComponent implements OnInit {
 }
 
 window.addEventListener('scroll', function () {
+  let navMenu = <HTMLElement>document.getElementById('nav-menu');
   let header = <HTMLElement>document.getElementById('header');
   header.classList.toggle('sticky', window.scrollY > 0);
+  if (window.scrollY > 0) {
+    navMenu.classList.add('navMenuScroll');
+  } else {
+    navMenu.classList.remove('navMenuScroll');
+  }
 });

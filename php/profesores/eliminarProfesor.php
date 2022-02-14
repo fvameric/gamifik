@@ -7,7 +7,7 @@
   $bd = new claseBD();
 
   // REALIZA LA QUERY A LA DB
-  mysqli_query($bd->obtenerConexion(), "DELETE FROM profesor WHERE id='$_GET[id]'");
+  mysqli_query($bd->obtenerConexion(), "DELETE FROM profesor WHERE id_profe='$_GET[id]'");
 
 
   class Result {}

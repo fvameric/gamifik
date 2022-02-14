@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
 
 import { HttpClient } from '@angular/common/http';
-import { ControladorService } from 'services/controlador.service';
 
 // interfaces
 import { Alumno } from 'app/interfaces/Alumno';
@@ -54,7 +53,8 @@ export class RegistroComponent implements OnInit {
       confirmPassword: ['', Validators.required],
       nombre: ['', [Validators.required, Validators.minLength(1)]],
       apellidos: ['', [Validators.required, Validators.minLength(2)]],
-      fechaNacimiento: ['', Validators.required]
+      fechaNacimiento: ['', Validators.required],
+      userImage: ['']
     }, {
       //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
       validator: this.mustMatch("password", "confirmPassword")
@@ -71,7 +71,8 @@ export class RegistroComponent implements OnInit {
       confirmPassword: ['', Validators.required],
       nombre: ['', [Validators.required, Validators.minLength(1)]],
       apellidos: ['', [Validators.required, Validators.minLength(2)]],
-      centro: ['', Validators.required]
+      centro: ['', Validators.required],
+      userImage: ['']
     }, {
       //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
       validator: this.mustMatch("password", "confirmPassword")
@@ -141,7 +142,8 @@ export class RegistroComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       const reader = new FileReader();
-      reader.onload = e => this.imgSrc = reader.result as string;
+      reader.onload = (e: any) =>
+      this.imgSrc = e.target.result;
       reader.readAsDataURL(file);
     }
   }
@@ -153,14 +155,15 @@ export class RegistroComponent implements OnInit {
       //Comprobar si es cumpleixen o no tots els errors
       if (!this.registerForm.invalid) {
         const nuevoProfesor: Profesor = {
-          id: 0,
+          id_profe: 0,
           nick: form.username,
           email: form.email,
           pass: form.password,
           nombre: form.nombre,
           apellidos: form.apellidos,
           centro: form.centro,
-          tipo: 1
+          tipo: 1,
+          imagen: this.imgSrc
         }
         this.authService.registroProfesor(nuevoProfesor);
       }
@@ -168,14 +171,15 @@ export class RegistroComponent implements OnInit {
       //Comprobar si es cumpleixen o no tots els errors
       if (!this.registerForm.invalid) {
         const nuevoAlumno: Alumno = {
-          id: 0,
+          id_alumno: 0,
           nick: form.username,
           email: form.email,
           pass: form.password,
           nombre: form.nombre,
           apellidos: form.apellidos,
           fecha_nacimiento: form.fechaNacimiento,
-          tipo: 0
+          tipo: 0,
+          imagen: this.imgSrc
         }
         this.authService.registroAlumno(nuevoAlumno);
       }
