@@ -10,6 +10,7 @@ import { PerfilComponent } from './vistas/alumnos/perfil/perfil.component';
 import { PruebaHeaderComponent } from './plantillas/prueba-header/prueba-header.component';
 import { PerfilProfesorComponent } from './vistas/profesores/perfil-profesor/perfil-profesor.component';
 import { DashboardProfesorComponent } from './vistas/profesores/dashboard-profesor/dashboard-profesor.component';
+import { PruebasCrearRankingComponent } from './vistas/profesores/pruebas-crear-ranking/pruebas-crear-ranking.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'identificacion', pathMatch: 'full' },
@@ -18,18 +19,19 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'dashboardprofesor', component: DashboardProfesorComponent },
   { path: 'registro', component: RegistroComponent },
-  { path: 'header', component: HeaderComponent},
+  { path: 'header', component: HeaderComponent },
   { path: 'footer', component: FooterComponent },
-  { path: 'perfil', component: PerfilComponent},
-  { path: 'perfilprofesor', component: PerfilProfesorComponent},
-  { path: 'prueba-header', component: PruebaHeaderComponent}
+  { path: 'perfil', component: PerfilComponent },
+  { path: 'perfilprofesor', component: PerfilProfesorComponent },
+  { path: 'prueba-header', component: PruebaHeaderComponent },
+  { path: 'pruebas-crear-ranking', component: PruebasCrearRankingComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
 export const routingComponents = [
   IdentificacionComponent,
   LoginComponent,
@@ -40,5 +42,6 @@ export const routingComponents = [
   PerfilProfesorComponent,
   HeaderComponent,
   FooterComponent,
-  PruebaHeaderComponent
+  PruebaHeaderComponent,
+  PruebasCrearRankingComponent
 ];
