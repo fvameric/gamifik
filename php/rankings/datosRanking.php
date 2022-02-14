@@ -2,7 +2,7 @@
   // headers
   header('Access-Control-Allow-Origin: *'); 
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-  header('Content-Type: application/json');
+  header('Content-Type: text/html; charset=UTF-8');
 
   // includes
   include_once("../conexion/bd.php");
@@ -20,7 +20,7 @@
   global $datos;
 
   // query
-  $query = "SELECT * FROM `ranking` WHERE 1 ORDER BY `ranking`.`id_rank` ASC";
+  $query = "SELECT * FROM `ranking` WHERE 1";
   $registros = mysqli_query($con, $query);
   
   // si la query ha sido correcta hacemos fetch
@@ -31,6 +31,7 @@
     }
   
     $json = json_encode($datos);
+    header('Content-Type: application/json');
     echo $json;
   } else {
     $response->resultado = 'error';

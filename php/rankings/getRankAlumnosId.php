@@ -20,7 +20,7 @@
   global $datos;
   
   // query
-  $query = "SELECT * FROM `rank_alumnos` WHERE id_alumno=$_GET[id] ORDER BY `rank_alumnos`.`id_rank` ASC";
+  $query = "SELECT * FROM `rank_alumnos` WHERE id_alumno=$_GET[id]";
   $res = mysqli_query($con, $query);
 
   // validación de la query

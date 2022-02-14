@@ -15,9 +15,9 @@ const URL_RANK_ENTREGAS = 'http://localhost:8080/rankings/getRankEntregas.php'; 
 const URL_RANK_ALUMNOS = 'http://localhost:8080/rankings/getRankAlumnos.php';     // obtener relacion rankings - alumnos
 const URL_RANK_ALUMNOS_ID = 'http://localhost:8080/rankings/getRankAlumnosId.php';// obtener relacion rankings - id de alumno
 const URL_RANK_PROFES = 'http://localhost:8080/rankings/getRankProfes.php';       // obtener relacion rankings - profes
-const URL_RANK_PROFES_ID = 'http://localhost:8080/rankings/getRankProfesId.php';// obtener relacion rankings - id de profesor
+const URL_RANK_PROFES_ID = 'http://localhost:8080/rankings/getRankProfesId.php';  // obtener relacion rankings - id de profesor
 
-
+const URL_RANK_CODES = 'http://localhost:8080/rankings/getRankCodes.php';         // obtener viabilidad de alumnos dependiendo del codigo de sala
 @Injectable({
   providedIn: 'root'
 })
@@ -57,7 +57,7 @@ export class RankingService {
   }
 
   // obtener ranking - alumnos
-  obtenerRankingAlumnos(id: number) {
+  obtenerRankingAlumnos() {
     return this.http.get(URL_RANK_ALUMNOS);
   }
 
@@ -74,5 +74,9 @@ export class RankingService {
   // obtener ranking - alumnos
   obtenerRankingProfeId(id: number) {
     return this.http.get(URL_RANK_PROFES_ID + `?id=${id}`);
+  }
+
+  obtenerRankCodes(cod_rank: string) {
+    return this.http.get(URL_RANK_CODES + `?c=${cod_rank}`);
   }
 }

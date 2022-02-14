@@ -9,7 +9,7 @@
     </div>
 
     <!-- formulario registro profes -->
-    <form [formGroup]="registerForm" (ngSubmit)="onRegistro(registerForm.value)" class="Icon-inside">
+    <form id="formularioRegistro" [formGroup]="registerForm" (ngSubmit)="onRegistro(registerForm.value)" class="Icon-inside">
 
         <div class="image-upload">
             <label for="file-input">
@@ -94,13 +94,15 @@
 </div>
 
 <ng-template #registroAlumno>
-    <!-- contraseña acceso profes -->
-    <div id="acceso-profes" class="fadeIn first">
-        <input type="password" [(ngModel)]="passAcceso" [ngModelOptions]="{standalone: true}" placeholder="12">
-        <input type="submit" value="Acceso profes" (click)="profe()">
-    </div>
+
     <!-- formulario registro alumnos  -->
-    <form [formGroup]="registerForm" (ngSubmit)="onRegistro(registerForm.value)" class="Icon-inside" enctype="multipart/form-data">
+    <form id="formularioRegistro" [formGroup]="registerForm" (ngSubmit)="onRegistro(registerForm.value)" class="Icon-inside" enctype="multipart/form-data">
+
+        <!-- contraseña acceso profes -->
+        <div id="acceso-profes" class="fadeIn first">
+            <input type="password" [(ngModel)]="passAcceso" [ngModelOptions]="{standalone: true}" placeholder="12">
+            <input type="submit" value="Acceso profes" (click)="profe()">
+        </div>
 
         <div class="image-upload">
             <label for="file-input">

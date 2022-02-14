@@ -74,6 +74,11 @@ export class PerfilComponent implements OnInit {
     { id: 3, icon: 'error', title: 'Error', text: 'La contraseña actual no es correcta' }
   ];
 
+  ranksCodes: any;
+  alumnosId: any;
+
+  ranksArray: any[] = [];
+
   constructor(
     private usersService: UsersService,
     private rankingService: RankingService,
@@ -130,12 +135,16 @@ export class PerfilComponent implements OnInit {
       const file = event.target.files[0];
       const reader = new FileReader();
       reader.onload = (e: any) =>
-      this.imgSrc = e.target.result;
+        this.imgSrc = e.target.result;
       reader.readAsDataURL(file);
     }
   }
 
   obtenerDatosRanking() {
+    // cargar rankings
+    this.rankingService.obtenerRanking().subscribe(ranks => this.ranksCodes = ranks);
+    this.rankingService.obtenerRankingAlumnosId(this.datosAlumno.id_alumno).subscribe(alumnos => this.alumnosId = alumnos);
+
     this.arrRankings = [];
     this.rankingService.obtenerRankingAlumnosId(this.datosAlumno.id_alumno).subscribe((val: any) => {
       if (val == null) {
@@ -273,77 +282,123 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-  confirmarModif() {
-    let userModif: User = {
-      id: this.datosAlumno.id_alumno,
-      email: this.email,
-      pass: this.datosAlumno.pass,
-      nombre: this.nombre,
-      apellidos: this.apellidos
-    }
-    // en caso de que se quiera cambiar el email, nombre o apellidos
-    // pero no la password
-    if (this.oldPass == '' && this.newPass == '' && this.newConfPass == '') {
-      this.generarSwal(this.arrSwal[0], userModif);
-    } else {
-      if (this.oldPass == this.datosAlumno.pass) {
-        if (this.newPass == '' || this.newConfPass == '') {
-          this.generarSwal(this.arrSwal[1]);
-        } else {
-          // en caso de que se quiera cambiar cualquier dato y
-          // además, la password
-          if (this.newPass == this.newConfPass) {
-            let userModif: User = {
-              id: this.datosAlumno.id_alumno,
-              email: this.email,
-              pass: this.newConfPass,
-              nombre: this.nombre,
-              apellidos: this.apellidos
-            }
-            this.generarSwal(this.arrSwal[0], userModif);
-          } else {
-            this.generarSwal(this.arrSwal[2]);
-          }
-        }
-      } else {
-        this.generarSwal(this.arrSwal[3]);
+  async unirseRanking() {
+    this.this.ranksArray = [];
+    const { value: test } = await Swal.fire({
+      title: 'Input',
+      input: 'text',
+      inputLabel: 'Input test',
+      inputPlaceholder: 'Escribe algo'
+    });
+    this.ranksCodes.forEach((element: any) => {
+      if (test == element.cod_rank) {
+        this.ranksArray.push(element);
       }
-    }
+    });
+
+    this.comprobarAlumnoRanking(this.ranksArray);
   }
 
-  generarSwal(swal: any, user?: User) {
-    if (swal.id == 0) {
-      if (user != undefined || user != null) {
-        Swal.fire({
-          title: '¿Quieres guardar los cambios?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Sí'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire({
-              icon: swal.icon,
-              title: swal.title,
-              text: swal.text
-            });
-  
-            this.usersService.modificarAlumno(user).subscribe((val: any) => {
-              localStorage.removeItem(USER_LS);
-              localStorage.setItem(USER_LS, JSON.stringify(val.data));
-              this.ngOnInit();
-            });
+  comprobarAlumnoRanking(rank: any) {
+    let alumnRepetido = false;
+    console.log(rank);
+
+    /*
+    //this.rankingService.obtenerRankCodes(test).subscribe((val: any) => {
+    this.rankingService.obtenerRanking().subscribe((val: any) => {
+      console.log(val);
+      val.forEach((element: any) => {
+        */
+        /*
+        if (this.datosAlumno.id_alumno == element.id_alumno) {
+          console.log(this.datosAlumno.nick + " esta en " + element.id_rank);
+          alumnRepetido = true;
+          
+        }*/
+        /*
+      });
+
+      if (alumnRepetido) {
+        console.log("este alumno ya está en este ranking");
+      } else {
+        console.log("este alumno (" + this.datosAlumno.id_alumno + ") no está en este ranking");
+        console.log("alumno: " + this.datosAlumno.nick + " se ha unido a " + test);
+      }
+    });
+    */
+  }
+
+confirmarModif() {
+  let userModif: User = {
+    id: this.datosAlumno.id_alumno,
+    email: this.email,
+    pass: this.datosAlumno.pass,
+    nombre: this.nombre,
+    apellidos: this.apellidos
+  }
+  // en caso de que se quiera cambiar el email, nombre o apellidos
+  // pero no la password
+  if (this.oldPass == '' && this.newPass == '' && this.newConfPass == '') {
+    this.generarSwal(this.arrSwal[0], userModif);
+  } else {
+    if (this.oldPass == this.datosAlumno.pass) {
+      if (this.newPass == '' || this.newConfPass == '') {
+        this.generarSwal(this.arrSwal[1]);
+      } else {
+        // en caso de que se quiera cambiar cualquier dato y
+        // además, la password
+        if (this.newPass == this.newConfPass) {
+          let userModif: User = {
+            id: this.datosAlumno.id_alumno,
+            email: this.email,
+            pass: this.newConfPass,
+            nombre: this.nombre,
+            apellidos: this.apellidos
           }
-        });
+          this.generarSwal(this.arrSwal[0], userModif);
+        } else {
+          this.generarSwal(this.arrSwal[2]);
+        }
       }
     } else {
-      Swal.fire({
-        icon: swal.icon,
-        title: swal.title,
-        text: swal.text
-      });
+      this.generarSwal(this.arrSwal[3]);
     }
   }
+}
+
+generarSwal(swal: any, user ?: User) {
+  if (swal.id == 0) {
+    if (user != undefined || user != null) {
+      Swal.fire({
+        title: '¿Quieres guardar los cambios?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            icon: swal.icon,
+            title: swal.title,
+            text: swal.text
+          });
+
+          this.usersService.modificarAlumno(user).subscribe((val: any) => {
+            localStorage.removeItem(USER_LS);
+            localStorage.setItem(USER_LS, JSON.stringify(val.data));
+            this.ngOnInit();
+          });
+        }
+      });
+    }
+  } else {
+    Swal.fire({
+      icon: swal.icon,
+      title: swal.title,
+      text: swal.text
+    });
+  }
+}
 
 }
