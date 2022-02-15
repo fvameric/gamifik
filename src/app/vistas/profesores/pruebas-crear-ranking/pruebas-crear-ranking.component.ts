@@ -7,7 +7,6 @@ import { UsersService } from 'services/users.service';
   styleUrls: ['./pruebas-crear-ranking.component.css'],
 })
 export class PruebasCrearRankingComponent implements OnInit {
-
   powers = ['Really Smart', 'Super Flexible', 'Super Hot', 'Weather Changer'];
 
   nombreRanking: string = '';
@@ -15,28 +14,58 @@ export class PruebasCrearRankingComponent implements OnInit {
   selecAlumnos: any[] = [];
   codigoRanking: string = 'Random string';
 
-  constructor(
-    private usersService: UsersService
-  ) {}
+  constructor(private usersService: UsersService) {}
 
   ngOnInit(): void {
-    this.usersService.obtenerAlumnos().subscribe(val => this.listaAlumnos = val);
+    this.usersService
+      .obtenerAlumnos()
+      .subscribe((val) => (this.listaAlumnos = val));
   }
 
   checkboxAlumnos(event: any) {
     if (event.target.checked) {
       this.selecAlumnos.push(event.target.value);
     } else {
-      this.selecAlumnos.splice(this.selecAlumnos.indexOf(event.target.value), 1);
+      this.selecAlumnos.splice(
+        this.selecAlumnos.indexOf(event.target.value),
+        1
+      );
     }
   }
 
   onSubmit() {
-    console.log("nombre: " + this.nombreRanking);
-    console.log("alumnos seleccionados: ");
-    this.selecAlumnos.forEach(alumno => {
-      console.log(alumno);
+    console.log('nombre: ' + this.nombreRanking);
+    console.log('alumnos seleccionados: ');
+    this.selecAlumnos.forEach((alumno) => {
+      //console.log(alumno);
     });
+
+    //this.insertarAlumnosRanking();
+    let codigoRandom=this.generaNss();
+    console.log(codigoRandom);
+    
+    
+    
     // this.codigoRanking = ""; rellenar con una string random de letras y números
+  }
+
+  insertarAlumnosRanking() {
+    for (let i = 0; i < this.selecAlumnos.length; i++) {
+      const id = this.selecAlumnos[i];
+
+      //console.log(id);
+    }
+  }
+
+  generaNss() {
+    let result = '';
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < 12; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
   }
 }
