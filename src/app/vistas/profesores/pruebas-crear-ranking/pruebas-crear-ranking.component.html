@@ -14,16 +14,25 @@
 </form>
 
 -->
+<div class="Centrar-crear-ranking">
+    <div class="contenido-crear-ranking">
+        <h3 class="h3-estilos">Registro ranking</h3>
+        <label>Nombre:
+            <input type="text" [(ngModel)]="nombreRanking" placeholder="Nombre del ranking"><br>
+        </label>
+        <br><label> Seleccionar alumnos:</label>
+        <div class="contenido-checkbox " *ngFor="let alumno of listaAlumnos">
+            <label class="container">
+                <input type="checkbox" checked="checked" [value]="alumno.id_alumno" (change)="checkboxAlumnos($event)">
+                <span class="checkmark"></span>
+                {{alumno.nick}}
+            </label>
+        </div>
 
-<p>Registro ranking:</p>
-<input type="text" [(ngModel)]="nombreRanking" placeholder="Nombre del ranking"><br><br>
+        <br><label>Código de ranking:</label>
+        <p>{{codigoRanking}}</p><br>
 
-<p>Seleccionar alumnos:</p>
-<div *ngFor="let alumno of listaAlumnos">
-<input type="checkbox" [value]="alumno.id_alumno" (change)="checkboxAlumnos($event)"/>
-{{alumno.nick}}
+
+        <button class="buttom-rankings" (click)="onSubmit()">Crear ranking</button>
+    </div>
 </div>
-
-<br>Código de ranking: <label>{{codigoRanking}}</label><br>
-
-<button (click)="onSubmit()">Crear ranking</button>
