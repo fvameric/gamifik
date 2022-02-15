@@ -283,7 +283,7 @@ export class PerfilComponent implements OnInit {
   }
 
   async unirseRanking() {
-    this.this.ranksArray = [];
+    this.ranksArray = [];
     const { value: test } = await Swal.fire({
       title: 'Input',
       input: 'text',

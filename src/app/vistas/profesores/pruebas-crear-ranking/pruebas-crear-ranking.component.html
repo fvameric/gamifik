@@ -1,4 +1,6 @@
-<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+<!--
+    
+    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
     <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" required [(ngModel)]="" name="name" #name="ngModel">
@@ -10,3 +12,18 @@
     </div>
     <button type="submit" class="btn btn-success">Submit</button>
 </form>
+
+-->
+
+<p>Registro ranking:</p>
+<input type="text" [(ngModel)]="nombreRanking" placeholder="Nombre del ranking"><br><br>
+
+<p>Seleccionar alumnos:</p>
+<div *ngFor="let alumno of listaAlumnos">
+<input type="checkbox" [value]="alumno.id_alumno" (change)="checkboxAlumnos($event)"/>
+{{alumno.nick}}
+</div>
+
+<br>Código de ranking: <label>{{codigoRanking}}</label><br>
+
+<button (click)="onSubmit()">Crear ranking</button>
