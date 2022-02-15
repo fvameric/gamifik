@@ -74,8 +74,10 @@ export class PerfilComponent implements OnInit {
     { id: 3, icon: 'error', title: 'Error', text: 'La contraseña actual no es correcta' }
   ];
 
+  rankings: any;
+  rankingsConAlumnos: any;
   ranksCodes: any;
-  alumnosId: any;
+  alumnosId: any[] = [];
 
   ranksArray: any[] = [];
 
@@ -90,6 +92,200 @@ export class PerfilComponent implements OnInit {
     this.obtenerDatosRanking();
   }
 
+  obtenerDatosAlumno() {
+    this.datosStorage = localStorage.getItem(USER_LS);
+    this.datosAlumno = JSON.parse(this.datosStorage);
+
+    this.nombre = this.datosAlumno.nombre;
+    this.apellidos = this.datosAlumno.apellidos;
+    this.email = this.datosAlumno.email;
+    this.imgSrc = this.datosAlumno.imagen;
+  }
+
+  readURL(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e: any) =>
+        this.imgSrc = e.target.result;
+      reader.readAsDataURL(file);
+    }
+  }
+
+  obtenerDatosRanking() {
+    this.rankingService.obtenerRanking().subscribe(val => this.rankings = val);
+    this.rankingService.obtenerJoinRankingAlumno().subscribe((val: any) => {
+      this.rankingsConAlumnos = val;
+
+      val.forEach((element: any) => {
+        if (element.id_alumno == this.datosAlumno.id_alumno) {
+          this.arrRankings.push(element);
+          console.log("ranking " + element.cod_rank + " alumno "+ this.datosAlumno.id_alumno);
+        }
+      });
+
+      if (this.arrRankings.length == 0) {
+        this.flagRanks = true;
+      } else {
+        this.flagRanks = false;
+      }
+    });
+  }
+
+  async unirseRanking() {
+    const { value: test } = await Swal.fire({
+      title: 'Input',
+      input: 'text',
+      inputLabel: 'Input test',
+      inputPlaceholder: 'Escribe algo',
+      showCancelButton: true
+    });
+
+    if (test) {
+      this.comprobarAlumnoRanking(test);
+    }
+  }
+
+  comprobarAlumnoRanking(codRank: string) {
+    let rankExiste = false;
+    let alumnoExiste = false;
+    this.rankings.forEach((element: any) => {
+      if (codRank == element.cod_rank) {
+        console.log("rank existe");
+        rankExiste = true;
+      }
+    });
+
+    if (rankExiste) {
+      rankExiste = false;
+      this.arrRankings.forEach((element: any) => {
+        if (codRank == element.cod_rank) {
+          alumnoExiste = true;
+        }
+      });
+      if (alumnoExiste) {
+        alumnoExiste = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'ya está en el ranking'
+        });
+      } else {
+        console.log("alumno NO está en el rank");
+        Swal.fire({
+          title: "¿Quieres unirte a " + codRank + "?",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Ok',
+              text: 'Se une al ranking'
+            });
+            console.log("Se une al ranking");
+          } else {
+            console.log("Se cancela el unirse al ranking");
+          }
+        });
+      }
+      /*
+
+      if (alumnoExiste) {
+        console.log("ya está en el ranking");
+        
+      } else {
+        console.log("No está en el ranking");
+        
+      }
+      */
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: "Codigo " + codRank + " no existe"
+      });
+      console.log(codRank + " no existe");
+    }
+  }
+
+  confirmarModif() {
+    let userModif: User = {
+      id: this.datosAlumno.id_alumno,
+      email: this.email,
+      pass: this.datosAlumno.pass,
+      nombre: this.nombre,
+      apellidos: this.apellidos
+    }
+    // en caso de que se quiera cambiar el email, nombre o apellidos
+    // pero no la password
+    if (this.oldPass == '' && this.newPass == '' && this.newConfPass == '') {
+      this.generarSwal(this.arrSwal[0], userModif);
+    } else {
+      if (this.oldPass == this.datosAlumno.pass) {
+        if (this.newPass == '' || this.newConfPass == '') {
+          this.generarSwal(this.arrSwal[1]);
+        } else {
+          // en caso de que se quiera cambiar cualquier dato y
+          // además, la password
+          if (this.newPass == this.newConfPass) {
+            let userModif: User = {
+              id: this.datosAlumno.id_alumno,
+              email: this.email,
+              pass: this.newConfPass,
+              nombre: this.nombre,
+              apellidos: this.apellidos
+            }
+            this.generarSwal(this.arrSwal[0], userModif);
+          } else {
+            this.generarSwal(this.arrSwal[2]);
+          }
+        }
+      } else {
+        this.generarSwal(this.arrSwal[3]);
+      }
+    }
+  }
+
+  generarSwal(swal: any, user?: User) {
+    if (swal.id == 0) {
+      if (user != undefined || user != null) {
+        Swal.fire({
+          title: '¿Quieres guardar los cambios?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              icon: swal.icon,
+              title: swal.title,
+              text: swal.text
+            });
+
+            this.usersService.modificarAlumno(user).subscribe((val: any) => {
+              localStorage.removeItem(USER_LS);
+              localStorage.setItem(USER_LS, JSON.stringify(val.data));
+              this.ngOnInit();
+            });
+          }
+        });
+      }
+    } else {
+      Swal.fire({
+        icon: swal.icon,
+        title: swal.title,
+        text: swal.text
+      });
+    }
+  }
+
+  /********** funciones formulario **********/
   crearForm() {
     //Validadors registre
     this.registerForm = this.formBuilder.group({
@@ -120,47 +316,7 @@ export class PerfilComponent implements OnInit {
     };
   }
 
-  obtenerDatosAlumno() {
-    this.datosStorage = localStorage.getItem(USER_LS);
-    this.datosAlumno = JSON.parse(this.datosStorage);
-
-    this.nombre = this.datosAlumno.nombre;
-    this.apellidos = this.datosAlumno.apellidos;
-    this.email = this.datosAlumno.email;
-    this.imgSrc = this.datosAlumno.imagen;
-  }
-
-  readURL(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (e: any) =>
-        this.imgSrc = e.target.result;
-      reader.readAsDataURL(file);
-    }
-  }
-
-  obtenerDatosRanking() {
-    // cargar rankings
-    this.rankingService.obtenerRanking().subscribe(ranks => this.ranksCodes = ranks);
-    this.rankingService.obtenerRankingAlumnosId(this.datosAlumno.id_alumno).subscribe(alumnos => this.alumnosId = alumnos);
-
-    this.arrRankings = [];
-    this.rankingService.obtenerRankingAlumnosId(this.datosAlumno.id_alumno).subscribe((val: any) => {
-      if (val == null) {
-        this.flagRanks = true;
-      } else {
-        this.flagRanks = false;
-        val.forEach((element: any) => {
-          this.rankingService.obtenerRankingPorId(element.id_rank).subscribe((val: any) => {
-            this.datosRanking = val;
-            this.arrRankings.push(this.datosRanking.data);
-          });
-        });
-      }
-    });
-  }
-
+  /********** funciones botones del perfil **********/
   mostrarRankings() {
     if (this.mostrarRankingsVisual == false) {
       this.mostrarRankingsVisual = true;
@@ -281,124 +437,5 @@ export class PerfilComponent implements OnInit {
       this.passTypeConfirmNew = 'password';
     }
   }
-
-  async unirseRanking() {
-    this.ranksArray = [];
-    const { value: test } = await Swal.fire({
-      title: 'Input',
-      input: 'text',
-      inputLabel: 'Input test',
-      inputPlaceholder: 'Escribe algo'
-    });
-    this.ranksCodes.forEach((element: any) => {
-      if (test == element.cod_rank) {
-        this.ranksArray.push(element);
-      }
-    });
-
-    this.comprobarAlumnoRanking(this.ranksArray);
-  }
-
-  comprobarAlumnoRanking(rank: any) {
-    let alumnRepetido = false;
-    console.log(rank);
-
-    /*
-    //this.rankingService.obtenerRankCodes(test).subscribe((val: any) => {
-    this.rankingService.obtenerRanking().subscribe((val: any) => {
-      console.log(val);
-      val.forEach((element: any) => {
-        */
-        /*
-        if (this.datosAlumno.id_alumno == element.id_alumno) {
-          console.log(this.datosAlumno.nick + " esta en " + element.id_rank);
-          alumnRepetido = true;
-          
-        }*/
-        /*
-      });
-
-      if (alumnRepetido) {
-        console.log("este alumno ya está en este ranking");
-      } else {
-        console.log("este alumno (" + this.datosAlumno.id_alumno + ") no está en este ranking");
-        console.log("alumno: " + this.datosAlumno.nick + " se ha unido a " + test);
-      }
-    });
-    */
-  }
-
-confirmarModif() {
-  let userModif: User = {
-    id: this.datosAlumno.id_alumno,
-    email: this.email,
-    pass: this.datosAlumno.pass,
-    nombre: this.nombre,
-    apellidos: this.apellidos
-  }
-  // en caso de que se quiera cambiar el email, nombre o apellidos
-  // pero no la password
-  if (this.oldPass == '' && this.newPass == '' && this.newConfPass == '') {
-    this.generarSwal(this.arrSwal[0], userModif);
-  } else {
-    if (this.oldPass == this.datosAlumno.pass) {
-      if (this.newPass == '' || this.newConfPass == '') {
-        this.generarSwal(this.arrSwal[1]);
-      } else {
-        // en caso de que se quiera cambiar cualquier dato y
-        // además, la password
-        if (this.newPass == this.newConfPass) {
-          let userModif: User = {
-            id: this.datosAlumno.id_alumno,
-            email: this.email,
-            pass: this.newConfPass,
-            nombre: this.nombre,
-            apellidos: this.apellidos
-          }
-          this.generarSwal(this.arrSwal[0], userModif);
-        } else {
-          this.generarSwal(this.arrSwal[2]);
-        }
-      }
-    } else {
-      this.generarSwal(this.arrSwal[3]);
-    }
-  }
-}
-
-generarSwal(swal: any, user ?: User) {
-  if (swal.id == 0) {
-    if (user != undefined || user != null) {
-      Swal.fire({
-        title: '¿Quieres guardar los cambios?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            icon: swal.icon,
-            title: swal.title,
-            text: swal.text
-          });
-
-          this.usersService.modificarAlumno(user).subscribe((val: any) => {
-            localStorage.removeItem(USER_LS);
-            localStorage.setItem(USER_LS, JSON.stringify(val.data));
-            this.ngOnInit();
-          });
-        }
-      });
-    }
-  } else {
-    Swal.fire({
-      icon: swal.icon,
-      title: swal.title,
-      text: swal.text
-    });
-  }
-}
 
 }

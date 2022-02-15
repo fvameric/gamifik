@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RankingService } from 'services/ranking.service';
 import { UsersService } from 'services/users.service';
 
 @Component({
@@ -14,7 +15,14 @@ export class PruebasCrearRankingComponent implements OnInit {
   selecAlumnos: any[] = [];
   codigoRanking: string = 'Random string';
 
+<<<<<<< Updated upstream
   constructor(private usersService: UsersService) {}
+=======
+  constructor(
+    private usersService: UsersService,
+    private rankService: RankingService
+  ) {}
+>>>>>>> Stashed changes
 
   ngOnInit(): void {
     this.usersService
@@ -47,6 +55,12 @@ export class PruebasCrearRankingComponent implements OnInit {
     
     
     // this.codigoRanking = ""; rellenar con una string random de letras y números
+    
+    /*
+    this.rankService.insertarAlumnoEnRanking(id_rank, id_alumno).subscribe((val: any) => {
+      console.log(val);
+    });
+    */
   }
 
   insertarAlumnosRanking() {
