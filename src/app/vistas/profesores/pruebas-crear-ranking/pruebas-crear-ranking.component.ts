@@ -15,14 +15,10 @@ export class PruebasCrearRankingComponent implements OnInit {
   selecAlumnos: any[] = [];
   codigoRanking: string = 'Random string';
 
-<<<<<<< Updated upstream
-  constructor(private usersService: UsersService) {}
-=======
   constructor(
     private usersService: UsersService,
     private rankService: RankingService
   ) {}
->>>>>>> Stashed changes
 
   ngOnInit(): void {
     this.usersService

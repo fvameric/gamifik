@@ -113,6 +113,7 @@ export class PerfilComponent implements OnInit {
   }
 
   obtenerDatosRanking() {
+    this.arrRankings = [];
     this.rankingService.obtenerRanking().subscribe(val => this.rankings = val);
     this.rankingService.obtenerJoinRankingAlumno().subscribe((val: any) => {
       this.rankingsConAlumnos = val;
@@ -120,7 +121,7 @@ export class PerfilComponent implements OnInit {
       val.forEach((element: any) => {
         if (element.id_alumno == this.datosAlumno.id_alumno) {
           this.arrRankings.push(element);
-          console.log("ranking " + element.cod_rank + " alumno "+ this.datosAlumno.id_alumno);
+          console.log("ranking " + element.cod_rank + " alumno " + this.datosAlumno.id_alumno);
         }
       });
 
@@ -147,11 +148,13 @@ export class PerfilComponent implements OnInit {
   }
 
   comprobarAlumnoRanking(codRank: string) {
-    let rankExiste = false;
-    let alumnoExiste = false;
+    let rankId: number = 0;
+    let rankExiste: boolean = false;
+    let alumnoExiste: boolean = false;
     this.rankings.forEach((element: any) => {
       if (codRank == element.cod_rank) {
         console.log("rank existe");
+        rankId = element.id_rank;
         rankExiste = true;
       }
     });
@@ -187,21 +190,19 @@ export class PerfilComponent implements OnInit {
               text: 'Se une al ranking'
             });
             console.log("Se une al ranking");
+
+            this.rankingService.insertarAlumnoEnRanking(rankId, this.datosAlumno.id_alumno).subscribe((val: any) => {
+              if (val.resultado == 'ok') {
+                this.ngOnInit();
+              } else {
+                console.log(val);
+              }
+            });
           } else {
             console.log("Se cancela el unirse al ranking");
           }
         });
       }
-      /*
-
-      if (alumnoExiste) {
-        console.log("ya está en el ranking");
-        
-      } else {
-        console.log("No está en el ranking");
-        
-      }
-      */
     } else {
       Swal.fire({
         icon: 'error',
