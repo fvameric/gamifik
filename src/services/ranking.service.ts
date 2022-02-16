@@ -32,6 +32,7 @@ export class RankingService {
   // funciones rankings
   // create ranking
   insertarRanking(rank: Ranking) {
+
     return this.http.post(URL_CREATE_RANK, JSON.stringify(rank));
   }
 

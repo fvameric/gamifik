@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RankingService } from 'services/ranking.service';
 import { UsersService } from 'services/users.service';
+import { Ranking } from '../../../interfaces/Ranking';
 
 @Component({
   selector: 'app-pruebas-crear-ranking',
@@ -14,6 +15,13 @@ export class PruebasCrearRankingComponent implements OnInit {
   listaAlumnos: any;
   selecAlumnos: any[] = [];
   codigoRanking: string = 'Random string';
+  rankCodes: any;
+  ranking: Ranking = {
+    id_rank: 0,
+    nom_rank: '',
+    alumnos: 0,
+    cod_rank: '',
+  };
 
   constructor(
     private usersService: UsersService,
@@ -40,33 +48,56 @@ export class PruebasCrearRankingComponent implements OnInit {
   onSubmit() {
     console.log('nombre: ' + this.nombreRanking);
     console.log('alumnos seleccionados: ');
-    this.selecAlumnos.forEach((alumno) => {
-      //console.log(alumno);
-    });
 
     //this.insertarAlumnosRanking();
-    let codigoRandom=this.generaNss();
-    console.log(codigoRandom);
-    
-    
-    
+
     // this.codigoRanking = ""; rellenar con una string random de letras y números
-    
+
     /*
     this.rankService.insertarAlumnoEnRanking(id_rank, id_alumno).subscribe((val: any) => {
       console.log(val);
     });
     */
+
+    this.generaNss();
+  }
+
+  //Función que comprueba el codigo
+  comprobarCodigo(codigo: string) {
+    this.codigoRanking = codigo;
+    this.rankService.obtenerRanking().subscribe((val: any) => {
+      this.rankCodes = val;
+
+      this.rankCodes.forEach((element: any) => {
+        if (element.cod_rank != codigo) {
+
+          this.ranking.alumnos = 0;
+          this.ranking.nom_rank = this.nombreRanking;
+          this.ranking.cod_rank = codigo;
+        } else {
+          this.generaNss();
+        }
+      });
+      this.rankService.insertarRanking(this.ranking).subscribe((val: any) => {
+        console.log(val);
+        console.log(val.data.id_rank);
+        console.log(this.selecAlumnos);
+        
+        this.insertarAlumnosRanking();
+        
+      });
+    });
   }
 
   insertarAlumnosRanking() {
     for (let i = 0; i < this.selecAlumnos.length; i++) {
       const id = this.selecAlumnos[i];
 
-      //console.log(id);
+      console.log("id"+id);
     }
   }
 
+  //Funcion que genera el codigo
   generaNss() {
     let result = '';
     const characters =
@@ -76,6 +107,6 @@ export class PruebasCrearRankingComponent implements OnInit {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
 
-    return result;
+    this.comprobarCodigo(result);
   }
 }
