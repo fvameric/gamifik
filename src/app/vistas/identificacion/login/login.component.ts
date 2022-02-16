@@ -61,7 +61,10 @@ export class LoginComponent implements OnInit {
       pass: form.password,
     };
     this.submitted = true;
-    this.authService.loginUser(user);
+
+    if (this.loginForm.valid) {
+      this.authService.loginUser(user);
+    }
   }
 
   public togglePass() {

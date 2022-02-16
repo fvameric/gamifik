@@ -47,7 +47,7 @@ export class RegistroComponent implements OnInit {
   crearFormAlumno() {
     //Validadors registre
     this.registerForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(".*\\S.*[a-zA-z0-9_]")]],
+      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9_]+$')]],
       email: ['', [Validators.required, Validators.email, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
@@ -65,7 +65,7 @@ export class RegistroComponent implements OnInit {
   crearFormProfesor() {
     //Validadors registre
     this.registerForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(".*\\S.*[a-zA-z0-9_]")]],
+      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9_]+$')]],
       email: ['', [Validators.required, Validators.email, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
@@ -153,7 +153,7 @@ export class RegistroComponent implements OnInit {
     this.submitted = true;
     if (this.registroProfe) {
       //Comprobar si es cumpleixen o no tots els errors
-      if (!this.registerForm.invalid) {
+      if (this.registerForm.valid) {
         const nuevoProfesor: Profesor = {
           id_profe: 0,
           nick: form.username,
@@ -169,7 +169,7 @@ export class RegistroComponent implements OnInit {
       }
     } else {  
       //Comprobar si es cumpleixen o no tots els errors
-      if (!this.registerForm.invalid) {
+      if (this.registerForm.valid) {
         const nuevoAlumno: Alumno = {
           id_alumno: 0,
           nick: form.username,
