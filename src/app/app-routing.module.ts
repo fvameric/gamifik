@@ -7,7 +7,6 @@ import { IdentificacionComponent } from './vistas/identificacion/home/identifica
 import { HeaderComponent } from './plantillas/header/header.component';
 import { FooterComponent } from './plantillas/footer/footer.component';
 import { PerfilComponent } from './vistas/alumnos/perfil/perfil.component';
-import { PruebaHeaderComponent } from './plantillas/prueba-header/prueba-header.component';
 import { PerfilProfesorComponent } from './vistas/profesores/perfil-profesor/perfil-profesor.component';
 import { DashboardProfesorComponent } from './vistas/profesores/dashboard-profesor/dashboard-profesor.component';
 import { PruebasCrearRankingComponent } from './vistas/profesores/pruebas-crear-ranking/pruebas-crear-ranking.component';
@@ -23,7 +22,6 @@ const routes: Routes = [
   { path: 'footer', component: FooterComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'perfilprofesor', component: PerfilProfesorComponent },
-  { path: 'prueba-header', component: PruebaHeaderComponent },
   { path: 'pruebas-crear-ranking', component: PruebasCrearRankingComponent },
 ];
 
@@ -42,6 +40,5 @@ export const routingComponents = [
   PerfilProfesorComponent,
   HeaderComponent,
   FooterComponent,
-  PruebaHeaderComponent,
   PruebasCrearRankingComponent
 ];
