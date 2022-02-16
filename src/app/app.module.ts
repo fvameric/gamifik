@@ -10,7 +10,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpClientModule } from '@angular/common/http';
-import { PruebasCrearRankingComponent } from './vistas/profesores/pruebas-crear-ranking/pruebas-crear-ranking.component';
 
 @NgModule({
   declarations: [
