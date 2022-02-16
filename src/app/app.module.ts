@@ -10,7 +10,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpClientModule } from '@angular/common/http';
-import { PruebaHeaderComponent } from './plantillas/prueba-header/prueba-header.component';
 import { PruebasCrearRankingComponent } from './vistas/profesores/pruebas-crear-ranking/pruebas-crear-ranking.component';
 
 @NgModule({
@@ -18,9 +17,7 @@ import { PruebasCrearRankingComponent } from './vistas/profesores/pruebas-crear-
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    routingComponents,
-    PruebaHeaderComponent,
-    PruebasCrearRankingComponent
+    routingComponents
   ],
   imports: [
     BrowserModule,
