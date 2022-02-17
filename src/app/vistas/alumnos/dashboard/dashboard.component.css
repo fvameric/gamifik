@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
   body {
     height: 100% !important;
   }
@@ -29,44 +28,11 @@
   }
 
   .sidebar a {
-=======
-body {
-    height: 100% !important;
-}
-
-.separador1 {
-    display: block;
-    float: left;
-    height: 100%;
-}
-
-.separador2 {
-    display: flex;
-    justify-content: center;
-}
-
-
-/* sidebar */
-
-.sidebar {
-    padding: 30px;
-    background: #0000008c;
-    -webkit-backdrop-filter: blur(6px);
-    box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
-    height: 100%;
-    overflow: auto;
-    margin-top: 70%;
-    border-radius: 0px 10px 0px 0px;
-}
-
-.sidebar a {
->>>>>>> Stashed changes
     display: block;
     color: rgb(117, 117, 117);
     padding: 16px;
     text-decoration: none;
     transition: 1s ease-in-out;
-<<<<<<< Updated upstream
   }
 
   .sidebar a.active {
@@ -104,31 +70,6 @@ body {
   /* cartas destacados
 
   .contenido-dashboard {
-=======
-}
-
-.sidebar a.active {
-    background-color: transparent;
-    color: white;
-}
-
-.sidebar a:hover:not(.active) {
-    transition: 1s;
-    background-color: rgb(68, 68, 68);
-    color: white;
-}
-
-div.content {
-    margin-left: 200px;
-    padding: 1px 16px;
-    height: 1000px;
-}
-
-
-/* cartas destacados*/
-
-.contenido-dashboard {
->>>>>>> Stashed changes
     padding: 10px;
     margin-top: 50px;
     width: auto;
@@ -137,15 +78,9 @@ div.content {
     -webkit-backdrop-filter: blur(6px);
     box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
     border-radius: 5px 5px 5px 5px;
-<<<<<<< Updated upstream
   }
 
   .rectangulo {
-=======
-}
-
-.rectangulo {
->>>>>>> Stashed changes
     float: left;
     padding: 0;
     margin: 10px;
@@ -155,28 +90,16 @@ div.content {
     -webkit-backdrop-filter: blur(6px);
     box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
     border-radius: 5px 5px 5px 5px;
-<<<<<<< Updated upstream
   }
 
   h4 {
-=======
-}
-
-h4 {
->>>>>>> Stashed changes
     margin-top: 5%;
     margin-left: 5%;
     color: white !important;
     font-size: 25px;
-<<<<<<< Updated upstream
   }
 
   .button-destacados {
-=======
-}
-
-.button-destacados {
->>>>>>> Stashed changes
     margin-left: 70%;
     padding: 8px;
     margin-right: 1rem;
@@ -185,7 +108,6 @@ h4 {
     color: white;
     border: none;
     transition: 0.5s ease-in-out;
-<<<<<<< Updated upstream
   }
 
   .button-destacados:hover {
@@ -237,32 +159,3 @@ h4 {
     position: fixed;
     bottom: 0;
   }
-=======
-}
-
-.button-destacados:hover {
-    transform: scale(1.1);
-    transition: 1s;
-}
-
-.texto-destacados {
-    margin-left: 8%;
-    color: rgb(182, 182, 182);
-}
-
-.Texto-destacados {
-    text-align: center;
-    margin: 1%;
-}
-
-@media (max-width: 1227px) {
-    .rectangulo {
-        width: 95%;
-        float: left;
-    }
-}
-
-.mis-rankings p {
-    color: #ffffff
-}
->>>>>>> Stashed changes

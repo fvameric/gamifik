@@ -1,7 +1,6 @@
 <app-header></app-header>
 <div class="separador1">
     <div class="sidebar">
-<<<<<<< Updated upstream
             <h1 class="active" style="margin: 2%;">Mis Rankings</h1>
             <a href="#">text</a>
             <a href="#">text</a>
@@ -20,21 +19,6 @@
     <div class="info-rankings">
         <h1>Ranking</h1>
         <hr>
-=======
-        <button class="unirse-ranking" (click)="unirseRanking()">
-            Unirse
-        </button>
-
-        <h1>Mis Rankings</h1>
-        <div *ngIf="flagRanks;else tieneRankings">
-            No tiene rankings.
-        </div>
-        <ng-template #tieneRankings>
-            <div *ngFor="let rank of arrRankings;let i = index" class="mis-rankings">
-                <p>{{i}}. {{rank.nom_rank}}</p>
-            </div>
-        </ng-template>
->>>>>>> Stashed changes
     </div>
 </div>
 <!--<div class="separador2">
