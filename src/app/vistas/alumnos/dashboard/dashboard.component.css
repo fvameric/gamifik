@@ -22,6 +22,8 @@ body{
   box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
   height: 100%;
   overflow: auto;
+  margin-top: 80%;
+  border-radius: 0px 10px 0px 0px;
 }
 
 .sidebar a {
