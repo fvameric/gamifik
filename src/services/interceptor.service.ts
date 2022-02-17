@@ -16,16 +16,8 @@ export class InterceptorService implements HttpInterceptor {
     let authReq = req;
     const token = this.tokenService.getToken();
     console.log("interceptar http token: " + token);
-
     if (token != null) {
       authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
-
-      if (this.tokenService.tokenExpired(token)) {
-        console.log("esta expirado intercept");
-        //this.tokenService.signOut();
-      } else {
-        console.log("no esta expirado intercept");
-      }
     }
     return next.handle(authReq);
   }

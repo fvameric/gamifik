@@ -39,13 +39,12 @@ export class TokenService {
     return JSON.parse(sessionStorage.getItem(USER_KEY) || '');
   }
 
-  tokenExpired(token: string): boolean {
+  tokenExpired(token: string) {
     console.log("expired: " + this.jwtHelper.isTokenExpired(token));
     
     if (this.jwtHelper.isTokenExpired(token)) {
-      return true;
+      //this.signOut();
     }
-    return false;
   }
 
   generarToken() {

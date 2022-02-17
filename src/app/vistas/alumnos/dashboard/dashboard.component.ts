@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Alumno } from 'app/interfaces/Alumno';
 import { Profesor } from '../../../interfaces/Profesor';
-import { UsersService } from 'services/users.service';
-import { RankingService } from 'services/ranking.service';
-import { AuthService } from 'services/auth.service';
-import { TokenService } from 'services/token.service';
-import { FormBuilder } from '@angular/forms';
-import Swal from 'sweetalert2';
+import { User } from 'app/interfaces/User';
 
 @Component({
   selector: 'app-dashboard',
@@ -67,27 +62,10 @@ export class DashboardComponent implements OnInit {
   tipoUser: any;
   datosStorage: any;
 
-  // variables ranking
-  flagRanks: boolean = false;
-  rankingIds: any;
-  datosRanking: any;
-  arrRankings: any[] = [];
-  rankings: any;
-  rankingsConAlumnos: any;
-  ranksCodes: any;
-  alumnosId: any[] = [];
-  ranksArray: any[] = [];
-
-  constructor(
-    private usersService: UsersService,
-    private rankingService: RankingService,
-    private authService: AuthService,
-    private tokenService: TokenService,
-    public formBuilder: FormBuilder) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.obtenerDatos();
-    this.obtenerDatosRanking();
   }
 
   obtenerDatos() {
@@ -96,106 +74,6 @@ export class DashboardComponent implements OnInit {
       this.obtenerAlumno();
     } else {
       this.obtenerProfesor();
-    }
-  }
-
-  obtenerDatosRanking() {
-    this.arrRankings = [];
-    this.rankingService.obtenerRanking().subscribe(val => this.rankings = val);
-    this.rankingService.obtenerJoinRankingAlumno().subscribe((val: any) => {
-      this.rankingsConAlumnos = val;
-
-      val.forEach((element: any) => {
-        if (element.id_alumno == this.datosAlumno.id_alumno) {
-          this.arrRankings.push(element);
-        }
-      });
-
-      if (this.arrRankings.length == 0) {
-        this.flagRanks = true;
-      } else {
-        this.flagRanks = false;
-      }
-    });
-  }
-
-  async unirseRanking() {
-    const { value: test } = await Swal.fire({
-      title: 'Input',
-      input: 'text',
-      inputLabel: 'Input test',
-      inputPlaceholder: 'Escribe algo',
-      showCancelButton: true
-    });
-
-    if (test) {
-      this.comprobarAlumnoRanking(test);
-    }
-  }
-
-  comprobarAlumnoRanking(codRank: string) {
-    let rankId: number = 0;
-    let rankExiste: boolean = false;
-    let alumnoExiste: boolean = false;
-    this.rankings.forEach((element: any) => {
-      if (codRank == element.cod_rank) {
-        console.log("rank existe");
-        rankId = element.id_rank;
-        rankExiste = true;
-      }
-    });
-
-    if (rankExiste) {
-      rankExiste = false;
-      this.arrRankings.forEach((element: any) => {
-        if (codRank == element.cod_rank) {
-          alumnoExiste = true;
-        }
-      });
-      if (alumnoExiste) {
-        alumnoExiste = false;
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'ya está en el ranking'
-        });
-      } else {
-        console.log("alumno NO está en el rank");
-        Swal.fire({
-          title: "¿Quieres unirte a " + codRank + "?",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Sí'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Ok',
-              text: 'Se une al ranking'
-            });
-            console.log("Se une al ranking");
-
-            this.rankingService.insertarAlumnoEnRanking(rankId, this.datosAlumno.id_alumno).subscribe((val: any) => {
-              if (val.resultado == 'ok') {
-                this.ngOnInit();
-              } else {
-                console.log(val);
-              }
-            });
-          } else {
-            console.log("Se cancela el unirse al ranking");
-          }
-        });
-      }
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: "Codigo " + codRank + " no existe"
-      });
-      console.log(codRank + " no existe");
     }
   }
 
