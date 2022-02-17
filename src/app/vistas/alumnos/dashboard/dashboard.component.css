@@ -16,12 +16,14 @@ body{
 
 /* sidebar */
 .sidebar {
-  padding: 10px;
+  padding: 30px;
   background: #0000008c;
   -webkit-backdrop-filter: blur(6px);
   box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
   height: 100%;
   overflow: auto;
+  margin-top: 70%;
+  border-radius: 0px 10px 0px 0px;
 }
 
 .sidebar a {

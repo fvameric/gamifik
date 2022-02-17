@@ -470,3 +470,18 @@ input[type=date] {
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
 }
+
+
+.unirse-ranking{
+    margin-left: 200px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #56baed;
+    color: white;
+    border: none; 
+    transition: 1s;
+}
+
+.unirse-ranking:hover{
+        background-color: #1292f8;
+}
