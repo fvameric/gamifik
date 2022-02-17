@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
+const URL_REFRESCAR_TOKEN =  'http://localhost:8080/tokenJWT/refrescarToken.php';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
+  num: number = 0;
 
-  constructor(private jwtHelper: JwtHelperService) { }
+  constructor(private jwtHelper: JwtHelperService, private http: HttpClient) {
+  }
 
   signOut(): void {
     window.sessionStorage.clear();
@@ -40,5 +45,9 @@ export class TokenService {
     if (this.jwtHelper.isTokenExpired(token)) {
       //this.signOut();
     }
+  }
+
+  generarToken() {
+    this.http.get(URL_REFRESCAR_TOKEN);
   }
 }

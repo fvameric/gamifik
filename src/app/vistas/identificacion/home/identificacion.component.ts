@@ -14,5 +14,6 @@ export class IdentificacionComponent implements OnInit {
   constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
+    
   }
 }
