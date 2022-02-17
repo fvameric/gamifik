@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './vistas/identificacion/login/login.component';
 import { DashboardComponent } from './vistas/alumnos/dashboard/dashboard.component';
 import { RegistroComponent } from './vistas/identificacion/registro/registro.component';
-import { IdentificacionComponent } from './vistas/identificacion/home/identificacion.component';
+import { IdentificacionComponent } from './vistas/identificacion/identificacion/identificacion.component';
 import { HeaderComponent } from './plantillas/header/header.component';
 import { FooterComponent } from './plantillas/footer/footer.component';
 import { PerfilComponent } from './vistas/alumnos/perfil/perfil.component';

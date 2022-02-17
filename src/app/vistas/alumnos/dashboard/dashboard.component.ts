@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Alumno } from 'app/interfaces/Alumno';
 import { Profesor } from '../../../interfaces/Profesor';
 import { User } from 'app/interfaces/User';
+import { UsersService } from 'services/users.service';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { RankingService } from 'services/ranking.service';
+import { Ranking } from 'app/interfaces/Ranking';
+import Swal from 'sweetalert2';
+import { TokenService } from 'services/token.service';
+import { AuthService } from 'services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -62,157 +70,154 @@ export class DashboardComponent implements OnInit {
   tipoUser: any;
   datosStorage: any;
 
-  constructor() {}
+  // rankings
+  rankings: any;
+  rankingsConAlumnos: any;
+  ranksCodes: any;
+  alumnosId: any[] = [];
+  ranksArray: any[] = [];
+  flagRanks: boolean = false;
+  rankingIds: any;
+  datosRanking: any;
+  arrRankings: any[] = [];
+  rankSeleccionado: any;
+  noselec: boolean = false;
+  listaAlumnos: any[] = [];
+
+  constructor(
+    private usersService: UsersService,
+    private rankingService: RankingService,
+    private tokenService: TokenService,
+    public formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.obtenerDatos();
+    this.obtenerDatosRanking();
   }
 
   obtenerDatos() {
-    this.tipoUser = JSON.parse(localStorage.getItem('userLocalStorage') || '{}');
-    if (this.tipoUser.tipo == 0) {
-      this.obtenerAlumno();
-    } else {
-      this.obtenerProfesor();
-    }
+    this.datosAlumno = this.tokenService.getUser();
   }
 
-  obtenerProfesor() {
-    this.datosStorage = localStorage.getItem('userLocalStorage');
-    this.datosProfesor = JSON.parse(this.datosStorage);
+  obtenerDatosRanking() {
+    this.arrRankings = [];
+    this.rankingService.obtenerRanking().subscribe(val => this.rankings = val);
+    this.rankingService.obtenerJoinRankingAlumno().subscribe((val: any) => {
+      this.rankingsConAlumnos = val;
 
-    this.nombre = this.datosProfesor.nombre;
-    this.apellidos = this.datosProfesor.apellidos;
-    this.email = this.datosProfesor.email;
-  }
+      val.forEach((element: any) => {
+        if (element.id_alumno == this.datosAlumno.id_alumno) {
+          this.arrRankings.push(element);
+        }
+      });
 
-  obtenerAlumno() {
-    this.datosStorage = localStorage.getItem('userLocalStorage');
-    this.datosAlumno = JSON.parse(this.datosStorage);
-
-    this.nombre = this.datosAlumno.nombre;
-    this.apellidos = this.datosAlumno.apellidos;
-    this.email = this.datosAlumno.email;
-  }
-
-  mostrarRankings() {
-    if (this.mostrarRankingsVisual == false) {
-      this.mostrarRankingsVisual = true;
-      this.mostrarConfiguracionVisual = false;
-      this.mostrarCerrarVisual = false;
-    } else {
-      this.mostrarRankingsVisual = false;
-    }
-  }
-
-  mostrarConfiguracion() {
-    if (this.mostrarConfiguracionVisual == false) {
-      this.mostrarConfiguracionVisual = true;
-      this.mostrarRankingsVisual = false;
-      this.mostrarCerrarVisual = false;
-    } else {
-      this.mostrarConfiguracionVisual = false;
-    }
-  }
-
-  mostrarCerrar() {
-    if (this.mostrarCerrarVisual == false) {
-      this.mostrarCerrarVisual = true;
-      this.mostrarRankingsVisual = false;
-      this.mostrarConfiguracionVisual = false;
-    } else {
-      this.mostrarCerrarVisual = false;
-    }
-  }
-
-  editarEmail() {
-    if (this.editableEmail == true) {
-      this.editableEmail = false;
-    } else {
-      (<HTMLInputElement>document.getElementById('inputEmail')).value;
-      (<HTMLInputElement>document.getElementById('inputEmail')).value = '';
-      this.editableEmail = true;
-    }
-  }
-
-  editarNombre() {
-    if (this.editableNombre == true) {
-      this.editableNombre = false;
-    } else {
-      if (document.getElementById('guardarNombre')) {
+      if (this.arrRankings.length == 0) {
+        this.flagRanks = true;
+      } else {
+        this.flagRanks = false;
       }
+    });
+  }
 
-      (<HTMLInputElement>document.getElementById('inputNombre')).value;
-      (<HTMLInputElement>document.getElementById('inputNombre')).value = '';
-      this.editableNombre = true;
+  async unirseRanking() {
+    const { value: test } = await Swal.fire({
+      title: 'Input',
+      input: 'text',
+      inputLabel: 'Input test',
+      inputPlaceholder: 'Escribe algo',
+      showCancelButton: true
+    });
+
+    if (test) {
+      this.comprobarAlumnoRanking(test);
     }
   }
 
-  editarApellidos() {
-    if (this.editableApellidos == true) {
-      this.editableApellidos = false;
+  comprobarAlumnoRanking(codRank: string) {
+    let rankId: number = 0;
+    let rankExiste: boolean = false;
+    let alumnoExiste: boolean = false;
+    this.rankings.forEach((element: any) => {
+      if (codRank == element.cod_rank) {
+        console.log("rank existe");
+        rankId = element.id_rank;
+        rankExiste = true;
+      }
+    });
+
+    if (rankExiste) {
+      rankExiste = false;
+      this.arrRankings.forEach((element: any) => {
+        if (codRank == element.cod_rank) {
+          alumnoExiste = true;
+        }
+      });
+      if (alumnoExiste) {
+        alumnoExiste = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'ya está en el ranking'
+        });
+      } else {
+        console.log("alumno NO está en el rank");
+        Swal.fire({
+          title: "¿Quieres unirte a " + codRank + "?",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Ok',
+              text: 'Se une al ranking'
+            });
+            console.log("Se une al ranking");
+
+            this.rankingService.insertarAlumnoEnRanking(rankId, this.datosAlumno.id_alumno).subscribe((val: any) => {
+              if (val.resultado == 'ok') {
+                this.ngOnInit();
+              } else {
+                console.log(val);
+              }
+            });
+          } else {
+            console.log("Se cancela el unirse al ranking");
+          }
+        });
+      }
     } else {
-      (<HTMLInputElement>document.getElementById('inputApellidos')).value;
-      (<HTMLInputElement>document.getElementById('inputApellidos')).value = '';
-      this.editableApellidos = true;
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: "Codigo " + codRank + " no existe"
+      });
+      console.log(codRank + " no existe");
     }
   }
 
-  guardarNombre() {
-    this.editableNombre = true;
-    this.nombre = (<HTMLInputElement>(
-      document.getElementById('inputNombre')
-    )).value;
-  }
+  rankSelec(rankId: number) {
+    this.listaAlumnos = [];
+    this.rankSeleccionado = this.arrRankings.find(rank => rank.id_rank == rankId);
 
-  guardarApellidos() {
-    this.editableApellidos = true;
-    this.apellidos = (<HTMLInputElement>(
-      document.getElementById('inputApellidos')
-    )).value;
-  }
+    this.rankingService.obtenerRankingAlumnos().subscribe((val: any) => {
+      val.forEach((element:any) => {
+        if (element.id_rank == this.rankSeleccionado.id_rank) {
+          this.usersService.obtenerAlumnoPorId(element.id_alumno).subscribe((val: any) => {
+            console.log(val.data);
+            this.listaAlumnos.push(val.data);
+          });
+        }
+      });
+    });
 
-  guardarEmail() {
-    this.editableEmail = true;
-    this.email = (<HTMLInputElement>(
-      document.getElementById('inputEmail')
-    )).value;
-  }
-
-  mostrarEditarContra() {
-    if (this.mostrarEditarContrasena == true) {
-      this.mostrarEditarContrasena = false;
+    if (this.noselec) {
+      this.noselec = false;
     } else {
-      this.mostrarEditarContrasena = true;
-    }
-  }
-
-  visualizarAntiguaContrasena() {
-    if (this.antiguaContrasena == false) {
-      this.antiguaContrasena = true;
-      this.passType = 'text';
-    } else {
-      this.antiguaContrasena = false;
-      this.passType = 'password';
-    }
-  }
-
-  visualizarNuevaContrasena() {
-    if (this.nuevaContrasena == false) {
-      this.nuevaContrasena = true;
-      this.passTypeNew = 'text';
-    } else {
-      this.nuevaContrasena = false;
-      this.passTypeNew = 'password';
-    }
-  }
-  visualizarConfirmarNuevaContrasena() {
-    if (this.confirmarNuevaContrasena == false) {
-      this.confirmarNuevaContrasena = true;
-      this.passTypeConfirmNew = 'text';
-    } else {
-      this.confirmarNuevaContrasena = false;
-      this.passTypeConfirmNew = 'password';
+      this.noselec = true;
     }
   }
 }

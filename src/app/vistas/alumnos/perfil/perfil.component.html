@@ -44,11 +44,6 @@
                         <button class="unirse-ranking" (click)="unirseRanking()">
                             Unirse
                         </button>
-                        <ng-template #tieneRankings>
-                            <div *ngFor="let rank of arrRankings">
-                                {{rank.id_rank}}. {{rank.nom_rank}} - {{rank.cod_rank}}
-                            </div>
-                        </ng-template>
                         <div *ngIf="flagRanks;else tieneRankings">
                             No tiene rankings.
                         </div>

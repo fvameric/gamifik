@@ -2,12 +2,15 @@
 
 <header id="header">
     <nav class="navbar-todo">
-
-        <ul id="nav-menu">
-            <li class="nav-items-right"><a href="#">Perfil</a></li>
-            <li class="nav-items-right"><a href="#">Mis Rankins</a></li>
-        </ul>
         <a href="#" class="logo">FBX</a>
+        
+        <ul id="nav-menu">
+            
+            <li class="nav-items-right"><a routerLink="/perfil">{{user.nick}}</a></li>
+            <li class="nav-items-right"><img src={{user.imagen}}/></li>
+            <li class="nav-items-right"><a routerLink="/dashboard">Mis Rankins</a></li>
+        </ul>
+        
         <span id="abrir-menu" class="material-icons" (click)="onclickToggle()">
             reorder
         </span>

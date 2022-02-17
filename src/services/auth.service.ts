@@ -15,7 +15,11 @@ const USER_LS = 'userLocalStorage';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private router: Router, private tokenService: TokenService) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private tokenService: TokenService
+    ) { }
 
   loginUser(user: User) {
     return this.http.post(URL_LOGIN, JSON.stringify(user)).subscribe((val: any) => {
@@ -80,11 +84,11 @@ export class AuthService {
     if (data.tipo == 0) {
       localStorage.removeItem(USER_LS);
       localStorage.setItem(USER_LS, JSON.stringify(data));
-      this.router.navigate(['/perfil']);
+      this.router.navigate(['/dashboard']);
     } else {
       localStorage.removeItem(USER_LS);
       localStorage.setItem(USER_LS, JSON.stringify(data));
-      this.router.navigate(['/perfilprofesor']);
+      this.router.navigate(['/dashboardprofesor']);
     }
   }
 }

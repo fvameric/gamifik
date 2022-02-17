@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenService } from 'services/token.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   toggleMenu: boolean = false;
-  
-  constructor() {}
 
-  ngOnInit(): void {}
+  user: any;
+  
+  constructor(private tokenService: TokenService) {}
+
+  ngOnInit(): void {
+    this.user = this.tokenService.getUser();
+  }
 
   onclickToggle() {
     let navMenu = <HTMLElement>document.getElementById('nav-menu');

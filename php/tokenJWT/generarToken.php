@@ -14,7 +14,8 @@
   $key = "example_key";
   $iat = time();
   $nbf = $iat + 10;
-  $exp = $iat + 7200; // 2 horas
+  //$exp = $iat + 7200; // 2 horas
+  $exp = $iat + 500;
   $payload = array(
       "iss" => "http://example.org",
       "aud" => "http://example.com",

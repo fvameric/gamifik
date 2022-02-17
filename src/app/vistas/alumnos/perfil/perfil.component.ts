@@ -21,6 +21,7 @@ const USER_LS = 'userLocalStorage';
 export class PerfilComponent implements OnInit {
   profesores: any;
   alumnos: any;
+
   mostrarRankingsVisual: boolean = false;
   mostrarConfiguracionVisual: boolean = false;
   mostrarCerrarVisual: boolean = false;
@@ -53,11 +54,6 @@ export class PerfilComponent implements OnInit {
     imagen: ''
   };
 
-  flagRanks: boolean = false;
-  rankingIds: any;
-  datosRanking: any;
-  arrRankings: any[] = [];
-
   datosStorage: any;
 
   // formulario
@@ -76,13 +72,6 @@ export class PerfilComponent implements OnInit {
     { id: 3, icon: 'error', title: 'Error', text: 'La contraseña actual no es correcta' }
   ];
 
-  rankings: any;
-  rankingsConAlumnos: any;
-  ranksCodes: any;
-  alumnosId: any[] = [];
-
-  ranksArray: any[] = [];
-
   // token
   logUserToken: any;
 
@@ -91,12 +80,11 @@ export class PerfilComponent implements OnInit {
     private rankingService: RankingService,
     private authService: AuthService,
     private tokenService: TokenService,
-    public formBuilder: FormBuilder,) { }
+    public formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.obtenerDatosAlumno();
     this.crearForm();
-    this.obtenerDatosRanking();
   }
 
   obtenerDatosAlumno() {
@@ -131,107 +119,6 @@ export class PerfilComponent implements OnInit {
     }
   }
   
-
-  obtenerDatosRanking() {
-    this.arrRankings = [];
-    this.rankingService.obtenerRanking().subscribe(val => this.rankings = val);
-    this.rankingService.obtenerJoinRankingAlumno().subscribe((val: any) => {
-      this.rankingsConAlumnos = val;
-
-      val.forEach((element: any) => {
-        if (element.id_alumno == this.datosAlumno.id_alumno) {
-          this.arrRankings.push(element);
-        }
-      });
-
-      if (this.arrRankings.length == 0) {
-        this.flagRanks = true;
-      } else {
-        this.flagRanks = false;
-      }
-    });
-  }
-
-  async unirseRanking() {
-    const { value: test } = await Swal.fire({
-      title: 'Input',
-      input: 'text',
-      inputLabel: 'Input test',
-      inputPlaceholder: 'Escribe algo',
-      showCancelButton: true
-    });
-
-    if (test) {
-      this.comprobarAlumnoRanking(test);
-    }
-  }
-
-  comprobarAlumnoRanking(codRank: string) {
-    let rankId: number = 0;
-    let rankExiste: boolean = false;
-    let alumnoExiste: boolean = false;
-    this.rankings.forEach((element: any) => {
-      if (codRank == element.cod_rank) {
-        console.log("rank existe");
-        rankId = element.id_rank;
-        rankExiste = true;
-      }
-    });
-
-    if (rankExiste) {
-      rankExiste = false;
-      this.arrRankings.forEach((element: any) => {
-        if (codRank == element.cod_rank) {
-          alumnoExiste = true;
-        }
-      });
-      if (alumnoExiste) {
-        alumnoExiste = false;
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'ya está en el ranking'
-        });
-      } else {
-        console.log("alumno NO está en el rank");
-        Swal.fire({
-          title: "¿Quieres unirte a " + codRank + "?",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Sí'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Ok',
-              text: 'Se une al ranking'
-            });
-            console.log("Se une al ranking");
-
-            this.rankingService.insertarAlumnoEnRanking(rankId, this.datosAlumno.id_alumno).subscribe((val: any) => {
-              if (val.resultado == 'ok') {
-                this.ngOnInit();
-              } else {
-                console.log(val);
-              }
-            });
-          } else {
-            console.log("Se cancela el unirse al ranking");
-          }
-        });
-      }
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: "Codigo " + codRank + " no existe"
-      });
-      console.log(codRank + " no existe");
-    }
-  }
-
   confirmarModif() {
     let userModif: User = {
       id: this.datosAlumno.id_alumno,

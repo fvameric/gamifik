@@ -1,24 +1,48 @@
 <app-header></app-header>
 <div class="separador1">
     <div class="sidebar">
-            <h1 class="active" style="margin: 2%;">Mis Rankings</h1>
-            <a href="#">text</a>
-            <a href="#">text</a>
-            <a href="#">text</a>
-            <a href="#">text</a>
-            <a href="#">text</a>
-            <a href="#">text</a>
-            <div class="unirse-retangulo">
-                <button class="unirse-ranking">Unirse</button>
+        <div class="lista-rankings">
+            <h2>Mis Rankings</h2>
+            <button class="unirse-ranking" (click)="unirseRanking()">
+                Unirse
+            </button>
+            <div *ngIf="flagRanks;else tieneRankings">
+                <p>No tiene rankings</p>
             </div>
+            <ng-template #tieneRankings>
+                <div *ngFor="let rank of arrRankings; let i = index" class="rank">
+                    <button (click)="rankSelec(rank.id_rank)">{{rank.nom_rank}}</button>
+                </div>
+            </ng-template>
+        </div>
+        <div class="unirse-retangulo">
+            <button class="unirse-ranking">Unirse</button>
+        </div>
     </div>
-
 </div>
 
 <div class="separador2">
     <div class="info-rankings">
-        <h1>Ranking</h1>
+        <div class="titulo-detalle-ranking" *ngIf="rankSeleccionado;else noselec">
+            <h1>Ranking</h1>
+            <h4>{{rankSeleccionado.nom_rank}}</h4>
+            <h3>{{rankSeleccionado.cod_rank}}</h3>
+        </div>
+        <ng-template #noselec>
+            <div class="titulo-detalle-ranking">
+                <h1>Ranking</h1>
+                <h5>No se seleccionó ningún ranking</h5>
+            </div>
+        </ng-template>
         <hr>
+        <div class="alumnos-ranking" *ngFor="let alumno of listaAlumnos; let i = index">
+            {{i}}.
+            
+            <div>
+                <img src="{{alumno.imagen}}">
+            </div>
+            {{alumno.nick}}
+        </div>
     </div>
 </div>
 <!--<div class="separador2">
