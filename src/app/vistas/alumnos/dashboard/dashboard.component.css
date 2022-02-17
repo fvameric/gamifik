@@ -124,7 +124,9 @@ h4 {
   margin: 5%;
   padding: 10px;
   border-radius: 5px;
-  background-color: #1292f8;
+  background: #0000008c;
+  box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+  backdrop-filter: blur(6px);
   color: white;
   border: none; 
   transition: 1s;
@@ -135,9 +137,7 @@ h4 {
 }
 
 .unirse-retangulo{
-  background: #0000008c;
-  box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-  backdrop-filter: blur(6px);
+  background: #1292f8;
  float: left;
  width: 100%;
  position: fixed;
