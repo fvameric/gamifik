@@ -21,7 +21,7 @@
   $ids = json_decode($json);
 
   // query
-  $queryInsert = "INSERT INTO `rank_alumnos`(`id_rank_alumnos`, `id_rank`, `id_alumno`) VALUES (NULL, $ids->id_rank, $ids->id_alumno)";
+  $queryInsert = "INSERT INTO `rank_alumnos`(`id_rank_alumnos`, `id_rank`, `id_alumno`) VALUES (0, $ids->id_rank, $ids->id_alumno)";
   $resInsert = mysqli_query($con, $queryInsert);
 
   // validacion de la query

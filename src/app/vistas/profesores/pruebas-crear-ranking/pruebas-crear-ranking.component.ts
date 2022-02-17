@@ -79,21 +79,26 @@ export class PruebasCrearRankingComponent implements OnInit {
         }
       });
       this.rankService.insertarRanking(this.ranking).subscribe((val: any) => {
-        console.log(val);
-        console.log(val.data.id_rank);
-        console.log(this.selecAlumnos);
         
-        this.insertarAlumnosRanking();
+        //this.insertarAlumnosRanking(val.data.id_rank);
+        this.insertarAlumnosRanking(val.data.id_rank);
+        console.log("subscribe"+val.data.id_rank);
         
       });
     });
   }
 
-  insertarAlumnosRanking() {
+  insertarAlumnosRanking(id_rank:number) {
     for (let i = 0; i < this.selecAlumnos.length; i++) {
-      const id = this.selecAlumnos[i];
-
-      console.log("id"+id);
+      let id_alumno:number = this.selecAlumnos[i];
+      this.rankService.insertarAlumnoEnRanking(id_rank,id_alumno).subscribe((val:any) => {console.log(val);
+      });
+      console.log("id ranking"+id_rank);
+      console.log("id alumno"+id_alumno);
+      
+      
+      
+      
     }
   }
 
