@@ -38,7 +38,7 @@ export class TokenService {
     console.log("expired: " + this.jwtHelper.isTokenExpired(token));
     
     if (this.jwtHelper.isTokenExpired(token)) {
-      this.signOut();
+      //this.signOut();
     }
   }
 }
