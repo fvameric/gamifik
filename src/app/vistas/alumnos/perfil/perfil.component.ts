@@ -8,6 +8,8 @@ import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from
 import { RankingService } from 'services/ranking.service';
 import { Ranking } from 'app/interfaces/Ranking';
 import Swal from 'sweetalert2';
+import { TokenService } from 'services/token.service';
+import { AuthService } from 'services/auth.service';
 
 const USER_LS = 'userLocalStorage';
 
@@ -81,9 +83,14 @@ export class PerfilComponent implements OnInit {
 
   ranksArray: any[] = [];
 
+  // token
+  logUserToken: any;
+
   constructor(
     private usersService: UsersService,
     private rankingService: RankingService,
+    private authService: AuthService,
+    private tokenService: TokenService,
     public formBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
@@ -93,13 +100,25 @@ export class PerfilComponent implements OnInit {
   }
 
   obtenerDatosAlumno() {
+    /*
     this.datosStorage = localStorage.getItem(USER_LS);
     this.datosAlumno = JSON.parse(this.datosStorage);
+    */
+
+    this.datosAlumno = this.tokenService.getUser();
 
     this.nombre = this.datosAlumno.nombre;
     this.apellidos = this.datosAlumno.apellidos;
     this.email = this.datosAlumno.email;
     this.imgSrc = this.datosAlumno.imagen;
+  }
+
+  expirado() {
+    this.tokenService.tokenExpired(this.tokenService.getToken());
+  }
+
+  cerrarSesion() {
+    this.authService.logout();
   }
 
   readURL(event: any) {
@@ -111,6 +130,7 @@ export class PerfilComponent implements OnInit {
       reader.readAsDataURL(file);
     }
   }
+  
 
   obtenerDatosRanking() {
     this.arrRankings = [];
@@ -121,7 +141,6 @@ export class PerfilComponent implements OnInit {
       val.forEach((element: any) => {
         if (element.id_alumno == this.datosAlumno.id_alumno) {
           this.arrRankings.push(element);
-          console.log("ranking " + element.cod_rank + " alumno " + this.datosAlumno.id_alumno);
         }
       });
 

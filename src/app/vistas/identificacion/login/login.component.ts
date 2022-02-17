@@ -30,6 +30,9 @@ export class LoginComponent implements OnInit {
 
   alumnos: any;
 
+  // variables token
+  userRoles: any;
+
   constructor(
     public formBuilder: FormBuilder,
     private tokenService: TokenService,

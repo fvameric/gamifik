@@ -1,6 +1,6 @@
 <?php 
   header('Access-Control-Allow-Origin: *'); 
-  header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+  header("Access-Control-Allow-Headers: Authorization, Origin, X-Requested-With, Content-Type, Accept");
   
   include_once("../conexion/bd.php");
   $bd = new claseBD();

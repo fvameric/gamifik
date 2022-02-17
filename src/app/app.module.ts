@@ -9,7 +9,10 @@ import { FooterComponent } from './plantillas/footer/footer.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { HttpClientModule } from '@angular/common/http';
+//interceptor
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from 'services/interceptor.service';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,18 @@ import { HttpClientModule } from '@angular/common/http';
     NgbModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    },
+    {
+      provide: JWT_OPTIONS,
+      useValue: JWT_OPTIONS
+    },
+    JwtHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

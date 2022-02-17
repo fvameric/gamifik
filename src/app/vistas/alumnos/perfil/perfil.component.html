@@ -15,6 +15,10 @@
                         </div>
                         <h1>{{datosAlumno.nombre}}</h1>
                         <p>Alumno</p>
+
+                        <button (click)="expirado()">
+                            comprobar expirado
+                        </button>
                     </aside>
                 </div>
             </section>
@@ -241,7 +245,7 @@
                     <h2 class="h2-perfil">¿Estas seguro?</h2>
                     <div class="cursos-profe">
                         <div class="align-cerrar-sesion">
-                            <button class="boton-cerrar" routerLink="/identificacion">Cerrar Sesion</button>
+                            <button class="boton-cerrar" (click)="cerrarSesion()">Cerrar Sesion</button>
                             <button class="boton-cancelar">Cancelar</button>
                         </div>
                     </div>

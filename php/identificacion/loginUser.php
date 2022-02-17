@@ -1,8 +1,56 @@
 <?php
   // headers
   header('Access-Control-Allow-Origin: *');
-  header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+  header("Access-Control-Allow-Headers: Authorization, Origin, X-Requested-With, Content-Type, Accept");
   header('Content-Type: application/json');
+
+  // librerias de firebase para generar JWT
+  require_once '../../jwt/src/BeforeValidException.php';
+  require_once '../../jwt/src/ExpiredException.php';
+  require_once '../../jwt/src/SignatureInvalidException.php';
+  require_once '../../jwt/src/JWT.php';
+  require_once '../../jwt/src/JWK.php';
+  require_once '../../jwt/src/Key.php';
+
+  use Firebase\JWT\JWT;
+  use Firebase\JWT\Key;
+
+  /************** TOKEN **************/
+
+  $key = "example_key";
+  $iat = time();
+  $nbf = $iat + 10;
+  $exp = $nbf + 10;
+  $payload = array(
+      "iss" => "http://example.org",
+      "aud" => "http://example.com",
+      "iat" => $iat,
+      "nbf" => $nbf,
+      "exp" => $exp
+  );
+
+  /**
+   * IMPORTANT:
+   * You must specify supported algorithms for your application. See
+   * https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40
+   * for a list of spec-compliant algorithms.
+   */
+  $jwt = JWT::encode($payload, $key, 'HS256');
+  JWT::$leeway = 60; // $leeway in seconds
+  $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
+
+  
+
+  //print_r($decoded);
+
+  /*
+  NOTE: This will now be an object instead of an associative array. To get
+  an associative array, you will need to cast it as such:
+  */
+
+  $decoded_array = (array) $decoded;
+
+  /************** TOKEN **************/
 
   $json = file_get_contents('php://input');
   $user = json_decode($json);
@@ -13,7 +61,9 @@
   // clases
   $bd = new claseBD();
   $con = $bd->obtenerConexion();
-  class Result{}
+  class Result
+  {
+  }
   $response = new Result();
 
   // query
@@ -31,8 +81,8 @@
     if (!is_null($dataAlumno)) {
       $response->resultado = 'ok';
       $response->mensaje = 'Se encontró al alumno';
-      json_encode($dataAlumno);
       $response->data = $dataAlumno;
+      $response->accessToken = json_encode($jwt);
       echo json_encode($response);
     } else {
 
@@ -46,7 +96,6 @@
         if (!is_null($dataProfesor)) {
           $response->resultado = 'ok';
           $response->mensaje = 'Se encontró al profesor';
-          json_encode($dataProfesor);
           $response->data = $dataProfesor;
           echo json_encode($response);
         } else {
