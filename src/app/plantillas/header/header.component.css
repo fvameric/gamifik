@@ -22,6 +22,7 @@ header {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  font-size: 25px;
 }
 
 #abrir-menu {
@@ -51,7 +52,8 @@ li {
 }
 
 .nav-items-right:hover {
-  background-color: aqua;
+  background-color: #1292f8;
+  border-radius: 50px;
 }
 
 li a {

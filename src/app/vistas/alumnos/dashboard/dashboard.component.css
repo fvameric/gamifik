@@ -16,11 +16,10 @@ body{
 
 /* sidebar */
 .sidebar {
-  padding: 30px;
+  width: 100%;
   background: #0000008c;
-  -webkit-backdrop-filter: blur(6px);
-  box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
-  height: 100%;
+  box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+  backdrop-filter: blur(6px);
   overflow: auto;
   margin-top: 70%;
   border-radius: 0px 10px 0px 0px;
@@ -41,8 +40,9 @@ body{
 
 .sidebar a:hover:not(.active) {
   transition: 1s;
-  background-color: rgb(68, 68, 68);
+  background-color: #1292f8;
   color: white;
+  border-radius: 5px 5px 5px 5px;
 }
 
 div.content {
@@ -51,7 +51,7 @@ div.content {
   height: 1000px;
 }
 
-/* cartas destacados*/
+/* cartas destacados
 
 .contenido-dashboard {
   padding: 10px;
@@ -118,4 +118,29 @@ h4 {
     float:left;
   }
   
+}
+*/
+.unirse-ranking{
+  margin: 5%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #1292f8;
+  color: white;
+  border: none; 
+  transition: 1s;
+}
+
+.unirse-ranking:hover{
+      background-color: #56baed;
+}
+
+.unirse-retangulo{
+  background: #0000008c;
+  box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+  backdrop-filter: blur(6px);
+ float: left;
+ width: 100%;
+ position: fixed;
+ bottom: 0;
+ z-index: 999999;
 }
