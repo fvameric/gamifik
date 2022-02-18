@@ -14,8 +14,6 @@ export class RoleGuardService implements CanActivate {
     private authService: AuthService) { }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
-    console.log();
-    console.log(this.authService.userRole());
     if (route.routeConfig?.path == 'perfilprofesor' && this.authService.userRole() == 0) {
       this.router.navigate(['perfil']);
       return false;

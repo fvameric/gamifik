@@ -101,10 +101,6 @@ export class PerfilComponent implements OnInit {
     this.imgSrc = this.datosAlumno.imagen;
   }
 
-  expirado() {
-    this.tokenService.tokenExpired(this.tokenService.getToken());
-  }
-
   cerrarSesion() {
     this.authService.logout();
   }

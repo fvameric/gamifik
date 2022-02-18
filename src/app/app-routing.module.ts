@@ -17,14 +17,14 @@ const routes: Routes = [
   { path: '', redirectTo: 'identificacion', pathMatch: 'full' },
   { path: 'identificacion', component: IdentificacionComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
-  { path: 'dashboardprofesor', component: DashboardProfesorComponent, canActivate: [AuthGuardService] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService, RoleGuardService] },
+  { path: 'dashboardprofesor', component: DashboardProfesorComponent, canActivate: [AuthGuardService, RoleGuardService] },
   { path: 'registro', component: RegistroComponent },
-  { path: 'header', component: HeaderComponent },
+  { path: 'header', component: HeaderComponent, canActivate: [AuthGuardService] },
   { path: 'footer', component: FooterComponent },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuardService, RoleGuardService]},
   { path: 'perfilprofesor', component: PerfilProfesorComponent, canActivate: [AuthGuardService, RoleGuardService] },
-  { path: 'pruebas-crear-ranking', component: PruebasCrearRankingComponent, canActivate: [AuthGuardService] },
+  { path: 'pruebas-crear-ranking', component: PruebasCrearRankingComponent },
 ];
 
 @NgModule({

@@ -29,7 +29,6 @@ export class AuthService {
         this.guardarLocalStorage(val.data);
 
         // token
-        console.log("guardar token");
         this.tokenService.saveToken(val.accessToken);
         this.tokenService.saveUser(val.data);
       }

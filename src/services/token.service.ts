@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 const TOKEN_KEY = 'auth-token';
@@ -43,7 +42,7 @@ export class TokenService {
     console.log("expired: " + this.jwtHelper.isTokenExpired(token));
     
     if (this.jwtHelper.isTokenExpired(token)) {
-      //this.signOut();
+      this.signOut();
     }
   }
 

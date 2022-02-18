@@ -17,6 +17,10 @@ export class HeaderComponent implements OnInit {
     this.user = this.tokenService.getUser();
   }
 
+  expirado() {
+    this.tokenService.tokenExpired(this.tokenService.getToken());
+  }
+
   onclickToggle() {
     let navMenu = <HTMLElement>document.getElementById('nav-menu');
     if (this.toggleMenu) {
