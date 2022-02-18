@@ -207,7 +207,6 @@ export class DashboardComponent implements OnInit {
       val.forEach((element:any) => {
         if (element.id_rank == this.rankSeleccionado.id_rank) {
           this.usersService.obtenerAlumnoPorId(element.id_alumno).subscribe((val: any) => {
-            console.log(val.data);
             this.listaAlumnos.push(val.data);
           });
         }
