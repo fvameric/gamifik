@@ -2,19 +2,28 @@
 
 <header id="header">
     <nav class="navbar-todo">
-        <a routerLink="/dashboard" class="logo">FBX</a>
 
-        <button (click)="expirado()">
-            comprobar expirado
-        </button>
-        
+
         <ul id="nav-menu">
-            
+
+
+
             <li class="nav-items-right"><a routerLink="/perfil">{{user.nick}}</a></li>
-            <li class="nav-items-right"><img src={{user.imagen}}/></li>
+            <li class="nav-items-right"><img src={{user.imagen}} /></li>
             <li class="nav-items-right"><a routerLink="/dashboard">Mis Rankins</a></li>
+
+            <a routerLink="/dashboard" class="logo">
+                <div class="containerlogo">
+                    <div class="logotest">
+                        <div class="barralogo1"></div>
+                        <div class="barralogo2"></div>
+                        <div class="barralogo3"></div>
+                        <div class="barralogo4"></div>
+                    </div>
+                </div>
+            </a>
         </ul>
-        
+
         <span id="abrir-menu" class="material-icons" (click)="onclickToggle()">
             reorder
         </span>

@@ -167,3 +167,206 @@ li a {
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@import url(//fonts.googleapis.com/css?family=Lato:300:400);
+body {
+    margin: 0;
+}
+
+p {
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 1px;
+    font-size: 14px;
+    color: #333333;
+}
+
+.logo {
+    width: 50px;
+    fill: white;
+    padding-right: 15px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.inner-header {
+    height: 65vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.waves {
+    position: relative;
+    width: 100%;
+    height: 15vh;
+    margin-bottom: -7px;
+    min-height: 100px;
+    max-height: 150px;
+}
+
+.content {
+    position: relative;
+    height: 20vh;
+    text-align: center;
+    background-color: rgb(211, 83, 83);
+}
+
+.footer-waves {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: -10;
+}
+
+
+/* Animacion */
+
+.parallax>use {
+    animation: move-forever 30s cubic-bezier(.55, .5, .45, .5) infinite alternate;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
+}
+
+.parallax>use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 20s;
+
+}
+
+.parallax>use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 20s;
+}
+
+.parallax>use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 20s;
+}
+
+@keyframes move-forever {
+    0% {
+        transform: translate3d(-90px, 0, 0);
+    }
+    100% {
+        transform: translate3d(85px, 0, 0);
+    }
+}
+
+
+/*Shrinking for mobile*/
+
+@media (max-width: 768px) {
+    .waves {
+        height: 40px;
+        min-height: 40px;
+    }
+    .content {
+        height: 30vh;
+    }
+    h1 {
+        font-size: 24px;
+    }
+}
+
+
+/* logo animado */
+
+.logotest {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-top: 60px;
+}
+
+.logotest>div {
+    position: absolute;
+    width: 25px;
+    margin: 2px;
+    border-radius: 100px 100px 0 0;
+}
+
+.barralogo1 {
+    background-color: rgb(20, 129, 255);
+    animation: barra1 0.2s forwards;
+    animation-delay: 0.8s;
+    right: 1400px;
+}
+
+.barralogo2 {
+    background-color: rgb(71, 212, 255);
+    animation: barra2 0.2s forwards;
+    animation-delay: 1s;
+    right: 1370px;
+}
+
+.barralogo3 {
+    background-color: rgb(74, 159, 255);
+    animation: barra3 0.2s forwards;
+    animation-delay: 1.2s;
+    right: 1340px;
+}
+
+.barralogo4 {
+    background-color: rgb(71, 212, 255);
+    animation: barra4 0.2s forwards;
+    animation-delay: 1.4s;
+    right: 1310px;
+}
+
+@keyframes barra1 {
+    0% {
+        height: 0px;
+    }
+    100% {
+        height: 40px;
+    }
+}
+
+@keyframes barra2 {
+    0% {
+        height: 0px;
+    }
+    100% {
+        height: 50px;
+    }
+}
+
+@keyframes barra3 {
+    0% {
+        height: 0px;
+    }
+    100% {
+        height: 20px;
+    }
+}
+
+@keyframes barra4 {
+    0% {
+        height: 0px;
+    }
+    100% {
+        height: 70px;
+    }
+}
