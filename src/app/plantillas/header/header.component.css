@@ -52,6 +52,7 @@ li {
 }
 
 .nav-items-right:hover {
+  transition: 1s;
   background-color: #1292f8;
   border-radius: 50px;
 }
@@ -63,6 +64,8 @@ li {
 }
 
 li a {
+  margin: 5px;
+  transition: 1s;
   display: block;
   color: white;
   text-align: center;
