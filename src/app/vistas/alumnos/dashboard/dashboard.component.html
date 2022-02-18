@@ -15,9 +15,6 @@
                 </div>
             </ng-template>
         </div>
-        <div class="unirse-retangulo">
-            <button class="unirse-ranking">Unirse</button>
-        </div>
     </div>
 </div>
 
@@ -25,8 +22,8 @@
     <div class="info-rankings">
         <div class="titulo-detalle-ranking" *ngIf="rankSeleccionado;else noselec">
             <h1>Ranking</h1>
-            <h4>{{rankSeleccionado.nom_rank}}</h4>
-            <h3>{{rankSeleccionado.cod_rank}}</h3>
+            <h4> Nombre del ranking: {{rankSeleccionado.nom_rank}}</h4>
+            <h3> Codigo de acceso:  {{rankSeleccionado.cod_rank}}</h3>
         </div>
         <ng-template #noselec>
             <div class="titulo-detalle-ranking">
