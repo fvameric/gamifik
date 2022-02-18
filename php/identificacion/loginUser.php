@@ -14,9 +14,7 @@
   // clases
   $bd = new claseBD();
   $con = $bd->obtenerConexion();
-  class Result
-  {
-  }
+  class Result{}
   $response = new Result();
 
   // query
