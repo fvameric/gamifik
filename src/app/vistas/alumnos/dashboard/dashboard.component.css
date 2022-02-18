@@ -150,8 +150,6 @@ div.content {
 }
 
 .unirse-retangulo {
-  transition: 1s;
-  margin: 5px;
   background: #1292f8;
   float: left;
   width: 100%;
