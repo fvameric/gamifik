@@ -19,6 +19,7 @@ const URL_RANK_PROFES = 'http://localhost:8080/rankings/getRankProfes.php';     
 const URL_RANK_PROFES_ID = 'http://localhost:8080/rankings/getRankProfesId.php';  // obtener relacion rankings - id de profesor
 
 const URL_RANK_JOIN_ALUMNOS = 'http://localhost:8080/rankings/getRankAlumnoId.php';      // obtener inner join ranking rank_alumnos
+const URL_RANK_JOIN_PROFES = 'http://localhost:8080/rankings/getRankProfesorId.php';      // obtener inner join ranking rank_profes
 
 const URL_INSERT_RANK_ALUMNOS = 'http://localhost:8080/rankings/insertarAlumnoEnRanking.php';      // insertar alumnos y rankings
 
@@ -71,7 +72,7 @@ export class RankingService {
   }
 
   // obtener ranking - profes
-  obtenerRankingProfes(id: number) {
+  obtenerRankingProfes() {
     return this.http.get(URL_RANK_PROFES);
   }
 
@@ -82,6 +83,10 @@ export class RankingService {
 
   obtenerJoinRankingAlumno() {
     return this.http.get(URL_RANK_JOIN_ALUMNOS);
+  }
+
+  obtenerJoinRankingProfes() {
+    return this.http.get(URL_RANK_JOIN_PROFES);
   }
 
   insertarAlumnoEnRanking(id_rank: number, id_alumno: number) {

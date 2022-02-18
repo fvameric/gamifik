@@ -1,0 +1,200 @@
+body {
+    height: 100% !important;
+  }
+  
+  .separador1 {
+    display: block;
+    float: left;
+    height: 100%;
+  }
+  
+  .separador2 {
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* sidebar */
+  .sidebar {
+    width: 100%;
+    background: #0000008c;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    backdrop-filter: blur(6px);
+    overflow: auto;
+    margin-top: 50%;
+    border-radius: 0px 10px 10px 0px;
+    height: 80%;
+  }
+  
+  .sidebar a {
+    display: block;
+    color: rgb(117, 117, 117);
+    padding: 16px;
+    text-decoration: none;
+    transition: 1s ease-in-out;
+  }
+  
+  .sidebar a.active {
+    background-color: transparent;
+    color: white;
+  }
+  
+  .sidebar a:hover:not(.active) {
+    transition: 1s;
+    background-color: #1292f8;
+    color: white;
+    border-radius: 5px 5px 5px 5px;
+  }
+  
+  div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+  }
+  
+  /*info  rankings dashboard*/
+  .info-rankings {
+    padding: 10px;
+    margin-top: 12%;
+    width: 80%;
+    height: 50%;
+    display: inline-block;
+    background: #0000008c;
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
+    border-radius: 5px 5px 5px 5px;
+  }
+  
+  /* cartas destacados
+  
+    .contenido-dashboard {
+      padding: 10px;
+      margin-top: 50px;
+      width: auto;
+      display: inline-block;
+      background: #0000008c;
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
+      border-radius: 5px 5px 5px 5px;
+    }
+  
+    .rectangulo {
+      float: left;
+      padding: 0;
+      margin: 10px;
+      width: 330px;
+      height: 150px;
+      background: #0000008c;
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
+      border-radius: 5px 5px 5px 5px;
+    }
+  
+    h4 {
+      margin-top: 5%;
+      margin-left: 5%;
+      color: white !important;
+      font-size: 25px;
+    }
+  
+    .button-destacados {
+      margin-left: 70%;
+      padding: 8px;
+      margin-right: 1rem;
+      border-radius: 5px;
+      background-color: #56baed;
+      color: white;
+      border: none;
+      transition: 0.5s ease-in-out;
+    }
+  
+    .button-destacados:hover {
+      transform: scale(1.1);
+      transition: 1s;
+    }
+  
+    .texto-destacados {
+      margin-left: 8%;
+      color: rgb(182, 182, 182);
+    }
+  
+  
+  
+    .Texto-destacados {
+      text-align: center;
+      margin: 1%;
+    }
+  
+    @media (max-width: 1227px) {
+      
+      .rectangulo {
+        width:95%;
+        float:left;
+      }
+      
+    }
+    */
+  .unirse-ranking {
+    margin: 5%;
+    padding: 10px;
+    border-radius: 5px;
+    background: #0000008c;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    backdrop-filter: blur(6px);
+    color: #cccccc;
+    border: none;
+    transition: 1s;
+  }
+  
+  .unirse-ranking:hover {
+    background-color: #56baed;
+  }
+  
+  .unirse-retangulo {
+    background: #1292f8;
+    float: left;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+  }
+  
+  .lista-rankings p {
+    color: #ffffff;
+  }
+  
+  .info-rankings {
+    color: #ffffff;
+  }
+  
+  .titulo-detalle-ranking {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  
+  .alumnos-ranking {
+    color: #ffffff;
+    padding: 10px;
+  }
+  
+  .alumnos-ranking img {
+    width: 30px;
+    height: auto;
+  }
+  
+  .buttom-ranking-class{
+    background-color: transparent;
+    width: 200px;
+    height: 50px;
+    text-align: left;
+    border: none;
+    color: #cccccc;
+    cursor: pointer;
+    transition: 1s;
+  }
+  .buttom-ranking-class:hover{
+    transition: 1s;
+    color: white;
+    background-color: #56baed;
+  
+  }

@@ -21,7 +21,7 @@
             </section>
             <nav>
                 <!--Mostrar Rankings-->
-                <a (click)="mostrarRankings()" class="mis-rankings">
+                <a class="mis-rankings">
                     <div class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
                             <path
@@ -30,31 +30,10 @@
                     </div>
 
                     <div class="content">
-                        <h1>Mis Rankings</h1>
+                        <h5 routerLink='/dashboardprofesor'>Mis Rankings</h5>
                     </div>
-
-                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
-                        <g class="nc-icon-wrapper" fill="#444444">
-                            <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z" class="icono-flecha">
-                            </path>
-                        </g>
-                    </svg>
                 </a>
 
-                <div *ngIf="this.mostrarRankingsVisual" class="rankings-profe">
-                    <div class="cursos-profe">
-                        <h2 class="h2-perfil">Rankings</h2>
-                        <hr>
-                        <div *ngIf="flagRanks;else tieneRankings">
-                            No tiene rankings.
-                        </div>
-                        <ng-template #tieneRankings>
-                            <div *ngFor="let rank of arrRankings">
-                                {{rank.id_rank}}. {{rank.nom_rank}} - {{rank.alumnos}} alumnos
-                            </div>
-                        </ng-template>
-                    </div>
-                </div>
                 <!--Mostrar Configurarcion-->
                 <a (click)="mostrarConfiguracion()" class="configuracion">
                     <div class="icon">
@@ -246,7 +225,7 @@
                     <h2 class="h2-perfil">¿Estas seguro?</h2>
                     <div class="cursos-profe">
                         <div class="align-cerrar-sesion">
-                            <button class="boton-cerrar" routerLink="/identificacion">Cerrar Sesion</button>
+                            <button class="boton-cerrar" (click)="cerrarSesion()">Cerrar Sesion</button>
                             <button class="boton-cancelar">Cancelar</button>
                         </div>
                     </div>

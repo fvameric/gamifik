@@ -1,15 +1,82 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Profesor } from '../../../interfaces/Profesor';
+import { UsersService } from 'services/users.service';
+import { FormBuilder } from '@angular/forms';
+import { RankingService } from 'services/ranking.service';
+import { TokenService } from 'services/token.service';
 @Component({
   selector: 'app-dashboard-profesor',
   templateUrl: './dashboard-profesor.component.html',
   styleUrls: ['./dashboard-profesor.component.css']
 })
 export class DashboardProfesorComponent implements OnInit {
+  datosProfesor: Profesor = {
+    id_profe: 0,
+    nick: '',
+    email: '',
+    pass: '',
+    nombre: '',
+    apellidos: '',
+    centro: 0,
+    tipo: 1,
+    imagen: ''
+  };
 
-  constructor() { }
+  // rankings
+  rankings: any;
+  rankingsConProfes: any;
+  flagRanks: boolean = false;
+  arrRankings: any[] = [];
+  rankSeleccionado: any;
+  listaAlumnos: any[] = [];
+
+  constructor(
+    private usersService: UsersService,
+    private rankingService: RankingService,
+    private tokenService: TokenService,
+    public formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
+    this.obtenerDatos();
+    this.obtenerDatosRanking();
   }
 
+  obtenerDatos() {
+    this.datosProfesor = this.tokenService.getUser();
+  }
+
+  obtenerDatosRanking() {
+    this.arrRankings = [];
+    this.rankingService.obtenerRanking().subscribe(val => this.rankings = val);
+    this.rankingService.obtenerJoinRankingProfes().subscribe((val: any) => {
+      this.rankingsConProfes = val;
+
+      val.forEach((element: any) => {
+        if (element.id_profe == this.datosProfesor.id_profe) {
+          this.arrRankings.push(element);
+        }
+      });
+
+      if (this.arrRankings.length == 0) {
+        this.flagRanks = true;
+      } else {
+        this.flagRanks = false;
+      }
+    });
+  }
+
+  rankSelec(rankId: number) {
+    this.listaAlumnos = [];
+    this.rankSeleccionado = this.arrRankings.find(rank => rank.id_rank == rankId);
+
+    this.rankingService.obtenerRankingAlumnos().subscribe((val: any) => {
+      val.forEach((element:any) => {
+        if (element.id_rank == this.rankSeleccionado.id_rank) {
+          this.usersService.obtenerAlumnoPorId(element.id_alumno).subscribe((val: any) => {
+            this.listaAlumnos.push(val.data);
+          });
+        }
+      });
+    });
+  }
 }

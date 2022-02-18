@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Alumno } from 'app/interfaces/Alumno';
 import { Profesor } from '../../../interfaces/Profesor';
-import { User } from 'app/interfaces/User';
 import { UsersService } from 'services/users.service';
-import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { RankingService } from 'services/ranking.service';
-import { Ranking } from 'app/interfaces/Ranking';
 import Swal from 'sweetalert2';
 import { TokenService } from 'services/token.service';
-import { AuthService } from 'services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,44 +13,6 @@ import { AuthService } from 'services/auth.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  profesores: any;
-  alumnos: any;
-  mostrarRankingsVisual: boolean = false;
-  mostrarConfiguracionVisual: boolean = false;
-  mostrarCerrarVisual: boolean = false;
-  editableEmail: boolean = true;
-  editableNombre: boolean = true;
-  editableApellidos: boolean = true;
-
-  passType: string = 'password';
-  passTypeNew: string = 'password';
-  passTypeConfirmNew: string = 'password';
-
-  antiguaContrasena: boolean = false;
-  nuevaContrasena: boolean = false;
-  confirmarNuevaContrasena: boolean = false;
-
-  mostrarEditarContrasena: boolean = false;
-
-  password: string = 'password';
-  text: string = 'text';
-
-  nombre: string = 'funciona Fran';
-  apellidos: string = 'funciona Fran Olga';
-  email: string = 'funcionaFran@gmail.com';
-
-  datosProfesor: Profesor = {
-    id_profe: 0,
-    nick: '',
-    email: '',
-    pass: '',
-    nombre: '',
-    apellidos: '',
-    centro: 0,
-    tipo: 1,
-    imagen: ''
-  };
-
   datosAlumno: Alumno = {
     id_alumno: 0,
     nick: '',
@@ -67,21 +25,12 @@ export class DashboardComponent implements OnInit {
     imagen: ''
   };
 
-  tipoUser: any;
-  datosStorage: any;
-
   // rankings
   rankings: any;
   rankingsConAlumnos: any;
-  ranksCodes: any;
-  alumnosId: any[] = [];
-  ranksArray: any[] = [];
   flagRanks: boolean = false;
-  rankingIds: any;
-  datosRanking: any;
   arrRankings: any[] = [];
   rankSeleccionado: any;
-  noselec: boolean = false;
   listaAlumnos: any[] = [];
 
   constructor(
@@ -212,11 +161,5 @@ export class DashboardComponent implements OnInit {
         }
       });
     });
-
-    if (this.noselec) {
-      this.noselec = false;
-    } else {
-      this.noselec = true;
-    }
   }
 }

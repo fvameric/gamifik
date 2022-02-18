@@ -1,1 +1,41 @@
-<p>dashboard-profesor works!</p>
+<app-header></app-header>
+<div class="separador1">
+    <div class="sidebar">
+        <div class="lista-rankings">
+            <h2>Mis Rankings</h2>
+            <div *ngIf="flagRanks;else tieneRankings">
+                <p>No tiene rankings</p>
+            </div>
+            <ng-template #tieneRankings>
+                <div *ngFor="let rank of arrRankings; let i = index" class="rank">
+                    <button class="buttom-ranking-class" (click)="rankSelec(rank.id_rank)">{{rank.nom_rank}}</button>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
+
+<div class="separador2">
+    <div class="info-rankings">
+        <div class="titulo-detalle-ranking" *ngIf="rankSeleccionado;else noselec">
+            <h1>Ranking</h1>
+            <h4> Cantidad de alumnos: {{rankSeleccionado.alumnos}}</h4>
+            <h4> Nombre del ranking: {{rankSeleccionado.nom_rank}}</h4>
+            <h3> Codigo de acceso: {{rankSeleccionado.cod_rank}}</h3>
+        </div>
+        <ng-template #noselec>
+            <div class="titulo-detalle-ranking">
+                <h1>Ranking</h1>
+                <h5>No se seleccionó ningún ranking</h5>
+            </div>
+        </ng-template>
+        <div class="alumnos-ranking" *ngFor="let alumno of listaAlumnos; let i = index">
+            {{i}}.
+            
+            <div>
+                <img src="{{alumno.imagen}}">
+            </div>
+            {{alumno.nick}}
+        </div>
+    </div>
+</div>

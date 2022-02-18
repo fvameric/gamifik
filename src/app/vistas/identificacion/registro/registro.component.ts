@@ -181,6 +181,8 @@ export class RegistroComponent implements OnInit {
           tipo: 0,
           imagen: this.imgSrc
         }
+
+        console.log(nuevoAlumno);
         this.authService.registroAlumno(nuevoAlumno);
       }
     }

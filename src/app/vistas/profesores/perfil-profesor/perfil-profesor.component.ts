@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Alumno } from 'app/interfaces/Alumno';
 import { Profesor } from '../../../interfaces/Profesor';
 import { User } from 'app/interfaces/User';
 import { UsersService } from 'services/users.service';
@@ -7,6 +6,8 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { RankingService } from 'services/ranking.service';
 import Swal from 'sweetalert2';
+import { TokenService } from 'services/token.service';
+import { AuthService } from 'services/auth.service';
 
 const USER_LS = 'userLocalStorage';
 
@@ -84,16 +85,122 @@ export class PerfilProfesorComponent implements OnInit {
 
   constructor(
     private usersService: UsersService,
-    private rankingService: RankingService,
+    private authService: AuthService,
+    private tokenService: TokenService,
     public formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.obtenerDatosProfesor();
     this.crearForm();
     this.oldCentro();
-    this.obtenerDatosRanking();
   }
 
+  obtenerDatosProfesor() {
+    this.datosProfesor = this.tokenService.getUser();
+
+    this.nombre = this.datosProfesor.nombre;
+    this.apellidos = this.datosProfesor.apellidos;
+    this.email = this.datosProfesor.email;
+    this.imgSrc = this.datosProfesor.imagen;
+  }
+
+  cerrarSesion() {
+    this.authService.logout();
+  }
+
+  readURL(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e: any) =>
+        this.imgSrc = e.target.result;
+      reader.readAsDataURL(file);
+    }
+  }
+
+  oldCentro() {
+    this.centroSelec = this.datosProfesor.centro;
+  }
+
+  confirmarModif() {
+    let userModif: User = {
+      id: this.datosProfesor.id_profe,
+      email: this.email,
+      pass: this.datosProfesor.pass,
+      nombre: this.nombre,
+      apellidos: this.apellidos,
+      centro: this.centroSelec
+    }
+
+    // en caso de que se quiera cambiar el email, nombre o apellidos
+    // pero no la password
+    if (this.oldPass == '' && this.newPass == '' && this.newConfPass == '') {
+      this.generarSwal(this.arrSwal[0], userModif);
+    } else {
+      if (this.oldPass == this.datosProfesor.pass) {
+        if (this.newPass == '' || this.newConfPass == '') {
+          this.generarSwal(this.arrSwal[1]);
+        } else {
+
+          // en caso de que se quiera cambiar cualquier dato y
+          // además, la password
+          if (this.newPass == this.newConfPass) {
+            let userModif: User = {
+              id: this.datosProfesor.id_profe,
+              email: this.email,
+              pass: this.newConfPass,
+              nombre: this.nombre,
+              apellidos: this.apellidos,
+              centro: this.centroSelec
+            }
+
+            this.generarSwal(this.arrSwal[0], userModif);
+          } else {
+            this.generarSwal(this.arrSwal[2]);
+          }
+        }
+      } else {
+        this.generarSwal(this.arrSwal[3]);
+      }
+    }
+  }
+
+  generarSwal(swal: any, user?: User) {
+    if (swal.id == 0) {
+      if (user != undefined || user != null) {
+        Swal.fire({
+          title: '¿Quieres guardar los cambios?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              icon: swal.icon,
+              title: swal.title,
+              text: swal.text
+            });
+
+            this.usersService.modificarProfesor(user).subscribe((val: any) => {
+              localStorage.removeItem(USER_LS);
+              localStorage.setItem(USER_LS, JSON.stringify(val.data));
+              this.ngOnInit();
+            });
+          }
+        });
+      }
+    } else {
+      Swal.fire({
+        icon: swal.icon,
+        title: swal.title,
+        text: swal.text
+      });
+    }
+  }
+
+  /********** funciones formulario **********/
   crearForm() {
     //Validadors registre
     this.registerForm = this.formBuilder.group({
@@ -124,57 +231,7 @@ export class PerfilProfesorComponent implements OnInit {
     };
   }
 
-  obtenerDatosProfesor() {
-    this.datosStorage = localStorage.getItem(USER_LS);
-    this.datosProfesor = JSON.parse(this.datosStorage);
-
-    this.nombre = this.datosProfesor.nombre;
-    this.apellidos = this.datosProfesor.apellidos;
-    this.email = this.datosProfesor.email;
-    this.imgSrc = this.datosProfesor.imagen;
-  }
-
-  readURL(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (e: any) =>
-        this.imgSrc = e.target.result;
-      reader.readAsDataURL(file);
-    }
-  }
-
-  obtenerDatosRanking() {
-    this.arrRankings = [];
-    this.rankingService.obtenerRankingProfeId(this.datosProfesor.id_profe).subscribe((val: any) => {
-      if (val == null) {
-        this.flagRanks = true;
-      } else {
-        this.flagRanks = false;
-        val.forEach((element: any) => {
-          this.rankingService.obtenerRankingPorId(element.id_rank).subscribe((val: any) => {
-            this.datosRanking = val;
-            this.arrRankings.push(this.datosRanking.data);
-          });
-        });
-      }
-    });
-  }
-
-  oldCentro() {
-    this.centroSelec = this.datosProfesor.centro;
-  }
-
-  mostrarRankings() {
-    if (this.mostrarRankingsVisual == false) {
-      this.mostrarRankingsVisual = true;
-      this.mostrarConfiguracionVisual = false;
-      this.mostrarCerrarVisual = false;
-    } else {
-      this.mostrarRankingsVisual = false;
-    }
-  }
-
+  /********** funciones botones del perfil **********/
   mostrarConfiguracion() {
     if (this.mostrarConfiguracionVisual == false) {
       this.mostrarConfiguracionVisual = true;
@@ -285,83 +342,4 @@ export class PerfilProfesorComponent implements OnInit {
       this.passTypeConfirmNew = 'password';
     }
   }
-
-  confirmarModif() {
-    let userModif: User = {
-      id: this.datosProfesor.id_profe,
-      email: this.email,
-      pass: this.datosProfesor.pass,
-      nombre: this.nombre,
-      apellidos: this.apellidos,
-      centro: this.centroSelec
-    }
-
-    // en caso de que se quiera cambiar el email, nombre o apellidos
-    // pero no la password
-    if (this.oldPass == '' && this.newPass == '' && this.newConfPass == '') {
-      this.generarSwal(this.arrSwal[0], userModif);
-    } else {
-      if (this.oldPass == this.datosProfesor.pass) {
-        if (this.newPass == '' || this.newConfPass == '') {
-          this.generarSwal(this.arrSwal[1]);
-        } else {
-
-          // en caso de que se quiera cambiar cualquier dato y
-          // además, la password
-          if (this.newPass == this.newConfPass) {
-            let userModif: User = {
-              id: this.datosProfesor.id_profe,
-              email: this.email,
-              pass: this.newConfPass,
-              nombre: this.nombre,
-              apellidos: this.apellidos,
-              centro: this.centroSelec
-            }
-
-            this.generarSwal(this.arrSwal[0], userModif);
-          } else {
-            this.generarSwal(this.arrSwal[2]);
-          }
-        }
-      } else {
-        this.generarSwal(this.arrSwal[3]);
-      }
-    }
-  }
-
-  generarSwal(swal: any, user?: User) {
-    if (swal.id == 0) {
-      if (user != undefined || user != null) {
-        Swal.fire({
-          title: '¿Quieres guardar los cambios?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Sí'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire({
-              icon: swal.icon,
-              title: swal.title,
-              text: swal.text
-            });
-  
-            this.usersService.modificarProfesor(user).subscribe((val: any) => {
-              localStorage.removeItem(USER_LS);
-              localStorage.setItem(USER_LS, JSON.stringify(val.data));
-              this.ngOnInit();
-            });
-          }
-        });
-      }
-    } else {
-      Swal.fire({
-        icon: swal.icon,
-        title: swal.title,
-        text: swal.text
-      });
-    }
-  }
-
 }

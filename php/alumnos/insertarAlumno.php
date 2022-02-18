@@ -6,6 +6,7 @@
 
   // includes
   include_once("../conexion/bd.php");
+  include_once("../tokenJWT/generarToken.php");
   
   // clases
   // clase conexión
@@ -21,31 +22,51 @@
   $alumno = json_decode($json);
 
   // query
-  $queryInsert = "INSERT INTO `alumno`(`id_alumno`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `fecha_nacimiento`, `tipo`, `imagen`) VALUES
-  (NULL,'$alumno->nick','$alumno->email','$alumno->pass','$alumno->nombre','$alumno->apellidos','$alumno->fecha_nacimiento','$alumno->tipo' ,'$alumno->imagen')";
   $querySelect = "SELECT * FROM `alumno` WHERE nick = '$alumno->nick' AND email = '$alumno->email'";
 
-  $resInsert = mysqli_query($con, $queryInsert);
+  // comprobamos que el email y el nick de usuario no se repita
+  $resSelect = mysqli_query($con, $querySelect);
 
-  // validacion de la query
-  if ($resInsert) {
-
-    // si se hace bien el select devolvemos el profesor recién registrado
-    $resSelect = mysqli_query($con, $querySelect);
-    if ($resSelect) {
-      $response->resultado = 'ok';
-      $response->mensaje = 'Se registró correctamente';
-      $data = mysqli_fetch_array($resSelect);
-      $response->data = $data;
-      echo json_encode($response);
+  if ($resSelect) {
+    $dataValidacion = mysqli_fetch_array($resSelect);
+    if ($alumno->nick != $dataValidacion['nick'] && $alumno->email != $dataValidacion['email']) {
+      $queryInsert = "INSERT INTO `alumno`(`id_alumno`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `fecha_nacimiento`, `tipo`, `imagen`) VALUES
+      (NULL,'$alumno->nick','$alumno->email','$alumno->pass','$alumno->nombre','$alumno->apellidos','$alumno->fecha_nacimiento','$alumno->tipo' ,'$alumno->imagen')";
+  
+      $resInsert = mysqli_query($con, $queryInsert);
+  
+      // validacion de la query
+      if ($resInsert) {
+  
+        // si se hace bien el select devolvemos el profesor recién registrado
+        $resSelectUltimoAlumno = mysqli_query($con, $querySelect);
+        if ($resSelectUltimoAlumno) {
+          $response->resultado = 'ok';
+          $response->mensaje = 'Se registró correctamente';
+          $data = mysqli_fetch_array($resSelectUltimoAlumno);
+          $response->data = $data;
+          $response->accessToken = json_encode($jwt);
+          echo json_encode($response);
+        } else {
+          $response->resultado = 'error';
+          $response->mensaje = 'Hubo un error al cargar el alumno insertado';
+          echo json_encode($response);
+        }
+      } else {
+        $response->resultado = 'error';
+        $response->mensaje = 'Hubo un error al registrar al alumno';
+        echo json_encode($response);
+      }
     } else {
-      $response->resultado = 'error';
-      $response->mensaje = 'Hubo un error al cargar el alumno insertado';
-      echo json_encode($response);
+      if ($alumno->nick == $dataValidacion['nick'] || $alumno->email == $dataValidacion['email']) {
+        $response->resultado = 'error';
+        $response->mensaje = 'Nick o email en uso';
+        echo json_encode($response);
+      }
     }
   } else {
     $response->resultado = 'error';
-    $response->mensaje = 'Hubo un error al registrar al alumno';
+    $response->mensaje = 'Hubo un error con la base de datos';
     echo json_encode($response);
   }
 ?>

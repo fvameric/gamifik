@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Alumno } from 'app/interfaces/Alumno';
-import { Profesor } from '../../../interfaces/Profesor';
 import { User } from 'app/interfaces/User';
 import { UsersService } from 'services/users.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { RankingService } from 'services/ranking.service';
-import { Ranking } from 'app/interfaces/Ranking';
 import Swal from 'sweetalert2';
 import { TokenService } from 'services/token.service';
 import { AuthService } from 'services/auth.service';
@@ -77,7 +75,6 @@ export class PerfilComponent implements OnInit {
 
   constructor(
     private usersService: UsersService,
-    private rankingService: RankingService,
     private authService: AuthService,
     private tokenService: TokenService,
     public formBuilder: FormBuilder) { }
@@ -88,11 +85,6 @@ export class PerfilComponent implements OnInit {
   }
 
   obtenerDatosAlumno() {
-    /*
-    this.datosStorage = localStorage.getItem(USER_LS);
-    this.datosAlumno = JSON.parse(this.datosStorage);
-    */
-
     this.datosAlumno = this.tokenService.getUser();
 
     this.nombre = this.datosAlumno.nombre;
@@ -220,16 +212,6 @@ export class PerfilComponent implements OnInit {
   }
 
   /********** funciones botones del perfil **********/
-  mostrarRankings() {
-    if (this.mostrarRankingsVisual == false) {
-      this.mostrarRankingsVisual = true;
-      this.mostrarConfiguracionVisual = false;
-      this.mostrarCerrarVisual = false;
-    } else {
-      this.mostrarRankingsVisual = false;
-    }
-  }
-
   mostrarConfiguracion() {
     if (this.mostrarConfiguracionVisual == false) {
       this.mostrarConfiguracionVisual = true;
@@ -340,5 +322,4 @@ export class PerfilComponent implements OnInit {
       this.passTypeConfirmNew = 'password';
     }
   }
-
 }

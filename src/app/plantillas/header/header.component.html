@@ -2,15 +2,19 @@
 
 <header id="header">
     <nav class="navbar-todo">
-
-
         <ul id="nav-menu">
-
-
-
-            <li class="nav-items-right"><a routerLink="/perfil">{{user.nick}}</a></li>
-            <li class="nav-items-right"><img src={{user.imagen}} /></li>
-            <li class="nav-items-right"><a routerLink="/dashboard">Mis Rankins</a></li>
+            <li class="nav-items-right">
+                <a *ngIf="user.tipo == 0;else perfilProfe" routerLink="/perfil">{{user.nick}}</a>
+                <ng-template #perfilProfe>
+                    <a routerLink="/perfilprofesor">{{user.nick}}</a>
+                </ng-template>
+            </li>
+            <li class="nav-items-right">
+                <img src={{user.imagen}} />
+            </li>
+            <li class="nav-items-right">
+                <a routerLink="/dashboard">Mis Rankins</a>
+            </li>
 
             <a routerLink="/dashboard" class="logo">
                 <div class="containerlogo">
@@ -23,7 +27,6 @@
                 </div>
             </a>
         </ul>
-
         <span id="abrir-menu" class="material-icons" (click)="onclickToggle()">
             reorder
         </span>

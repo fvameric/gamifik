@@ -22,7 +22,7 @@
             </section>
             <nav>
                 <!--Mostrar Rankings-->
-                <a (click)="mostrarRankings()" class="mis-rankings">
+                <a class="mis-rankings">
                     <div class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
                             <path
@@ -35,24 +35,6 @@
                     </div>
                 </a>
 
-                <!--
-                <div *ngIf="this.mostrarRankingsVisual" class="rankings-profe">
-                    <div class="cursos-profe">
-                        <h2 class="h2-perfil">Rankings</h2>
-                        <button class="unirse-ranking" (click)="unirseRanking()">
-                            Unirse
-                        </button>
-                        <div *ngIf="flagRanks;else tieneRankings">
-                            No tiene rankings.
-                        </div>
-                        <ng-template #tieneRankings>
-                            <div *ngFor="let rank of arrRankings">
-                                {{rank.id_rank}}. {{rank.nom_rank}}. {{rank.alumnos}}
-                            </div>
-                        </ng-template>
-                    </div>
-                </div>
-                -->
                 <!--Mostrar Configurarcion-->
                 <a (click)="mostrarConfiguracion()" class="configuracion">
                     <div class="icon">
