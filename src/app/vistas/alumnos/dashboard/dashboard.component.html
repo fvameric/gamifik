@@ -11,7 +11,7 @@
             </div>
             <ng-template #tieneRankings>
                 <div *ngFor="let rank of arrRankings; let i = index" class="rank">
-                    <button (click)="rankSelec(rank.id_rank)">{{rank.nom_rank}}</button>
+                    <button class="buttom-ranking-class" (click)="rankSelec(rank.id_rank)">{{rank.nom_rank}}</button>
                 </div>
             </ng-template>
         </div>
@@ -22,8 +22,8 @@
     <div class="info-rankings">
         <div class="titulo-detalle-ranking" *ngIf="rankSeleccionado;else noselec">
             <h1>Ranking</h1>
-            <h4> Nombre del ranking: {{rankSeleccionado.nom_rank}}</h4>
-            <h3> Codigo de acceso:  {{rankSeleccionado.cod_rank}}</h3>
+            <h4> Nombre del ranking:   {{rankSeleccionado.nom_rank}}</h4>
+            <h3> Codigo de acceso:   {{rankSeleccionado.cod_rank}}</h3>
         </div>
         <ng-template #noselec>
             <div class="titulo-detalle-ranking">
@@ -31,7 +31,6 @@
                 <h5>No se seleccionó ningún ranking</h5>
             </div>
         </ng-template>
-        <hr>
         <div class="alumnos-ranking" *ngFor="let alumno of listaAlumnos; let i = index">
             {{i}}.
             
@@ -42,22 +41,3 @@
         </div>
     </div>
 </div>
-<!--<div class="separador2">
-    <div class="contenido-dashboard">
-        <div class="rectangulo">
-            <h4 class=".destacadoDashboard">Rankins</h4>
-            <p class="texto-destacados">11 alumons</p>
-            <button class="button-destacados">Ver más</button>
-        </div>
-        <div class="rectangulo">
-            <h4 class=".destacadoDashboard">Rankins</h4>
-            <p class="texto-destacados">5 alumons</p>
-            <button class="button-destacados">Ver más</button>
-        </div>
-        <div class="rectangulo">
-            <h4 class=".destacadoDashboard">Rankins</h4>
-            <p class="texto-destacados">18 alumons</p>
-            <button class="button-destacados">Ver más</button>
-        </div>
-    </div>
-</div>-->

@@ -140,7 +140,7 @@ div.content {
   background: #0000008c;
   box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
   backdrop-filter: blur(6px);
-  color: white;
+  color: #cccccc;
   border: none;
   transition: 1s;
 }
@@ -180,4 +180,21 @@ div.content {
 .alumnos-ranking img {
   width: 30px;
   height: auto;
+}
+
+.buttom-ranking-class{
+  background-color: transparent;
+  width: 200px;
+  height: 50px;
+  text-align: left;
+  border: none;
+  color: #cccccc;
+  cursor: pointer;
+  transition: 1s;
+}
+.buttom-ranking-class:hover{
+  transition: 1s;
+  color: white;
+  background-color: #56baed;
+
 }
