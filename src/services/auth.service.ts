@@ -81,11 +81,11 @@ export class AuthService {
     if (data.data.tipo == 0) {
       this.tokenService.saveToken(data.accessToken);
       this.tokenService.saveUser(data.data);
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['dashboard']);
     } else {
       this.tokenService.saveToken(data.accessToken);
       this.tokenService.saveUser(data.data);
-      this.router.navigate(['/dashboardprofesor']);
+      this.router.navigate(['dashboardprofesor']);
     }
   }
 }

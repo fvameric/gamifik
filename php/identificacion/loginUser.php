@@ -48,6 +48,7 @@
           $response->resultado = 'ok';
           $response->mensaje = 'Se encontró al profesor';
           $response->data = $dataProfesor;
+          $response->accessToken = json_encode($jwt);
           echo json_encode($response);
         } else {
 
