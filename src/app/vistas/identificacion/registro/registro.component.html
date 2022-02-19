@@ -16,7 +16,7 @@ Formulario PROFESORES
     </div>
 
     <!-- formulario registro profes -->
-    <form id="formularioRegistro" [formGroup]="registerForm" (ngSubmit)="onRegistro(registerForm.value)" class="Icon-inside">
+    <form id="formularioRegistro" [formGroup]="registerForm" (ngSubmit)="onRegistro(registerForm.value)" class="Icon-inside" enctype="multipart/form-data">
 
         <div class="image-upload">
             <label for="file-input">
@@ -87,7 +87,6 @@ Formulario PROFESORES
         <div *ngIf="submitted && form.apellidos.errors" class="invalid-feedback">
             <div *ngIf="form.apellidos.errors.required">Los apellidos son necesarios</div>
         </div>
-
 
         <select class="select-Centros" formControlName="centro">
             <option value="0" class="option-select-centros">Ilerna</option>

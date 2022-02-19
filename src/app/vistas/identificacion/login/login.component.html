@@ -12,7 +12,7 @@
 
     <div class="form-group">
         <div class="input-group">
-            <input type="password" id="password" formControlName="password" class="fadeIn third" [type]="passType" [ngClass]="{ 'is-invalid': submitted && form.password.errors }" placeholder="Password">
+            <input type="password" id="password" formControlName="password" class="fadeIn third" [type]="passType" [ngClass]="{ 'is-invalid': submitted && form.password.errors }" placeholder="Password" autocomplete="on">
 
             <!-- Icono -->
             <i *ngIf="this.passShown" (click)="togglePass()" class="material-icons">
