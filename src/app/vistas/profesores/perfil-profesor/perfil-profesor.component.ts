@@ -2,14 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Profesor } from '../../../interfaces/Profesor';
 import { User } from 'app/interfaces/User';
 import { UsersService } from 'services/users.service';
-import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
-import { RankingService } from 'services/ranking.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { TokenService } from 'services/token.service';
 import { AuthService } from 'services/auth.service';
-
-const USER_LS = 'userLocalStorage';
 
 @Component({
   selector: 'app-perfil-profesor',
@@ -80,7 +76,8 @@ export class PerfilProfesorComponent implements OnInit {
     { id: 0, icon: 'success', title: 'Ok', text: 'Se han guardaron los cambios' },
     { id: 1, icon: 'error', title: 'Error', text: 'Contraseña y confirmar contraseña no pueden quedar vacíos' },
     { id: 2, icon: 'error', title: 'Error', text: 'Las contraseñas tienen que coincidir' },
-    { id: 3, icon: 'error', title: 'Error', text: 'La contraseña actual no es correcta' }
+    { id: 3, icon: 'error', title: 'Error', text: 'La contraseña actual no es correcta' },
+    { id: 4, icon: 'error', title: 'Error', text: 'Este email ya está en uso' }
   ];
 
   constructor(
@@ -131,7 +128,10 @@ export class PerfilProfesorComponent implements OnInit {
       apellidos: this.apellidos,
       centro: this.centroSelec
     }
-
+    // validacion para no duplicar emails
+    if (this.datosProfesor.email != this.email) {
+      this.comprobarEmail(this.email);
+    }
     // en caso de que se quiera cambiar el email, nombre o apellidos
     // pero no la password
     if (this.oldPass == '' && this.newPass == '' && this.newConfPass == '') {
@@ -165,6 +165,14 @@ export class PerfilProfesorComponent implements OnInit {
     }
   }
 
+  comprobarEmail(email: string) {
+    this.usersService.validarEmailExisteProfesores(email).subscribe((val: any) => {
+      if (val.resultado == 'error') {
+        this.generarSwal(this.arrSwal[4]);
+      }
+    });
+  }
+
   generarSwal(swal: any, user?: User) {
     if (swal.id == 0) {
       if (user != undefined || user != null) {
@@ -184,8 +192,7 @@ export class PerfilProfesorComponent implements OnInit {
             });
 
             this.usersService.modificarProfesor(user).subscribe((val: any) => {
-              localStorage.removeItem(USER_LS);
-              localStorage.setItem(USER_LS, JSON.stringify(val.data));
+              this.tokenService.saveUser(val.data);
               this.ngOnInit();
             });
           }
