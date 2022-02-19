@@ -21,24 +21,62 @@
   $queryInsert = "INSERT INTO `profesor` (`id_profe`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `centro`, `tipo`, `imagen`) VALUES
   (NULL, '$profe->nick', '$profe->email', '$profe->pass', '$profe->nombre', '$profe->apellidos', '$profe->centro', '$profe->tipo', '$profe->imagen')";
 
-  $querySelect = "SELECT * FROM `profesor` WHERE nick = '$profe->nick' AND email = '$profe->email'";
+  $querySelect = "SELECT * FROM `profesor` WHERE nick = '$profe->nick' OR email = '$profe->email'";
 
-  $insertResult = mysqli_query($con, $queryInsert);
+  
 
-  // validacion de la query
-  if ($insertResult) {
-    $response->resultado = 'ok';
-    $response->mensaje = 'Se registró correctamente';
+  // comprobamos que el email y el nick de usuario no se repita
+  $resSelect = mysqli_query($con, $querySelect);
 
-    // devolvemos el user que se acaba de registrar
-    $selectResult = mysqli_query($con, $querySelect);
-    $data = mysqli_fetch_array($selectResult);
-    
-    $response->data = $data;
-    echo json_encode($response);
+  if ($resSelect) {
+    $dataValidacion = mysqli_fetch_array($resSelect);
+    if ($profe->nick != $dataValidacion['nick'] && $profe->email != $dataValidacion['email']) {
+      $resInsert = mysqli_query($con, $queryInsert);
+
+      // validacion de la query
+      if ($resInsert) {
+
+        $resSelectUltimoProfe = mysqli_query($con, $querySelect);
+
+        if ($resSelectUltimoProfe) {
+          $response->resultado = 'ok';
+          $response->mensaje = 'Se registró correctamente';
+          $data = mysqli_fetch_array($resSelectUltimoProfe);
+          $response->data = $data;
+          $response->accessToken = json_encode($jwt);
+          echo json_encode($response);
+          exit;
+        } else {
+          $response->resultado = 'error';
+          $response->mensaje = 'Hubo un error al cargar el profesor insertado';
+          echo json_encode($response);
+          exit;
+        }
+      } else {
+        $response->resultado = 'error';
+        $response->mensaje = 'Hubo un error al registrar al profesor';
+        echo json_encode($response);
+        exit;
+      }
+    } else {
+      if ($profe->nick == $dataValidacion['nick']) {
+        $response->resultado = 'error';
+        $response->mensaje = 'Este nick ya está en uso';
+        echo json_encode($response);
+        exit;
+      }
+
+      if ($profe->email == $dataValidacion['email']) {
+        $response->resultado = 'error';
+        $response->mensaje = 'Este email ya está en uso';
+        echo json_encode($response);
+        exit;
+      }
+    }
   } else {
     $response->resultado = 'error';
-    $response->mensaje = 'Hubo un error al registrar al profesor';
+    $response->mensaje = 'Hubo un error con la base de datos';
     echo json_encode($response);
+    exit;
   }
 ?>

@@ -22,7 +22,11 @@
   $alumno = json_decode($json);
 
   // query
-  $querySelect = "SELECT * FROM `alumno` WHERE nick = '$alumno->nick' AND email = '$alumno->email'";
+
+  $queryInsert = "INSERT INTO `alumno`(`id_alumno`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `fecha_nacimiento`, `tipo`, `imagen`) VALUES
+  (NULL,'$alumno->nick','$alumno->email','$alumno->pass','$alumno->nombre','$alumno->apellidos','$alumno->fecha_nacimiento','$alumno->tipo' ,'$alumno->imagen')";
+  
+  $querySelect = "SELECT * FROM `alumno` WHERE nick = '$alumno->nick' OR email = '$alumno->email'";
 
   // comprobamos que el email y el nick de usuario no se repita
   $resSelect = mysqli_query($con, $querySelect);
@@ -30,9 +34,6 @@
   if ($resSelect) {
     $dataValidacion = mysqli_fetch_array($resSelect);
     if ($alumno->nick != $dataValidacion['nick'] && $alumno->email != $dataValidacion['email']) {
-      $queryInsert = "INSERT INTO `alumno`(`id_alumno`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `fecha_nacimiento`, `tipo`, `imagen`) VALUES
-      (NULL,'$alumno->nick','$alumno->email','$alumno->pass','$alumno->nombre','$alumno->apellidos','$alumno->fecha_nacimiento','$alumno->tipo' ,'$alumno->imagen')";
-  
       $resInsert = mysqli_query($con, $queryInsert);
   
       // validacion de la query
@@ -47,26 +48,38 @@
           $response->data = $data;
           $response->accessToken = json_encode($jwt);
           echo json_encode($response);
+          exit;
         } else {
           $response->resultado = 'error';
           $response->mensaje = 'Hubo un error al cargar el alumno insertado';
           echo json_encode($response);
+          exit;
         }
       } else {
         $response->resultado = 'error';
         $response->mensaje = 'Hubo un error al registrar al alumno';
         echo json_encode($response);
+        exit;
       }
     } else {
-      if ($alumno->nick == $dataValidacion['nick'] || $alumno->email == $dataValidacion['email']) {
+      if ($alumno->nick == $dataValidacion['nick']) {
         $response->resultado = 'error';
-        $response->mensaje = 'Nick o email en uso';
+        $response->mensaje = 'Este nick ya está en uso';
         echo json_encode($response);
+        exit;
+      }
+
+      if ($alumno->email == $dataValidacion['email']) {
+        $response->resultado = 'error';
+        $response->mensaje = 'Este email ya está en uso';
+        echo json_encode($response);
+        exit;
       }
     }
   } else {
     $response->resultado = 'error';
     $response->mensaje = 'Hubo un error con la base de datos';
     echo json_encode($response);
+    exit;
   }
 ?>
