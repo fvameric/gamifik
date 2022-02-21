@@ -430,3 +430,5 @@ input[type=text]:placeholder {
     background-color: #f6f6f600;
     border-top: 1px solid #dce8f13d;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

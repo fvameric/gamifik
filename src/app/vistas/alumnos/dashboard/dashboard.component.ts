@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { RankingService } from 'services/ranking.service';
 import Swal from 'sweetalert2';
 import { TokenService } from 'services/token.service';
+import { LoadingInterceptorService } from 'services/loading-interceptor.service';
 
 @Component({
   selector: 'app-dashboard',

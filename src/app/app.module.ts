@@ -13,13 +13,19 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from 'services/interceptor.service';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { LoadingInterceptorService } from 'services/loading-interceptor.service';
+import { LoaderComponent } from './plantillas/loader/loader.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderService } from 'services/loader.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    routingComponents
+    routingComponents,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -27,12 +33,25 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptorService,
+      multi: true
+    },
+    LoaderService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptorService,
       multi: true
     },
     {

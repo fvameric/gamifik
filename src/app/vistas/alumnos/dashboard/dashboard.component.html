@@ -10,6 +10,7 @@
                 <p>No tiene rankings</p>
             </div>
             <ng-template #tieneRankings>
+                <app-loader></app-loader>
                 <div *ngFor="let rank of arrRankings; let i = index" class="rank">
                     <button class="buttom-ranking-class" (click)="rankSelec(rank.id_rank)">{{rank.nom_rank}}</button>
                 </div>
@@ -22,8 +23,8 @@
     <div class="info-rankings">
         <div class="titulo-detalle-ranking" *ngIf="rankSeleccionado;else noselec">
             <h1>Ranking</h1>
-            <h4> Nombre del ranking:   {{rankSeleccionado.nom_rank}}</h4>
-            <h3> Codigo de acceso:   {{rankSeleccionado.cod_rank}}</h3>
+            <h4> Nombre del ranking: {{rankSeleccionado.nom_rank}}</h4>
+            <h3> Codigo de acceso: {{rankSeleccionado.cod_rank}}</h3>
         </div>
         <ng-template #noselec>
             <div class="titulo-detalle-ranking">
@@ -33,7 +34,7 @@
         </ng-template>
         <div class="alumnos-ranking" *ngFor="let alumno of listaAlumnos; let i = index">
             {{i}}.
-            
+
             <div>
                 <img src="{{alumno.imagen}}">
             </div>
