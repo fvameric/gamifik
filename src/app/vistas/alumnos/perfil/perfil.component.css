@@ -16,7 +16,7 @@ body {
 /* CONTACT ========================================== */
 
 .contact-area {
-    top: 30%;
+    top: 8%;
     left: 0%;
     position: relative;
     display: flex;
@@ -54,9 +54,7 @@ body {
         -o-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
     }
-    .contact-area {
-        top: 0;
-    }
+
 }
 
 .contact main {
@@ -143,9 +141,6 @@ body {
 }
 
 @media (min-width: 10px) {
-    .contact-area {
-        top: 0;
-    }
 }
 
 .contact main section .content aside h1 {
