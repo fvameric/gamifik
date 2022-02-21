@@ -7,6 +7,8 @@ import { RankingService } from 'services/ranking.service';
 import Swal from 'sweetalert2';
 import { TokenService } from 'services/token.service';
 import { LoadingInterceptorService } from 'services/loading-interceptor.service';
+import { concat, forkJoin } from 'rxjs';
+import { concatMap, map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -153,6 +155,7 @@ export class DashboardComponent implements OnInit {
     this.listaAlumnos = [];
     this.rankSeleccionado = this.arrRankings.find(rank => rank.id_rank == rankId);
 
+    /*
     this.rankingService.obtenerRankingAlumnos().subscribe((val: any) => {
       val.forEach((element:any) => {
         if (element.id_rank == this.rankSeleccionado.id_rank) {
@@ -162,5 +165,6 @@ export class DashboardComponent implements OnInit {
         }
       });
     });
+    */
   }
 }
