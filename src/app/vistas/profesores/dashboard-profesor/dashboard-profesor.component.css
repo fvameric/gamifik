@@ -18,11 +18,14 @@ body {
     width: 100%;
     background: #0000008c;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
     overflow: auto;
     margin-top: 50%;
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 10px 10px 10px 10px;
     height: 80%;
+    padding: 20px;
+    margin-left: 20px;
   }
   
   .sidebar a {
