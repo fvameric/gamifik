@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoaderService } from 'services/loader.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,

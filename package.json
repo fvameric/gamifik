@@ -24,6 +24,7 @@
     "@auth0/angular-jwt": "^5.0.2",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "@popperjs/core": "^2.11.2",
+    "angular-modal-service": "^0.15.6",
     "bootstrap": "^4.6.1",
     "jquery": "^3.6.0",
     "rxjs": "~6.6.0",

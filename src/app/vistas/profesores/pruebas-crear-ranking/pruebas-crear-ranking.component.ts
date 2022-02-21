@@ -114,4 +114,7 @@ export class PruebasCrearRankingComponent implements OnInit {
 
     this.comprobarCodigo(result);
   }
+
+
+
 }

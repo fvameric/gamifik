@@ -12,7 +12,7 @@ import { DashboardProfesorComponent } from './vistas/profesores/dashboard-profes
 import { PruebasCrearRankingComponent } from './vistas/profesores/pruebas-crear-ranking/pruebas-crear-ranking.component';
 import { AuthGuardService } from 'services/auth-guard.service';
 import { RoleGuardService } from 'services/role-guard.service';
-
+import { ModalComponent } from './vistas/profesores/modal/modal.component';
 const routes: Routes = [
   { path: '', redirectTo: 'identificacion', pathMatch: 'full' },
   { path: 'identificacion', component: IdentificacionComponent },
@@ -25,6 +25,8 @@ const routes: Routes = [
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuardService, RoleGuardService]},
   { path: 'perfilprofesor', component: PerfilProfesorComponent, canActivate: [AuthGuardService, RoleGuardService] },
   { path: 'pruebas-crear-ranking', component: PruebasCrearRankingComponent },
+  { path: 'modal', component: ModalComponent }, 
+
 ];
 
 @NgModule({
@@ -42,5 +44,6 @@ export const routingComponents = [
   PerfilProfesorComponent,
   HeaderComponent,
   FooterComponent,
-  PruebasCrearRankingComponent
+  PruebasCrearRankingComponent,
+  ModalComponent  
 ];

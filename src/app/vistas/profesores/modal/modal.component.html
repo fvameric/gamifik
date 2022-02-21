@@ -1,0 +1,9 @@
+<button type="buttom " class="btn btn-primary" (click)="enviar(nombreModal)" >abrir modal</button>
+<ng-template #nombreModal let-c="close" let-d="dismiss">
+  <div class="modal-header"> cabezera
+    <button  type="button" class="close" data-dismiss="modal" (click)="retornar()">&times;</button>
+  </div>
+  <div class="modal-body">
+    contenido
+  </div>
+</ng-template>
