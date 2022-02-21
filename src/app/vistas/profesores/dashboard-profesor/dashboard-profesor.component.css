@@ -21,8 +21,10 @@ body {
     backdrop-filter: blur(6px);
     overflow: auto;
     margin-top: 50%;
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 10px 10px 10px 10px;
     height: 80%;
+    padding: 20px;
+    margin-left: 20px;
   }
   
   .sidebar a {
