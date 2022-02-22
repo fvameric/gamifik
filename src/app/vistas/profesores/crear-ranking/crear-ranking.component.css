@@ -1,3 +1,36 @@
 input{
     color: black !important;
+    border: 1px solid #f6f6f633 !important;
+    margin-left: 2%;
+}
+
+p{
+    font: 400 24px/32px Roboto, "Helvetica Neue", sans-serif;
+}
+
+.checkbox{
+    margin-left: 2%;
+    font: 400 24px/32px Roboto, "Helvetica Neue", sans-serif;
+}
+
+.codigo-entrar-ranking{
+    margin-left: 2%;
+    color:#56baed;
+}
+
+.crear-ranking {
+    margin: 5%;
+    padding: 10px;
+    border-radius: 5px;
+    background: #56baed;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    backdrop-filter: blur(6px);
+    color: white;
+    border: none;
+    transition: 300ms;
+}
+
+.crear-ranking:hover {
+    background-color: #0000008c;
+    color: #ffffff;
 }

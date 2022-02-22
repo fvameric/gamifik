@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RankingService } from 'services/ranking.service';
 import { UsersService } from 'services/users.service';
 import { Ranking } from '../../../interfaces/Ranking';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-crear-ranking',
@@ -26,7 +26,8 @@ export class CrearRankingComponent implements OnInit {
 
   constructor(
     private usersService: UsersService,
-    private rankService: RankingService
+    private rankService: RankingService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -61,6 +62,7 @@ export class CrearRankingComponent implements OnInit {
     */
 
     this.generaNss();
+    this.modalService.dismissAll();
   }
 
   //Función que comprueba el codigo

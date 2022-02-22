@@ -133,4 +133,30 @@ body {
   
   }
 
+.info-superior{
+  width: 100%;
+  margin: 10px;
+  display: flex;
+}
+
+.contenido-icons{
+  margin: 10px 10px 10px 10px;
+ float:right;
+ width: 100%;
+}  
+
+.buttom-icons{
+  float: right;
+  border: none;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  transition: 1s;
+
+}
+
+.buttom-icons:hover{
+  transition: 1s;
+  color: #1292f8;
+}
 
