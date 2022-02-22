@@ -1,75 +1,80 @@
 body {
-  height: 100% !important;
+    height: 100% !important;
 }
 
 .separador1 {
-  display: block;
-  float: left;
-  height: 100%;
+    display: block;
+    float: left;
+    height: 100%;
 }
 
-.separador{
+.separador {
     margin-top: 10%;
     display: block;
     position: sticky;
 }
 
 .separador2 {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
+
 /* sidebar */
+
 .sidebar {
-  width: 100%;
-  background: #0000008c;
-  box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-  backdrop-filter: blur(6px);
-  overflow: auto;
-  border-radius: 10px 10px 10px 10px;
-  height: 80%;
-  margin-left: 40px;
-  padding: 20px;
+    width: 100%;
+    background: #0000008c;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    backdrop-filter: blur(6px);
+    overflow: auto;
+    border-radius: 10px 10px 10px 10px;
+    height: 80%;
+    margin-left: 40px;
+    padding: 20px;
 }
 
 .sidebar a {
-  display: block;
-  color: rgb(117, 117, 117);
-  padding: 16px;
-  text-decoration: none;
-  transition: 1s ease-in-out;
+    display: block;
+    color: rgb(117, 117, 117);
+    padding: 16px;
+    text-decoration: none;
+    transition: 1s ease-in-out;
 }
 
 .sidebar a.active {
-  background-color: transparent;
-  color: white;
+    background-color: transparent;
+    color: white;
 }
 
 .sidebar a:hover:not(.active) {
-  transition: 1s;
-  background-color: #1292f8;
-  color: white;
-  border-radius: 5px 5px 5px 5px;
+    transition: 1s;
+    background-color: #1292f8;
+    color: white;
+    border-radius: 5px 5px 5px 5px;
 }
 
 div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
-  height: 1000px;
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
 }
 
+
 /*info  rankings dashboard*/
+
 .info-rankings {
-  padding: 10px;
-  width: 100%;
-  height: 50%;
-  display: inline-block;
-  background: #0000008c;
-  -webkit-backdrop-filter: blur(6px);
-  box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
-  border-radius: 10px 10px 10px 10px;
-  margin: 0 3rem 0 5rem;
+    padding: 10px;
+    width: 100%;
+    height: 50%;
+    display: inline-block;
+    background: #0000008c;
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
+    border-radius: 10px 10px 10px 10px;
+    margin: 0 3rem 0 5rem;
 }
+
 
 /* cartas destacados
 
@@ -140,94 +145,95 @@ div.content {
     
   }
   */
+
 .unirse-ranking {
-  margin: 5%;
-  padding: 10px;
-  border-radius: 5px;
-  background: #0000008c;
-  box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-  backdrop-filter: blur(6px);
-  color: #cccccc;
-  border: none;
-  transition: 1s;
+    margin: 5%;
+    padding: 10px;
+    border-radius: 5px;
+    background: #0000008c;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    backdrop-filter: blur(6px);
+    color: #cccccc;
+    border: none;
+    transition: 300ms;
 }
 
 .unirse-ranking:hover {
-  background-color: #56baed;
+    background-color: #56baed;
+    color: #ffffff;
 }
 
 .unirse-retangulo {
-  background: #1292f8;
-  float: left;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
+    background: #1292f8;
+    float: left;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
 }
 
 .lista-rankings p {
-  color: #ffffff;
+    color: #ffffff;
 }
 
 .info-rankings {
-  color: #ffffff;
+    color: #ffffff;
 }
 
 .titulo-detalle-ranking {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
 }
 
 .alumnos-ranking {
-  color: #ffffff;
-  padding: 10px;
+    color: #ffffff;
+    padding: 10px;
 }
 
 .alumnos-ranking img {
-  width: 30px;
-  height: auto;
+    width: 30px;
+    height: auto;
 }
 
-.buttom-ranking-class{
-  background-color: transparent;
-  width: 200px;
-  height: 50px;
-  text-align: left;
-  border: none;
-  color: #cccccc;
-  cursor: pointer;
-  transition: 1s;
-}
-.buttom-ranking-class:hover{
-  transition: 1s;
-  color: white;
-  background-color: #56baed;
-
+.buttom-ranking-class {
+    background-color: transparent;
+    width: 200px;
+    height: 50px;
+    text-align: left;
+    border: none;
+    color: #cccccc;
+    cursor: pointer;
+    transition: 200ms;
+    border-radius: 7px;
 }
 
-@media screen and (max-width:1024px){
-  .separador{
-    margin-top:15%;
-  }  
-  
+.buttom-ranking-class:hover {
+    transition: 200ms;
+    color: #ffffff;
+    background-color: #56baed;
 }
 
-@media screen and (max-width:768px){
-  .sidebar{
-    margin:3rem;
-    margin-left: none;
-  } 
-  .separador1{
-    float: none;
-    display: flex;
-  }
-  .info-rankings{
-    margin: 0 3rem 0 3rem;
-    width: 100%;
-  }
-  .buttom-ranking-class{
-    width: 100%;
-  }
-  
+@media screen and (max-width:1024px) {
+    .separador {
+        margin-top: 15%;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .sidebar {
+        margin: 3rem;
+        margin-left: none;
+    }
+    .separador1 {
+        float: none;
+        display: flex;
+    }
+    .info-rankings {
+        margin: 0 3rem 0 3rem;
+        width: 100%;
+    }
+    .buttom-ranking-class {
+        width: 100%;
+    }
 }
