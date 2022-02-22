@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RankingService } from 'services/ranking.service';
+import { TokenService } from 'services/token.service';
 import { UsersService } from 'services/users.service';
 import { Ranking } from '../../../interfaces/Ranking';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -24,16 +26,26 @@ export class CrearRankingComponent implements OnInit {
     cod_rank: '',
   };
 
+  profeLogin: any;
+
   constructor(
     private usersService: UsersService,
     private rankService: RankingService,
+    private tokenService: TokenService,
+    private router: Router,
     private modalService: NgbModal
-  ) {}
+
+  ) { }
 
   ngOnInit(): void {
+    this.obtenerDatosProfesor();
     this.usersService
       .obtenerAlumnos()
       .subscribe((val) => (this.listaAlumnos = val));
+  }
+
+  obtenerDatosProfesor() {
+    this.profeLogin = this.tokenService.getUser();
   }
 
   checkboxAlumnos(event: any) {
@@ -48,8 +60,6 @@ export class CrearRankingComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('nombre: ' + this.nombreRanking);
-    console.log('alumnos seleccionados: ');
 
     //this.insertarAlumnosRanking();
 
@@ -63,6 +73,19 @@ export class CrearRankingComponent implements OnInit {
 
     this.generaNss();
     this.modalService.dismissAll();
+  }
+
+  //Funcion que genera el codigo
+  generaNss() {
+    let result = '';
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < 12; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    this.comprobarCodigo(result);
   }
 
   //Función que comprueba el codigo
@@ -82,42 +105,27 @@ export class CrearRankingComponent implements OnInit {
         }
       });
       this.rankService.insertarRanking(this.ranking).subscribe((val: any) => {
-        
+
         //this.insertarAlumnosRanking(val.data.id_rank);
         this.insertarAlumnosRanking(val.data.id_rank);
-        console.log("subscribe"+val.data.id_rank);
-        
+        this.insertarProfesorRanking(val.data.id_rank);
       });
     });
   }
 
-  insertarAlumnosRanking(id_rank:number) {
+  insertarAlumnosRanking(id_rank: number) {
     for (let i = 0; i < this.selecAlumnos.length; i++) {
-      let id_alumno:number = this.selecAlumnos[i];
-      this.rankService.insertarAlumnoEnRanking(id_rank,id_alumno).subscribe((val:any) => {console.log(val);
+      let id_alumno: number = this.selecAlumnos[i];
+      this.rankService.insertarAlumnoEnRanking(id_rank, id_alumno).subscribe((val: any) => {
+        console.log(val);
       });
-      console.log("id ranking"+id_rank);
-      console.log("id alumno"+id_alumno);
-      
-      
-      
-      
     }
   }
 
-  //Funcion que genera el codigo
-  generaNss() {
-    let result = '';
-    const characters =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    for (let i = 0; i < 12; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-
-    this.comprobarCodigo(result);
+  insertarProfesorRanking(id_rank: number) {
+    this.rankService.insertarProfeEnRanking(id_rank, this.profeLogin.id_profe).subscribe((val: any) => {
+      console.log(val);
+      window.location.reload();
+    });
   }
-
-
-
 }

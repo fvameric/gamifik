@@ -10,8 +10,8 @@ import { PerfilComponent } from './vistas/alumnos/perfil/perfil.component';
 import { PerfilProfesorComponent } from './vistas/profesores/perfil-profesor/perfil-profesor.component';
 import { DashboardProfesorComponent } from './vistas/profesores/dashboard-profesor/dashboard-profesor.component';
 
-import { AuthGuardService } from 'services/auth-guard.service';
-import { RoleGuardService } from 'services/role-guard.service';
+import { AuthGuardService } from 'services/guards/auth-guard.service';
+import { RoleGuardService } from 'services/guards/role-guard.service';
 import { ModalComponent } from './vistas/profesores/modal/modal.component';
 import { CrearRankingComponent } from './vistas/profesores/crear-ranking/crear-ranking.component';
 const routes: Routes = [

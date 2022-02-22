@@ -69,14 +69,9 @@ export class DashboardProfesorComponent implements OnInit {
     this.listaAlumnos = [];
     this.rankSeleccionado = this.arrRankings.find(rank => rank.id_rank == rankId);
 
-    this.rankingService.obtenerRankingAlumnos().subscribe((val: any) => {
-      val.forEach((element:any) => {
-        if (element.id_rank == this.rankSeleccionado.id_rank) {
-          this.usersService.obtenerAlumnoPorId(element.id_alumno).subscribe((val: any) => {
-            this.listaAlumnos.push(val.data);
-          });
-        }
-      });
+    this.rankingService.obtenerAlumnoPorRanking(this.rankSeleccionado.id_rank)
+    .subscribe((val: any) => {
+      this.listaAlumnos = val;
     });
   }
 }

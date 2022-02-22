@@ -158,8 +158,6 @@ export class DashboardComponent implements OnInit {
     this.rankingService.obtenerAlumnoPorRanking(this.rankSeleccionado.id_rank)
     .subscribe((val: any) => {
       this.listaAlumnos = val;
-
-      console.log(val);
     });
   }
 }

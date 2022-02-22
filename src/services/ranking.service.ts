@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Ranking } from 'app/interfaces/Ranking';
 import { Alumno } from 'app/interfaces/Alumno';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 const URL = 'http://localhost:8080/';
 
@@ -24,6 +24,7 @@ const URL_RANK_JOIN_ALUMNOS = 'http://localhost:8080/rankings/getRankAlumnoId.ph
 const URL_RANK_JOIN_PROFES = 'http://localhost:8080/rankings/getRankProfesorId.php';      // obtener inner join ranking rank_profes
 
 const URL_INSERT_RANK_ALUMNOS = 'http://localhost:8080/rankings/insertarAlumnoEnRanking.php';      // insertar alumnos y rankings
+const URL_INSERT_RANK_PROFES = 'http://localhost:8080/rankings/insertarProfesorRanking.php';      // insertar alumnos y rankings
 
 @Injectable({
   providedIn: 'root'
@@ -97,6 +98,15 @@ export class RankingService {
       "id_alumno": id_alumno
     }
     return this.http.post(URL_INSERT_RANK_ALUMNOS, JSON.stringify(ids));
+  }
+
+  insertarProfeEnRanking(id_rank: number, id_profe: number) {
+    var ids = {
+      "id_rank": id_rank,
+      "id_profe": id_profe
+    }
+    return this.http.post(URL_INSERT_RANK_PROFES, JSON.stringify(ids)).pipe(
+      take(1));
   }
 
   // obtener alumnos por codigo de ranking
