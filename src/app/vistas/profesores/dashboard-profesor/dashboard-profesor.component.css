@@ -129,12 +129,17 @@ div.content {
     cursor: pointer;
     transition: 200ms;
     border-radius: 7px;
+    word-wrap: break-word;
 }
 
 .buttom-ranking-class:hover {
     transition: 200ms;
     color: white;
     background-color: #56baed;
+}
+
+.cantidad-alumnos {
+    float: right;
 }
 
 .info-superior {

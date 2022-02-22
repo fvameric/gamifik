@@ -74,4 +74,9 @@ export class DashboardProfesorComponent implements OnInit {
       this.listaAlumnos = val;
     });
   }
+
+  eliminarRanking() {
+    console.log(this.rankSeleccionado.id_rank);
+    
+  }
 }

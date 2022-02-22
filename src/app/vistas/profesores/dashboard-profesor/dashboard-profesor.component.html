@@ -9,7 +9,11 @@
             </div>
             <ng-template #tieneRankings>
                 <div *ngFor="let rank of arrRankings; let i = index" class="rank">
-                    <button class="buttom-ranking-class" (click)="rankSelec(rank.id_rank)">{{rank.nom_rank}}</button>
+                    <button class="buttom-ranking-class" (click)="rankSelec(rank.id_rank)">{{rank.nom_rank}}
+                        <div class="cantidad-alumnos">
+                            {{rank.alumnos}} alumnos
+                        </div>
+                    </button>
                 </div>
             </ng-template>
         </div>
@@ -23,7 +27,7 @@
                 <h1>Ranking</h1>
                 <div class="contenido-icons">
                     <!--buttom borrar-->
-                    <button class="buttom-icons">
+                    <button class="buttom-icons" (click)="eliminarRanking()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                             class="bi bi-trash-fill" viewBox="0 0 16 16">
                             <path
@@ -41,7 +45,6 @@
 
                 </div>
             </div>
-            <h4> Cantidad de alumnos: {{rankSeleccionado.alumnos}}</h4>
             <h4> Nombre del ranking: {{rankSeleccionado.nom_rank}}</h4>
             <h3> Codigo de acceso: {{rankSeleccionado.cod_rank}}</h3>
         </div>
