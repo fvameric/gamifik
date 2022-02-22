@@ -66,75 +66,7 @@ body {
     border-radius: 5px 5px 5px 5px;
   }
   
-  /* cartas destacados
-  
-    .contenido-dashboard {
-      padding: 10px;
-      margin-top: 50px;
-      width: auto;
-      display: inline-block;
-      background: #0000008c;
-      -webkit-backdrop-filter: blur(6px);
-      box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
-      border-radius: 5px 5px 5px 5px;
-    }
-  
-    .rectangulo {
-      float: left;
-      padding: 0;
-      margin: 10px;
-      width: 330px;
-      height: 150px;
-      background: #0000008c;
-      -webkit-backdrop-filter: blur(6px);
-      box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
-      border-radius: 5px 5px 5px 5px;
-    }
-  
-    h4 {
-      margin-top: 5%;
-      margin-left: 5%;
-      color: white !important;
-      font-size: 25px;
-    }
-  
-    .button-destacados {
-      margin-left: 70%;
-      padding: 8px;
-      margin-right: 1rem;
-      border-radius: 5px;
-      background-color: #56baed;
-      color: white;
-      border: none;
-      transition: 0.5s ease-in-out;
-    }
-  
-    .button-destacados:hover {
-      transform: scale(1.1);
-      transition: 1s;
-    }
-  
-    .texto-destacados {
-      margin-left: 8%;
-      color: rgb(182, 182, 182);
-    }
-  
-  
-  
-    .Texto-destacados {
-      text-align: center;
-      margin: 1%;
-    }
-  
-    @media (max-width: 1227px) {
-      
-      .rectangulo {
-        width:95%;
-        float:left;
-      }
-      
-    }
-    */
+
   .unirse-ranking {
     margin: 5%;
     padding: 10px;
@@ -200,3 +132,5 @@ body {
     background-color: #56baed;
   
   }
+
+

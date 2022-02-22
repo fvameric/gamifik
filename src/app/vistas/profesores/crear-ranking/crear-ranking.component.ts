@@ -3,12 +3,13 @@ import { RankingService } from 'services/ranking.service';
 import { UsersService } from 'services/users.service';
 import { Ranking } from '../../../interfaces/Ranking';
 
+
 @Component({
-  selector: 'app-pruebas-crear-ranking',
-  templateUrl: './pruebas-crear-ranking.component.html',
-  styleUrls: ['./pruebas-crear-ranking.component.css'],
+  selector: 'app-crear-ranking',
+  templateUrl: './crear-ranking.component.html',
+  styleUrls: ['./crear-ranking.component.css']
 })
-export class PruebasCrearRankingComponent implements OnInit {
+export class CrearRankingComponent implements OnInit {
   powers = ['Really Smart', 'Super Flexible', 'Super Hot', 'Weather Changer'];
 
   nombreRanking: string = '';

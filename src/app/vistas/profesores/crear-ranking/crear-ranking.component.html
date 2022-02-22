@@ -1,0 +1,12 @@
+<p>Registro ranking:</p>
+<input type="text" [(ngModel)]="nombreRanking" class="inputTexto" placeholder="Nombre del ranking"><br><br>
+
+<p>Seleccionar alumnos:</p>
+<div *ngFor="let alumno of listaAlumnos">
+<input type="checkbox" [value]="alumno.id_alumno" (change)="checkboxAlumnos($event)"/>
+{{alumno.nick}}
+</div>
+
+<br>Código de ranking: <label>{{codigoRanking}}</label><br>
+
+<button (click)="onSubmit()">Crear ranking</button>

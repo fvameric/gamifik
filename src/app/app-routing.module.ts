@@ -9,10 +9,11 @@ import { FooterComponent } from './plantillas/footer/footer.component';
 import { PerfilComponent } from './vistas/alumnos/perfil/perfil.component';
 import { PerfilProfesorComponent } from './vistas/profesores/perfil-profesor/perfil-profesor.component';
 import { DashboardProfesorComponent } from './vistas/profesores/dashboard-profesor/dashboard-profesor.component';
-import { PruebasCrearRankingComponent } from './vistas/profesores/pruebas-crear-ranking/pruebas-crear-ranking.component';
+
 import { AuthGuardService } from 'services/auth-guard.service';
 import { RoleGuardService } from 'services/role-guard.service';
 import { ModalComponent } from './vistas/profesores/modal/modal.component';
+import { CrearRankingComponent } from './vistas/profesores/crear-ranking/crear-ranking.component';
 const routes: Routes = [
   { path: '', redirectTo: 'identificacion', pathMatch: 'full' },
   { path: 'identificacion', component: IdentificacionComponent },
@@ -24,7 +25,7 @@ const routes: Routes = [
   { path: 'footer', component: FooterComponent },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuardService, RoleGuardService]},
   { path: 'perfilprofesor', component: PerfilProfesorComponent, canActivate: [AuthGuardService, RoleGuardService] },
-  { path: 'pruebas-crear-ranking', component: PruebasCrearRankingComponent },
+  { path: 'crear-ranking', component: CrearRankingComponent },
   { path: 'modal', component: ModalComponent }, 
 
 ];
@@ -44,6 +45,6 @@ export const routingComponents = [
   PerfilProfesorComponent,
   HeaderComponent,
   FooterComponent,
-  PruebasCrearRankingComponent,
+  CrearRankingComponent,
   ModalComponent  
 ];
