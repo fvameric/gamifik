@@ -1,20 +1,22 @@
 body {
     height: 100% !important;
-  }
-  
-  .separador1 {
+}
+
+.separador1 {
     display: block;
     float: left;
     height: 100%;
-  }
-  
-  .separador2 {
+}
+
+.separador2 {
     display: flex;
     justify-content: center;
-  }
-  
-  /* sidebar */
-  .sidebar {
+}
+
+
+/* sidebar */
+
+.sidebar {
     width: 100%;
     background: #0000008c;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
@@ -25,36 +27,38 @@ body {
     height: 80%;
     padding: 20px;
     margin-left: 20px;
-  }
-  
-  .sidebar a {
+}
+
+.sidebar a {
     display: block;
     color: rgb(117, 117, 117);
     padding: 16px;
     text-decoration: none;
     transition: 1s ease-in-out;
-  }
-  
-  .sidebar a.active {
+}
+
+.sidebar a.active {
     background-color: transparent;
     color: white;
-  }
-  
-  .sidebar a:hover:not(.active) {
+}
+
+.sidebar a:hover:not(.active) {
     transition: 1s;
     background-color: #1292f8;
     color: white;
     border-radius: 5px 5px 5px 5px;
-  }
-  
-  div.content {
+}
+
+div.content {
     margin-left: 200px;
     padding: 1px 16px;
     height: 1000px;
-  }
-  
-  /*info  rankings dashboard*/
-  .info-rankings {
+}
+
+
+/*info  rankings dashboard*/
+
+.info-rankings {
     padding: 10px;
     margin-top: 12%;
     width: 80%;
@@ -64,10 +68,9 @@ body {
     -webkit-backdrop-filter: blur(6px);
     box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
     border-radius: 5px 5px 5px 5px;
-  }
-  
+}
 
-  .unirse-ranking {
+.unirse-ranking {
     margin: 5%;
     padding: 10px;
     border-radius: 5px;
@@ -77,46 +80,46 @@ body {
     color: #cccccc;
     border: none;
     transition: 1s;
-  }
-  
-  .unirse-ranking:hover {
+}
+
+.unirse-ranking:hover {
     background-color: #56baed;
-  }
-  
-  .unirse-retangulo {
+}
+
+.unirse-retangulo {
     background: #1292f8;
     float: left;
     width: 100%;
     position: fixed;
     bottom: 0;
-  }
-  
-  .lista-rankings p {
+}
+
+.lista-rankings p {
     color: #ffffff;
-  }
-  
-  .info-rankings {
+}
+
+.info-rankings {
     color: #ffffff;
-  }
-  
-  .titulo-detalle-ranking {
+}
+
+.titulo-detalle-ranking {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: column;
-  }
-  
-  .alumnos-ranking {
+}
+
+.alumnos-ranking {
     color: #ffffff;
     padding: 10px;
-  }
-  
-  .alumnos-ranking img {
+}
+
+.alumnos-ranking img {
     width: 30px;
     height: auto;
-  }
-  
-  .buttom-ranking-class{
+}
+
+.buttom-ranking-class {
     background-color: transparent;
     width: 200px;
     height: 50px;
@@ -124,39 +127,38 @@ body {
     border: none;
     color: #cccccc;
     cursor: pointer;
-    transition: 1s;
-  }
-  .buttom-ranking-class:hover{
-    transition: 1s;
+    transition: 200ms;
+    border-radius: 7px;
+}
+
+.buttom-ranking-class:hover {
+    transition: 200ms;
     color: white;
     background-color: #56baed;
-  
-  }
-
-.info-superior{
-  width: 100%;
-  margin: 10px;
-  display: flex;
 }
 
-.contenido-icons{
-  margin: 10px 10px 10px 10px;
- float:right;
- width: 100%;
-}  
-
-.buttom-icons{
-  float: right;
-  border: none;
-  background-color: transparent;
-  color: white;
-  cursor: pointer;
-  transition: 1s;
-
+.info-superior {
+    width: 100%;
+    margin: 10px;
+    display: flex;
 }
 
-.buttom-icons:hover{
-  transition: 1s;
-  color: #1292f8;
+.contenido-icons {
+    margin: 10px 10px 10px 10px;
+    float: right;
+    width: 100%;
 }
 
+.buttom-icons {
+    float: right;
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.buttom-icons:hover {
+    transition: 1s;
+    color: #1292f8;
+}
