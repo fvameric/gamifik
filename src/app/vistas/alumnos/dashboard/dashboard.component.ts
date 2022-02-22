@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import { TokenService } from 'services/token.service';
 import { LoadingInterceptorService } from 'services/loading-interceptor.service';
 import { concat, forkJoin } from 'rxjs';
-import { concatMap, map, switchMap, tap } from 'rxjs/operators';
+import { concatMap, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
   flagRanks: boolean = false;
   arrRankings: any[] = [];
   rankSeleccionado: any;
-  listaAlumnos: any[] = [];
+  listaAlumnos: any;
 
   constructor(
     private usersService: UsersService,
@@ -155,16 +155,11 @@ export class DashboardComponent implements OnInit {
     this.listaAlumnos = [];
     this.rankSeleccionado = this.arrRankings.find(rank => rank.id_rank == rankId);
 
-    /*
-    this.rankingService.obtenerRankingAlumnos().subscribe((val: any) => {
-      val.forEach((element:any) => {
-        if (element.id_rank == this.rankSeleccionado.id_rank) {
-          this.usersService.obtenerAlumnoPorId(element.id_alumno).subscribe((val: any) => {
-            this.listaAlumnos.push(val.data);
-          });
-        }
-      });
+    this.rankingService.obtenerAlumnoPorRanking(this.rankSeleccionado.id_rank)
+    .subscribe((val: any) => {
+      this.listaAlumnos = val;
+
+      console.log(val);
     });
-    */
   }
 }
