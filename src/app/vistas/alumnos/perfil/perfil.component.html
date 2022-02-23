@@ -63,6 +63,17 @@
                         <h2 class="h2-perfil">Configuración</h2>
                         <hr>
                         <div class="centrar-configuracion">
+                            <!--imagen configuracion-->
+                            <div class="image-upload">
+                                <h5>Avatar:</h5>
+                                <label for="file-input">
+                                    <img id="preview" [src]="imgSrc" alt="ImagenPerfil">
+                                  </label>
+                                <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg"><br>
+                            </div>
+                        </div><br>
+
+                        <div class="centrar-configuracion">
                             <h5>Nombre: </h5>
                             <input class="inputEditar" type="text" [placeholder]="this.nombre" [value]="this.nombre" id="inputNombre" [readonly]="this.editableNombre">
                             <div class="pruebaConfiguracion">

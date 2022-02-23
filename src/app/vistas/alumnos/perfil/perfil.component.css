@@ -312,7 +312,6 @@ hr {
     position: absolute;
     left: 100%;
     margin-left: 5%;
-    animation: fadeIn linear 0.6s;
 }
 
 @keyframes fadeIn {
@@ -479,4 +478,10 @@ input[type=date] {
 
 .unirse-ranking:hover{
         background-color: #1292f8;
+}
+
+::ng-deep img{
+    display: table-cell;
+    width: 100px;
+    border-radius: 50%;
 }
