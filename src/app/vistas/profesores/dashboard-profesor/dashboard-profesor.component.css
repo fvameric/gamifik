@@ -175,6 +175,7 @@ div.content {
     color: white;
     cursor: pointer;
     transition: 1s;
+    margin: 2px;
 }
 
 .button-icons:hover {
