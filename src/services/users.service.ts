@@ -7,30 +7,39 @@ import { User } from 'app/interfaces/User';
 const URL = 'http://localhost:8080/';
 
 // URLS CRUD ALUMNOS
-const URL_CREATE_ALUMNOS = 'http://localhost:8080/alumnos/insertarAlumno.php';  // create
-const URL_READ_ALUMNOS = 'http://localhost:8080/alumnos/datosAlumno.php';       // read
+const URL_CREATE_ALUMNOS = 'http://localhost:8080/alumnos/insertarAlumno.php'; // create
+const URL_READ_ALUMNOS = 'http://localhost:8080/alumnos/datosAlumno.php'; // read
 const URL_UPDATE_ALUMNOS = 'http://localhost:8080/alumnos/modificarAlumno.php'; // update
-const URL_DELETE_ALUMNOS = 'http://localhost:8080/alumnos/eliminarAlumno.php';  // delete
-const URL_GET_ALUMNO_ID = 'http://localhost:8080/alumnos/getAlumnoId.php';      // obtener alumnos específicos según su ID
-const URL_EMAIL_EXISTE_ALUMNOS = 'http://localhost:8080/alumnos/emailExiste.php';      // comprobar si un email ya está en uso
+const URL_DELETE_ALUMNOS = 'http://localhost:8080/alumnos/eliminarAlumno.php'; // delete
+const URL_GET_ALUMNO_ID = 'http://localhost:8080/alumnos/getAlumnoId.php'; // obtener alumnos específicos según su ID
+const URL_EMAIL_EXISTE_ALUMNOS =
+  'http://localhost:8080/alumnos/emailExiste.php'; // comprobar si un email ya está en uso
+const URL_USERNAME_EXISTE_ALUMNOS =
+  'http://localhost:8080/alumnos/usuarioExiste.php';
 
 // URLS CRUD PROFESORES
-const URL_CREATE_PROFESORES = 'http://localhost:8080/profesores/insertarProfesor.php';  // create
-const URL_READ_PROFESORES = 'http://localhost:8080/profesores/datosProfesor.php';       // read
-const URL_UPDATE_PROFESORES = 'http://localhost:8080/profesores/modificarProfesor.php'; // update
-const URL_DELETE_PROFESORES = 'http://localhost:8080/profesores/eliminarProfesor.php';  // delete
-const URL_GET_PROFESOR_ID = 'http://localhost:8080/profesores/getProfesorId.php';       // obtener profesores específicos según su ID
-const URL_EMAIL_EXISTE_PROFESORES = 'http://localhost:8080/profesores/emailExiste.php';      // comprobar si un email ya está en uso
+const URL_CREATE_PROFESORES =
+  'http://localhost:8080/profesores/insertarProfesor.php'; // create
+const URL_READ_PROFESORES =
+  'http://localhost:8080/profesores/datosProfesor.php'; // read
+const URL_UPDATE_PROFESORES =
+  'http://localhost:8080/profesores/modificarProfesor.php'; // update
+const URL_DELETE_PROFESORES =
+  'http://localhost:8080/profesores/eliminarProfesor.php'; // delete
+const URL_GET_PROFESOR_ID =
+  'http://localhost:8080/profesores/getProfesorId.php'; // obtener profesores específicos según su ID
+const URL_EMAIL_EXISTE_PROFESORES =
+  'http://localhost:8080/profesores/emailExiste.php'; // comprobar si un email ya está en uso
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsersService {
   alumnoExiste: boolean = false;
   profesorExiste: boolean = false;
 
-  user: string = "";
-  pass: string = "";
+  user: string = '';
+  pass: string = '';
 
   datosAlumno: Alumno = {
     id_alumno: 0,
@@ -41,8 +50,8 @@ export class UsersService {
     apellidos: '',
     fecha_nacimiento: new Date(),
     tipo: 0,
-    imagen: ''
-  }
+    imagen: '',
+  };
 
   datosProfesor: Profesor = {
     id_profe: 0,
@@ -53,10 +62,10 @@ export class UsersService {
     apellidos: '',
     centro: 0,
     tipo: 1,
-    imagen: ''
-  }
+    imagen: '',
+  };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // funciones alumnos
   // create alumno
@@ -80,11 +89,15 @@ export class UsersService {
 
   // obtener alumnos específicos según su ID
   obtenerAlumnoPorId(id: number) {
-    return this.http.get(URL_GET_ALUMNO_ID +`?id=${id}`);
+    return this.http.get(URL_GET_ALUMNO_ID + `?id=${id}`);
   }
 
   validarEmailExisteAlumnos(email: string) {
     return this.http.get(URL_EMAIL_EXISTE_ALUMNOS + `?email=${email}`);
+  }
+
+  validarUsuarioExisteAlumnos(username: string) {
+    return this.http.get(URL_USERNAME_EXISTE_ALUMNOS + `?username=${username}`);
   }
 
   // funciones profesores
@@ -109,7 +122,7 @@ export class UsersService {
 
   // obtener profesores específicos según su ID
   obtenerProfesorPorId(id: number) {
-    return this.http.get(URL_GET_PROFESOR_ID +`?id=${id}`);
+    return this.http.get(URL_GET_PROFESOR_ID + `?id=${id}`);
   }
 
   validarEmailExisteProfesores(email: string) {

@@ -17,19 +17,19 @@
   $response = new Result();
   
   // query
-  $query = "SELECT * FROM `alumno` WHERE email='$_GET[email]'";
+  $query = "SELECT * FROM `alumno` WHERE nick='$_GET[username]'";
   $res = mysqli_query($con, $query);
 
   // validación de la query
   if ($res) {
-      $datosEmail = mysqli_fetch_assoc($res);
-      if ($datosEmail == '' || $datosEmail == null) {
+      $datosUsername = mysqli_fetch_assoc($res);
+      if ($datosUsername == '' || $datosUsername == null) {
         $response->resultado = 'ok';
-        $response->mensaje = 'Este email no está en uso';
+        $response->mensaje = 'Este nombre de usuario no está en uso';
         echo json_encode($response);
       } else {
         $response->resultado = 'error';
-        $response->mensaje = 'Este email está en uso';
+        $response->mensaje = 'Este nombre de usuario está en uso';
         echo json_encode($response);  
       }
   } else {
