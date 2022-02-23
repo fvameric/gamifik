@@ -13,18 +13,21 @@ const URL_UPDATE_RANK = 'http://localhost:8080/rankings/modificarRanking.php';  
 const URL_DELETE_RANK = 'http://localhost:8080/rankings/eliminarRanking.php';     // delete
 const URL_GET_RANK_ID = 'http://localhost:8080/rankings/getRankingId.php';        // obtener rankings específicos según su ID
 
+// ENTREGAS
 const URL_RANK_ENTREGAS = 'http://localhost:8080/rankings/getRankEntregas.php';   // obtener relacion rankings - entregas
-const URL_RANK_ALUMNOS = 'http://localhost:8080/rankings/getRankAlumnos.php';     // obtener relacion rankings - alumnos
-const URL_RANK_ALUMNOS_ID = 'http://localhost:8080/rankings/getRankAlumnosId.php';// obtener relacion rankings - id de alumno
-const URL_RANK_PROFES = 'http://localhost:8080/rankings/getRankProfes.php';       // obtener relacion rankings - profes
-const URL_RANK_PROFES_ID = 'http://localhost:8080/rankings/getRankProfesId.php';  // obtener relacion rankings - id de profesor
 
-const URL_ALUMNOS_POR_RANK = 'http://localhost:8080/rankings/getAlumnoPorRanking.php';      // obtener alumnos via ranking id
-const URL_RANK_JOIN_ALUMNOS = 'http://localhost:8080/rankings/getRankAlumnoId.php';      // obtener inner join ranking rank_alumnos
-const URL_RANK_JOIN_PROFES = 'http://localhost:8080/rankings/getRankProfesorId.php';      // obtener inner join ranking rank_profes
+// ALUMNOS
+const URL_RANK_ALUMNOS = 'http://localhost:8080/rankings/alumnos/getRankAlumnos.php';     // obtener relacion rankings - alumnos
+const URL_RANK_ALUMNOS_ID = 'http://localhost:8080/rankings/alumnos/getRankAlumnosId.php';// obtener relacion rankings - id de alumno
+const URL_ALUMNOS_POR_RANK = 'http://localhost:8080/rankings/alumnos/getAlumnoPorRanking.php';      // obtener alumnos via ranking id
+const URL_RANK_JOIN_ALUMNOS = 'http://localhost:8080/rankings/alumnos/getRankAlumnoId.php';      // obtener inner join ranking rank_alumnos
+const URL_INSERT_RANK_ALUMNOS = 'http://localhost:8080/rankings/alumnos/insertarAlumnoEnRanking.php';      // insertar alumnos y rankings
 
-const URL_INSERT_RANK_ALUMNOS = 'http://localhost:8080/rankings/insertarAlumnoEnRanking.php';      // insertar alumnos y rankings
-const URL_INSERT_RANK_PROFES = 'http://localhost:8080/rankings/insertarProfesorRanking.php';      // insertar alumnos y rankings
+// PROFESORES
+const URL_RANK_PROFES = 'http://localhost:8080/rankings/profesores/getRankProfes.php';       // obtener relacion rankings - profes
+const URL_RANK_PROFES_ID = 'http://localhost:8080/rankings/profesores/getRankProfesId.php';  // obtener relacion rankings - id de profesor
+const URL_RANK_JOIN_PROFES = 'http://localhost:8080/rankings/profesores/getRankProfesorId.php';      // obtener inner join ranking rank_profes
+const URL_INSERT_RANK_PROFES = 'http://localhost:8080/rankings/profesores/insertarProfesorRanking.php';      // insertar alumnos y rankings
 
 @Injectable({
   providedIn: 'root'
@@ -50,8 +53,8 @@ export class RankingService {
   }
 
   // delete ranking
-  eliminarRanking() {
-    return this.http.get(URL_DELETE_RANK);
+  eliminarRanking(id: number) {
+    return this.http.delete(URL_DELETE_RANK + `?id=${id}`);
   }
 
   // obtener rankings específicos según su ID

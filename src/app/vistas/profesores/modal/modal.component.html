@@ -1,10 +1,10 @@
-<button type="buttom " class="crear-ranking" (click)="enviar(nombreModal)" >Crear</button>
+<button type="buttom " class="crear-ranking" (click)="enviar(nombreModal)">Crear</button>
 <ng-template #nombreModal let-c="close" let-d="dismiss">
-  <div class="modal-header"> 
-    <h1>Crear ranking</h1>
-    <button  type="button" class="close" data-dismiss="modal" (click)="retornar()">&times;</button>
-  </div>
-  <div class="modal-body">
-    <app-crear-ranking></app-crear-ranking>
-  </div>
+    <div class="modal-header">
+        <h1>Crear ranking</h1>
+        <button type="button" class="close" data-dismiss="modal" (click)="retornar()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <app-crear-ranking></app-crear-ranking>
+    </div>
 </ng-template>

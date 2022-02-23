@@ -1,41 +1,42 @@
 <app-header></app-header>
-<div class="separador1">
-    <div class="sidebar">
-        <div class="lista-rankings">
-            <h2>Mis Rankings</h2>
-            <app-modal></app-modal>
-            <div *ngIf="flagRanks;else tieneRankings">
-                <p>No tiene rankings</p>
-            </div>
-            <ng-template #tieneRankings>
-                <div *ngFor="let rank of arrRankings; let i = index" class="rank">
-                    <button class="buttom-ranking-class" (click)="rankSelec(rank.id_rank)">{{rank.nom_rank}}
+<div class="main-separador">
+    <div class="separador1">
+        <div class="sidebar">
+            <div class="lista-rankings">
+                <h2>Mis Rankings</h2>
+                <app-modal></app-modal>
+                <div *ngIf="flagRanks;else tieneRankings">
+                    <p>No tiene rankings</p>
+                </div>
+                <ng-template #tieneRankings>
+                    <div *ngFor="let rank of arrRankings; let i = index" class="rank">
+                        <button class="buttom-ranking-class" (click)="rankSelec(rank.id_rank)">{{rank.nom_rank}}
                         <div class="cantidad-alumnos">
                             {{rank.alumnos}} alumnos
                         </div>
                     </button>
-                </div>
-            </ng-template>
+                    </div>
+                </ng-template>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="separador2">
-    <div class="info-rankings">
-        <div class="titulo-detalle-ranking" *ngIf="rankSeleccionado;else noselec">
-            <div class="info-superior">
-                <h1>Ranking</h1>
-                <div class="contenido-icons">
-                    <!--buttom borrar-->
-                    <button class="buttom-icons" (click)="eliminarRanking()">
+    <div class="separador2">
+        <div class="info-rankings">
+            <div class="titulo-detalle-ranking" *ngIf="rankSeleccionado;else noselec">
+                <div class="info-superior">
+                    <h1>Ranking</h1>
+                    <div class="contenido-icons">
+                        <!--buttom borrar-->
+                        <button class="buttom-icons" (click)="eliminarRanking()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                             class="bi bi-trash-fill" viewBox="0 0 16 16">
                             <path
                                 d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                         </svg>
                     </button>
-                    <!--buttom editar-->
-                    <button class="buttom-icons">
+                        <!--buttom editar-->
+                        <button class="buttom-icons">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                             class="bi bi-tools" viewBox="0 0 16 16">
                             <path
@@ -43,33 +44,35 @@
                         </svg>
                     </button>
 
+                    </div>
                 </div>
+                <h4> Nombre del ranking: {{rankSeleccionado.nom_rank}}</h4>
+                <h3> Codigo de acceso: {{rankSeleccionado.cod_rank}}</h3>
             </div>
-            <h4> Nombre del ranking: {{rankSeleccionado.nom_rank}}</h4>
-            <h3> Codigo de acceso: {{rankSeleccionado.cod_rank}}</h3>
-        </div>
-        <ng-template #noselec>
-            <div class="titulo-detalle-ranking">
-                <h1>Ranking</h1>
-                <h5>No se seleccionó ningún ranking</h5>
-            </div>
-        </ng-template>
-        <div class="alumnos-ranking">
-            <div class="table-element" *ngFor="let alumno of listaAlumnos; let i = index">
-                <div class="table-num">
-                    {{i+1}}
+            <ng-template #noselec>
+                <div class="titulo-detalle-ranking">
+                    <h1>Ranking</h1>
+                    <h5>No se seleccionó ningún ranking</h5>
                 </div>
-                <div class="table-imagen">
-                    <img src="{{alumno.imagen}}">
-                </div>
-                <div class="table-nombre">
-                    {{alumno.nombre}}
-                </div>
-                <div class="table-apellidos">
-                    {{alumno.apellidos}}
-                </div>
-                <div class="table-puntuacion">
-                    {{alumno.puntuacion}}
+            </ng-template>
+            <div class="alumnos-ranking">
+                <app-loader></app-loader>
+                <div class="table-element" *ngFor="let alumno of listaAlumnos; let i = index">
+                    <div class="table-num">
+                        {{i+1}}
+                    </div>
+                    <div class="table-imagen">
+                        <img src="{{alumno.imagen}}">
+                    </div>
+                    <div class="table-nombre">
+                        {{alumno.nombre}}
+                    </div>
+                    <div class="table-apellidos">
+                        {{alumno.apellidos}}
+                    </div>
+                    <div class="table-puntuacion">
+                        {{alumno.puntuacion}}
+                    </div>
                 </div>
             </div>
         </div>

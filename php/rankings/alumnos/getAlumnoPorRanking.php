@@ -5,7 +5,7 @@
   header('Content-Type: application/json');
 
   // includes
-  include_once("../conexion/bd.php");
+  include_once("../../conexion/bd.php");
 
   // clases
   // clase conexión
@@ -20,7 +20,7 @@
   global $datos;
   
   // query
-  $query = "SELECT * FROM `rank_profes` WHERE id_profe=$_GET[id]";
+  $query = "SELECT * FROM alumno INNER JOIN rank_alumnos ON alumno.id_alumno = rank_alumnos.id_alumno WHERE rank_alumnos.id_rank = '$_GET[id]' ORDER BY rank_alumnos.puntuacion DESC";
   $res = mysqli_query($con, $query);
 
   // validación de la query
@@ -40,7 +40,7 @@
 
   } else {
     $response->resultado = 'error';
-    $response->mensaje = 'No se encontró el ranking';
+    $response->mensaje = 'Hubo un problema con la base de datos';
     echo json_encode($response);
   }
 ?>

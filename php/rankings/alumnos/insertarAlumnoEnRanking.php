@@ -5,7 +5,7 @@
   header('Content-Type: application/json');
 
   // includes
-  include_once("../conexion/bd.php");
+  include_once("../../conexion/bd.php");
   
   // clases
   // clase conexión
@@ -21,24 +21,17 @@
   $ids = json_decode($json);
 
   // query
-  $queryInsert = "INSERT INTO `rank_profes`(`id_rank_profes`, `id_rank`, `id_profe`) VALUES (0, $ids->id_rank, $ids->id_profe)";
+  $queryInsert = "INSERT INTO `rank_alumnos`(`id_rank_alumnos`, `id_rank`, `id_alumno`) VALUES (0, $ids->id_rank, $ids->id_alumno)";
   $resInsert = mysqli_query($con, $queryInsert);
 
   // validacion de la query
   if ($resInsert) {
-    $response->resultado = 'ok';
-    $response->mensaje = 'Se registró correctamente';
-    $queryUpdateAlumnos = "UPDATE ranking SET alumnos = (SELECT COUNT(*) FROM rank_alumnos WHERE id_rank='$ids->id_rank') WHERE id_rank = '$ids->id_rank'";
-    $resUpdate = mysqli_query($con, $queryUpdateAlumnos);
-    if ($resUpdate) {
-        echo json_encode($response);
-    } else {
-        $response->resultado = 'error';
-        $response->mensaje = 'Hubo un error al actualizar rankings';
-        echo json_encode($response);
-    }
+      $response->resultado = 'ok';
+      $response->mensaje = 'Se registró correctamente';
+      echo json_encode($response);
   } else {
     $response->resultado = 'error';
     $response->mensaje = 'Hubo un error al registrar el ranking';
     echo json_encode($response);
   }
+?>

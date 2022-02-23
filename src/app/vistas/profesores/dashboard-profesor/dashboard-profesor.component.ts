@@ -77,6 +77,12 @@ export class DashboardProfesorComponent implements OnInit {
 
   eliminarRanking() {
     console.log(this.rankSeleccionado.id_rank);
-    
+    this.rankingService.eliminarRanking(this.rankSeleccionado.id_rank).subscribe((val: any) => {
+      if (val.resultado == 'ok') {
+        window.location.reload();
+      } else {
+        console.log(val.mensaje);
+      }
+    });
   }
 }

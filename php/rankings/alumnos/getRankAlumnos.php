@@ -5,7 +5,7 @@
   header('Content-Type: application/json');
 
   // includes
-  include_once("../conexion/bd.php");
+  include_once("../../conexion/bd.php");
 
   // clases
   // clase conexión
@@ -20,7 +20,7 @@
   global $datos;
 
   // query
-  $query = "SELECT * FROM ranking INNER JOIN rank_alumnos ON ranking.id_rank = rank_alumnos.id_rank";
+  $query = "SELECT * FROM `rank_alumnos` WHERE 1";
   $res = mysqli_query($con, $query);
   
   // si la query ha sido correcta hacemos fetch

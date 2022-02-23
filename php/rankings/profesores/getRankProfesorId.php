@@ -5,7 +5,7 @@
   header('Content-Type: application/json');
 
   // includes
-  include_once("../conexion/bd.php");
+  include_once("../../conexion/bd.php");
 
   // clases
   // clase conexión
@@ -15,32 +15,26 @@
   // clase respuesta
   class Result {}
   $response = new Result();
-
+  
   // variable donde guardar los datos del fetch
   global $datos;
-  
-  // query
-  $query = "SELECT * FROM `rank_alumnos` WHERE id_alumno=$_GET[id]";
-  $res = mysqli_query($con, $query);
 
-  // validación de la query
+  // query
+  $query = "SELECT * FROM ranking INNER JOIN rank_profes ON ranking.id_rank = rank_profes.id_rank";
+  $res = mysqli_query($con, $query);
+  
+  // si la query ha sido correcta hacemos fetch
   if ($res) {
-    while ($registros = mysqli_fetch_array($res))
+    while ($reg = mysqli_fetch_array($res))
     {
-      $datos[] = $registros;
+      $datos[] = $reg;
     }
   
-    $data = json_encode($datos);
-    echo $data;
-    /*
-    $response->resultado = 'ok';
-    $response->mensaje = 'Se seleccionó el ranking con éxito';
-    $response->data = $data;
-    echo json_encode($response);*/
-
+    $json = json_encode($datos);
+    echo $json;
   } else {
     $response->resultado = 'error';
-    $response->mensaje = 'No se encontró el ranking';
+    $response->mensaje = 'Hubo un problema con la base de datos.';
     echo json_encode($response);
   }
 ?>
