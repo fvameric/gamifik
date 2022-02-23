@@ -481,7 +481,7 @@ input[type=date] {
 }
 
 ::ng-deep img{
-    display: table-cell;
+
     width: 100px;
     border-radius: 50%;
 }
