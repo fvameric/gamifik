@@ -54,13 +54,24 @@
                 <h5>No se seleccionó ningún ranking</h5>
             </div>
         </ng-template>
-        <div class="alumnos-ranking" *ngFor="let alumno of listaAlumnos; let i = index">
-            {{i}}.
-
-            <div>
-                <img src="{{alumno.imagen}}">
+        <div class="alumnos-ranking">
+            <div class="table-element" *ngFor="let alumno of listaAlumnos; let i = index">
+                <div class="table-num">
+                    {{i+1}}
+                </div>
+                <div class="table-imagen">
+                    <img src="{{alumno.imagen}}">
+                </div>
+                <div class="table-nombre">
+                    {{alumno.nombre}}
+                </div>
+                <div class="table-apellidos">
+                    {{alumno.apellidos}}
+                </div>
+                <div class="table-puntuacion">
+                    {{alumno.puntuacion}}
+                </div>
             </div>
-            {{alumno.nick}}
         </div>
     </div>
 </div>
