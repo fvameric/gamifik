@@ -109,6 +109,10 @@ p {
 
 /* logo animado */
 
+.containerlogo {
+    position: relative;
+}
+
 .logotest {
     display: flex;
     align-items: flex-end;

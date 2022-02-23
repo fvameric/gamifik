@@ -15,16 +15,6 @@ header {
   z-index: 100000;
 }
 
-.logo {
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 0px 16px;
-  text-decoration: none;
-  font-size: 25px;
-}
-
 #abrir-menu {
   padding: 14px;
   color: white;
@@ -214,6 +204,7 @@ p {
     color: #333333;
 }
 
+/*
 .logo {
     width: 50px;
     fill: white;
@@ -221,6 +212,7 @@ p {
     display: inline-block;
     vertical-align: middle;
 }
+*/
 
 .inner-header {
     height: 65vh;
@@ -313,16 +305,21 @@ p {
 
 /* logo animado */
 
+.containerlogo {
+  position: relative;
+  width: 300px;
+}
+
 .logotest {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    padding-top: 60px;
+    padding-top: 50px;
 }
 
 .logotest>div {
     position: absolute;
-    width: 25px;
+    width: 15px;
     margin: 2px;
     border-radius: 100px 100px 0 0;
 }
@@ -331,28 +328,28 @@ p {
     background-color: rgb(20, 129, 255);
     animation: barra1 0.2s forwards;
     animation-delay: 0.8s;
-    right: 1400px;
+    right: 240px;
 }
 
 .barralogo2 {
     background-color: rgb(71, 212, 255);
     animation: barra2 0.2s forwards;
     animation-delay: 1s;
-    right: 1370px;
+    right: 220px;
 }
 
 .barralogo3 {
     background-color: rgb(74, 159, 255);
     animation: barra3 0.2s forwards;
     animation-delay: 1.2s;
-    right: 1340px;
+    right: 200px;
 }
 
 .barralogo4 {
     background-color: rgb(71, 212, 255);
     animation: barra4 0.2s forwards;
     animation-delay: 1.4s;
-    right: 1310px;
+    right: 180px;
 }
 
 @keyframes barra1 {
@@ -360,7 +357,7 @@ p {
         height: 0px;
     }
     100% {
-        height: 40px;
+        height: 30px;
     }
 }
 
@@ -369,7 +366,7 @@ p {
         height: 0px;
     }
     100% {
-        height: 50px;
+        height: 40px;
     }
 }
 
@@ -378,7 +375,7 @@ p {
         height: 0px;
     }
     100% {
-        height: 20px;
+        height: 10px;
     }
 }
 
@@ -387,6 +384,6 @@ p {
         height: 0px;
     }
     100% {
-        height: 70px;
+        height: 60px;
     }
 }
