@@ -2,19 +2,22 @@
 <div class="main-separador">
     <div class="separador1">
         <div class="sidebar">
-            <div class="lista-rankings">
+            <div class="cabecera-mis-rankings">
                 <h2>Mis Rankings</h2>
-                <app-modal></app-modal>
                 <button class="unirse-ranking" (click)="unirseRanking()">
-                        Unirse
-                    </button>
-                <div *ngIf="flagRanks;else tieneRankings">
-                    <p>No tiene rankings</p>
-                </div>
+                    Unirse
+                </button>
+            </div>
+            <div *ngIf="flagRanks;else tieneRankings">
+                <p>No tiene rankings</p>
+            </div>
+            <div class="lista-rankings">
                 <ng-template #tieneRankings>
                     <app-loader></app-loader>
-                    <div *ngFor="let rank of arrRankings; let i = index" class="rank">
-                        <button class="buttom-ranking-class" (click)="rankSelec(rank.id_rank)">{{rank.nom_rank}}</button>
+                    <div class="array-rankings">
+                        <div *ngFor="let rank of arrRankings; let i = index" class="rank">
+                            <button class="button-ranking-class" (click)="rankSelec(rank.id_rank)">{{rank.nom_rank}}</button>
+                        </div>
                     </div>
                 </ng-template>
             </div>
@@ -25,12 +28,12 @@
         <div class="info-rankings">
             <div class="titulo-detalle-ranking" *ngIf="rankSeleccionado;else noselec">
                 <h1>Ranking</h1>
-                <h4> Nombre del ranking: {{rankSeleccionado.nom_rank}}</h4>
+                <h4>{{rankSeleccionado.nom_rank}}</h4>
             </div>
             <ng-template #noselec>
                 <div class="titulo-detalle-ranking">
                     <h1>Ranking</h1>
-                    <h5>No se seleccionó ningún ranking</h5>
+                    <p>No se seleccionó ningún ranking</p>
                 </div>
             </ng-template>
             <div class="alumnos-ranking">
