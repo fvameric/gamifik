@@ -2,21 +2,21 @@ body {
     height: 100% !important;
 }
 
+.main-separador {
+    display: flex;
+    margin-top: 150px;
+    padding-bottom: 150px;
+}
+
 .separador1 {
-    display: block;
-    float: left;
     height: 100%;
 }
 
-.separador {
-    margin-top: 10%;
-    display: block;
-    position: sticky;
-}
-
 .separador2 {
-    display: flex;
     justify-content: center;
+    margin: 0 0 0 50px;
+    width: 80%;
+    height: auto;
 }
 
 
@@ -30,8 +30,8 @@ body {
     overflow: auto;
     border-radius: 10px 10px 10px 10px;
     height: 80%;
-    margin-left: 40px;
     padding: 20px;
+    margin-left: 20px;
 }
 
 .sidebar a {
@@ -65,86 +65,11 @@ div.content {
 
 .info-rankings {
     padding: 10px;
-    width: 100%;
-    height: 50%;
-    display: inline-block;
     background: #0000008c;
     -webkit-backdrop-filter: blur(6px);
     box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
-    border-radius: 10px 10px 10px 10px;
-    margin: 0 3rem 0 5rem;
+    border-radius: 5px 5px 5px 5px;
 }
-
-
-/* cartas destacados
-
-  .contenido-dashboard {
-    padding: 10px;
-    margin-top: 50px;
-    width: auto;
-    display: inline-block;
-    background: #0000008c;
-    -webkit-backdrop-filter: blur(6px);
-    box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
-    border-radius: 5px 5px 5px 5px;
-  }
-
-  .rectangulo {
-    float: left;
-    padding: 0;
-    margin: 10px;
-    width: 330px;
-    height: 150px;
-    background: #0000008c;
-    -webkit-backdrop-filter: blur(6px);
-    box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
-    border-radius: 5px 5px 5px 5px;
-  }
-
-  h4 {
-    margin-top: 5%;
-    margin-left: 5%;
-    color: white !important;
-    font-size: 25px;
-  }
-
-  .button-destacados {
-    margin-left: 70%;
-    padding: 8px;
-    margin-right: 1rem;
-    border-radius: 5px;
-    background-color: #56baed;
-    color: white;
-    border: none;
-    transition: 0.5s ease-in-out;
-  }
-
-  .button-destacados:hover {
-    transform: scale(1.1);
-    transition: 1s;
-  }
-
-  .texto-destacados {
-    margin-left: 8%;
-    color: rgb(182, 182, 182);
-  }
-
-
-
-  .Texto-destacados {
-    text-align: center;
-    margin: 1%;
-  }
-
-  @media (max-width: 1227px) {
-    
-    .rectangulo {
-      width:95%;
-      float:left;
-    }
-    
-  }
-  */
 
 .unirse-ranking {
     margin: 5%;
@@ -155,12 +80,11 @@ div.content {
     backdrop-filter: blur(6px);
     color: #cccccc;
     border: none;
-    transition: 300ms;
+    transition: 1s;
 }
 
 .unirse-ranking:hover {
     background-color: #56baed;
-    color: #ffffff;
 }
 
 .unirse-retangulo {
@@ -188,7 +112,6 @@ div.content {
 
 .alumnos-ranking {
     color: #ffffff;
-    padding: 10px;
 }
 
 .alumnos-ranking img {
@@ -206,34 +129,74 @@ div.content {
     cursor: pointer;
     transition: 200ms;
     border-radius: 7px;
+    word-wrap: break-word;
 }
 
 .buttom-ranking-class:hover {
     transition: 200ms;
-    color: #ffffff;
+    color: white;
     background-color: #56baed;
 }
 
-@media screen and (max-width:1024px) {
-    .separador {
-        margin-top: 15%;
-    }
+.cantidad-alumnos {
+    float: right;
 }
 
-@media screen and (max-width:768px) {
-    .sidebar {
-        margin: 3rem;
-        margin-left: none;
-    }
-    .separador1 {
-        float: none;
-        display: flex;
-    }
-    .info-rankings {
-        margin: 0 3rem 0 3rem;
-        width: 100%;
-    }
-    .buttom-ranking-class {
-        width: 100%;
-    }
+.info-superior {
+    width: 100%;
+    margin: 10px;
+    display: flex;
+}
+
+.contenido-icons {
+    margin: 10px 10px 10px 10px;
+    float: right;
+    width: 100%;
+}
+
+.buttom-icons {
+    float: right;
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.buttom-icons:hover {
+    transition: 1s;
+    color: #1292f8;
+}
+
+
+/* tabla alumnos */
+
+.table-element {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.table-element:nth-child(odd) {
+    background-color: #002d52;
+}
+
+.table-imagen {
+    margin: 0 0 0 10px;
+}
+
+.table-imagen img {
+    width: 35px;
+    height: auto;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+.table-puntuacion {
+    margin-left: auto;
+}
+
+.table-nombre {
+    margin: 0 6px 0 10px;
 }

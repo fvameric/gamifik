@@ -1,12 +1,13 @@
 <app-header></app-header>
-<div class="separador">
+<div class="main-separador">
     <div class="separador1">
         <div class="sidebar">
             <div class="lista-rankings">
                 <h2>Mis Rankings</h2>
+                <app-modal></app-modal>
                 <button class="unirse-ranking" (click)="unirseRanking()">
-                    Unirse
-                </button>
+                        Unirse
+                    </button>
                 <div *ngIf="flagRanks;else tieneRankings">
                     <p>No tiene rankings</p>
                 </div>
@@ -32,13 +33,25 @@
                     <h5>No se seleccionó ningún ranking</h5>
                 </div>
             </ng-template>
-            <div class="alumnos-ranking" *ngFor="let alumno of listaAlumnos; let i = index">
-                {{alumno.id_alumno}}.
-
-                <div>
-                    <img src="{{alumno.imagen}}">
+            <div class="alumnos-ranking">
+                <app-loader></app-loader>
+                <div class="table-element" *ngFor="let alumno of listaAlumnos; let i = index">
+                    <div class="table-num">
+                        {{i+1}}
+                    </div>
+                    <div class="table-imagen">
+                        <img src="{{alumno.imagen}}">
+                    </div>
+                    <div class="table-nombre">
+                        {{alumno.nombre}}
+                    </div>
+                    <div class="table-apellidos">
+                        {{alumno.apellidos}}
+                    </div>
+                    <div class="table-puntuacion">
+                        {{alumno.puntuacion}}
+                    </div>
                 </div>
-                {{alumno.nick}}
             </div>
         </div>
     </div>
