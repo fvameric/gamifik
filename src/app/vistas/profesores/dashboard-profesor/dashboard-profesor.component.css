@@ -230,23 +230,6 @@ div.content {
 }
 
 @media screen and (max-width:768px) {
-    /*
-    .sidebar {
-        margin: 3rem;
-        margin-left: none;
-    }
-    .separador1 {
-        float: none;
-        display: flex;
-    }
-    .info-rankings {
-        margin: 0 3rem 0 3rem;
-        width: 100%;
-    }
-    .button-ranking-class {
-        width: 100%;
-    }
-    */
     .main-separador {
         flex-direction: column;
         margin: 12px;
