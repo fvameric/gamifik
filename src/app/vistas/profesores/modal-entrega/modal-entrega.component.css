@@ -9,7 +9,7 @@ p{
 
 .crear-ranking {
     margin: 5px;
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
     background: #56baed;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
@@ -22,4 +22,18 @@ p{
 .crear-ranking:hover {
     background-color: #0000008c;
     color: #ffffff;
+}
+
+.button-svg{
+    width: auto;
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.button-svg:hover{
+    transition: 1s;
+    color: #1292f8;
 }
