@@ -1,14 +1,21 @@
-<p>Registro ranking:</p>
-<input type="text" [(ngModel)]="nombreRanking" class="inputTexto" placeholder="Nombre del ranking"><br><br>
+<form [formGroup]="crearRankingForm" (ngSubmit)="onSubmit()">
+    <p>Registro ranking:</p>
+    <input type="text" formControlName="nombreRanking" [ngClass]="{ 'is-invalid': submitted && form.nombreRanking.errors }" class="inputTexto" placeholder="Nombre del ranking"><br><br>
+    <div *ngIf="submitted && form.nombreRanking.errors" class="invalid-feedback">
+        <div *ngIf="form.nombreRanking.errors.required">El nombre es necesario</div>
+        <div *ngIf="form.nombreRanking.invalid && form.nombreRanking.errors?.notUnique">El correo electrónico ya existe</div>
+            <div *ngIf="form.nombreRanking.pending">Consultando disponibilidad del correo electrónico</div>
+    </div>
 
-<p>Seleccionar alumnos:</p>
-<app-loader></app-loader>
-<div *ngFor="let alumno of listaAlumnos">
-    <input type="checkbox" [value]="alumno.id_alumno" (change)="checkboxAlumnos($event)" /> {{alumno.nick}}
-</div>
+    <p>Seleccionar alumnos:</p>
+    <app-loader></app-loader>
+    <div *ngFor="let alumno of listaAlumnos">
+        <input type="checkbox" [value]="alumno.id_alumno" (change)="checkboxAlumnos($event)" /> {{alumno.nick}}
+    </div>
 
-<br>
-<p>Código de ranking:</p>
-<p class="codigo-entrar-ranking">{{codigoRanking}}</p><br>
+    <br>
+    <p>Código de ranking:</p>
+    <p class="codigo-entrar-ranking">{{codigoRanking}}</p><br>
 
-<button class="crear-ranking" (click)="onSubmit()">Crear ranking</button>
+    <button class="crear-ranking">Crear ranking</button>
+</form>

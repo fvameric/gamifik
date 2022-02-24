@@ -12,6 +12,7 @@ const URL_READ_RANK = 'http://localhost:8080/rankings/datosRanking.php';        
 const URL_UPDATE_RANK = 'http://localhost:8080/rankings/modificarRanking.php';    // update
 const URL_DELETE_RANK = 'http://localhost:8080/rankings/eliminarRanking.php';     // delete
 const URL_GET_RANK_ID = 'http://localhost:8080/rankings/getRankingId.php';        // obtener rankings específicos según su ID
+const URL_NOMBRE_EXISTE_RANKING = 'http://localhost:8080/rankings/profesores/obtenerNombreRanking.php';      // Obtener nombre ranking
 
 // ENTREGAS
 const URL_RANK_ENTREGAS = 'http://localhost:8080/rankings/getRankEntregas.php';   // obtener relacion rankings - entregas
@@ -115,5 +116,10 @@ export class RankingService {
   // obtener alumnos por codigo de ranking
   obtenerAlumnoPorRanking(id: number) {
     return this.http.get<any[]>(URL_ALUMNOS_POR_RANK +`?id=${id}`);
+  }
+
+
+  validarNombreExisteRanking(nombreRanking: string) {
+    return this.http.get(URL_NOMBRE_EXISTE_RANKING + `?nom_rank=${nombreRanking}`);
   }
 }
