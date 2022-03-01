@@ -8,7 +8,7 @@ import { TokenService } from 'services/token.service';
 @Component({
   selector: 'app-proba-dashboard-profesor',
   templateUrl: './proba-dashboard-profesor.component.html',
-  styleUrls: ['./proba-dashboard-profesor.component.css']
+  styleUrls: ['./proba-dashboard-profesor.component.css'],
 })
 export class ProbaDashboardProfesorComponent implements OnInit {
   datosProfesor: Profesor = {
@@ -20,11 +20,10 @@ export class ProbaDashboardProfesorComponent implements OnInit {
     apellidos: '',
     centro: 0,
     tipo: 1,
-    imagen: ''
+    imagen: '',
   };
 
   mostrarDesplegableVisual: boolean = false;
-
 
   // rankings
   rankings: any;
@@ -38,7 +37,8 @@ export class ProbaDashboardProfesorComponent implements OnInit {
     private usersService: UsersService,
     private rankingService: RankingService,
     private tokenService: TokenService,
-    public formBuilder: FormBuilder) {}
+    public formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.obtenerDatos();
@@ -51,7 +51,9 @@ export class ProbaDashboardProfesorComponent implements OnInit {
 
   obtenerDatosRanking() {
     this.arrRankings = [];
-    this.rankingService.obtenerRanking().subscribe(val => this.rankings = val);
+    this.rankingService
+      .obtenerRanking()
+      .subscribe((val) => (this.rankings = val));
     this.rankingService.obtenerJoinRankingProfes().subscribe((val: any) => {
       this.rankingsConProfes = val;
 
@@ -71,30 +73,46 @@ export class ProbaDashboardProfesorComponent implements OnInit {
 
   rankSelec(rankId: number) {
     this.listaAlumnos = [];
-    this.rankSeleccionado = this.arrRankings.find(rank => rank.id_rank == rankId);
+    this.rankSeleccionado = this.arrRankings.find(
+      (rank) => rank.id_rank == rankId
+    );
 
-    this.rankingService.obtenerAlumnoPorRanking(this.rankSeleccionado.id_rank)
-    .subscribe((val: any) => {
-      this.listaAlumnos = val;
-    });
+    this.rankingService
+      .obtenerAlumnoPorRanking(this.rankSeleccionado.id_rank)
+      .subscribe((val: any) => {
+        this.listaAlumnos = val;
+      });
   }
 
   eliminarRanking() {
     console.log(this.rankSeleccionado.id_rank);
-    this.rankingService.eliminarRanking(this.rankSeleccionado.id_rank).subscribe((val: any) => {
-      if (val.resultado == 'ok') {
-        window.location.reload();
-      } else {
-        console.log(val.mensaje);
-      }
-    });
+    this.rankingService
+      .eliminarRanking(this.rankSeleccionado.id_rank)
+      .subscribe((val: any) => {
+        if (val.resultado == 'ok') {
+          window.location.reload();
+        } else {
+          console.log(val.mensaje);
+        }
+      });
   }
 
-  mostrarDesplegable() {
-    if (this.mostrarDesplegableVisual == false) {
-        this.mostrarDesplegableVisual= true;
-    } else {
-      this.mostrarDesplegableVisual=false;
+  mostrarDesplegable(id_alumno: number) {
+    let antiguaId = id_alumno;
+
+    console.log(id_alumno);
+
+    if (antiguaId == id_alumno) {
+      if (this.mostrarDesplegableVisual) {
+        this.mostrarDesplegableVisual = false;
+      } else {
+        this.mostrarDesplegableVisual = true;
+      }
     }
+    if (antiguaId != id_alumno) {
+      this.mostrarDesplegableVisual = false;
+    }
+
+
   }
 }

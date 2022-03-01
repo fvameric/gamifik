@@ -352,9 +352,10 @@ div.content {
 }
 
 .desplegableVisual{
+    position: absolute;
     background-color: white;
     color: black;
-    width: 100%;
+    width: 10%;
     margin: 5px;
     border-radius: 5px;
 }
