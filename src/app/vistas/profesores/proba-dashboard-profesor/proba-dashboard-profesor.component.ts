@@ -34,6 +34,7 @@ export class ProbaDashboardProfesorComponent implements OnInit {
   rankSeleccionado: any;
   listaAlumnos: any[] = [];
 
+  alumno_seleccionado: number = 0;
   constructor(
     private usersService: UsersService,
     private rankingService: RankingService,
@@ -90,11 +91,15 @@ export class ProbaDashboardProfesorComponent implements OnInit {
     });
   }
 
-  mostrarDesplegable() {
+  mostrarDesplegable(alumno: any) {
+    this.alumno_seleccionado = alumno.id_alumno;
+    console.log(alumno);
+    
     if (this.mostrarDesplegableVisual == false) {
-        this.mostrarDesplegableVisual= true;
+        this.mostrarDesplegableVisual = true;
     } else {
-      this.mostrarDesplegableVisual=false;
+      this.mostrarDesplegableVisual = false;
     }
+    
   }
 }
