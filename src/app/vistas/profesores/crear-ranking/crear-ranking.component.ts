@@ -25,7 +25,7 @@ export class CrearRankingComponent implements OnInit {
 
   listaAlumnos: any;
   selecAlumnos: any[] = [];
-  codigoRanking: string = 'Random string';
+  codigoRanking: string = '';
   rankCodes: any;
   ranking: Ranking = {
     id_rank: 0,
@@ -36,6 +36,9 @@ export class CrearRankingComponent implements OnInit {
 
   profeLogin: any;
 
+  node = document.createElement("div");
+  nomExisteNode = document.createTextNode("Nombre de ranking ya existe");
+
   constructor(
     public formBuilder: FormBuilder,
     private usersService: UsersService,
@@ -44,20 +47,23 @@ export class CrearRankingComponent implements OnInit {
     private router: Router,
     private modalService: NgbModal,
     private HttpClient: HttpClient
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.obtenerDatosProfesor();
+    this.obtenerDatosRankings();
     this.crearForm();
-    this.usersService
-      .obtenerAlumnos()
-      .subscribe((val) => (this.listaAlumnos = val));
-
+    this.usersService.obtenerAlumnos().subscribe((val) => (this.listaAlumnos = val));
     this.checkNombre();
+    this.codigoRanking = this.generaNss();
   }
-
+  
   obtenerDatosProfesor() {
     this.profeLogin = this.tokenService.getUser();
+  }
+
+  obtenerDatosRankings() {
+    this.rankService.obtenerRanking().subscribe(val => this.rankCodes = val);
   }
 
   crearForm() {
@@ -78,10 +84,7 @@ export class CrearRankingComponent implements OnInit {
     if (event.target.checked) {
       this.selecAlumnos.push(event.target.value);
     } else {
-      this.selecAlumnos.splice(
-        this.selecAlumnos.indexOf(event.target.value),
-        1
-      );
+      this.selecAlumnos.splice(this.selecAlumnos.indexOf(event.target.value), 1);
     }
   }
 
@@ -89,8 +92,8 @@ export class CrearRankingComponent implements OnInit {
     this.submitted = true;
 
     if (this.crearRankingForm.valid) {
-      this.generaNss();
-      this.modalService.dismissAll();
+      this.validarCodigoRepetido(this.codigoRanking);
+      this.validarRankingNuevo();
     }
   }
 
@@ -111,13 +114,9 @@ export class CrearRankingComponent implements OnInit {
           .validarNombreExisteRanking(nombreRanking)
           .subscribe((val: any) => {
             if (val.resultado == 'error') {
-              console.log('ha sido error');
-
               this.nombreRanking.markAsPending({ onlySelf: false });
               this.nombreRanking.setErrors({ notUnique: true });
             } else {
-              console.log('funciona');
-
               this.nombreRanking.markAsPending({ onlySelf: false });
               if (nombreRanking.length > 0) {
                 this.nombreRanking.setErrors(null);
@@ -130,7 +129,7 @@ export class CrearRankingComponent implements OnInit {
   }
 
   //Funcion que genera el codigo
-  generaNss() {
+  generaNss(): string {
     let result = '';
     const characters =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -139,31 +138,49 @@ export class CrearRankingComponent implements OnInit {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
 
-    this.comprobarCodigo(result);
+    return result;
   }
 
-  //Función que comprueba el codigo
-  comprobarCodigo(codigo: string) {
-    this.codigoRanking = codigo;
-    this.rankService.obtenerRanking().subscribe((val: any) => {
-      this.rankCodes = val;
+  validarCodigoRepetido(codigo: string) {
+    let codExiste: boolean = false;
+    this.rankCodes.forEach((element: any) => {
+      if (element.cod_rank == codigo) {
+        codExiste = true;
+      }
+    });
 
-      this.rankCodes.forEach((element: any) => {
-        if (element.cod_rank != codigo) {
-          this.ranking.alumnos = 0;
-          this.ranking.nom_rank =
-            this.crearRankingForm.get('nombreRanking')?.value;
-          this.ranking.cod_rank = codigo;
-        } else {
-          this.generaNss();
-        }
-      });
+    if (codExiste) {
+      this.codigoRanking = this.validarCodigoRepetido(this.generaNss());
+    }
+    return codigo;
+  }
+
+  validarRankingNuevo() {
+    let rankingValido: boolean = true;
+
+    this.rankCodes.forEach((element: any) => {
+      if (element.nom_rank == this.nombreRanking.value) {
+        rankingValido = false;
+      }
+    });
+
+    
+    if (rankingValido) {
+      this.ranking.nom_rank = this.nombreRanking.value;
+      this.ranking.alumnos = this.selecAlumnos.length;
+      this.ranking.cod_rank = this.codigoRanking;
+
       this.rankService.insertarRanking(this.ranking).subscribe((val: any) => {
-        //this.insertarAlumnosRanking(val.data.id_rank);
         this.insertarAlumnosRanking(val.data.id_rank);
         this.insertarProfesorRanking(val.data.id_rank);
       });
-    });
+      
+      this.modalService.dismissAll();
+    } else {
+      console.log("nombre ya existe");
+      this.nombreRanking.markAsPending({ onlySelf: false });
+      this.nombreRanking.setErrors({ notUnique: true });
+    }
   }
 
   insertarAlumnosRanking(id_rank: number) {

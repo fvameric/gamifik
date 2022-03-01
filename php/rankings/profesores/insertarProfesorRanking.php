@@ -28,8 +28,11 @@
   if ($resInsert) {
     $response->resultado = 'ok';
     $response->mensaje = 'Se registró correctamente';
-    $queryUpdateAlumnos = "UPDATE ranking SET alumnos = (SELECT COUNT(*) FROM rank_alumnos WHERE id_rank='$ids->id_rank') WHERE id_rank = '$ids->id_rank'";
-    $resUpdate = mysqli_query($con, $queryUpdateAlumnos);
+    echo json_encode($response);
+
+    //$queryUpdateAlumnos = "UPDATE ranking SET alumnos = (SELECT COUNT(*) FROM rank_alumnos WHERE id_rank='$ids->id_rank') WHERE id_rank = '$ids->id_rank'";
+    //$resUpdate = mysqli_query($con, $queryUpdateAlumnos);
+    /*
     if ($resUpdate) {
         echo json_encode($response);
     } else {
@@ -37,6 +40,7 @@
         $response->mensaje = 'Hubo un error al actualizar rankings';
         echo json_encode($response);
     }
+    */
   } else {
     $response->resultado = 'error';
     $response->mensaje = 'Hubo un error al registrar el ranking';

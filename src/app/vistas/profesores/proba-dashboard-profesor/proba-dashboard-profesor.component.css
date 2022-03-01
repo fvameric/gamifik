@@ -355,13 +355,27 @@ div.content {
     position: absolute;
     background-color: white;
     color: black;
+<<<<<<< HEAD
     width: 10%;
     margin: 5px;
+=======
+    width: 100%;
+>>>>>>> e67747784da97488a0ad21c87eedaa77c17a6a6f
     border-radius: 5px;
 }
 
 .texto-desplegable{
     margin: 5px;
+}
+
+a{
+ color: #949393 !important;   
+ transition: 1s !important;
+ margin-left: 6px;
+}
+a:hover{
+    color: #1292f8 !important;
+    transition: 0.5s !important;
 }
 
 

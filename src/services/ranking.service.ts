@@ -40,6 +40,7 @@ export class RankingService {
   // funciones rankings
   // create ranking
   insertarRanking(rank: Ranking) {
+    console.log(rank);
     return this.http.post(URL_CREATE_RANK, JSON.stringify(rank));
   }
 

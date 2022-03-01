@@ -14,6 +14,10 @@ export class ModalComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngOnDestroy() {
+    this.modalService.dismissAll();
+  }
+
   enviar(modal:any){
     this.modalService.open(modal); 
   }
@@ -21,6 +25,4 @@ export class ModalComponent implements OnInit {
   retornar(){
     this.modalService.dismissAll();
   }
-
-
 }
