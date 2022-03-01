@@ -355,12 +355,21 @@ div.content {
     background-color: white;
     color: black;
     width: 100%;
-    margin: 5px;
     border-radius: 5px;
 }
 
 .texto-desplegable{
     margin: 5px;
+}
+
+a{
+ color: #949393 !important;   
+ transition: 1s !important;
+ margin-left: 6px;
+}
+a:hover{
+    color: #1292f8 !important;
+    transition: 0.5s !important;
 }
 
 
