@@ -1,10 +1,10 @@
 <form [formGroup]="crearRankingForm" (ngSubmit)="onSubmit()">
     <p>Registro ranking:</p>
-    <input type="text" formControlName="nombreRanking" [ngClass]="{ 'is-invalid': submitted && form.nombreRanking.errors }" class="inputTexto" placeholder="Nombre del ranking"><br><br>
-    <div *ngIf="submitted && form.nombreRanking.errors" class="invalid-feedback">
+    <input type="text" formControlName="nombreRanking" [ngClass]="{ 'is-invalid': form.nombreRanking.errors }" class="inputTexto" placeholder="Nombre del ranking"><br><br>
+    <div *ngIf="form.nombreRanking.errors" class="invalid-feedback">
         <div *ngIf="form.nombreRanking.errors.required">El nombre es necesario</div>
-        <div *ngIf="form.nombreRanking.invalid && form.nombreRanking.errors?.notUnique">El correo electrónico ya existe</div>
-            <div *ngIf="form.nombreRanking.pending">Consultando disponibilidad del correo electrónico</div>
+        <div *ngIf="form.nombreRanking.invalid && form.nombreRanking.errors?.notUnique">Nombre de ranking ya existe</div>
+        <div *ngIf="form.nombreRanking.pending">Consultando disponibilidad del nombre</div>
     </div>
 
     <p>Seleccionar alumnos:</p>
