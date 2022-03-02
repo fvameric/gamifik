@@ -31,6 +31,10 @@ header.sticky {
     float: right;
 }
 
+.navbar-todo{
+    margin-top: 1rem;
+}
+
 #nav-menu {
     display: block;
     opacity: 1;

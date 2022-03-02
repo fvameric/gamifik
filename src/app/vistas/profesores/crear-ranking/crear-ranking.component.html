@@ -6,14 +6,6 @@
         <div *ngIf="form.nombreRanking.invalid && form.nombreRanking.errors?.notUnique">Nombre de ranking ya existe</div>
         <div *ngIf="form.nombreRanking.pending">Consultando disponibilidad del nombre</div>
     </div>
-
-    <p>Seleccionar alumnos:</p>
-    <app-loader></app-loader>
-    <div *ngFor="let alumno of listaAlumnos">
-        <input type="checkbox" [value]="alumno.id_alumno" (change)="checkboxAlumnos($event)" /> {{alumno.nick}}
-    </div>
-
-    <br>
     <p>Código de ranking:</p>
     <p class="codigo-entrar-ranking">{{codigoRanking}}</p><br>
 
