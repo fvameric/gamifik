@@ -28,7 +28,7 @@ Formulario PROFESORES
                 formControlName="userImage"><br>
         </div>
 
-        <input type="text" id="login" formControlName="username" placeholder="Usuario" class="fadeIn first"
+        <input type="text" id="login" formControlName="username" maxlength="20" placeholder="Usuario" class="fadeIn first"
             [ngClass]="{ 'is-invalid': form.username.errors }">
         <!-- Missatge error nom usuari -->
         <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
@@ -47,7 +47,7 @@ Formulario PROFESORES
 
         <div class="form-group">
             <div class="input-group">
-                <input id="password" placeholder="Password" formControlName="password" class="fadeIn second"
+                <input id="password" placeholder="Password" maxlength="50" formControlName="password" class="fadeIn second"
                     [type]="passType" [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
                 <!-- Icono -->
                 <i *ngIf="this.passShown" (click)="togglePass()" class="material-icons">
@@ -66,7 +66,7 @@ Formulario PROFESORES
 
         <div class="form-group">
             <div class="input-group">
-                <input id="confirmPassword" placeholder="Confirmar Contraseña" class="fadeIn third"
+                <input id="confirmPassword" maxlength="50" placeholder="Confirmar Contraseña" class="fadeIn third"
                     formControlName="confirmPassword" [type]="confirmPassType"
                     [ngClass]="{ 'is-invalid':submitted && form.confirmPassword.errors }">
                 <!-- Icono -->
@@ -84,14 +84,14 @@ Formulario PROFESORES
             </div>
         </div>
 
-        <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="fadeIn third" formControlName="nombre"
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre" maxlength="30" class="fadeIn third" formControlName="nombre"
             [ngClass]="{ 'is-invalid': form.nombre.errors }">
         <!-- Missatge error nombre -->
         <div *ngIf="submitted && form.nombre.errors" class="invalid-feedback">
             <div *ngIf="form.nombre.errors.required">El nombre es necesario</div>
         </div>
 
-        <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" class="fadeIn fourth"
+        <input type="text" id="apellidos" name="apellidos" maxlength="30" placeholder="Apellidos" class="fadeIn fourth"
             formControlName="apellidos" [ngClass]="{ 'is-invalid': form.apellidos.errors }">
         <!-- Missatge error apellidos -->
         <div *ngIf="submitted && form.apellidos.errors" class="invalid-feedback">

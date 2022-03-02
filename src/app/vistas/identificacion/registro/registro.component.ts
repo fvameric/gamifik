@@ -49,7 +49,7 @@ export class RegistroComponent implements OnInit {
     public formBuilder: FormBuilder,
     private authService: AuthService,
     private HttpClient: HttpClient
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.crearFormAlumno();
@@ -157,10 +157,10 @@ export class RegistroComponent implements OnInit {
           '',
           [Validators.required, Validators.email, Validators.minLength(3)],
         ],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', Validators.required],
-        nombre: ['', [Validators.required, Validators.minLength(1)]],
-        apellidos: ['', [Validators.required, Validators.minLength(2)]],
+        password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
+        confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
+        nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
+        apellidos: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
         fechaNacimiento: ['', Validators.required],
         userImage: [''],
       },
@@ -188,10 +188,10 @@ export class RegistroComponent implements OnInit {
           '',
           [Validators.required, Validators.email, Validators.minLength(3)],
         ],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', Validators.required],
-        nombre: ['', [Validators.required, Validators.minLength(1)]],
-        apellidos: ['', [Validators.required, Validators.minLength(2)]],
+        password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
+        confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
+        nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
+        apellidos: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
         centro: ['', Validators.required],
         userImage: [''],
       },
