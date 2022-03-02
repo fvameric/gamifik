@@ -24,6 +24,7 @@ export class ProbaDashboardProfesorComponent implements OnInit {
   };
 
   mostrarDesplegableVisual: boolean = false;
+  alumnoSelec: number = 0;
 
   // rankings
   rankings: any;
@@ -97,19 +98,18 @@ export class ProbaDashboardProfesorComponent implements OnInit {
       });
   }
 
-  mostrarDesplegable(id_alumno: number) {
-    let antiguaId = id_alumno;
+  mostrarDesplegable(alumno: any) {
+    this.alumnoSelec = alumno.id_alumno;
+    let antiguaId = alumno.id_alumno;
 
-    console.log(id_alumno);
-
-    if (antiguaId == id_alumno) {
+    if (antiguaId == alumno.id_alumno) {
       if (this.mostrarDesplegableVisual) {
         this.mostrarDesplegableVisual = false;
       } else {
         this.mostrarDesplegableVisual = true;
       }
     }
-    if (antiguaId != id_alumno) {
+    if (antiguaId != alumno.id_alumno) {
       this.mostrarDesplegableVisual = false;
     }
 
