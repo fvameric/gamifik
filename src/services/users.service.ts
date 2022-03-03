@@ -28,8 +28,11 @@ const URL_DELETE_PROFESORES =
   'http://localhost:8080/profesores/eliminarProfesor.php'; // delete
 const URL_GET_PROFESOR_ID =
   'http://localhost:8080/profesores/getProfesorId.php'; // obtener profesores específicos según su ID
+
 const URL_EMAIL_EXISTE_PROFESORES =
   'http://localhost:8080/profesores/emailExiste.php'; // comprobar si un email ya está en uso
+const URL_USERNAME_EXISTE_PROFESORES =
+  'http://localhost:8080/profesores/usuarioExiste.php';
 
 @Injectable({
   providedIn: 'root',
@@ -65,7 +68,7 @@ export class UsersService {
     imagen: '',
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // funciones alumnos
   // create alumno
@@ -91,11 +94,11 @@ export class UsersService {
   obtenerAlumnoPorId(id: number) {
     return this.http.get(URL_GET_ALUMNO_ID + `?id=${id}`);
   }
-
+  // validar email alumnos
   validarEmailExisteAlumnos(email: string) {
     return this.http.get(URL_EMAIL_EXISTE_ALUMNOS + `?email=${email}`);
   }
-
+  // validar username alumnos
   validarUsuarioExisteAlumnos(username: string) {
     return this.http.get(URL_USERNAME_EXISTE_ALUMNOS + `?username=${username}`);
   }
@@ -125,7 +128,12 @@ export class UsersService {
     return this.http.get(URL_GET_PROFESOR_ID + `?id=${id}`);
   }
 
-  validarEmailExisteProfesores(email: string) {
+  //validar email profes
+  validarEmailExisteProfes(email: string) {
     return this.http.get(URL_EMAIL_EXISTE_PROFESORES + `?email=${email}`);
+  }
+  // validar username profes
+  validarUsuarioExisteProfes(username: string) {
+    return this.http.get(URL_USERNAME_EXISTE_PROFESORES + `?username=${username}`);
   }
 }

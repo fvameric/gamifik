@@ -17,6 +17,7 @@ import { CrearRankingComponent } from './vistas/profesores/crear-ranking/crear-r
 import { ModalEntregaComponent } from './vistas/profesores/modal-entrega/modal-entrega.component';
 import { ProbaDashboardProfesorComponent } from './vistas/profesores/proba-dashboard-profesor/proba-dashboard-profesor.component';
 import { ModalPerfilAlumnoComponent } from './vistas/profesores/modal-perfil-alumno/modal-perfil-alumno.component';
+
 const routes: Routes = [
   { path: '', redirectTo: 'identificacion', pathMatch: 'full' },
   { path: 'identificacion', component: IdentificacionComponent },

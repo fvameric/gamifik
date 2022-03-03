@@ -166,7 +166,7 @@ export class PerfilProfesorComponent implements OnInit {
   }
 
   comprobarEmail(email: string) {
-    this.usersService.validarEmailExisteProfesores(email).subscribe((val: any) => {
+    this.usersService.validarEmailExisteProfes(email).subscribe((val: any) => {
       if (val.resultado == 'error') {
         this.generarSwal(this.arrSwal[4]);
       }

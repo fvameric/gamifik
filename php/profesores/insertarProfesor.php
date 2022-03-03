@@ -6,10 +6,14 @@
 
   // includes
   include_once("../conexion/bd.php");
-  
+  include_once("../tokenJWT/generarToken.php");
+
   // clases
+  // clase conexión
   $bd = new claseBD();
   $con = $bd->obtenerConexion();
+
+  // clase respuesta
   class Result {}
   $response = new Result();
 
@@ -23,8 +27,6 @@
 
   $querySelect = "SELECT * FROM `profesor` WHERE nick = '$profe->nick' OR email = '$profe->email'";
 
-  
-
   // comprobamos que el email y el nick de usuario no se repita
   $resSelect = mysqli_query($con, $querySelect);
 
@@ -37,7 +39,6 @@
       if ($resInsert) {
 
         $resSelectUltimoProfe = mysqli_query($con, $querySelect);
-
         if ($resSelectUltimoProfe) {
           $response->resultado = 'ok';
           $response->mensaje = 'Se registró correctamente';
