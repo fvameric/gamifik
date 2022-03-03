@@ -120,7 +120,7 @@ export class RankingService {
   }
 
 
-  validarNombreExisteRanking(nombreRanking: string) {
-    return this.http.get(URL_NOMBRE_EXISTE_RANKING + `?nom_rank=${nombreRanking}`);
+  validarNombreExisteRanking(idProfe: number, nombreRanking:string,) {
+    return this.http.get(URL_NOMBRE_EXISTE_RANKING + `?nom_rank=${nombreRanking}&id_profe=${idProfe}`);
   }
 }

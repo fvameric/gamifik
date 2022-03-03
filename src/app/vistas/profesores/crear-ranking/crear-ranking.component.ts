@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { RankingService } from 'services/ranking.service';
 import { TokenService } from 'services/token.service';
 import { UsersService } from 'services/users.service';
@@ -11,8 +10,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { debounceTime, repeat, tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { debounceTime, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-crear-ranking',
@@ -24,7 +22,6 @@ export class CrearRankingComponent implements OnInit {
   submitted: boolean = false;
 
   listaAlumnos: any;
-  selecAlumnos: any[] = [];
   codigoRanking: string = '';
   rankCodes: any;
   ranking: Ranking = {
@@ -36,34 +33,42 @@ export class CrearRankingComponent implements OnInit {
 
   profeLogin: any;
 
-  node = document.createElement("div");
-  nomExisteNode = document.createTextNode("Nombre de ranking ya existe");
+  node = document.createElement('div');
+  nomExisteNode = document.createTextNode('Nombre de ranking ya existe');
+
+  user: any;
+  id_profe: number = 0;
 
   constructor(
     public formBuilder: FormBuilder,
     private usersService: UsersService,
     private rankService: RankingService,
     private tokenService: TokenService,
-    private router: Router,
-    private modalService: NgbModal,
-    private HttpClient: HttpClient
-  ) { }
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
+    this.user = this.tokenService.getUser();
     this.obtenerDatosProfesor();
     this.obtenerDatosRankings();
     this.crearForm();
-    this.usersService.obtenerAlumnos().subscribe((val) => (this.listaAlumnos = val));
+    this.usersService
+      .obtenerAlumnos()
+      .subscribe((val) => (this.listaAlumnos = val));
     this.checkNombre();
     this.codigoRanking = this.generaNss();
+    this.id_profe = this.user.id_profe;
+    console.log(this.id_profe);
   }
-  
+
   obtenerDatosProfesor() {
     this.profeLogin = this.tokenService.getUser();
   }
 
   obtenerDatosRankings() {
-    this.rankService.obtenerRanking().subscribe(val => this.rankCodes = val);
+    this.rankService
+      .obtenerRanking()
+      .subscribe((val) => (this.rankCodes = val));
   }
 
   crearForm() {
@@ -80,20 +85,12 @@ export class CrearRankingComponent implements OnInit {
     return this.crearRankingForm.get('nombreRanking') as FormControl;
   }
 
-  checkboxAlumnos(event: any) {
-    if (event.target.checked) {
-      this.selecAlumnos.push(event.target.value);
-    } else {
-      this.selecAlumnos.splice(this.selecAlumnos.indexOf(event.target.value), 1);
-    }
-  }
-
   onSubmit() {
     this.submitted = true;
 
     if (this.crearRankingForm.valid) {
       this.validarCodigoRepetido(this.codigoRanking);
-      this.validarRankingNuevo();
+      this.crearRankingNuevo();
     }
   }
 
@@ -111,7 +108,7 @@ export class CrearRankingComponent implements OnInit {
       )
       .subscribe((nombreRanking) => {
         this.rankService
-          .validarNombreExisteRanking(nombreRanking)
+          .validarNombreExisteRanking(this.id_profe, nombreRanking)
           .subscribe((val: any) => {
             if (val.resultado == 'error') {
               this.nombreRanking.markAsPending({ onlySelf: false });
@@ -155,43 +152,15 @@ export class CrearRankingComponent implements OnInit {
     return codigo;
   }
 
-  validarRankingNuevo() {
-    let rankingValido: boolean = true;
+  crearRankingNuevo() {
+    this.ranking.nom_rank = this.nombreRanking.value;
+    this.ranking.cod_rank = this.codigoRanking;
 
-    this.rankCodes.forEach((element: any) => {
-      if (element.nom_rank == this.nombreRanking.value) {
-        rankingValido = false;
-      }
+    this.rankService.insertarRanking(this.ranking).subscribe((val: any) => {
+      this.insertarProfesorRanking(val.data.id_rank);
     });
 
-    
-    if (rankingValido) {
-      this.ranking.nom_rank = this.nombreRanking.value;
-      this.ranking.alumnos = this.selecAlumnos.length;
-      this.ranking.cod_rank = this.codigoRanking;
-
-      this.rankService.insertarRanking(this.ranking).subscribe((val: any) => {
-        this.insertarAlumnosRanking(val.data.id_rank);
-        this.insertarProfesorRanking(val.data.id_rank);
-      });
-      
-      this.modalService.dismissAll();
-    } else {
-      console.log("nombre ya existe");
-      this.nombreRanking.markAsPending({ onlySelf: false });
-      this.nombreRanking.setErrors({ notUnique: true });
-    }
-  }
-
-  insertarAlumnosRanking(id_rank: number) {
-    for (let i = 0; i < this.selecAlumnos.length; i++) {
-      let id_alumno: number = this.selecAlumnos[i];
-      this.rankService
-        .insertarAlumnoEnRanking(id_rank, id_alumno)
-        .subscribe((val: any) => {
-          console.log(val);
-        });
-    }
+    this.modalService.dismissAll();
   }
 
   insertarProfesorRanking(id_rank: number) {

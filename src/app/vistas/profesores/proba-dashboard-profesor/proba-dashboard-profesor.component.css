@@ -4,9 +4,10 @@ body {
 
 .main-separador {
     display: flex;
-    margin-top: 150px;
     padding-bottom: 150px;
     justify-content: center;
+    top: 150px;
+    position: sticky;
 }
 
 .separador1 {
@@ -242,6 +243,7 @@ div.content {
         flex-direction: column;
         margin: 12px;
         margin-top: 150px;
+        
     }
     .separador1 {
         margin: 0px;

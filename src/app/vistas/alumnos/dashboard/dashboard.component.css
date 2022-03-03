@@ -241,7 +241,8 @@ div.content {
     .main-separador {
         flex-direction: column;
         margin: 12px;
-        margin-top: 150px;
+        top: 150px;
+        position: sticky;
     }
     .separador1 {
         margin: 0px;
