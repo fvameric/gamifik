@@ -64,6 +64,7 @@ li a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    font-size: 18px;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -363,7 +364,7 @@ p {
     -webkit-backdrop-filter: blur(6px);
     box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 999999;
     color: #0074D9;
     border-radius: 5px;
     right: -20px;
@@ -379,8 +380,10 @@ p {
     display: flex;
   }
   p{
+    font-family: "Poppins", sans-serif;
       color: white;
       position: flex;
+      margin-left: 5px;
   }
   
   /* Change color of dropdown links on hover */
