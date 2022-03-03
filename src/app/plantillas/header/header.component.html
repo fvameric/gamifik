@@ -6,14 +6,14 @@
             <li class="nav-items-right">
                 <a *ngIf="user.tipo == 0;else perfilProfe" routerLink="/perfil">{{user.nick}}</a>
                 <ng-template #perfilProfe>
-                    <a routerLink="/perfilprofesor">{{user.nick}}</a>
+                    <img style="cursor: pointer; margin-right: 10px;" routerLink="/perfilprofesor"  src={{user.imagen}} />
                 </ng-template>
             </li>
             <li class="nav-items-right">
-                <img src={{user.imagen}} />
+               <!-- <img style="cursor: pointer;" routerLink="/perfilprofesor"  src={{user.imagen}} />-->
             </li>
             <li class="nav-items-right">
-                <a routerLink="/dashboard">Mis Rankins</a>
+                <a routerLink="/dashboard"> Mis Rankins</a>
             </li>
 
             <a routerLink="/dashboard">

@@ -335,6 +335,10 @@ p {
     right: 180px;
 }
 
+.img-header{
+    margin: 0 !important;
+}
+
 @keyframes barra1 {
     0% {
         height: 0px;
