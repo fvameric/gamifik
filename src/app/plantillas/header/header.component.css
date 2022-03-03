@@ -291,6 +291,7 @@ p {
 .containerlogo {
     position: relative;
     width: 300px;
+    top: 9px;
 }
 
 .logotest {
@@ -335,9 +336,61 @@ p {
     right: 180px;
 }
 
-.img-header{
-    margin: 0 !important;
-}
+
+
+/* Dropdown Button */
+.dropbtn {
+    color: white;
+    font-size: 16px;
+    border: none;
+    transition: 1s;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 50px;
+    cursor: pointer;
+
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background: #0000008c;
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    color: #0074D9;
+    border-radius: 5px;
+    right: -20px;
+    width: 180px;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    transition: 1s;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+  }
+  p{
+      color: white;
+      position: flex;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #0376dbd0; border-radius: 5px;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {background-color: #0074d969; transition: 0.5;} 
 
 @keyframes barra1 {
     0% {

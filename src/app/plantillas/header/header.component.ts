@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from 'services/token.service';
+import { AuthService } from 'services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,8 @@ export class HeaderComponent implements OnInit {
 
   user: any;
   
-  constructor(private tokenService: TokenService) {}
+  constructor(private tokenService: TokenService,
+    private authService: AuthService) {}
 
   ngOnInit(): void {
     this.user = this.tokenService.getUser();
@@ -32,6 +34,10 @@ export class HeaderComponent implements OnInit {
       navMenu.classList.add('mostrar');
     }
   }
+  cerrarSesion() {
+    this.authService.logout();
+  }
+
 }
 window.addEventListener('scroll', function () {
   let navMenu = <HTMLElement>document.getElementById('nav-menu');
@@ -42,4 +48,5 @@ window.addEventListener('scroll', function () {
   } else {
     navMenu.classList.remove('navMenuScroll');
   }
+
 });
