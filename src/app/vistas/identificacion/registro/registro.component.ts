@@ -155,7 +155,7 @@ export class RegistroComponent implements OnInit {
         ],
         email: [
           '',
-          [Validators.required, Validators.email, Validators.minLength(3)],
+          [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(64)],
         ],
         password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
         confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
@@ -186,7 +186,7 @@ export class RegistroComponent implements OnInit {
         ],
         email: [
           '',
-          [Validators.required, Validators.email, Validators.minLength(3)],
+          [Validators.required, Validators.email, Validators.minLength(3),Validators.maxLength(64)],
         ],
         password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
         confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
