@@ -13,6 +13,7 @@ const URL_UPDATE_RANK = 'http://localhost:8080/rankings/modificarRanking.php';  
 const URL_DELETE_RANK = 'http://localhost:8080/rankings/eliminarRanking.php';     // delete
 const URL_GET_RANK_ID = 'http://localhost:8080/rankings/getRankingId.php';        // obtener rankings específicos según su ID
 const URL_NOMBRE_EXISTE_RANKING = 'http://localhost:8080/rankings/profesores/obtenerNombreRanking.php';      // Obtener nombre ranking
+const URL_CONTAR_RANKINGS = 'http://localhost:8080/rankings/contarRankings.php'; // Contar el numero total de rankings
 
 // ENTREGAS
 const URL_RANK_ENTREGAS = 'http://localhost:8080/rankings/getRankEntregas.php';   // obtener relacion rankings - entregas
@@ -52,6 +53,10 @@ export class RankingService {
   // update ranking
   modificarRanking(rank: Ranking) {
     return this.http.put(URL_UPDATE_RANK, JSON.stringify(rank));
+  }
+
+  contarRankings(){
+    return this.http.get(URL_CONTAR_RANKINGS);
   }
 
   // delete ranking

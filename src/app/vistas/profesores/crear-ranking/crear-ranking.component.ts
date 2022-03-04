@@ -38,6 +38,7 @@ export class CrearRankingComponent implements OnInit {
 
   user: any;
   id_profe: number = 0;
+  total_rankings: any;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -59,6 +60,10 @@ export class CrearRankingComponent implements OnInit {
     this.codigoRanking = this.generaNss();
     this.id_profe = this.user.id_profe;
     console.log(this.id_profe);
+
+    this.total_rankings = this.rankService.contarRankings().subscribe;
+    console.log(this.total_rankings);
+    
   }
 
   obtenerDatosProfesor() {
@@ -140,15 +145,15 @@ export class CrearRankingComponent implements OnInit {
 
   validarCodigoRepetido(codigo: string) {
     let codExiste: boolean = false;
-    this.rankCodes.forEach((element: any) => {
-      if (element.cod_rank == codigo) {
-        codExiste = true;
-      }
-    });
+      this.rankCodes.forEach((element: any) => {
+        if (element.cod_rank == codigo) {
+          codExiste = true;
+        }
+      });
 
-    if (codExiste) {
-      this.codigoRanking = this.validarCodigoRepetido(this.generaNss());
-    }
+      if (codExiste) {
+        this.codigoRanking = this.validarCodigoRepetido(this.generaNss());
+      } 
     return codigo;
   }
 

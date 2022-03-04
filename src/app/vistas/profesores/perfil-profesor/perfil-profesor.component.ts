@@ -292,27 +292,6 @@ export class PerfilProfesorComponent implements OnInit {
     }
   }
 
-  guardarNombre() {
-    this.editableNombre = true;
-    this.nombre = (<HTMLInputElement>(
-      document.getElementById('inputNombre')
-    )).value;
-  }
-
-  guardarApellidos() {
-    this.editableApellidos = true;
-    this.apellidos = (<HTMLInputElement>(
-      document.getElementById('inputApellidos')
-    )).value;
-  }
-
-  guardarEmail() {
-    this.editableEmail = true;
-    this.email = (<HTMLInputElement>(
-      document.getElementById('inputEmail')
-    )).value;
-  }
-
   mostrarEditarContra() {
     if (this.mostrarEditarContrasena == true) {
       this.mostrarEditarContrasena = false;
