@@ -118,6 +118,7 @@ div.content {
     align-items: flex-start;
     flex-direction: column;
     margin: 20px;
+    width: 50%;
 }
 
 .alumnos-ranking {

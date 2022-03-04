@@ -1,0 +1,17 @@
+.button-modal-perfil{
+    margin-left: 5%;
+    padding: 10px;
+    border-radius: 5px;
+    background: #0000008c;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    backdrop-filter: blur(6px);
+    color: white;
+    border: none;
+    transition: 300ms;
+    float: right;
+}
+
+.button-modal-perfil:hover {
+    background-color: #56baed;
+    color: #ffffff;
+}
