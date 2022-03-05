@@ -22,8 +22,8 @@ import { LoaderService } from 'services/loader.service';
 //plantillas
 import { HeaderComponent } from './plantillas/header/header.component';
 import { FooterComponent } from './plantillas/footer/footer.component';
-import { RegistroAlumnoComponent } from './plantillas/registro-alumno/registro-alumno.component';
-import { RegistroProfesorComponent } from './plantillas/registro-profesor/registro-profesor.component';
+import { RegistroAlumnoComponent } from './vistas/identificacion/registro/registro-alumno/registro-alumno.component';
+import { RegistroProfesorComponent } from './vistas/identificacion/registro/registro-profesor/registro-profesor.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +32,7 @@ import { RegistroProfesorComponent } from './plantillas/registro-profesor/regist
     RegistroAlumnoComponent,
     RegistroProfesorComponent,
     LoaderComponent,
-    routingComponents,
+    routingComponents
   ],
   imports: [
     BrowserModule,

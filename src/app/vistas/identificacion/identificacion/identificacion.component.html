@@ -1,9 +1,24 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
 
-<div class="header">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
     <div class="wrapperTest">
         <!-- pestañas de cada componente -->
+        <img src="../../../../assets/student.png" class="iconoUser fadeInDown">
+        <div class="cambio-form">
+            <a routerLink="/identificacion-profesores">Formulario para profesores</a> <img
+                src="../../../../assets/arrow-right.png" class="arrow-right">
+        </div>
         <div class="formContent fadeInDown">
             <div class="titulo">
                 <div class="fadeIn first">
@@ -28,7 +43,7 @@
                 <li [ngbNavItem]="2">
                     <a ngbNavLink>Registro</a>
                     <ng-template ngbNavContent>
-                        <app-registro></app-registro>
+                        <app-registro-alumno></app-registro-alumno>
                     </ng-template>
                 </li>
             </ul>
@@ -36,7 +51,8 @@
         </div>
     </div>
     <div class="footer-waves">
-        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <linearGradient id="grad1" x1="0%" y1="50%" x2="100%" y2="50%">
                     <stop offset="5%" stop-color="#32a7ff"></stop>
@@ -59,4 +75,6 @@
             </g>
         </svg>
     </div>
-</div>
+</body>
+
+</html>

@@ -68,10 +68,8 @@ h2:hover {
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
     width: 100%;
     min-height: 100%;
-    padding: 10%;
     background-color: transparent !important;
 }
 
@@ -88,6 +86,7 @@ h2:hover {
     box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
     text-align: center;
     backdrop-filter: blur(6px);
+    z-index: 2;
 }
 
 #formFooter {

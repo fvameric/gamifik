@@ -2,7 +2,6 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './vistas/identificacion/login/login.component';
 import { DashboardComponent } from './vistas/alumnos/dashboard/dashboard.component';
-import { RegistroComponent } from './vistas/identificacion/registro/registro.component';
 import { IdentificacionComponent } from './vistas/identificacion/identificacion/identificacion.component';
 import { HeaderComponent } from './plantillas/header/header.component';
 import { FooterComponent } from './plantillas/footer/footer.component';
@@ -17,14 +16,15 @@ import { CrearRankingComponent } from './vistas/profesores/crear-ranking/crear-r
 import { ModalEntregaComponent } from './vistas/profesores/modal-entrega/modal-entrega.component';
 import { ProbaDashboardProfesorComponent } from './vistas/profesores/proba-dashboard-profesor/proba-dashboard-profesor.component';
 import { ModalPerfilAlumnoComponent } from './vistas/profesores/modal-perfil-alumno/modal-perfil-alumno.component';
+import { IdentificacionProfesoresComponent } from './vistas/identificacion/identificacion-profesores/identificacion-profesores.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'identificacion', pathMatch: 'full' },
   { path: 'identificacion', component: IdentificacionComponent },
+  { path: 'identificacion-profesores', component: IdentificacionProfesoresComponent },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService, RoleGuardService] },
   { path: 'dashboardprofesor', component: DashboardProfesorComponent, canActivate: [AuthGuardService, RoleGuardService] },
-  { path: 'registro', component: RegistroComponent },
   { path: 'header', component: HeaderComponent, canActivate: [AuthGuardService] },
   { path: 'footer', component: FooterComponent },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuardService, RoleGuardService]},
@@ -44,10 +44,10 @@ const routes: Routes = [
 export class AppRoutingModule { }
 export const routingComponents = [
   IdentificacionComponent,
+  IdentificacionProfesoresComponent,
   LoginComponent,
   DashboardComponent,
   DashboardProfesorComponent,
-  RegistroComponent,
   PerfilComponent,
   PerfilProfesorComponent,
   HeaderComponent,

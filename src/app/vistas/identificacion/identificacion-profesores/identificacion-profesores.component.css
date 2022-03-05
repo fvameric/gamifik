@@ -48,6 +48,14 @@ p {
     background-color: rgb(211, 83, 83);
 }
 
+.container-background {
+    position: fixed;
+    overflow: scroll;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(35deg, rgb(51 158 219) 0%, rgb(3 16 38)100%) !important;
+}
+
 .footer-waves {
     position: fixed;
     left: 0;
@@ -192,7 +200,7 @@ p {
 .iconoUser {
     position: relative;
     top: 100px;
-    right: 220px;
+    left: 225px;
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -205,116 +213,116 @@ p {
 .cambio-form {
     position: relative;
     top: -20px;
-    left: 95px;
-    -webkit-animation: fadeInLeft 2.5s ease-in-out 1 forwards;
-    animation: fadeInLeft 2.5s ease-in-out 1 forwards;
+    right: 100px;
+    -webkit-animation: fadeInRight 2.5s ease-in-out 1 forwards;
+    animation: fadeInRight 2.5s ease-in-out 1 forwards;
 }
 
-@-webkit-keyframes fadeInLeft {
+@-webkit-keyframes fadeInRight {
     from {
-        opacity: 0;
-        -webkit-transform: translate3d(-100%, 0, 0);
-        transform: translate3d(-100%, 0, 0);
+      opacity: 0;
+      -webkit-transform: translate3d(100%, 0, 0);
+      transform: translate3d(100%, 0, 0);
     }
-
+  
     to {
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
     }
-}
-@keyframes fadeInLeft {
+  }
+  @keyframes fadeInRight {
     from {
-        opacity: 0;
-        -webkit-transform: translate3d(-100%, 0, 0);
-        transform: translate3d(-100%, 0, 0);
+      opacity: 0;
+      -webkit-transform: translate3d(100%, 0, 0);
+      transform: translate3d(100%, 0, 0);
     }
-
+  
     to {
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
     }
-}
+  }
 
 .cambio-form a {
     color: aliceblue;
     cursor: pointer;
 }
 
-.arrow-right {
+.arrow-left {
     transition: ease-in;
-    animation: mov-derecha 5s infinite;
-    -webkit-animation: mov-derecha 5s infinite;
+    animation: mov-izquierda 5s infinite;
+    -webkit-animation: mov-izquierda 5s infinite;
 }
 
-@keyframes mov-derecha {
+@keyframes mov-izquierda {
     0% {
-        transform: translate(5px);
+        transform: translate(-10px);
     }
     10% {
-        transform: translate(5px);
+        transform: translate(-10px);
     }
     40% {
-        transform: translate(20px);
+        transform: translate(-25px);
     }
     50% {
-        transform: translate(20px);
+        transform: translate(-25px);
     }
     100% {
-        transform: translate(5px);
+        transform: translate(-10px);
     }
 }
 
-@-webkit-keyframes mov-derecha {
+@-webkit-keyframes mov-izquierda {
     0% {
-        transform: translate(5px);
+        transform: translate(-5px);
     }
     10% {
-        transform: translate(5px);
+        transform: translate(-5px);
     }
     40% {
-        transform: translate(20px);
+        transform: translate(-25px);
     }
     50% {
-        transform: translate(20px);
+        transform: translate(-25px);
     }
     100% {
-        transform: translate(5px);
+        transform: translate(-5px);
     }
 }
 
-.fadeInDown {
-    -webkit-animation-name: fadeInDown;
-    animation-name: fadeInDown;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
+input[type=password] {
+    background-color: #f6f6f600;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    width: 85%;
+    border: 1px solid #f6f6f633;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
 }
 
-@-webkit-keyframes fadeInDown {
-    0% {
-        opacity: 0;
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
-    }
-}
-
-@keyframes fadeInDown {
-    0% {
-        opacity: 0;
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
-    }
+.acceso-profes {
+    background-color: #f6f6f600;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    width: 85%;
+    border: 1px solid #f6f6f633;
+    transition: all 0.5s ease-in-out;
+    border-radius: 5px 5px 5px 5px;
 }

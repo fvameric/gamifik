@@ -10,7 +10,7 @@
             <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg" formControlName="userImage" class="fadeIn second"><br>
         </div>
 
-        <input type="text" id="login" formControlName="username" minlength="3" maxlength="20" placeholder="Usuario" class="fadeIn second" [ngClass]="{ 'is-invalid': form.username.errors }">
+        <input type="text" id="login" formControlName="username" minlength="3" maxlength="20" placeholder="Nombre de usuario de profesor" class="fadeIn second" [ngClass]="{ 'is-invalid': form.username.errors }">
         <!-- Missatge error nom usuari -->
         <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
             <div *ngIf="form.username.errors.required">El nombre de usuario es necesario</div>
@@ -21,7 +21,7 @@
             <div *ngIf="form.username.pending">Consultando disponibilidad</div>
         </div>
 
-        <input type="email" id="email" formControlName="email" maxlength="64" placeholder="Correo Electrónico" class="fadeIn second" [ngClass]="{ 'is-invalid': form.email.errors }" email>
+        <input type="email" id="email" formControlName="email" maxlength="64" placeholder="Correo Electrónico de profesor" class="fadeIn second" [ngClass]="{ 'is-invalid': form.email.errors }" email>
         <!-- Missatge error email -->
         <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
             <div *ngIf="form.email.errors.required">El correo electrónico es necesario</div>
@@ -34,7 +34,7 @@
 
         <div class="form-group">
             <div class="input-group">
-                <input id="password" placeholder="Password" maxlength="50" formControlName="password" class="fadeIn second" [type]="passType" [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
+                <input id="password" placeholder="Contraseña del profesor" maxlength="50" formControlName="password" class="fadeIn second" [type]="passType" [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
                 <!-- Icono -->
                 <i *ngIf="this.passShown" (click)="togglePass()" class="material-icons">
                     visibility
@@ -68,13 +68,13 @@
             </div>
         </div>
 
-        <input type="text" id="nombre" name="nombre" placeholder="Nombre" minlength="3" maxlength="30" class="fadeIn third" formControlName="nombre" [ngClass]="{ 'is-invalid': form.nombre.errors }">
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre de profesor" minlength="3" maxlength="30" class="fadeIn third" formControlName="nombre" [ngClass]="{ 'is-invalid': form.nombre.errors }">
         <!-- Missatge error nombre -->
         <div *ngIf="submitted && form.nombre.errors" class="invalid-feedback">
             <div *ngIf="form.nombre.errors.required">El nombre es necesario</div>
         </div>
 
-        <input type="text" id="apellidos" name="apellidos" minlength="3" maxlength="30" placeholder="Apellidos" class="fadeIn fourth" formControlName="apellidos" [ngClass]="{ 'is-invalid': form.apellidos.errors }">
+        <input type="text" id="apellidos" name="apellidos" minlength="3" maxlength="30" placeholder="Apellidos de profesor" class="fadeIn fourth" formControlName="apellidos" [ngClass]="{ 'is-invalid': form.apellidos.errors }">
         <!-- Missatge error apellidos -->
         <div *ngIf="submitted && form.apellidos.errors" class="invalid-feedback">
             <div *ngIf="form.apellidos.errors.required">Los apellidos son necesarios</div>
