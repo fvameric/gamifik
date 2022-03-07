@@ -318,3 +318,15 @@ p {
         transform: none;
     }
 }
+
+@media (max-width: 600px){
+    .iconoUser{
+        top: 0;
+        left: 0;
+    }
+    .cambio-form{
+        top: 0;
+        right: auto;
+        left: auto;
+    }
+}
