@@ -9,5 +9,5 @@
     <p>Código de ranking:</p>
     <p class="codigo-entrar-ranking">{{codigoRanking}}</p><br>
 
-    <button class="crear-ranking">Crear ranking</button>
+    <button type="submit" class="crear-ranking" [disabled]="form.nombreRanking.errors">Crear ranking</button>
 </form>

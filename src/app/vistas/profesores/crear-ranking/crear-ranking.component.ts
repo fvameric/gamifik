@@ -10,7 +10,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { debounceTime, tap } from 'rxjs/operators';
+import { debounceTime, map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-crear-ranking',
@@ -40,6 +40,8 @@ export class CrearRankingComponent implements OnInit {
   id_profe: number = 0;
   total_rankings: any;
 
+  booltest: boolean = true;
+
   constructor(
     public formBuilder: FormBuilder,
     private usersService: UsersService,
@@ -59,10 +61,9 @@ export class CrearRankingComponent implements OnInit {
     this.checkNombre();
     this.codigoRanking = this.generaNss();
     this.id_profe = this.user.id_profe;
-    console.log(this.id_profe);
 
     this.total_rankings = this.rankService.contarRankings().subscribe;
-    console.log(this.total_rankings);
+    
   }
 
   obtenerDatosProfesor() {
@@ -93,18 +94,23 @@ export class CrearRankingComponent implements OnInit {
     this.submitted = true;
 
     if (this.crearRankingForm.valid) {
-      this.validarCodigoRepetido(this.codigoRanking);
+      if (this.rankCodes != null || this.rankCodes != undefined ) {
+        this.validarCodigoRepetido(this.codigoRanking);
+      }
+      
       this.crearRankingNuevo();
     }
   }
-
+  
   checkNombre() {
     this.nombreRanking.valueChanges
       .pipe(
         debounceTime(500),
         tap((nombreRanking) => {
+          console.log("comprobando");
           if (nombreRanking !== '' && this.nombreRanking.invalid) {
-            this.nombreRanking.markAsPending();
+            //this.nombreRanking.markAsPending();
+            this.nombreRanking.markAsPending({ emitEvent: true });
           } else {
             this.nombreRanking.setErrors({ invalid: true });
           }
@@ -144,16 +150,15 @@ export class CrearRankingComponent implements OnInit {
 
   validarCodigoRepetido(codigo: string) {
     let codExiste: boolean = false;
-    this.rankCodes?.forEach((element: any | null) => {
-      codExiste = true;
-      if (element.cod_rank == codigo) {
-        codExiste = true;
-      }
-    });
+      this.rankCodes.forEach((element: any) => {
+        if (element.cod_rank == codigo) {
+          codExiste = true;
+        }
+      });
 
-    if (codExiste) {
-      this.codigoRanking = this.validarCodigoRepetido(this.generaNss());
-    }
+      if (codExiste) {
+        codigo = this.validarCodigoRepetido(this.generaNss());
+      }
     return codigo;
   }
 
