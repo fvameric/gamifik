@@ -16,7 +16,9 @@ const URL_NOMBRE_EXISTE_RANKING = 'http://localhost:8080/rankings/profesores/obt
 const URL_CONTAR_RANKINGS = 'http://localhost:8080/rankings/contarRankings.php'; // Contar el numero total de rankings
 
 // ENTREGAS
+const URL_NOMBRE_EXISTE_PRACTICA = 'http://localhost:8080/rankings/profesores/obtenerNombrePractica.php';
 const URL_RANK_ENTREGAS = 'http://localhost:8080/rankings/getRankEntregas.php';   // obtener relacion rankings - entregas
+const URL_CREATE_ENTREGA = 'http://localhost:8080/rankings/insertarEntrega.php';
 
 // ALUMNOS
 const URL_RANK_ALUMNOS = 'http://localhost:8080/rankings/alumnos/getRankAlumnos.php';     // obtener relacion rankings - alumnos
@@ -127,5 +129,14 @@ export class RankingService {
 
   validarNombreExisteRanking(idProfe: number, nombreRanking:string,) {
     return this.http.get(URL_NOMBRE_EXISTE_RANKING + `?nom_rank=${nombreRanking}&id_profe=${idProfe}`);
+  }
+
+  //
+  validarNombreExistePractica(idProfe: number, nombrePractica:string){
+    return this.http.get(URL_NOMBRE_EXISTE_PRACTICA + `?nom_practica=${nombrePractica}&id_profe=${idProfe}`);
+  }
+
+  insertarPractica(id_rank:number, nom_entrega:string){
+    return this.http.get(URL_CREATE_ENTREGA+ `?id_rank=${id_rank}&nom_entrega=${nom_entrega}`);
   }
 }

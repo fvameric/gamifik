@@ -5,13 +5,22 @@
   </svg>
 </button>
 <ng-template #nombreModal let-c="close" let-d="dismiss">
+
   <div class="modal-header">
     <h1>Crear práctica/entrega</h1>
     <button type="button" class="close" data-dismiss="modal" (click)="retornar()">&times;</button>
   </div>
-  <div class="modal-body">
-    <p>Nombre de la práctica/entrega:</p>
-    <input type="text">
-    <button class="crear-ranking" (click)="onSubmit()">Crear práctica/entrega</button>
-  </div>
+  <form [formGroup]="crearPractica">
+    <div class="modal-body">
+      <p>Nombre de la práctica/entrega:</p>
+      <input type="text" formControlName="nombrePractica" [ngClass]="{ 'is-invalid': form.nombrePractica.errors }">
+      <button class="crear-ranking" (click)="onSubmit()" >Crear práctica/entrega</button>
+
+      <div *ngIf="form.nombrePractica.errors" class="invalid-feedback">
+        <div *ngIf="form.nombrePractica.errors.required">El nombre es necesario</div>
+        <div *ngIf="form.nombrePractica.invalid && form.nombrePractica.errors?.notUnique">Nombre de practica ya existe</div>
+        <div *ngIf="form.nombrePractica.pending">Consultando disponibilidad del nombre</div>
+    </div>
+    </div>
+  </form>
 </ng-template>

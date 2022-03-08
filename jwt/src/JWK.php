@@ -33,7 +33,7 @@ class JWK
      *
      * @uses parseKey
      */
-    public static function parseKeySet(array $jwks)
+    public static function parseKeySet( $jwks)
     {
         $keys = array();
 
