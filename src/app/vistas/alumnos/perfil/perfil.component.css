@@ -54,7 +54,6 @@ body {
         -o-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
     }
-
 }
 
 .contact main {
@@ -140,8 +139,7 @@ body {
     }
 }
 
-@media (min-width: 10px) {
-}
+@media (min-width: 10px) {}
 
 .contact main section .content aside h1 {
     font-weight: 100;
@@ -425,6 +423,15 @@ hr {
     width: 20%;
 }
 
+.cambiar-contraseña {
+    cursor: pointer;
+}
+
+.invalid-feedback {
+    display: flex;
+    justify-content: center;
+}
+
 #iconos-configuracion {
     float: right;
 }
@@ -444,6 +451,7 @@ hr {
 }
 
 input[type=text],
+input[type=email],
 input[type=password],
 input[type=date] {
     background-color: #f6f6f600;
@@ -465,23 +473,21 @@ input[type=date] {
     border-radius: 5px 5px 5px 5px;
 }
 
-
-.unirse-ranking{
+.unirse-ranking {
     margin-left: 200px;
     padding: 5px;
     border-radius: 5px;
     background-color: #56baed;
     color: white;
-    border: none; 
+    border: none;
     transition: 1s;
 }
 
-.unirse-ranking:hover{
-        background-color: #1292f8;
+.unirse-ranking:hover {
+    background-color: #1292f8;
 }
 
-::ng-deep img{
-
+::ng-deep img {
     width: 100px;
     border-radius: 50%;
 }

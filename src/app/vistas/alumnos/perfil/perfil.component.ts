@@ -2,10 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Alumno } from 'app/interfaces/Alumno';
 import { User } from 'app/interfaces/User';
 import { UsersService } from 'services/users.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl
+} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { TokenService } from 'services/token.service';
 import { AuthService } from 'services/auth.service';
+
+
 
 @Component({
   selector: 'app-perfil',
@@ -13,6 +20,9 @@ import { AuthService } from 'services/auth.service';
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
+
+  modificacionForm!: FormGroup;
+
   profesores: any;
   alumnos: any;
 
@@ -32,9 +42,9 @@ export class PerfilComponent implements OnInit {
   confirmarNuevaContrasena: boolean = false;
   mostrarEditarContrasena: boolean = false;
 
-  nombre: string = 'funciona Fran';
-  apellidos: string = 'funciona Fran Olga';
-  email: string = 'funcionaFran@gmail.com';
+  nombre: string = '';
+  apellidos: string = '';
+  email: string = '';
 
   datosAlumno: Alumno = {
     id_alumno: 0,
@@ -50,14 +60,13 @@ export class PerfilComponent implements OnInit {
 
   datosStorage: any;
 
-  // formulario
-  registerForm!: FormGroup;
-
   oldPass: string = '';
   newPass: string = '';
   newConfPass: string = '';
 
   imgSrc: string = '';
+
+  oldPassValidation: boolean = false;
 
   arrSwal: any = [
     { id: 0, icon: 'success', title: 'Ok', text: 'Se han guardaron los cambios' },
@@ -78,7 +87,9 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerDatosAlumno();
-    this.crearForm();
+    this.crearFormulario();
+    //this.checkEmail();
+    //this.checkPass();
   }
 
   obtenerDatosAlumno() {
@@ -90,54 +101,83 @@ export class PerfilComponent implements OnInit {
     this.imgSrc = this.datosAlumno.imagen;
   }
 
-  cerrarSesion() {
-    this.authService.logout();
-  }
-
-
-
-  readURL(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (e: any) =>
-        this.imgSrc = e.target.result;
-      reader.readAsDataURL(file);
+  /********** funciones formulario **********/
+  crearFormulario() {
+    //Validadors registre
+    this.modificacionForm = this.formBuilder.group({
+      inputNombre: [this.nombre],
+      inputApellidos: [this.apellidos],
+      inputEmail: [this.email, [Validators.required]],
+      inputOldPass: [''],
+      inputPass: [''],
+      inputConfirmPass: ['', [Validators.required]]
+    }, {
+      //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
+      validator: this.mustMatch("inputPass", "inputConfirmPass")
     }
+    );
   }
-  
-  confirmarModif() {
+
+  // funció per controlar que camps password i confirmarpassword siguin iguals
+  mustMatch(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+
+      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+        return;
+      }
+
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ mustMatch: true });
+      } else {
+        matchingControl.setErrors(null);
+      }
+    };
+  }
+
+  //Retorna els valors introduits al formulari
+  get form() {
+    return this.modificacionForm.controls;
+  }
+
+  confirmarModif(form: any) {
     let userModif: User = {
       id: this.datosAlumno.id_alumno,
-      email: this.email,
+      email: form.inputEmail,
       pass: this.datosAlumno.pass,
-      nombre: this.nombre,
-      apellidos: this.apellidos
+      nombre: form.inputNombre,
+      apellidos: form.inputApellidos
     }
 
-    // validacion para no duplicar emails
-    if (this.datosAlumno.email != this.email) {
-      this.comprobarEmail(this.email);
-    }
-    // en caso de que se quiera cambiar el email, nombre o apellidos
-    // pero no la password
-    if (this.oldPass == '' && this.newPass == '' && this.newConfPass == '') {
+    console.log(userModif);
+
+    if (form.inputOldPass == '' && form.inputPass == '' && form.inputConfirmPass == '') {
       this.generarSwal(this.arrSwal[0], userModif);
     } else {
-      if (this.oldPass == this.datosAlumno.pass) {
+
+    }
+
+    /*
+    if (form.inputOldPass == '' && form.inputPass == '' && form.inputConfirmPass == '') {
+      this.generarSwal(this.arrSwal[0], userModif);
+    } else {
+      if (this.datosAlumno.pass == form.inputOldPass) {
         if (this.newPass == '' || this.newConfPass == '') {
           this.generarSwal(this.arrSwal[1]);
         } else {
           // en caso de que se quiera cambiar cualquier dato y
           // además, la password
-          if (this.newPass == this.newConfPass) {
+          if (form.inputPass == form.inputConfirmPass) {
             let userModif: User = {
               id: this.datosAlumno.id_alumno,
-              email: this.email,
-              pass: this.newConfPass,
-              nombre: this.nombre,
-              apellidos: this.apellidos
+              email: form.inputEmail,
+              pass: form.inputPass,
+              nombre: form.inputNombre,
+              apellidos: form.inputApellidos
             }
+
+            console.log(userModif);
             this.generarSwal(this.arrSwal[0], userModif);
           } else {
             this.generarSwal(this.arrSwal[2]);
@@ -147,14 +187,48 @@ export class PerfilComponent implements OnInit {
         this.generarSwal(this.arrSwal[3]);
       }
     }
+    */
   }
 
-  comprobarEmail(email: string) {
-    this.usersService.validarEmailExisteAlumnos(email).subscribe((val: any) => {
-      if (val.resultado == 'error') {
-        this.generarSwal(this.arrSwal[4]);
+  // devuelve email
+  get formEmail() {
+    return this.modificacionForm.get('inputEmail') as FormControl;
+  }
+
+  // devuelve pass
+  get formPass() {
+    return this.modificacionForm.get('inputOldPass') as FormControl;
+  }
+
+  checkEmail() {
+    this.form.inputEmail.valueChanges.subscribe((formEmail) => {
+      if (!this.editableEmail && this.datosAlumno.email != this.form.inputEmail.value) {
+        this.usersService.validarEmailExisteAlumnos(formEmail).subscribe((val: any) => {
+          if (val.resultado == 'error') {
+            this.formEmail.setErrors({ notUnique: true });
+            console.log("igual");
+          }
+        });
       }
     });
+  }
+
+  checkPass() {
+    this.form.inputOldPass.valueChanges.subscribe((formPass) => {
+      if (formPass != '' && formPass != this.datosAlumno.pass) {
+        this.formPass.setErrors({incorrect: true});
+      }
+    });
+  }
+
+  readURL(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e: any) =>
+        this.imgSrc = e.target.result;
+      reader.readAsDataURL(file);
+    }
   }
 
   generarSwal(swal: any, user?: User) {
@@ -176,9 +250,15 @@ export class PerfilComponent implements OnInit {
             });
 
             this.usersService.modificarAlumno(user).subscribe((val: any) => {
+              this.editableNombre = true;
+              this.editableApellidos = true;
+              this.editableEmail = true;
               this.tokenService.saveUser(val.data);
+              this.obtenerDatosAlumno();
               this.ngOnInit();
             });
+
+            this.ngOnInit();
           }
         });
       }
@@ -189,37 +269,6 @@ export class PerfilComponent implements OnInit {
         text: swal.text
       });
     }
-  }
-
-  /********** funciones formulario **********/
-  crearForm() {
-    //Validadors registre
-    this.registerForm = this.formBuilder.group({
-      newPass: [''],
-      confNewPass: ['', Validators.required]
-    }, {
-      //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
-      validator: this.mustMatch("newPass", "confNewPass")
-    }
-    );
-  }
-
-  // funció per controlar que camps password i confirmarpassword siguin iguals
-  mustMatch(controlName: string, matchingControlName: string) {
-    return (formGroup: FormGroup) => {
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
-
-      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-        return;
-      }
-
-      if (control.value !== matchingControl.value) {
-        matchingControl.setErrors({ mustMatch: true });
-      } else {
-        matchingControl.setErrors(null);
-      }
-    };
   }
 
   /********** funciones botones del perfil **********/
@@ -243,25 +292,14 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-  editarEmail() {
-    if (this.editableEmail == true) {
-      this.editableEmail = false;
-    } else {
-      (<HTMLInputElement>document.getElementById('inputEmail')).value;
-      (<HTMLInputElement>document.getElementById('inputEmail')).value = '';
-      this.editableEmail = true;
-    }
-  }
-
   editarNombre() {
     if (this.editableNombre == true) {
       this.editableNombre = false;
     } else {
-      if (document.getElementById('guardarNombre')) {
-      }
 
-      (<HTMLInputElement>document.getElementById('inputNombre')).value;
-      (<HTMLInputElement>document.getElementById('inputNombre')).value = '';
+      //(<HTMLInputElement>document.getElementById('inputNombre')).value = this.nombre;
+
+      this.form['inputNombre'].setValue(this.nombre);
       this.editableNombre = true;
     }
   }
@@ -270,9 +308,23 @@ export class PerfilComponent implements OnInit {
     if (this.editableApellidos == true) {
       this.editableApellidos = false;
     } else {
-      (<HTMLInputElement>document.getElementById('inputApellidos')).value;
-      (<HTMLInputElement>document.getElementById('inputApellidos')).value = '';
+      //(<HTMLInputElement>document.getElementById('inputApellidos')).value = this.apellidos;
+
+      this.form['inputApellidos'].setValue(this.apellidos);
       this.editableApellidos = true;
+    }
+  }
+
+  editarEmail() {
+    if (this.editableEmail == true) {
+      this.editableEmail = false;
+
+      this.checkEmail();
+    } else {
+      //(<HTMLInputElement>document.getElementById('inputEmail')).value = this.email;
+
+      this.form['inputEmail'].setValue(this.email);
+      this.editableEmail = true;
     }
   }
 
@@ -280,6 +332,8 @@ export class PerfilComponent implements OnInit {
     if (this.mostrarEditarContrasena == true) {
       this.mostrarEditarContrasena = false;
     } else {
+      this.checkPass();
+      this.formEmail.setErrors({ required: false });
       this.mostrarEditarContrasena = true;
     }
   }
@@ -311,5 +365,9 @@ export class PerfilComponent implements OnInit {
       this.confirmarNuevaContrasena = false;
       this.passTypeConfirmNew = 'password';
     }
+  }
+
+  cerrarSesion() {
+    this.authService.logout();
   }
 }
