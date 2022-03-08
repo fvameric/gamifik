@@ -17,6 +17,8 @@ const URL_EMAIL_EXISTE_ALUMNOS =
 const URL_USERNAME_EXISTE_ALUMNOS =
   'http://localhost:8080/alumnos/usuarioExiste.php';
 
+const URL_PASS_EXISTE_ALUMNOS = 'http://localhost:8080/alumnos/passExiste.php';
+
 // URLS CRUD PROFESORES
 const URL_CREATE_PROFESORES =
   'http://localhost:8080/profesores/insertarProfesor.php'; // create
