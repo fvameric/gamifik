@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Profesor } from '../../../interfaces/Profesor';
 import { UsersService } from 'services/users.service';
 import { FormBuilder } from '@angular/forms';
@@ -64,6 +64,8 @@ export class DashboardProfesorComponent implements OnInit {
       }
     });
   }
+
+ 
 
   rankSelec(rankId: number) {
     this.listaAlumnos = [];
