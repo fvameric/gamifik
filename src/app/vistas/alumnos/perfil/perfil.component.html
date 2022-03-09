@@ -10,10 +10,7 @@
                 <div class="content">
                     <aside>
                         <div class="image-upload">
-                            <label for="file-input">
-                                <img id="preview" [src]="imgSrc" alt="ImagenPerfil">
-                            </label>
-                            <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg"><br>
+                            <img src="{{datosAlumno.imagen}}" alt="ImagenPerfil" class="imgPerfil">
                         </div>
                         <h1>{{datosAlumno.nombre}}</h1>
                         <p>Alumno</p>
@@ -62,17 +59,15 @@
                     <div class="cursos-profe">
                         <h2 class="h2-perfil">Configuración</h2>
                         <hr>
-                        <form [formGroup]="modificacionForm" (ngSubmit)="confirmarModif(modificacionForm.value)" enctype="multipart/form-data">
+                        <form [formGroup]="modificacionForm" (ngSubmit)="confirmarModif(modificacionForm)" enctype="multipart/form-data">
                             <div class="centrar-configuracion">
                                 <!--imagen configuracion-->
+                                <h5>Avatar:</h5><br>
                                 <div class="image-upload">
-                                    <h5>Avatar:</h5>
-                                    <label for="file-input">
-                                        <img id="preview" [src]="imgSrc" alt="ImagenPerfil">
-                                    </label>
-                                    <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg"><br>
+                                    <img id="preview" [src]="imgSrc" alt="ImagenPerfil" class="img-perfil">
                                 </div>
-                            </div><br>
+                            </div>
+                            <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg">
                             <div class="centrar-configuracion">
                                 <h5>Nombre: </h5>
                                 <input class="inputEditar" type="text" [placeholder]="this.nombre" [value]="this.nombre" id="inputNombre" formControlName="inputNombre" [readonly]="this.editableNombre">

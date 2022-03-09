@@ -86,13 +86,12 @@ body {
 .contact main section .content img {
     display: inline-block;
     width: 140px;
-    border-radius: 50%;
+    height: 100px;
 }
 
 @media (min-width: 10px) {
     .contact main section .content img {
         float: left;
-        width: 30%;
         margin-right: 10%;
     }
 }
@@ -487,7 +486,22 @@ input[type=date] {
     background-color: #1292f8;
 }
 
+/*
 ::ng-deep img {
     width: 100px;
+    height: 100px;
     border-radius: 50%;
+}
+*/
+
+.image-upload {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.img-perfil {
+    height: 100%;
+    object-fit: contain;
 }

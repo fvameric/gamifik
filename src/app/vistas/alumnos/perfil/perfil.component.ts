@@ -64,7 +64,8 @@ export class PerfilComponent implements OnInit {
   newPass: string = '';
   newConfPass: string = '';
 
-  imgSrc: string = '';
+  imgSrc: any;
+  imgError: boolean = false;
 
   oldPassValidation: boolean = false;
 
@@ -73,7 +74,8 @@ export class PerfilComponent implements OnInit {
     { id: 1, icon: 'error', title: 'Error', text: 'Contraseña y confirmar contraseña no pueden quedar vacíos' },
     { id: 2, icon: 'error', title: 'Error', text: 'Las contraseñas tienen que coincidir' },
     { id: 3, icon: 'error', title: 'Error', text: 'La contraseña actual no es correcta' },
-    { id: 4, icon: 'error', title: 'Error', text: 'Este email ya está en uso' }
+    { id: 4, icon: 'error', title: 'Error', text: 'Este email ya está en uso' },
+    { id: 5, icon: 'error', title: 'Error', text: 'Solo se aceptan JPG, PNG o GIF' },
   ];
 
   // token
@@ -107,10 +109,10 @@ export class PerfilComponent implements OnInit {
     this.modificacionForm = this.formBuilder.group({
       inputNombre: [this.nombre],
       inputApellidos: [this.apellidos],
-      inputEmail: [this.email, [Validators.required]],
+      inputEmail: [this.email],
       inputOldPass: [''],
       inputPass: [''],
-      inputConfirmPass: ['', [Validators.required]]
+      inputConfirmPass: ['']
     }, {
       //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
       validator: this.mustMatch("inputPass", "inputConfirmPass")
@@ -141,53 +143,61 @@ export class PerfilComponent implements OnInit {
     return this.modificacionForm.controls;
   }
 
-  confirmarModif(form: any) {
-    let userModif: User = {
-      id: this.datosAlumno.id_alumno,
-      email: form.inputEmail,
-      pass: this.datosAlumno.pass,
-      nombre: form.inputNombre,
-      apellidos: form.inputApellidos
-    }
-
-    console.log(userModif);
-
-    if (form.inputOldPass == '' && form.inputPass == '' && form.inputConfirmPass == '') {
-      this.generarSwal(this.arrSwal[0], userModif);
-    } else {
-
-    }
-
-    /*
-    if (form.inputOldPass == '' && form.inputPass == '' && form.inputConfirmPass == '') {
-      this.generarSwal(this.arrSwal[0], userModif);
-    } else {
-      if (this.datosAlumno.pass == form.inputOldPass) {
-        if (this.newPass == '' || this.newConfPass == '') {
-          this.generarSwal(this.arrSwal[1]);
-        } else {
-          // en caso de que se quiera cambiar cualquier dato y
-          // además, la password
-          if (form.inputPass == form.inputConfirmPass) {
-            let userModif: User = {
-              id: this.datosAlumno.id_alumno,
-              email: form.inputEmail,
-              pass: form.inputPass,
-              nombre: form.inputNombre,
-              apellidos: form.inputApellidos
-            }
-
-            console.log(userModif);
-            this.generarSwal(this.arrSwal[0], userModif);
-          } else {
-            this.generarSwal(this.arrSwal[2]);
-          }
-        }
+  readURL(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      if (event.target.files[0].type.indexOf('image') == 0) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = e => this.imgSrc = reader.result;
+        reader.readAsDataURL(file);
       } else {
-        this.generarSwal(this.arrSwal[3]);
+        this.imgError = true;
       }
     }
-    */
+  }
+
+  confirmarModif(form: any) {
+    console.log(form);
+    if (form.valid) {
+      console.log(this.imgError);
+      if (!this.imgError) {
+        let userModif: User = {
+          id: this.datosAlumno.id_alumno,
+          email: form.controls.inputEmail.value,
+          pass: this.datosAlumno.pass,
+          nombre: form.controls.inputNombre.value,
+          apellidos: form.controls.inputApellidos.value,
+          imagen: this.imgSrc
+        }
+
+        console.log(userModif);
+        Swal.fire({
+          title: '¿Quieres guardar los cambios?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Ok',
+              text: 'Se han guardaron los cambios'
+            });
+
+            this.usersService.modificarAlumno(userModif).subscribe((val: any) => {
+              this.editableNombre = true;
+              this.editableApellidos = true;
+              this.editableEmail = true;
+              this.tokenService.saveUser(val.data);
+              this.obtenerDatosAlumno();
+              window.location.reload();
+            });
+          }
+        });
+      }
+    }
   }
 
   // devuelve email
@@ -216,59 +226,12 @@ export class PerfilComponent implements OnInit {
   checkPass() {
     this.form.inputOldPass.valueChanges.subscribe((formPass) => {
       if (formPass != '' && formPass != this.datosAlumno.pass) {
-        this.formPass.setErrors({incorrect: true});
+        this.formPass.setErrors({ incorrect: true });
       }
     });
   }
 
-  readURL(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (e: any) =>
-        this.imgSrc = e.target.result;
-      reader.readAsDataURL(file);
-    }
-  }
-
   generarSwal(swal: any, user?: User) {
-    if (swal.id == 0) {
-      if (user != undefined || user != null) {
-        Swal.fire({
-          title: '¿Quieres guardar los cambios?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Sí'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire({
-              icon: swal.icon,
-              title: swal.title,
-              text: swal.text
-            });
-
-            this.usersService.modificarAlumno(user).subscribe((val: any) => {
-              this.editableNombre = true;
-              this.editableApellidos = true;
-              this.editableEmail = true;
-              this.tokenService.saveUser(val.data);
-              this.obtenerDatosAlumno();
-              this.ngOnInit();
-            });
-
-            this.ngOnInit();
-          }
-        });
-      }
-    } else {
-      Swal.fire({
-        icon: swal.icon,
-        title: swal.title,
-        text: swal.text
-      });
-    }
   }
 
   /********** funciones botones del perfil **********/
@@ -318,11 +281,9 @@ export class PerfilComponent implements OnInit {
   editarEmail() {
     if (this.editableEmail == true) {
       this.editableEmail = false;
-
-      this.checkEmail();
     } else {
       //(<HTMLInputElement>document.getElementById('inputEmail')).value = this.email;
-
+      //this.checkEmail();
       this.form['inputEmail'].setValue(this.email);
       this.editableEmail = true;
     }
