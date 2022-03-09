@@ -17,6 +17,7 @@ import { ModalEntregaComponent } from './vistas/profesores/modal-entrega/modal-e
 import { ProbaDashboardProfesorComponent } from './vistas/profesores/proba-dashboard-profesor/proba-dashboard-profesor.component';
 import { ModalPerfilAlumnoComponent } from './vistas/profesores/modal-perfil-alumno/modal-perfil-alumno.component';
 import { IdentificacionProfesoresComponent } from './vistas/identificacion/identificacion-profesores/identificacion-profesores.component';
+import { PerfilPruebaComponent } from './vistas/alumnos/perfil-prueba/perfil-prueba.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'identificacion', pathMatch: 'full' },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'header', component: HeaderComponent, canActivate: [AuthGuardService] },
   { path: 'footer', component: FooterComponent },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuardService, RoleGuardService]},
+  { path: 'perfil-prueba', component: PerfilPruebaComponent},
   { path: 'perfilprofesor', component: PerfilProfesorComponent, canActivate: [AuthGuardService, RoleGuardService] },
   { path: 'crear-ranking', component: CrearRankingComponent },
   { path: 'modal', component: ModalComponent }, 
@@ -49,6 +51,7 @@ export const routingComponents = [
   DashboardComponent,
   DashboardProfesorComponent,
   PerfilComponent,
+  PerfilPruebaComponent,
   PerfilProfesorComponent,
   HeaderComponent,
   FooterComponent,
