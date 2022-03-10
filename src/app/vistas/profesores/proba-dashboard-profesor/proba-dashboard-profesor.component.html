@@ -14,22 +14,30 @@
                     <app-loader></app-loader>
                     <div class="array-rankings">
                         <div *ngFor="let rank of arrRankings; let i = index" class="rank">
-                            <button class="button-ranking-class" (click)="rankSelec(rank.id_rank)">{{rank.nom_rank}}
-                                <div class="cantidad-alumnos">
-                                    {{rank.alumnos}} alumnos
+                            <div class="contenido-ranking">
+                                <button class="button-ranking-class" (click)="rankSelec(rank.id_rank)">{{rank.nom_rank}}
+                                    <div class="cantidad-alumnos">
+                                        {{rank.alumnos}} alumnos
 
+                                    </div>
+                                </button>
+                                <!--button para el desplegable del sidebar-->
+                                <button class="button-desplegable">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                      </svg>
+                                </button>
+                            </div>
+                            <div class="entregas-ranking">
+                                <h3 class="texto-h3">Práctica/Entrega </h3>
+                                <div class="practicas-ranking">
+                                    <p class="texto-practica">practica 1</p>
                                 </div>
-                            </button>
-                            <!--button para el desplegable del sidebar-->
-                            <button class="button-desplegable">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                                </svg>
-                            </button>
+                            </div>
                         </div>
+
                     </div>
+
                 </ng-template>
             </div>
         </div>
@@ -84,9 +92,10 @@
                     <div class="table-nombre">
                         {{alumno.nombre}}
                     </div>
-                    <div class="table-apellidos">
+                    <div class="table-apellidos" style="width: 80%;">
                         {{alumno.apellidos}}
                     </div>
+
                     <div class="table-puntuacion">
                         {{alumno.puntuacion}}
                     </div>
@@ -103,9 +112,10 @@
                         </button>
                         <div *ngIf="this.mostrarDesplegableVisual && alumnoSelec == alumno.id_alumno">
                             <div class="desplegableVisual">
-                                <a href=""> 
+                                <a href="">
                                     <p class="texto-desplegable">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                                             <path
                                                 d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                                         </svg>
@@ -114,14 +124,13 @@
                                 <hr>
                                 <a href="">
                                     <p class="texto-desplegable">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                             <path
                                                 d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                         </svg>
                                     </p>
                                 </a>
-
-                                <p></p>
                             </div>
                         </div>
 

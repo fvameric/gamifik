@@ -179,6 +179,10 @@ div.content {
     color: #1292f8;
 }
 
+.entregas-ranking {
+    display: flex;
+}
+
 
 /* tabla alumnos */
 
@@ -222,51 +226,42 @@ div.content {
 }
 
 @media screen and (max-width:768px) {
-    /*
-    .sidebar {
-        margin: 3rem;
-        margin-left: none;
-    }
-    .separador1 {
-        float: none;
-        display: flex;
-    }
-    .info-rankings {
-        margin: 0 3rem 0 3rem;
-        width: 100%;
-    }
-    .button-ranking-class {
-        width: 100%;
-    }
-    */
+
     .main-separador {
         flex-direction: column;
         margin: 12px;
         margin-top: 150px;
-        
+
     }
+
     .separador1 {
         margin: 0px;
         margin-bottom: 40px;
         width: 100%;
     }
+
     .separador2 {
         margin: 0px;
         width: 100%;
     }
+
     .cabecera-lista-rankings {
         display: block;
     }
+
     .array-rankings {
         display: flex;
         overflow-x: scroll;
         padding: 6px;
     }
+
     .button-ranking-class {
         text-align: center;
     }
+
     .rank {
         border-right: 1px solid #dce8f13d;
+
     }
 }
 
@@ -274,10 +269,10 @@ div.content {
 .dropdown {
     float: left;
     overflow: hidden;
-  }
+}
 
-  .dropdown .dropbtn {
-    font-size: 16px;  
+.dropdown .dropbtn {
+    font-size: 16px;
     border: none;
     outline: none;
     color: white;
@@ -285,39 +280,39 @@ div.content {
     background-color: inherit;
     font-family: inherit;
     margin: 0;
-  }
+}
 
-  .navbar a:hover, .dropdown:hover .dropbtn {
+.navbar a:hover, .dropdown:hover .dropbtn {
     background-color: red;
-  }
+}
 
-  .dropdown-content {
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-  }
+}
 
-  .dropdown-content a {
+.dropdown-content a {
     float: none;
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
     text-align: left;
-  }
+}
 
-  .dropdown-content a:hover {
+.dropdown-content a:hover {
     background-color: #ddd;
-  }
+}
 
-  .dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content {
     display: block;
-  }
+}
 
-.button-desplegable{
+.button-desplegable {
     background-color: transparent;
     border: none;
     color: #cccccc;
@@ -326,18 +321,38 @@ div.content {
     border-radius: 7px;
 }
 
-.button-desplegable:hover{
+.button-desplegable:hover {
     transition: 200ms;
-    color: white;
     background-color: #56baed;
 }
 
-.rank{
+.contenido-ranking {
     display: flex;
 }
 
+.entregas-ranking {
+    width: 100%;
+    background: #0000008c;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    border-radius: 5px;
+}
 
-.button-more-table{
+.texto-h3 {
+    color: #cccccc;
+    margin: 5px;
+}
+
+.practicas-ranking{
+    display: block;
+}
+
+.texto-practica{
+    color: #949393;
+}
+
+.button-more-table {
     background-color: transparent;
     border: none;
     color: #cccccc;
@@ -347,13 +362,13 @@ div.content {
     margin: 5px;
 }
 
-.button-more-table:hover{
+.button-more-table:hover {
     transition: 1;
     color: white;
     background-color: #56baed;
 }
 
-.desplegableVisual{
+.desplegableVisual {
     position: absolute;
     background-color: white;
     color: black;
@@ -362,19 +377,22 @@ div.content {
     border-radius: 5px;
 }
 
-.texto-desplegable{
+.texto-desplegable {
     margin: 5px;
 }
 
-a{
- color: #949393 !important;   
- transition: 1s !important;
- margin-left: 6px;
+a {
+    color: #949393 !important;
+    transition: 1s !important;
+    margin-left: 6px;
 }
-a:hover{
+
+a:hover {
     color: #1292f8 !important;
     transition: 0.5s !important;
 }
 
-
-
+.select-puntuacion {
+    width: auto;
+    margin-left: 100%;
+}
