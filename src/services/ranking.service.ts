@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Ranking } from 'app/interfaces/Ranking';
 import { Alumno } from 'app/interfaces/Alumno';
 import { map, take } from 'rxjs/operators';
+import { Entrega } from '../app/interfaces/Entrega';
 
 const URL = 'http://localhost:8080/';
 
@@ -136,7 +137,9 @@ export class RankingService {
     return this.http.get(URL_NOMBRE_EXISTE_PRACTICA + `?nom_practica=${nombrePractica}&id_profe=${idProfe}`);
   }
 
-  insertarPractica(id_rank:number, nom_entrega:string){
-    return this.http.get(URL_CREATE_ENTREGA+ `?id_rank=${id_rank}&nom_entrega=${nom_entrega}`);
+  insertarPractica(entrega:Entrega){
+    
+    
+    return this.http.post(URL_CREATE_ENTREGA, JSON.stringify(entrega));
   }
 }

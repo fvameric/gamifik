@@ -9,6 +9,8 @@ import {
 import { TokenService } from '../../../../services/token.service';
 import { debounceTime, tap } from 'rxjs/operators';
 import { RankingService } from 'services/ranking.service';
+import { Entrega } from 'app/interfaces/Entrega';
+
 @Component({
   selector: 'app-modal-entrega',
   templateUrl: './modal-entrega.component.html',
@@ -17,6 +19,13 @@ import { RankingService } from 'services/ranking.service';
 export class ModalEntregaComponent implements OnInit {
   submitted: boolean = false;
   rank: any;
+
+  entrega:Entrega={
+    id_entrega:0,
+    nom_entrega:'',
+    puntuacion_entrega:0,
+    id_rank:0
+  }
 
   constructor(
     private modalService: NgbModal,
@@ -61,13 +70,22 @@ export class ModalEntregaComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.crearPractica.valid) {
-      this.rankService.insertarPractica(1, this.nombrePractica.value);
+      
+      
       this.modalService.dismissAll();
     } else {
     }
 
     this.crearPractica.reset();
   }
+
+  crearEntrega(){
+    this.entrega.nom_entrega = this.nombrePractica.value;
+    this.entrega.id_rank = 2;
+
+    this.rankService.insertarPractica(this.entrega);
+  }
+
 
   checkNombre() {
     //   this.nombrePractica.valueChanges
