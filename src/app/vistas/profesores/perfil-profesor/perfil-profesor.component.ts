@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Profesor } from '../../../interfaces/Profesor';
 import { User } from 'app/interfaces/User';
 import { UsersService } from 'services/users.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl
+} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { TokenService } from 'services/token.service';
 import { AuthService } from 'services/auth.service';
@@ -13,8 +18,12 @@ import { AuthService } from 'services/auth.service';
   styleUrls: ['./perfil-profesor.component.css']
 })
 export class PerfilProfesorComponent implements OnInit {
+
+  modificacionForm!: FormGroup;
+
   profesores: any;
   alumnos: any;
+
   mostrarRankingsVisual: boolean = false;
   mostrarConfiguracionVisual: boolean = false;
   mostrarCerrarVisual: boolean = false;
@@ -31,9 +40,9 @@ export class PerfilProfesorComponent implements OnInit {
   confirmarNuevaContrasena: boolean = false;
   mostrarEditarContrasena: boolean = false;
 
-  nombre: string = 'funciona Fran';
-  apellidos: string = 'funciona Fran Olga';
-  email: string = 'funcionaFran@gmail.com';
+  nombre: string = '';
+  apellidos: string = '';
+  email: string = '';
 
   datosProfesor: Profesor = {
     id_profe: 0,
@@ -47,20 +56,29 @@ export class PerfilProfesorComponent implements OnInit {
     imagen: ''
   };
 
+  datosStorage: any;
+
+  oldPass: string = '';
+  newPass: string = '';
+  newConfPass: string = '';
+
+  imgSrc: any;
+  imgError: boolean = false;
+
+  oldPassValidation: boolean = false;
+
   flagRanks: boolean = false;
   rankingIds: any;
   datosRanking: any;
   arrRankings: any[] = [];
 
   userLocStorage: any;
-  datosStorage: any;
+
+  // token
+  logUserToken: any;
 
   // formulario
   registerForm!: FormGroup;
-
-  oldPass: string = '';
-  newPass: string = '';
-  newConfPass: string = '';
 
   centroSelec: number = 0;
 
@@ -68,16 +86,6 @@ export class PerfilProfesorComponent implements OnInit {
     { id: 0, nombre: 'Ilerna' },
     { id: 1, nombre: 'Caparrella' },
     { id: 2, nombre: 'Almenar' }
-  ];
-
-  imgSrc: string = '';
-
-  arrSwal: any = [
-    { id: 0, icon: 'success', title: 'Ok', text: 'Se han guardaron los cambios' },
-    { id: 1, icon: 'error', title: 'Error', text: 'Contraseña y confirmar contraseña no pueden quedar vacíos' },
-    { id: 2, icon: 'error', title: 'Error', text: 'Las contraseñas tienen que coincidir' },
-    { id: 3, icon: 'error', title: 'Error', text: 'La contraseña actual no es correcta' },
-    { id: 4, icon: 'error', title: 'Error', text: 'Este email ya está en uso' }
   ];
 
   constructor(
@@ -88,8 +96,7 @@ export class PerfilProfesorComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerDatosProfesor();
-    this.crearForm();
-    this.oldCentro();
+    this.crearFormulario();
   }
 
   obtenerDatosProfesor() {
@@ -99,27 +106,108 @@ export class PerfilProfesorComponent implements OnInit {
     this.apellidos = this.datosProfesor.apellidos;
     this.email = this.datosProfesor.email;
     this.imgSrc = this.datosProfesor.imagen;
+    this.centroSelec = this.datosProfesor.centro;
   }
 
-  cerrarSesion() {
-    this.authService.logout();
+  /********** funciones formulario **********/
+  crearFormulario() {
+    //Validadors registre
+    this.modificacionForm = this.formBuilder.group({
+      inputNombre: [this.nombre],
+      inputApellidos: [this.apellidos],
+      inputEmail: [this.email],
+      inputOldPass: [''],
+      inputPass: ['', [Validators.minLength(6), Validators.maxLength(50)]],
+      inputConfirmPass: ['']
+    }, {
+      //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
+      validator: this.mustMatch("inputPass", "inputConfirmPass")
+    }
+    );
+  }
+
+  // funció per controlar que camps password i confirmarpassword siguin iguals
+  mustMatch(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+
+      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+        return;
+      }
+
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ mustMatch: true });
+      } else {
+        matchingControl.setErrors(null);
+      }
+    };
+  }
+
+  //Retorna els valors introduits al formulari
+  get form() {
+    return this.modificacionForm.controls;
   }
 
   readURL(event: any) {
     if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (e: any) =>
-        this.imgSrc = e.target.result;
-      reader.readAsDataURL(file);
+      if (event.target.files[0].type.indexOf('image') == 0) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = e => this.imgSrc = reader.result;
+        reader.readAsDataURL(file);
+      } else {
+        this.imgError = true;
+      }
     }
   }
 
-  oldCentro() {
-    this.centroSelec = this.datosProfesor.centro;
-  }
+  confirmarModif(form: any) {
+    console.log(form);
+    if (form.valid) {
+      if (!this.imgError) {
+        let userModif: User = {
+          id: this.datosProfesor.id_profe,
+          email: form.controls.inputEmail.value,
+          pass: this.datosProfesor.pass,
+          nombre: form.controls.inputNombre.value,
+          apellidos: form.controls.inputApellidos.value,
+          imagen: this.imgSrc
+        }
 
-  confirmarModif() {
+        console.log(userModif);
+        Swal.fire({
+          title: '¿Quieres guardar los cambios?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Ok',
+              text: 'Se han guardaron los cambios',
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Ok'
+            }).then((result) => {
+              this.usersService.modificarProfesor(userModif).subscribe((val: any) => {
+                this.editableNombre = true;
+                this.editableApellidos = true;
+                this.editableEmail = true;
+                this.tokenService.saveUser(val.data);
+                this.obtenerDatosProfesor();
+                //window.location.reload();
+              });
+            });
+          }
+        });
+      }
+    }
+
+    /*
     let userModif: User = {
       id: this.datosProfesor.id_profe,
       email: this.email,
@@ -163,80 +251,50 @@ export class PerfilProfesorComponent implements OnInit {
         this.generarSwal(this.arrSwal[3]);
       }
     }
+    */
   }
 
-  comprobarEmail(email: string) {
-    this.usersService.validarEmailExisteProfes(email).subscribe((val: any) => {
-      if (val.resultado == 'error') {
-        this.generarSwal(this.arrSwal[4]);
+  // devuelve email
+  get formEmail() {
+    return this.modificacionForm.get('inputEmail') as FormControl;
+  }
+
+  // devuelve pass
+  get formPass() {
+    return this.modificacionForm.get('inputOldPass') as FormControl;
+  }
+
+  checkEmail() {
+    this.form.inputEmail.valueChanges.subscribe((formEmail) => {
+      console.log(formEmail);
+      if (this.datosProfesor.email != this.form.inputEmail.value) {
+        this.usersService.validarEmailExisteProfes(formEmail).subscribe((val: any) => {
+          console.log(val);
+          if (val.resultado == 'error') {
+            this.formEmail.setErrors({ notUnique: true });
+          }
+        });
+      } else {
+        this.formEmail.setErrors(null);
       }
     });
   }
 
-  generarSwal(swal: any, user?: User) {
-    if (swal.id == 0) {
-      if (user != undefined || user != null) {
-        Swal.fire({
-          title: '¿Quieres guardar los cambios?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Sí'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire({
-              icon: swal.icon,
-              title: swal.title,
-              text: swal.text
-            });
-
-            this.usersService.modificarProfesor(user).subscribe((val: any) => {
-              this.tokenService.saveUser(val.data);
-              this.ngOnInit();
-            });
+  checkPass() {
+    this.form.inputOldPass.valueChanges.subscribe((formPass) => {
+      if (formPass != '') {
+        this.usersService.validarPassProfes(formPass, this.datosProfesor.id_profe).subscribe((val: any) => {
+          console.log(val);
+          if (val.resultado == 'error') {
+            this.formPass.setErrors({ notUnique: true });
           }
         });
-      }
-    } else {
-      Swal.fire({
-        icon: swal.icon,
-        title: swal.title,
-        text: swal.text
-      });
-    }
-  }
-
-  /********** funciones formulario **********/
-  crearForm() {
-    //Validadors registre
-    this.registerForm = this.formBuilder.group({
-      newPass: [''],
-      confNewPass: ['', Validators.required]
-    }, {
-      //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
-      validator: this.mustMatch("newPass", "confNewPass")
-    }
-    );
-  }
-
-  // funció per controlar que camps password i confirmarpassword siguin iguals
-  mustMatch(controlName: string, matchingControlName: string) {
-    return (formGroup: FormGroup) => {
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
-
-      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-        return;
-      }
-
-      if (control.value !== matchingControl.value) {
-        matchingControl.setErrors({ mustMatch: true });
       } else {
-        matchingControl.setErrors(null);
+        this.formPass.setErrors(null);
       }
-    };
+    });
   }
+
 
   /********** funciones botones del perfil **********/
   mostrarConfiguracion() {
@@ -327,5 +385,9 @@ export class PerfilProfesorComponent implements OnInit {
       this.confirmarNuevaContrasena = false;
       this.passTypeConfirmNew = 'password';
     }
+  }
+
+  cerrarSesion() {
+    this.authService.logout();
   }
 }

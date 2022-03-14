@@ -68,6 +68,8 @@
                                 </div>
                             </div>
                             <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg">
+
+                            <!-- Modificar nombre -->
                             <div class="centrar-configuracion">
                                 <h5>Nombre: </h5>
                                 <input class="inputEditar" type="text" [placeholder]="this.nombre" [value]="this.nombre" id="inputNombre" formControlName="inputNombre" [readonly]="this.editableNombre">
@@ -86,6 +88,7 @@
                                     </svg>
                                 </div>
                             </div>
+                            <!-- Modificar apellidos -->
                             <div class="centrar-configuracion">
                                 <h5>Apellidos:</h5>
                                 <input class="inputEditar" type="text" [placeholder]="this.apellidos" [value]="this.apellidos" id="inputApellidos" formControlName="inputApellidos" [readonly]="this.editableApellidos">
@@ -123,14 +126,14 @@
                                             d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
                                     </svg>
                                 </div>
-
-
                             </div>
                             <div *ngIf="form.inputEmail.errors" class="invalid-feedback">
                                 <div *ngIf="form.inputEmail.errors.notUnique">El correo electrónico ya existe</div>
                                 <div *ngIf="form.inputEmail.errors.email">Correo electrónico no válido</div>
                                 <div *ngIf="form.inputEmail.errors.required">Correo electrónico vacio</div>
                             </div>
+
+                            <!-- contraseña -->
                             <div class="centrar-configuracion">
                                 <a (click)="mostrarEditarContra()" class="cambiar-contraseña">Cambiar Contraseña</a>
                             </div>

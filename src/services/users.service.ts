@@ -36,6 +36,8 @@ const URL_EMAIL_EXISTE_PROFESORES =
 const URL_USERNAME_EXISTE_PROFESORES =
   'http://localhost:8080/profesores/usuarioExiste.php';
 
+const URL_PASS_EXISTE_PROFES = 'http://localhost:8080/profesores/passExiste.php';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -145,5 +147,14 @@ export class UsersService {
   // validar username profes
   validarUsuarioExisteProfes(username: string) {
     return this.http.get(URL_USERNAME_EXISTE_PROFESORES + `?username=${username}`);
+  }
+
+  // validar pass alumnos
+  validarPassProfes(pass: string, id: number) {
+    var user = {
+      "pass": pass,
+      "id": id
+    }
+    return this.http.post(URL_PASS_EXISTE_PROFES, JSON.stringify(user));
   }
 }

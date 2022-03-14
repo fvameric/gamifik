@@ -69,15 +69,6 @@ export class PerfilComponent implements OnInit {
 
   oldPassValidation: boolean = false;
 
-  arrSwal: any = [
-    { id: 0, icon: 'success', title: 'Ok', text: 'Se han guardaron los cambios' },
-    { id: 1, icon: 'error', title: 'Error', text: 'Contraseña y confirmar contraseña no pueden quedar vacíos' },
-    { id: 2, icon: 'error', title: 'Error', text: 'Las contraseñas tienen que coincidir' },
-    { id: 3, icon: 'error', title: 'Error', text: 'La contraseña actual no es correcta' },
-    { id: 4, icon: 'error', title: 'Error', text: 'Este email ya está en uso' },
-    { id: 5, icon: 'error', title: 'Error', text: 'Solo se aceptan JPG, PNG o GIF' },
-  ];
-
   // token
   logUserToken: any;
 
@@ -90,8 +81,6 @@ export class PerfilComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerDatosAlumno();
     this.crearFormulario();
-    //this.checkEmail();
-    //this.checkPass();
   }
 
   obtenerDatosAlumno() {
