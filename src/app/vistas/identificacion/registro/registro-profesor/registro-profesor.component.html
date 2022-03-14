@@ -7,8 +7,8 @@
             <label for="file-input">
                 <img id="preview" [src]="imgSrc" class="fadeIn first">
             </label>
-            <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg" formControlName="userImage" class="fadeIn second"><br>
         </div>
+        <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg" formControlName="userImage" class="fadeIn second"><br>
 
         <input type="text" id="login" formControlName="username" minlength="3" maxlength="20" placeholder="Nombre de usuario de profesor" class="fadeIn second" [ngClass]="{ 'is-invalid': form.username.errors }">
         <!-- Missatge error nom usuari -->

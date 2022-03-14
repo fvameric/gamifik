@@ -206,6 +206,7 @@ export class PerfilComponent implements OnInit {
       console.log(formEmail);
       if (this.datosAlumno.email != this.form.inputEmail.value) {
         this.usersService.validarEmailExisteAlumnos(formEmail).subscribe((val: any) => {
+          this.formEmail.markAsPending({ emitEvent: true });
           console.log(val);
           if (val.resultado == 'error') {
             this.formEmail.setErrors({ notUnique: true });
@@ -218,6 +219,7 @@ export class PerfilComponent implements OnInit {
   }
 
   checkPass() {
+    console.log("test");
     this.form.inputOldPass.valueChanges.subscribe((formPass) => {
       if (formPass != '') {
         this.usersService.validarPassAlumnos(formPass, this.datosAlumno.id_alumno).subscribe((val: any) => {

@@ -7,6 +7,7 @@
   // includes
   include_once("../conexion/bd.php");
   include_once("../tokenJWT/generarToken.php");
+  include_once("../phpFunctions/passCrypt.php");
 
   // clases
   // clase conexión
@@ -21,9 +22,12 @@
   $json = file_get_contents('php://input');
   $profe = json_decode($json);
 
+  // encriptar pass
+  $encryptedPass = passCrypt($profe->pass);
+
   // query
   $queryInsert = "INSERT INTO `profesor` (`id_profe`, `nick`, `email`, `pass`, `nombre`, `apellidos`, `centro`, `tipo`, `imagen`) VALUES
-  (NULL, '$profe->nick', '$profe->email', '$profe->pass', '$profe->nombre', '$profe->apellidos', '$profe->centro', '$profe->tipo', '$profe->imagen')";
+  (NULL, '$profe->nick', '$profe->email', '$encryptedPass', '$profe->nombre', '$profe->apellidos', '$profe->centro', '$profe->tipo', '$profe->imagen')";
 
   $querySelect = "SELECT * FROM `profesor` WHERE nick = '$profe->nick' OR email = '$profe->email'";
 

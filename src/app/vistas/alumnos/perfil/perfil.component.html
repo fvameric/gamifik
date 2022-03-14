@@ -131,6 +131,7 @@
                                 <div *ngIf="form.inputEmail.errors.notUnique">El correo electrónico ya existe</div>
                                 <div *ngIf="form.inputEmail.errors.email">Correo electrónico no válido</div>
                                 <div *ngIf="form.inputEmail.errors.required">Correo electrónico vacio</div>
+                                <div *ngIf="form.inputEmail.errors.emitEvent">Consultando disponibilidad</div>
                             </div>
 
                             <!-- contraseña -->
