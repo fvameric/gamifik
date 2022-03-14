@@ -6,6 +6,7 @@
 
   // includes
   include_once("../conexion/bd.php");
+  include_once("../phpFunctions/passCrypt.php");
 
   // clases
   // clase conexión
@@ -20,8 +21,11 @@
   $json = file_get_contents('php://input');
   $alumno = json_decode($json);
 
+  // encriptar pass
+  $encryptedPass = passCrypt($alumno->pass);
+
   // query
-  $queryUpdate = "UPDATE `alumno` SET `email`='$alumno->email',`pass`='$alumno->pass',`nombre`='$alumno->nombre',`apellidos`='$alumno->apellidos',`imagen`='$alumno->imagen' WHERE id_alumno = $alumno->id";
+  $queryUpdate = "UPDATE `alumno` SET `email`='$alumno->email',`pass`='$encryptedPass',`nombre`='$alumno->nombre',`apellidos`='$alumno->apellidos',`imagen`='$alumno->imagen' WHERE id_alumno = $alumno->id";
   $querySelect = "SELECT * FROM `alumno` WHERE id_alumno = $alumno->id";
 
   $resUpdate = mysqli_query($con, $queryUpdate);

@@ -14,7 +14,7 @@ export class TokenService {
 
   constructor(private jwtHelper: JwtHelperService, private http: HttpClient) {
   }
-
+  
   signOut(): void {
     window.sessionStorage.clear();
     window.location.reload();
@@ -45,7 +45,7 @@ export class TokenService {
       this.signOut();
     }
   }
-
+  
   generarToken() {
     this.http.get(URL_REFRESCAR_TOKEN);
   }

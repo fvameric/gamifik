@@ -104,6 +104,14 @@ export class UsersService {
   validarUsuarioExisteAlumnos(username: string) {
     return this.http.get(URL_USERNAME_EXISTE_ALUMNOS + `?username=${username}`);
   }
+  // validar pass alumnos
+  validarPassAlumnos(pass: string, id: number) {
+    var user = {
+      "pass": pass,
+      "id": id
+    }
+    return this.http.post(URL_PASS_EXISTE_ALUMNOS, JSON.stringify(user));
+  }
 
   // funciones profesores
   // create profesores

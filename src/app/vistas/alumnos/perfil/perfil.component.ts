@@ -111,7 +111,7 @@ export class PerfilComponent implements OnInit {
       inputApellidos: [this.apellidos],
       inputEmail: [this.email],
       inputOldPass: [''],
-      inputPass: [''],
+      inputPass: ['', [Validators.minLength(6), Validators.maxLength(50)]],
       inputConfirmPass: ['']
     }, {
       //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
@@ -159,7 +159,6 @@ export class PerfilComponent implements OnInit {
   confirmarModif(form: any) {
     console.log(form);
     if (form.valid) {
-      console.log(this.imgError);
       if (!this.imgError) {
         let userModif: User = {
           id: this.datosAlumno.id_alumno,
@@ -183,16 +182,19 @@ export class PerfilComponent implements OnInit {
             Swal.fire({
               icon: 'success',
               title: 'Ok',
-              text: 'Se han guardaron los cambios'
-            });
-
-            this.usersService.modificarAlumno(userModif).subscribe((val: any) => {
-              this.editableNombre = true;
-              this.editableApellidos = true;
-              this.editableEmail = true;
-              this.tokenService.saveUser(val.data);
-              this.obtenerDatosAlumno();
-              window.location.reload();
+              text: 'Se han guardaron los cambios',
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Ok'
+            }).then((result) => {
+              this.usersService.modificarAlumno(userModif).subscribe((val: any) => {
+                this.editableNombre = true;
+                this.editableApellidos = true;
+                this.editableEmail = true;
+                this.tokenService.saveUser(val.data);
+                this.obtenerDatosAlumno();
+                //window.location.reload();
+              });
             });
           }
         });
@@ -212,26 +214,33 @@ export class PerfilComponent implements OnInit {
 
   checkEmail() {
     this.form.inputEmail.valueChanges.subscribe((formEmail) => {
-      if (!this.editableEmail && this.datosAlumno.email != this.form.inputEmail.value) {
+      console.log(formEmail);
+      if (this.datosAlumno.email != this.form.inputEmail.value) {
         this.usersService.validarEmailExisteAlumnos(formEmail).subscribe((val: any) => {
+          console.log(val);
           if (val.resultado == 'error') {
             this.formEmail.setErrors({ notUnique: true });
-            console.log("igual");
           }
         });
+      } else {
+        this.formEmail.setErrors(null);
       }
     });
   }
 
   checkPass() {
     this.form.inputOldPass.valueChanges.subscribe((formPass) => {
-      if (formPass != '' && formPass != this.datosAlumno.pass) {
-        this.formPass.setErrors({ incorrect: true });
+      if (formPass != '') {
+        this.usersService.validarPassAlumnos(formPass, this.datosAlumno.id_alumno).subscribe((val: any) => {
+          console.log(val);
+          if (val.resultado == 'error') {
+            this.formPass.setErrors({ notUnique: true });
+          }
+        });
+      } else {
+        this.formPass.setErrors(null);
       }
     });
-  }
-
-  generarSwal(swal: any, user?: User) {
   }
 
   /********** funciones botones del perfil **********/
@@ -281,9 +290,9 @@ export class PerfilComponent implements OnInit {
   editarEmail() {
     if (this.editableEmail == true) {
       this.editableEmail = false;
+      console.log("test");
+      this.checkEmail();
     } else {
-      //(<HTMLInputElement>document.getElementById('inputEmail')).value = this.email;
-      //this.checkEmail();
       this.form['inputEmail'].setValue(this.email);
       this.editableEmail = true;
     }
@@ -294,7 +303,7 @@ export class PerfilComponent implements OnInit {
       this.mostrarEditarContrasena = false;
     } else {
       this.checkPass();
-      this.formEmail.setErrors({ required: false });
+      //this.formEmail.setErrors({ required: false });
       this.mostrarEditarContrasena = true;
     }
   }

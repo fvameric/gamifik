@@ -85,8 +85,8 @@ body {
 
 .contact main section .content img {
     display: inline-block;
-    width: 140px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
 }
 
 @media (min-width: 10px) {
@@ -486,6 +486,7 @@ input[type=date] {
     background-color: #1292f8;
 }
 
+
 /*
 ::ng-deep img {
     width: 100px;
@@ -495,13 +496,12 @@ input[type=date] {
 */
 
 .image-upload {
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     overflow: hidden;
 }
 
 .img-perfil {
     height: 100%;
-    object-fit: contain;
 }

@@ -32,6 +32,7 @@ body {
     height: auto;
 }
 
+
 /* sidebar */
 
 .sidebar {
@@ -159,7 +160,7 @@ body {
 
 .contact main section .content img {
     display: inline-block;
-    width: 140px;
+    width: 100px;
     border-radius: 50%;
 }
 
@@ -371,8 +372,6 @@ hr {
     color: #007bff;
 }
 
-
-
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -393,13 +392,9 @@ hr {
     }
 }
 
-
-
 .configuracion:hover {
     cursor: pointer;
 }
-
-
 
 .cerrar-sesion {
     cursor: pointer;

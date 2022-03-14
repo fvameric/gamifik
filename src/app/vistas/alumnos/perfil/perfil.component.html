@@ -107,15 +107,7 @@
                             <!-- Div para cada linia ej. :  Nombre, apellidos, email... -->
                             <div class="centrar-configuracion">
                                 <h5>Email: </h5>
-                                <div class="email-validators-flex">
-                                    <input class="inputEditar" type="email" [value]="this.email" id="inputEmail" formControlName="inputEmail" [ngClass]="{ 'is-invalid': form.inputEmail.errors }" email [readonly]="this.editableEmail">
-                                    <div *ngIf="form.inputEmail.errors" class="invalid-feedback">
-                                        <div *ngIf="form.inputEmail.errors.notUnique">El correo electrónico ya existe</div>
-                                        <div *ngIf="form.inputEmail.errors.email">Correo electrónico no válido</div>
-                                        <div *ngIf="form.inputEmail.errors.required">Correo electrónico vacio</div>
-                                    </div>
-
-                                </div>
+                                <input class="inputEditar" type="email" [value]="this.email" id="inputEmail" formControlName="inputEmail" [ngClass]="{ 'is-invalid': form.inputEmail.errors }" email [readonly]="this.editableEmail">
                                 <!-- Div que divide las imagenes -->
                                 <div class="pruebaConfiguracion">
                                     <!-- Lápiz -->
@@ -131,6 +123,13 @@
                                             d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
                                     </svg>
                                 </div>
+
+
+                            </div>
+                            <div *ngIf="form.inputEmail.errors" class="invalid-feedback">
+                                <div *ngIf="form.inputEmail.errors.notUnique">El correo electrónico ya existe</div>
+                                <div *ngIf="form.inputEmail.errors.email">Correo electrónico no válido</div>
+                                <div *ngIf="form.inputEmail.errors.required">Correo electrónico vacio</div>
                             </div>
                             <div class="centrar-configuracion">
                                 <a (click)="mostrarEditarContra()" class="cambiar-contraseña">Cambiar Contraseña</a>
@@ -152,7 +151,7 @@
                                     </div>
                                 </div>
                                 <div *ngIf="form.inputOldPass.errors" class="invalid-feedback">
-                                    <div *ngIf="form.inputOldPass.errors.incorrect">Contraseña no coincide</div>
+                                    <div *ngIf="form.inputOldPass.errors.notUnique">Contraseña no coincide</div>
                                 </div>
 
                                 <div class="centrar-configuracion">
@@ -190,6 +189,7 @@
                                 </div>
                                 <div *ngIf="form.inputConfirmPass.errors" class="invalid-feedback">
                                     <div *ngIf="form.inputConfirmPass.errors.required">Confirmar la contraseña es necesario</div>
+                                    <div *ngIf="form.inputConfirmPass.errors.minlength">La contraseña debe contener al menos 6 carácteres</div>
                                     <div *ngIf="form.inputConfirmPass.errors.mustMatch">Las contraseñas deben de coincidir</div>
                                 </div>
                             </div>

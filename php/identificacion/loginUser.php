@@ -4,22 +4,31 @@
   header("Access-Control-Allow-Headers: Authorization, Origin, X-Requested-With, Content-Type, Accept");
   header('Content-Type: application/json');
 
-  $json = file_get_contents('php://input');
-  $user = json_decode($json);
-
   // includes
   include_once("../conexion/bd.php");
   include_once("../tokenJWT/generarToken.php");
+  include_once("../phpFunctions/passCrypt.php");
 
   // clases
+  // clase conexión
   $bd = new claseBD();
   $con = $bd->obtenerConexion();
+
+  // clase respuesta
   class Result{}
   $response = new Result();
 
+  // input body
+  $json = file_get_contents('php://input');
+  $user = json_decode($json);
+
+  
+  // encriptar pass
+  $encryptedPass = passCrypt($user->pass);
+
   // query
-  $queryAlumno = "SELECT * FROM alumno WHERE nick='$user->nick' and pass='$user->pass'";
-  $queryProfesor = "SELECT * FROM profesor WHERE nick='$user->nick' and pass='$user->pass'";
+  $queryAlumno = "SELECT * FROM alumno WHERE nick='$user->nick' and pass='$encryptedPass'";
+  $queryProfesor = "SELECT * FROM profesor WHERE nick='$user->nick' and pass='$encryptedPass'";
 
   $regAlumno = mysqli_query($con, $queryAlumno);
 
@@ -51,7 +60,6 @@
           $response->accessToken = json_encode($jwt);
           echo json_encode($response);
         } else {
-
           // en caso de que no exista ni como alumno ni como profe devolvemos error
           $response->resultado = 'error';
           $response->mensaje = 'No se encontró este usuario';
