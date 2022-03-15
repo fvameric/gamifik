@@ -70,7 +70,7 @@ export class ModalEntregaComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.crearPractica.valid) {
-      
+      this.crearEntrega();
       
       this.modalService.dismissAll();
     } else {
@@ -81,8 +81,9 @@ export class ModalEntregaComponent implements OnInit {
 
   crearEntrega(){
     this.entrega.nom_entrega = this.nombrePractica.value;
-    this.entrega.id_rank = 2;
-
+    this.entrega.id_rank = 3;
+    console.log(this.entrega);
+    
     this.rankService.insertarPractica(this.entrega);
   }
 

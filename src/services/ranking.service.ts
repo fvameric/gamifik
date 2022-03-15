@@ -48,6 +48,13 @@ export class RankingService {
     return this.http.post(URL_CREATE_RANK, JSON.stringify(rank));
   }
 
+  // crear entrega
+  insertarPractica(entrega:Entrega){
+    console.log(entrega);
+    
+    return this.http.post(URL_CREATE_ENTREGA, JSON.stringify(entrega));
+  }
+
   // read ranking
   obtenerRanking() {
     return this.http.get(URL_READ_RANK);
@@ -137,9 +144,4 @@ export class RankingService {
     return this.http.get(URL_NOMBRE_EXISTE_PRACTICA + `?nom_practica=${nombrePractica}&id_profe=${idProfe}`);
   }
 
-  insertarPractica(entrega:Entrega){
-    
-    
-    return this.http.post(URL_CREATE_ENTREGA, JSON.stringify(entrega));
-  }
 }
