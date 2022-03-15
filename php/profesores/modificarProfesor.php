@@ -21,35 +21,76 @@
   $json = file_get_contents('php://input');
   $profesor = json_decode($json);
 
-  // encriptar pass
-  $encryptedPass = passCrypt($profesor->pass);
-  
   // query
-  $queryUpdate = "UPDATE `profesor` SET `email`='$profesor->email',`pass`='$encryptedPass',`nombre`='$profesor->nombre',`apellidos`='$profesor->apellidos', `centro`='$profesor->centro' WHERE id_profe = $profesor->id";
   $querySelect = "SELECT * FROM `profesor` WHERE id_profe = $profesor->id";
 
-  $resUpdate = mysqli_query($con, $queryUpdate);
+  if (isset($profesor->pass)) {
+    // encriptar pass
+    $encryptedPass = passCrypt($profesor->pass);
+    $queryUpdate = "UPDATE `profesor` SET `email`='$profesor->email',`pass`='$encryptedPass',`nombre`='$profesor->nombre',`apellidos`='$profesor->apellidos',`imagen`='$profesor->imagen', `centro`='$profesor->centro' WHERE id_profe = $profesor->id";
+    $resUpdate = mysqli_query($con, $queryUpdate);
 
-  // validacion de la query
-  // si se hace bien el insert
-  if ($resUpdate) {
+    // validacion de la query
+    // si se hace bien el insert
+    if ($resUpdate) {
 
-    // si se hace bien el select devolvemos el profesor recién registrado
-    $resSelect = mysqli_query($con, $querySelect);
-    if ($resSelect) {
-      $response->resultado = 'ok';
-      $response->mensaje = 'Se modificó al profesor con éxito';
-      $data = mysqli_fetch_array($resSelect);
-      $response->data = $data;
-      echo json_encode($response);
+      // si se hace bien el select devolvemos el profesor recién registrado
+      $resSelect = mysqli_query($con, $querySelect);
+      if ($resSelect) {
+        $response->resultado = 'ok';
+        $response->mensaje = 'Se modificó al profesor con éxito';
+        $response->profesor = $profesor;
+        $data = mysqli_fetch_array($resSelect);
+        $response->data = $data;
+        echo json_encode($response);
+        exit;
+      } else {
+        $response->resultado = 'error';
+        $response->mensaje = 'Hubo un error al cargar el profesor insertado';
+        $response->profesor = $profesor;
+        echo json_encode($response);
+        exit;
+      }
     } else {
       $response->resultado = 'error';
-      $response->mensaje = 'Hubo un error al cargar el profesor insertado';
+      $response->mensaje = 'Hubo un error al registrar al profesor';
+      $response->profesor = $profesor;
       echo json_encode($response);
+      exit;
     }
+
   } else {
-    $response->resultado = 'error';
-    $response->mensaje = 'Hubo un error al registrar al profesor';
-    echo json_encode($response);
+    $queryUpdateSinPass = "UPDATE `profesor` SET `email`='$profesor->email',`nombre`='$profesor->nombre',`apellidos`='$profesor->apellidos', `imagen`='$profesor->imagen', `centro`='$profesor->centro' WHERE id_profe = $profesor->id";
+    $resUpdateSinPass = mysqli_query($con, $queryUpdateSinPass);
+
+    // validacion de la query
+    // si se hace bien el insert
+    if ($resUpdateSinPass) {
+
+      // si se hace bien el select devolvemos el profesor recién registrado
+      $resSelect = mysqli_query($con, $querySelect);
+      if ($resSelect) {
+        $response->resultado = 'ok';
+        $response->mensaje = 'Se modificó al profesor con éxito';
+        $response->profesor = $profesor;
+        $data = mysqli_fetch_array($resSelect);
+        $response->data = $data;
+        echo json_encode($response);
+        exit;
+      } else {
+        $response->resultado = 'error';
+        $response->mensaje = 'Hubo un error al cargar el profesor insertado';
+        $response->profesor = $profesor;
+        echo json_encode($response);
+        exit;
+      }
+    } else {
+      $response->resultado = 'error';
+      $response->mensaje = 'Hubo un error al registrar al profesor';
+      $response->profesor = $profesor;
+      echo json_encode($response);
+      exit;
+    }
   }
+  
 ?>

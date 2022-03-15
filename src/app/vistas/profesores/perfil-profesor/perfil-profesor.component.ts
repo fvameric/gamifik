@@ -97,6 +97,8 @@ export class PerfilProfesorComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerDatosProfesor();
     this.crearFormulario();
+
+    console.log(this.formCentro.value);
   }
 
   obtenerDatosProfesor() {
@@ -118,12 +120,14 @@ export class PerfilProfesorComponent implements OnInit {
       inputEmail: [this.email],
       inputOldPass: [''],
       inputPass: ['', [Validators.minLength(6), Validators.maxLength(50)]],
-      inputConfirmPass: ['']
+      inputConfirmPass: [''],
+      inputCentro: [this.centroSelec]
     }, {
       //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
       validator: this.mustMatch("inputPass", "inputConfirmPass")
-    }
-    );
+    });
+
+    console.log(this.modificacionForm);
   }
 
   // funció per controlar que camps password i confirmarpassword siguin iguals
@@ -162,20 +166,36 @@ export class PerfilProfesorComponent implements OnInit {
     }
   }
 
+  compararCentro(centro1: any, centro2: any) {
+    return centro1.id === centro2.id;
+  }
+
   confirmarModif(form: any) {
+    let userModif: User;
+
     console.log(form);
     if (form.valid) {
       if (!this.imgError) {
-        let userModif: User = {
-          id: this.datosProfesor.id_profe,
-          email: form.controls.inputEmail.value,
-          pass: this.datosProfesor.pass,
-          nombre: form.controls.inputNombre.value,
-          apellidos: form.controls.inputApellidos.value,
-          imagen: this.imgSrc
+        if (form.controls.inputPass.value != '') {
+          userModif = {
+            id: this.datosProfesor.id_profe,
+            email: form.controls.inputEmail.value,
+            pass: form.controls.inputPass.value,
+            nombre: form.controls.inputNombre.value,
+            apellidos: form.controls.inputApellidos.value,
+            imagen: this.imgSrc,
+            centro: form.controls.inputCentro.value,
+          }
+        } else {
+          userModif = {
+            id: this.datosProfesor.id_profe,
+            email: form.controls.inputEmail.value,
+            nombre: form.controls.inputNombre.value,
+            apellidos: form.controls.inputApellidos.value,
+            imagen: this.imgSrc,
+            centro: form.controls.inputCentro.value,
+          }
         }
-
-        console.log(userModif);
         Swal.fire({
           title: '¿Quieres guardar los cambios?',
           icon: 'warning',
@@ -199,59 +219,13 @@ export class PerfilProfesorComponent implements OnInit {
                 this.editableEmail = true;
                 this.tokenService.saveUser(val.data);
                 this.obtenerDatosProfesor();
-                //window.location.reload();
+                window.location.reload();
               });
             });
           }
         });
       }
     }
-
-    /*
-    let userModif: User = {
-      id: this.datosProfesor.id_profe,
-      email: this.email,
-      pass: this.datosProfesor.pass,
-      nombre: this.nombre,
-      apellidos: this.apellidos,
-      centro: this.centroSelec
-    }
-    // validacion para no duplicar emails
-    if (this.datosProfesor.email != this.email) {
-      this.comprobarEmail(this.email);
-    }
-    // en caso de que se quiera cambiar el email, nombre o apellidos
-    // pero no la password
-    if (this.oldPass == '' && this.newPass == '' && this.newConfPass == '') {
-      this.generarSwal(this.arrSwal[0], userModif);
-    } else {
-      if (this.oldPass == this.datosProfesor.pass) {
-        if (this.newPass == '' || this.newConfPass == '') {
-          this.generarSwal(this.arrSwal[1]);
-        } else {
-
-          // en caso de que se quiera cambiar cualquier dato y
-          // además, la password
-          if (this.newPass == this.newConfPass) {
-            let userModif: User = {
-              id: this.datosProfesor.id_profe,
-              email: this.email,
-              pass: this.newConfPass,
-              nombre: this.nombre,
-              apellidos: this.apellidos,
-              centro: this.centroSelec
-            }
-
-            this.generarSwal(this.arrSwal[0], userModif);
-          } else {
-            this.generarSwal(this.arrSwal[2]);
-          }
-        }
-      } else {
-        this.generarSwal(this.arrSwal[3]);
-      }
-    }
-    */
   }
 
   // devuelve email
@@ -262,6 +236,11 @@ export class PerfilProfesorComponent implements OnInit {
   // devuelve pass
   get formPass() {
     return this.modificacionForm.get('inputOldPass') as FormControl;
+  }
+
+  // devuelve pass
+  get formCentro() {
+    return this.modificacionForm.get('inputCentro') as FormControl;
   }
 
   checkEmail() {
@@ -281,6 +260,7 @@ export class PerfilProfesorComponent implements OnInit {
   }
 
   checkPass() {
+    console.log("test");
     this.form.inputOldPass.valueChanges.subscribe((formPass) => {
       if (formPass != '') {
         this.usersService.validarPassProfes(formPass, this.datosProfesor.id_profe).subscribe((val: any) => {
@@ -294,7 +274,6 @@ export class PerfilProfesorComponent implements OnInit {
       }
     });
   }
-
 
   /********** funciones botones del perfil **********/
   mostrarConfiguracion() {
@@ -316,17 +295,7 @@ export class PerfilProfesorComponent implements OnInit {
       this.mostrarCerrarVisual = false;
     }
   }
-
-  editarEmail() {
-    if (this.editableEmail == true) {
-      this.editableEmail = false;
-    } else {
-      (<HTMLInputElement>document.getElementById('inputEmail')).value;
-      (<HTMLInputElement>document.getElementById('inputEmail')).value = '';
-      this.editableEmail = true;
-    }
-  }
-
+  
   editarNombre() {
     if (this.editableNombre == true) {
       this.editableNombre = false;
@@ -334,8 +303,7 @@ export class PerfilProfesorComponent implements OnInit {
       if (document.getElementById('guardarNombre')) {
       }
 
-      (<HTMLInputElement>document.getElementById('inputNombre')).value;
-      (<HTMLInputElement>document.getElementById('inputNombre')).value = '';
+      this.form['inputNombre'].setValue(this.nombre);
       this.editableNombre = true;
     }
   }
@@ -344,9 +312,18 @@ export class PerfilProfesorComponent implements OnInit {
     if (this.editableApellidos == true) {
       this.editableApellidos = false;
     } else {
-      (<HTMLInputElement>document.getElementById('inputApellidos')).value;
-      (<HTMLInputElement>document.getElementById('inputApellidos')).value = '';
+      this.form['inputApellidos'].setValue(this.apellidos);
       this.editableApellidos = true;
+    }
+  }
+
+  editarEmail() {
+    if (this.editableEmail == true) {
+      this.editableEmail = false;
+      this.checkEmail();
+    } else {
+      this.form['inputEmail'].setValue(this.email);
+      this.editableEmail = true;
     }
   }
 
@@ -354,6 +331,7 @@ export class PerfilProfesorComponent implements OnInit {
     if (this.mostrarEditarContrasena == true) {
       this.mostrarEditarContrasena = false;
     } else {
+      this.checkPass();
       this.mostrarEditarContrasena = true;
     }
   }

@@ -146,19 +146,29 @@ export class PerfilComponent implements OnInit {
   }
 
   confirmarModif(form: any) {
+    let userModif: User;
+
     console.log(form);
     if (form.valid) {
       if (!this.imgError) {
-        let userModif: User = {
-          id: this.datosAlumno.id_alumno,
-          email: form.controls.inputEmail.value,
-          pass: this.datosAlumno.pass,
-          nombre: form.controls.inputNombre.value,
-          apellidos: form.controls.inputApellidos.value,
-          imagen: this.imgSrc
+        if (form.controls.inputPass.value != '') {
+          userModif = {
+            id: this.datosAlumno.id_alumno,
+            email: form.controls.inputEmail.value,
+            pass: form.controls.inputPass.value,
+            nombre: form.controls.inputNombre.value,
+            apellidos: form.controls.inputApellidos.value,
+            imagen: this.imgSrc
+          }
+        } else {
+          userModif = {
+            id: this.datosAlumno.id_alumno,
+            email: form.controls.inputEmail.value,
+            nombre: form.controls.inputNombre.value,
+            apellidos: form.controls.inputApellidos.value,
+            imagen: this.imgSrc
+          }
         }
-
-        console.log(userModif);
         Swal.fire({
           title: '¿Quieres guardar los cambios?',
           icon: 'warning',
@@ -182,7 +192,7 @@ export class PerfilComponent implements OnInit {
                 this.editableEmail = true;
                 this.tokenService.saveUser(val.data);
                 this.obtenerDatosAlumno();
-                //window.location.reload();
+                window.location.reload();
               });
             });
           }

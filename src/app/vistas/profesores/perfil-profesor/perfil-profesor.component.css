@@ -16,7 +16,7 @@ body {
 /* CONTACT ========================================== */
 
 .contact-area {
-    top: 30%;
+    top: 8%;
     left: 0%;
     position: relative;
     display: flex;
@@ -28,7 +28,6 @@ body {
     max-width: 420px;
     padding: 40px 20px;
     margin: 0 auto;
-    margin-top: 5%;
 }
 
 @media (min-width: 1024px) {
@@ -54,9 +53,6 @@ body {
         -ms-transform: translate(-50%, -50%);
         -o-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
-    }
-    .contact-area {
-        top: 0;
     }
 }
 
@@ -89,14 +85,13 @@ body {
 
 .contact main section .content img {
     display: inline-block;
-    width: 100px;
-    border-radius: 50%;
+    width: 60px;
+    height: 60px;
 }
 
 @media (min-width: 10px) {
     .contact main section .content img {
         float: left;
-        width: 30%;
         margin-right: 10%;
     }
 }
@@ -143,11 +138,7 @@ body {
     }
 }
 
-@media (min-width: 10px) {
-    .contact-area {
-        top: 0;
-    }
-}
+@media (min-width: 10px) {}
 
 .contact main section .content aside h1 {
     font-weight: 100;
@@ -374,6 +365,11 @@ hr {
     background-color: rgb(231, 77, 90);
     color: white;
     border: none;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 .boton-cerrar:hover {
@@ -386,10 +382,15 @@ hr {
     background-color: #56baed;
     color: white;
     border: none;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 .boton-cancelar:hover {
-    background-color: rgb(9, 53, 134);
+    background-color: #1292f8;
 }
 
 .button-configuracion {
@@ -400,10 +401,15 @@ hr {
     box-shadow: 0 10px 30px 0 rgb(95 186 233 / 40%);
     color: white;
     border: none;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 .button-configuracion:hover {
-    background-color: rgb(9, 53, 134);
+    background-color: #1292f8;
 }
 
 .centrar-configuracion {
@@ -414,6 +420,15 @@ hr {
 .pruebaConfiguracion {
     float: right;
     width: 20%;
+}
+
+.cambiar-contraseña {
+    cursor: pointer;
+}
+
+.invalid-feedback {
+    display: flex;
+    justify-content: center;
 }
 
 #iconos-configuracion {
@@ -435,6 +450,7 @@ hr {
 }
 
 input[type=text],
+input[type=email],
 input[type=password],
 input[type=date] {
     background-color: #f6f6f600;
@@ -456,7 +472,36 @@ input[type=date] {
     border-radius: 5px 5px 5px 5px;
 }
 
+.unirse-ranking {
+    margin-left: 200px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #56baed;
+    color: white;
+    border: none;
+    transition: 1s;
+}
+
+.unirse-ranking:hover {
+    background-color: #1292f8;
+}
+
+
+/*
 ::ng-deep img {
     width: 100px;
+    height: 100px;
     border-radius: 50%;
+}
+*/
+
+.image-upload {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.img-perfil {
+    height: 100%;
 }
