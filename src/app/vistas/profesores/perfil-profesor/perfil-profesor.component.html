@@ -131,14 +131,14 @@
                                 <div *ngIf="form.inputEmail.errors.notUnique">El correo electrónico ya existe</div>
                                 <div *ngIf="form.inputEmail.errors.email">Correo electrónico no válido</div>
                                 <div *ngIf="form.inputEmail.errors.required">Correo electrónico vacio</div>
+                                <div *ngIf="form.inputEmail.errors.emitEvent">Consultando disponibilidad</div>
                             </div>
 
                             <!-- Modificar centro -->
                             <div class="centrar-configuracion">
                                 <h5>Centro: </h5>
-                                <select class="select-Centros" [(ngModel)]="centroSelec">
-                                    <option [value]="centro.id" *ngFor="let centro of listaCentros"
-                                        [selected]="centro.id === centroSelec">
+                                <select class="select-Centros" formControlName="inputCentro">
+                                    <option *ngFor="let centro of listaCentros" [value]="centro.id">
                                         {{centro.nombre}}
                                     </option>
                                 </select>

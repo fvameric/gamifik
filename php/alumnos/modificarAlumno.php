@@ -23,8 +23,10 @@
 
   $querySelect = "SELECT * FROM `alumno` WHERE id_alumno = $alumno->id";
 
-  // encriptar pass
+  
   if (isset($alumno->pass)) {
+
+    // encriptar pass
     $encryptedPass = passCrypt($alumno->pass);
     $queryUpdate = "UPDATE `alumno` SET `email`='$alumno->email',`pass`='$encryptedPass',`nombre`='$alumno->nombre',`apellidos`='$alumno->apellidos',`imagen`='$alumno->imagen' WHERE id_alumno = $alumno->id";
     $resUpdate = mysqli_query($con, $queryUpdate);
@@ -46,7 +48,6 @@
       } else {
         $response->resultado = 'error';
         $response->mensaje = 'Hubo un error al cargar el alumno insertado';
-        $response->alumno = $alumno;
         echo json_encode($response);
         exit;
       }
@@ -70,6 +71,7 @@
       if ($resSelect) {
         $response->resultado = 'ok';
         $response->mensaje = 'Se modificó al alumno con éxito';
+        $response->alumno = $alumno;
         $data = mysqli_fetch_array($resSelect);
         $response->data = $data;
         echo json_encode($response);
@@ -77,12 +79,14 @@
       } else {
         $response->resultado = 'error';
         $response->mensaje = 'Hubo un error al cargar el alumno insertado';
+        $response->alumno = $alumno;
         echo json_encode($response);
         exit;
       }
     } else {
       $response->resultado = 'error';
       $response->mensaje = 'Hubo un error al registrar al alumno';
+      $response->alumno = $alumno;
       echo json_encode($response);
       exit;
     }
