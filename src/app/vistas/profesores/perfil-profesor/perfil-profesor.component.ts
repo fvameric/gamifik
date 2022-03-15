@@ -161,7 +161,7 @@ export class PerfilProfesorComponent implements OnInit {
         reader.onload = e => this.imgSrc = reader.result;
         reader.readAsDataURL(file);
       } else {
-        this.imgError = true;
+        alert('Por favor elige una imagen');
       }
     }
   }
@@ -175,56 +175,55 @@ export class PerfilProfesorComponent implements OnInit {
 
     console.log(form);
     if (form.valid) {
-      if (!this.imgError) {
-        if (form.controls.inputPass.value != '') {
-          userModif = {
-            id: this.datosProfesor.id_profe,
-            email: form.controls.inputEmail.value,
-            pass: form.controls.inputPass.value,
-            nombre: form.controls.inputNombre.value,
-            apellidos: form.controls.inputApellidos.value,
-            imagen: this.imgSrc,
-            centro: form.controls.inputCentro.value,
-          }
-        } else {
-          userModif = {
-            id: this.datosProfesor.id_profe,
-            email: form.controls.inputEmail.value,
-            nombre: form.controls.inputNombre.value,
-            apellidos: form.controls.inputApellidos.value,
-            imagen: this.imgSrc,
-            centro: form.controls.inputCentro.value,
-          }
+      if (form.controls.inputPass.value != '') {
+        userModif = {
+          id: this.datosProfesor.id_profe,
+          email: form.controls.inputEmail.value,
+          pass: form.controls.inputPass.value,
+          nombre: form.controls.inputNombre.value,
+          apellidos: form.controls.inputApellidos.value,
+          imagen: this.imgSrc,
+          centro: form.controls.inputCentro.value,
         }
-        Swal.fire({
-          title: '¿Quieres guardar los cambios?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Sí'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Ok',
-              text: 'Se han guardaron los cambios',
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Ok'
-            }).then((result) => {
-              this.usersService.modificarProfesor(userModif).subscribe((val: any) => {
-                this.editableNombre = true;
-                this.editableApellidos = true;
-                this.editableEmail = true;
-                this.tokenService.saveUser(val.data);
-                this.obtenerDatosProfesor();
-                window.location.reload();
-              });
-            });
-          }
-        });
+      } else {
+        userModif = {
+          id: this.datosProfesor.id_profe,
+          email: form.controls.inputEmail.value,
+          nombre: form.controls.inputNombre.value,
+          apellidos: form.controls.inputApellidos.value,
+          imagen: this.imgSrc,
+          centro: form.controls.inputCentro.value,
+        }
       }
+      Swal.fire({
+        title: '¿Quieres guardar los cambios?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Ok',
+            text: 'Se han guardaron los cambios',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ok'
+          }).then((result) => {
+            this.usersService.modificarProfesor(userModif).subscribe((val: any) => {
+              this.editableNombre = true;
+              this.editableApellidos = true;
+              this.editableEmail = true;
+              this.tokenService.saveUser(val.data);
+              this.obtenerDatosProfesor();
+              window.location.reload();
+            });
+          });
+        }
+      });
+
     }
   }
 
@@ -295,7 +294,7 @@ export class PerfilProfesorComponent implements OnInit {
       this.mostrarCerrarVisual = false;
     }
   }
-  
+
   editarNombre() {
     if (this.editableNombre == true) {
       this.editableNombre = false;

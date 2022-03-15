@@ -81,10 +81,15 @@
         </div>
 
         <select class="select-Centros" formControlName="centro">
+            <option value="" selected disabled class="option-select-centros">Escoge un centro:</option>
             <option value="0" class="option-select-centros">Ilerna</option>
             <option value="1" class="option-select-centros">centre 2</option>
             <option value="2" class="option-select-centros">centre 3</option>
         </select>
+
+        <div *ngIf="submitted && form.centro.errors" class="invalid-feedback">
+            <div *ngIf="form.centro.errors.required">Por favor escoge un centro</div>
+        </div>
 
         <input type="submit" value="Registrarse" class="fadeIn fifth">
     </form>

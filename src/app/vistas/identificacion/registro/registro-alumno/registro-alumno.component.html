@@ -16,6 +16,7 @@
             <div *ngIf="form.username.errors.required">El nombre de usuario es necesario</div>
         </div>
         <div *ngIf="form.username.errors" class="invalid-feedback">
+            <div *ngIf="form.username.errors.minlength">Se requieren mínimo 3 caracteres</div>
             <div *ngIf="form.username.errors.pattern">Solo se permiten letras, números y guiones bajos</div>
             <div *ngIf="form.username.errors.notUnique">El nombre de usuario ya existe</div>
             <div *ngIf="form.username.pending">Consultando disponibilidad</div>
@@ -81,7 +82,7 @@
             <div *ngIf="form.apellidos.errors.required">Los apellidos son necesarios</div>
         </div>
 
-        <input type="date" name="currentDate" [ngModel]="currentDate | date:'yyyy-MM-dd'" min="1942-01-01" [max]="currentDate | date:'yyyy-MM-dd'" id="fechaNacimiento" minlength="3" maxlength="30" placeholder="Date" class="fadeIn fourth" formControlName="fechaNacimiento">
+        <input type="date" name="currentDate" [ngModel]="currentDate | date:'yyyy-MM-dd'" min="1942-01-01" [max]="currentDate | date:'yyyy-MM-dd'" id="fechaNacimiento" minlength="3" maxlength="30" placeholder=" " class="fadeIn fourth" formControlName="fechaNacimiento">
         <!-- Missatge error fecha de nacimiento -->
         <div *ngIf="submitted && form.fechaNacimiento.errors" class="invalid-feedback">
             <div *ngIf="form.fechaNacimiento.errors.required">La fecha de nacimiento es necesaria</div>

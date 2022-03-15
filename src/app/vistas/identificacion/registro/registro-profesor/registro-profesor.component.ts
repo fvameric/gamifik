@@ -48,7 +48,7 @@ export class RegistroProfesorComponent implements OnInit {
 
   ngOnInit() {
     this.crearFormulario();
-    
+
     //Comprueba que el correo electrónico y nombre user no se repitan
     this.checkEmail();
     this.checkUsername();
@@ -92,21 +92,9 @@ export class RegistroProfesorComponent implements OnInit {
 
   crearFormulario() {
     //Validadors registre
-    this.registerForm = this.formBuilder.group(
-      {
-        username: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(20),
-            Validators.pattern('^[a-zA-Z0-9_]+$'),
-          ],
-        ],
-        email: [
-          '',
-          [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(64)],
-        ],
+    this.registerForm = this.formBuilder.group({
+        username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9_]+$')]],
+        email: ['', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(64)]],
         password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
         confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
         nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
@@ -117,8 +105,7 @@ export class RegistroProfesorComponent implements OnInit {
       {
         //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
         validator: this.mustMatch('password', 'confirmPassword'),
-      }
-    );
+      });
   }
 
   // funció per controlar que camps password i confirmarpassword siguin iguals
@@ -166,10 +153,14 @@ export class RegistroProfesorComponent implements OnInit {
 
   readURL(event: any) {
     if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (e: any) => (this.imgSrc = e.target.result);
-      reader.readAsDataURL(file);
+      if (event.target.files[0].type.indexOf('image') == 0) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (e: any) => (this.imgSrc = e.target.result);
+        reader.readAsDataURL(file);
+      } else {
+        alert('Por favor elige una imagen');
+      }
     }
   }
 

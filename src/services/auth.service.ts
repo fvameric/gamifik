@@ -5,7 +5,8 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { TokenService } from './token.service';
 
-const URL_LOGIN = 'http://localhost:8080/identificacion/loginUser.php';
+const URL_LOGIN_ALUMNOS = 'http://localhost:8080/identificacion/loginAlumnos.php';
+const URL_LOGIN_PROFESORES = 'http://localhost:8080/identificacion/loginProfes.php';
 const URL_REGISTRO_ALUMNO = 'http://localhost:8080/alumnos/insertarAlumno.php';
 const URL_REGISTRO_PROFESOR = 'http://localhost:8080/profesores/insertarProfesor.php';
 const USER_LS = 'userLocalStorage';
@@ -21,8 +22,20 @@ export class AuthService {
     private tokenService: TokenService
     ) { }
 
-  loginUser(user: User) {
-    return this.http.post(URL_LOGIN, JSON.stringify(user)).subscribe((val: any) => {
+  loginAlumnos(user: User) {
+    return this.http.post(URL_LOGIN_ALUMNOS, JSON.stringify(user)).subscribe((val: any) => {
+      if (val.resultado == "error") {
+        this.generarSwal(val.mensaje);
+      } else {
+        //this.guardarLocalStorage(val.data);
+
+        this.guardarSessionStorage(val);
+      }
+    });
+  }
+
+  loginProfesores(user: User) {
+    return this.http.post(URL_LOGIN_PROFESORES, JSON.stringify(user)).subscribe((val: any) => {
       if (val.resultado == "error") {
         this.generarSwal(val.mensaje);
       } else {
