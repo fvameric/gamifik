@@ -44,7 +44,7 @@
       $response->data = $dataAlumno;
       $response->accessToken = json_encode($jwt);
       echo json_encode($response);
-    } else {
+    } else {  
 
       // miramos que sea un profesor
       $regProfesor = mysqli_query($con, $queryProfesor);
