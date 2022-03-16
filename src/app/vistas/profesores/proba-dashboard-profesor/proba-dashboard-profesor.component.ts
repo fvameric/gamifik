@@ -4,6 +4,8 @@ import { UsersService } from 'services/users.service';
 import { FormBuilder } from '@angular/forms';
 import { RankingService } from 'services/ranking.service';
 import { TokenService } from 'services/token.service';
+import { Ranking} from '../../../interfaces/Ranking';
+
 
 @Component({
   selector: 'app-proba-dashboard-profesor',
@@ -24,7 +26,10 @@ export class ProbaDashboardProfesorComponent implements OnInit {
   };
 
   mostrarDesplegableVisual: boolean = false;
+  mostrarDesplegablePracticaVisual: boolean = false;
   alumnoSelec: number = 0;
+  rankingSelec: number = 0;
+  
 
   // rankings
   rankings: any;
@@ -39,7 +44,7 @@ export class ProbaDashboardProfesorComponent implements OnInit {
     private rankingService: RankingService,
     private tokenService: TokenService,
     public formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
@@ -111,7 +116,28 @@ export class ProbaDashboardProfesorComponent implements OnInit {
     if (antiguaId != alumno.id_alumno) {
       this.mostrarDesplegableVisual = false;
     }
+  }
+
+  mostrarDesplegablePractica() {
+    
+    this.rankingSelec = this.rankSeleccionado;
+    let antiguaIdRanking = this. rankSeleccionado;
+
+
+    if (antiguaIdRanking == this.rankSeleccionado) {
+      if (this.mostrarDesplegablePracticaVisual == false) {
+        this.mostrarDesplegablePracticaVisual = true;
+
+      } else {
+        this.mostrarDesplegablePracticaVisual = false;
+      }
+    }
+    if (antiguaIdRanking != this.rankSeleccionado){
+      this.mostrarDesplegablePracticaVisual=false;
+
+    }
 
 
   }
 }
+
