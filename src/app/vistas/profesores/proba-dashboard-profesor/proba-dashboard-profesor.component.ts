@@ -37,7 +37,11 @@ export class ProbaDashboardProfesorComponent implements OnInit {
   flagRanks: boolean = false;
   arrRankings: any[] = [];
   rankSeleccionado: any;
+  rankDesplegable: any;
   listaAlumnos: any[] = [];
+
+  flagDesplegable: boolean = false;
+  indice: number = 0;
 
   constructor(
     private usersService: UsersService,
@@ -77,11 +81,9 @@ export class ProbaDashboardProfesorComponent implements OnInit {
     });
   }
 
-  rankSelec(rankId: number) {
+  rankSelec(rank: any) {
     this.listaAlumnos = [];
-    this.rankSeleccionado = this.arrRankings.find(
-      (rank) => rank.id_rank == rankId
-    );
+    this.rankSeleccionado = rank;
 
     this.rankingService
       .obtenerAlumnoPorRanking(this.rankSeleccionado.id_rank)
@@ -118,26 +120,17 @@ export class ProbaDashboardProfesorComponent implements OnInit {
     }
   }
 
-  mostrarDesplegablePractica() {
+  mostrarDesplegablePractica(index: number, rank: any) {
+    this.indice = index;
+    this.rankDesplegable = rank;
     
-    this.rankingSelec = this.rankSeleccionado;
-    let antiguaIdRanking = this. rankSeleccionado;
-
-
-    if (antiguaIdRanking == this.rankSeleccionado) {
-      if (this.mostrarDesplegablePracticaVisual == false) {
-        this.mostrarDesplegablePracticaVisual = true;
-
-      } else {
-        this.mostrarDesplegablePracticaVisual = false;
-      }
-    }
-    if (antiguaIdRanking != this.rankSeleccionado){
-      this.mostrarDesplegablePracticaVisual=false;
-
+    if(this.flagDesplegable) {
+      this.flagDesplegable = false;
+    } else {
+      this.flagDesplegable = true;
     }
 
-
+    console.log(this.rankDesplegable);
   }
 }
 
