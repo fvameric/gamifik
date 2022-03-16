@@ -4,6 +4,8 @@ import { UsersService } from 'services/users.service';
 import { FormBuilder } from '@angular/forms';
 import { RankingService } from 'services/ranking.service';
 import { TokenService } from 'services/token.service';
+import { webSocket } from "rxjs/webSocket";
+
 @Component({
   selector: 'app-dashboard-profesor',
   templateUrl: './dashboard-profesor.component.html',
@@ -39,6 +41,13 @@ export class DashboardProfesorComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerDatos();
     this.obtenerDatosRanking();
+
+    const subject = webSocket("ws://localhost:4200");
+    subject.subscribe(
+      msg => console.log('message received: ' + msg), // Called whenever there is a message from the server.
+      err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
+      () => console.log('complete') // Called when connection is closed (for whatever reason).
+    );
   }
 
   obtenerDatos() {
@@ -50,23 +59,21 @@ export class DashboardProfesorComponent implements OnInit {
     this.rankingService.obtenerRanking().subscribe(val => this.rankings = val);
     this.rankingService.obtenerJoinRankingProfes().subscribe((val: any) => {
       this.rankingsConProfes = val;
-
-      val.forEach((element: any) => {
-        if (element.id_profe == this.datosProfesor.id_profe) {
-          this.arrRankings.push(element);
-        }
-      });
-
-      if (this.arrRankings.length == 0) {
+      
+      if (this.rankingsConProfes == null) {
         this.flagRanks = true;
       } else {
         this.flagRanks = false;
+
+        val.forEach((element: any) => {
+          if (element.id_profe == this.datosProfesor.id_profe) {
+            this.arrRankings.push(element);
+          }
+        });
       }
     });
   }
-
- 
-
+  
   rankSelec(rankId: number) {
     this.listaAlumnos = [];
     this.rankSeleccionado = this.arrRankings.find(rank => rank.id_rank == rankId);

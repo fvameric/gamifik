@@ -148,7 +148,6 @@ export class PerfilComponent implements OnInit {
   confirmarModif(form: any) {
     let userModif: User;
 
-    console.log(form);
     if (form.valid) {
       if (form.controls.inputPass.value != '') {
         userModif = {
@@ -211,11 +210,9 @@ export class PerfilComponent implements OnInit {
 
   checkEmail() {
     this.form.inputEmail.valueChanges.subscribe((formEmail) => {
-      console.log(formEmail);
       if (this.datosAlumno.email != this.form.inputEmail.value) {
         this.usersService.validarEmailExisteAlumnos(formEmail).subscribe((val: any) => {
           this.formEmail.markAsPending({ emitEvent: true });
-          console.log(val);
           if (val.resultado == 'error') {
             this.formEmail.setErrors({ notUnique: true });
           }
@@ -227,11 +224,9 @@ export class PerfilComponent implements OnInit {
   }
 
   checkPass() {
-    console.log("test");
     this.form.inputOldPass.valueChanges.subscribe((formPass) => {
       if (formPass != '') {
         this.usersService.validarPassAlumnos(formPass, this.datosAlumno.id_alumno).subscribe((val: any) => {
-          console.log(val);
           if (val.resultado == 'error') {
             this.formPass.setErrors({ notUnique: true });
           }
@@ -289,7 +284,6 @@ export class PerfilComponent implements OnInit {
   editarEmail() {
     if (this.editableEmail == true) {
       this.editableEmail = false;
-      console.log("test");
       this.checkEmail();
     } else {
       this.form['inputEmail'].setValue(this.email);
@@ -298,12 +292,16 @@ export class PerfilComponent implements OnInit {
   }
 
   mostrarEditarContra() {
+    const parent: HTMLElement = document.getElementById('arrow-pass')!;
+
     if (this.mostrarEditarContrasena == true) {
       this.mostrarEditarContrasena = false;
+      parent.setAttribute("style", "transform: rotate(0deg);");
     } else {
       this.checkPass();
       //this.formEmail.setErrors({ required: false });
       this.mostrarEditarContrasena = true;
+      parent.setAttribute("style", "transform: rotate(90deg);");
     }
   }
 

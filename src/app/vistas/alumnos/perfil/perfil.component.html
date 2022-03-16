@@ -135,8 +135,15 @@
                             </div>
 
                             <!-- contraseña -->
-                            <div class="centrar-configuracion">
-                                <a (click)="mostrarEditarContra()" class="cambiar-contraseña">Cambiar Contraseña</a>
+                            <div class="centrar-configuracion passFlex">
+                                <a (click)="mostrarEditarContra()" class="cambiar-contraseña">Cambiar Contraseña
+                                    <svg id="arrow-pass" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+                                        <g class="nc-icon-wrapper" fill="#444444">
+                                            <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z" class="icono-flecha">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                </a>
                             </div>
 
                             <div *ngIf="mostrarEditarContrasena">

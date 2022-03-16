@@ -57,21 +57,23 @@ export class DashboardComponent implements OnInit {
     this.rankingService.obtenerJoinRankingAlumno().subscribe((val: any) => {
       this.rankingsConAlumnos = val;
 
-      val.forEach((element: any) => {
-        if (element.id_alumno == this.datosAlumno.id_alumno) {
-          this.arrRankings.push(element);
-        }
-      });
-
-      if (this.arrRankings.length == 0) {
+      if (this.rankingsConAlumnos == null) {
         this.flagRanks = true;
       } else {
         this.flagRanks = false;
+
+        val.forEach((element: any) => {
+          if (element.id_alumno == this.datosAlumno.id_alumno) {
+            this.arrRankings.push(element);
+          }
+        });
       }
     });
   }
 
   async unirseRanking() {
+    this.obtenerDatosRanking();
+    
     const { value: test } = await Swal.fire({
       title: 'Input',
       input: 'text',

@@ -86,7 +86,6 @@ export class ProbaDashboardProfesorComponent implements OnInit {
   }
 
   eliminarRanking() {
-    console.log(this.rankSeleccionado.id_rank);
     this.rankingService
       .eliminarRanking(this.rankSeleccionado.id_rank)
       .subscribe((val: any) => {

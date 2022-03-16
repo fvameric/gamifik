@@ -422,8 +422,19 @@ hr {
     width: 20%;
 }
 
+.passFlex {
+    align-items: center;
+}
+
 .cambiar-contraseña {
+    font-size: 20px;
     cursor: pointer;
+    color: rgb(2, 82, 187);
+}
+
+.cambiar-contraseña:hover {
+    color: rgb(29, 145, 240);
+    text-shadow: 0px 0px 8px #0aa7f04b;
 }
 
 .invalid-feedback {

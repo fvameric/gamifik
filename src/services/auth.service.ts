@@ -94,23 +94,7 @@ export class AuthService {
     });
   }
 
-  /*
-  guardarSessionStorage(data: any) {
-    console.log(data.data.tipo);
-    if (data.data.tipo == 0) {
-      this.tokenService.saveToken(data.accessToken);
-      this.tokenService.saveUser(data.data);
-      this.router.navigate(['dashboard']);
-    } else {
-      this.tokenService.saveToken(data.accessToken);
-      this.tokenService.saveUser(data.data);
-      this.router.navigate(['dashboardprofesor']);
-    }
-  }
-  */
-
   guardarLocalStorage(data: any) {
-    console.log(data.data.tipo);
     if (data.data.tipo == 0) {
       this.tokenService.saveToken(data.accessToken);
       this.tokenService.saveUser(data.data);

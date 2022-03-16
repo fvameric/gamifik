@@ -54,7 +54,6 @@ export class RegistroProfesorComponent implements OnInit {
     this.checkUsername();
 
     this.currentDate = new Date();
-    console.log(this.currentDate);
   }
 
   // devuelve email

@@ -6,8 +6,8 @@ body {
     display: flex;
     padding-bottom: 150px;
     justify-content: center;
-        top: 150px;
-        position: sticky;
+    top: 150px;
+    position: sticky;
 }
 
 .separador1 {
@@ -180,6 +180,10 @@ div.content {
     color: #1292f8;
 }
 
+.no-ranks p {
+    color: #ffffff;
+}
+
 
 /* tabla alumnos */
 
@@ -269,5 +273,3 @@ div.content {
         border-right: 1px solid #dce8f13d;
     }
 }
-
-

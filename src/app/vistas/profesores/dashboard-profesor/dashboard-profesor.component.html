@@ -6,7 +6,7 @@
                 <h2>Mis Rankings</h2>
                 <app-modal></app-modal>
             </div>
-            <div *ngIf="flagRanks;else tieneRankings">
+            <div class="no-ranks" *ngIf="flagRanks;else tieneRankings">
                 <p>No tiene rankings</p>
             </div>
             <div class="lista-rankings">
@@ -32,7 +32,7 @@
                 <div class="titulo-detalle-ranking">
                     <h1>Ranking</h1>
                     <h3>{{rankSeleccionado.nom_rank}}</h3>
-                    <h4>Codigo:  {{rankSeleccionado.cod_rank}}</h4>
+                    <h4>Codigo: {{rankSeleccionado.cod_rank}}</h4>
                 </div>
 
                 <div class="contenido-icons">

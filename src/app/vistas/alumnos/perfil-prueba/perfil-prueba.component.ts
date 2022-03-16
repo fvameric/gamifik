@@ -149,44 +149,11 @@ export class PerfilPruebaComponent implements OnInit {
       apellidos: form.inputApellidos
     }
 
-    console.log(userModif);
-
     if (form.inputOldPass == '' && form.inputPass == '' && form.inputConfirmPass == '') {
       this.generarSwal(this.arrSwal[0], userModif);
     } else {
 
     }
-
-    /*
-    if (form.inputOldPass == '' && form.inputPass == '' && form.inputConfirmPass == '') {
-      this.generarSwal(this.arrSwal[0], userModif);
-    } else {
-      if (this.datosAlumno.pass == form.inputOldPass) {
-        if (this.newPass == '' || this.newConfPass == '') {
-          this.generarSwal(this.arrSwal[1]);
-        } else {
-          // en caso de que se quiera cambiar cualquier dato y
-          // además, la password
-          if (form.inputPass == form.inputConfirmPass) {
-            let userModif: User = {
-              id: this.datosAlumno.id_alumno,
-              email: form.inputEmail,
-              pass: form.inputPass,
-              nombre: form.inputNombre,
-              apellidos: form.inputApellidos
-            }
-
-            console.log(userModif);
-            this.generarSwal(this.arrSwal[0], userModif);
-          } else {
-            this.generarSwal(this.arrSwal[2]);
-          }
-        }
-      } else {
-        this.generarSwal(this.arrSwal[3]);
-      }
-    }
-    */
   }
 
   // devuelve email
@@ -205,7 +172,6 @@ export class PerfilPruebaComponent implements OnInit {
         this.usersService.validarEmailExisteAlumnos(formEmail).subscribe((val: any) => {
           if (val.resultado == 'error') {
             this.formEmail.setErrors({ notUnique: true });
-            console.log("igual");
           }
         });
       }
