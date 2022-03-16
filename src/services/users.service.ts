@@ -114,7 +114,7 @@ export class UsersService {
     }
     return this.http.post(URL_PASS_EXISTE_ALUMNOS, JSON.stringify(user));
   }
-
+  
   // funciones profesores
   // create profesores
   insertarProfesores(alumno: Alumno) {
@@ -149,7 +149,7 @@ export class UsersService {
     return this.http.get(URL_USERNAME_EXISTE_PROFESORES + `?username=${username}`);
   }
 
-  // validar pass alumnos
+  // validar pass profes
   validarPassProfes(pass: string, id: number) {
     var user = {
       "pass": pass,

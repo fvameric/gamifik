@@ -14,7 +14,6 @@ import { RoleGuardService } from 'services/guards/role-guard.service';
 import { ModalComponent } from './vistas/profesores/modal/modal.component';
 import { CrearRankingComponent } from './vistas/profesores/crear-ranking/crear-ranking.component';
 import { ModalEntregaComponent } from './vistas/profesores/modal-entrega/modal-entrega.component';
-import { ProbaDashboardProfesorComponent } from './vistas/profesores/proba-dashboard-profesor/proba-dashboard-profesor.component';
 import { ModalPerfilAlumnoComponent } from './vistas/profesores/modal-perfil-alumno/modal-perfil-alumno.component';
 import { IdentificacionProfesoresComponent } from './vistas/identificacion/identificacion-profesores/identificacion-profesores.component';
 import { PerfilPruebaComponent } from './vistas/alumnos/perfil-prueba/perfil-prueba.component';
@@ -34,8 +33,7 @@ const routes: Routes = [
   { path: 'crear-ranking', component: CrearRankingComponent },
   { path: 'modal', component: ModalComponent }, 
   { path: 'modal-entrega', component: ModalEntregaComponent }, 
-  { path: 'modal-perfil-alumno', component: ModalPerfilAlumnoComponent }, 
-  { path: 'proba-dashboard-profesor', component: ProbaDashboardProfesorComponent }
+  { path: 'modal-perfil-alumno', component: ModalPerfilAlumnoComponent }
 
 ];
 
@@ -58,6 +56,5 @@ export const routingComponents = [
   CrearRankingComponent,
   ModalComponent,
   ModalEntregaComponent,
-  ProbaDashboardProfesorComponent,
   ModalPerfilAlumnoComponent  
 ];

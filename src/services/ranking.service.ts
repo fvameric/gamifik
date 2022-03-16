@@ -20,6 +20,9 @@ const URL_CONTAR_RANKINGS = 'http://localhost:8080/rankings/contarRankings.php';
 const URL_NOMBRE_EXISTE_PRACTICA = 'http://localhost:8080/rankings/profesores/obtenerNombrePractica.php';
 const URL_RANK_ENTREGAS = 'http://localhost:8080/rankings/getRankEntregas.php';   // obtener relacion rankings - entregas
 const URL_CREATE_ENTREGA = 'http://localhost:8080/rankings/insertarEntrega.php';
+const URL_DATOS_ENTREGA = 'http://localhost:8080/rankings/datosEntrega.php';
+const URL_ELIMINAR_ENTREGA = 'http://localhost:8080/rankings/eliminarEntrega.php';
+const URL_MODIFICAR_ENTREGA = 'http://localhost:8080/rankings/modificarEntrega.php';
 
 // ALUMNOS
 const URL_RANK_ALUMNOS = 'http://localhost:8080/rankings/alumnos/getRankAlumnos.php';     // obtener relacion rankings - alumnos
@@ -27,6 +30,7 @@ const URL_RANK_ALUMNOS_ID = 'http://localhost:8080/rankings/alumnos/getRankAlumn
 const URL_ALUMNOS_POR_RANK = 'http://localhost:8080/rankings/alumnos/getAlumnoPorRanking.php';      // obtener alumnos via ranking id
 const URL_RANK_JOIN_ALUMNOS = 'http://localhost:8080/rankings/alumnos/getRankAlumnoId.php';      // obtener inner join ranking rank_alumnos
 const URL_INSERT_RANK_ALUMNOS = 'http://localhost:8080/rankings/alumnos/insertarAlumnoEnRanking.php';      // insertar alumnos y rankings
+const URL_QUITAR_ALUMNO_RANK = 'http://localhost:8080/rankings/alumnos/quitarAlumnoRanking.php';      // quitar alumnos de un ranking
 
 // PROFESORES
 const URL_RANK_PROFES = 'http://localhost:8080/rankings/profesores/getRankProfes.php';       // obtener relacion rankings - profes
@@ -144,4 +148,27 @@ export class RankingService {
     return this.http.get(URL_NOMBRE_EXISTE_PRACTICA + `?nom_practica=${nombrePractica}&id_profe=${idProfe}`);
   }
 
+
+  // quitar alumno del ranking
+  quitarAlumnoRanking(id_rank: number, id_alumno: number) {
+    var ids = {
+      "id_rank": id_rank,
+      "id_alumno": id_alumno
+    }
+    return this.http.post(URL_QUITAR_ALUMNO_RANK, JSON.stringify(ids));
+  }
+
+  obtenerEntregas() {
+    return this.http.get(URL_DATOS_ENTREGA);
+  }
+
+  eliminarEntregas(entrega: any) {
+    return this.http.post(URL_ELIMINAR_ENTREGA, JSON.stringify(entrega));
+  }
+
+  modificarEntrega(entrega: any) {
+    console.log(entrega);
+
+    return this.http.post(URL_MODIFICAR_ENTREGA, JSON.stringify(entrega));
+  }
 }

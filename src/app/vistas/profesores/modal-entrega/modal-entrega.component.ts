@@ -90,6 +90,10 @@ export class ModalEntregaComponent implements OnInit {
 
     this.rankService.insertarPractica(this.entrega).subscribe((val: any) => {
       console.log(val);
+
+      if (val.resultado == 'ok') {
+        window.location.reload();
+      }
     });
   }
 

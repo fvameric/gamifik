@@ -14,11 +14,36 @@
                     <app-loader></app-loader>
                     <div class="array-rankings">
                         <div *ngFor="let rank of arrRankings; let i = index" class="rank">
-                            <button class="button-ranking-class" (click)="rankSelec(rank.id_rank)">{{rank.nom_rank}}
-                                <div class="cantidad-alumnos">
-                                    {{rank.alumnos}} alumnos
+                            <div class="contenido-ranking">
+                                <button class="button-ranking-class" (click)="rankSelec(rank)">{{rank.nom_rank}}
+                                    <div class="cantidad-alumnos">
+                                        {{rank.alumnos}} alumnos
+                                    </div>
+                                </button>
+                                <!--button para el desplegable del sidebar-->
+                                <button class="button-desplegable" (click)="mostrarDesplegablePractica(i, rank)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="entregas-ranking" *ngIf="i == indice && flagDesplegable">
+                                <h3 class="texto-h3">Práctica/Entrega</h3>
+                                <div class="no-entregas" *ngIf="flagEntregas; else tieneEntregas">
+                                    <p>No tiene entregas</p>
                                 </div>
-                            </button>
+                                <ng-template #tieneEntregas>
+                                    <div class="practicas-ranking" *ngFor="let entrega of arrEntregas">
+
+                                        <button (click)="detalleEntrega(entrega)"
+                                            class="texto-practica">{{entrega.nom_entrega}}</button>
+                                    </div>
+                                </ng-template>
+
+                            </div>
                         </div>
                     </div>
                 </ng-template>
@@ -34,7 +59,18 @@
                     <h3>{{rankSeleccionado.nom_rank}}</h3>
                     <div class="codFlex">
                         <button (click)="generarCodRank()">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="20" height="20" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve"><g><path xmlns="http://www.w3.org/2000/svg" d="M12,2a10.032,10.032,0,0,1,7.122,3H16a1,1,0,0,0-1,1h0a1,1,0,0,0,1,1h4.143A1.858,1.858,0,0,0,22,5.143V1a1,1,0,0,0-1-1h0a1,1,0,0,0-1,1V3.078A11.981,11.981,0,0,0,.05,10.9a1.007,1.007,0,0,0,1,1.1h0a.982.982,0,0,0,.989-.878A10.014,10.014,0,0,1,12,2Z" fill="#ffffff" data-original="#000000"/><path xmlns="http://www.w3.org/2000/svg" d="M22.951,12a.982.982,0,0,0-.989.878A9.986,9.986,0,0,1,4.878,19H8a1,1,0,0,0,1-1H9a1,1,0,0,0-1-1H3.857A1.856,1.856,0,0,0,2,18.857V23a1,1,0,0,0,1,1H3a1,1,0,0,0,1-1V20.922A11.981,11.981,0,0,0,23.95,13.1a1.007,1.007,0,0,0-1-1.1Z" fill="#ffffff" data-original="#000000"/></g></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="20" height="20" x="0" y="0"
+                                viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve">
+                                <g>
+                                    <path xmlns="http://www.w3.org/2000/svg"
+                                        d="M12,2a10.032,10.032,0,0,1,7.122,3H16a1,1,0,0,0-1,1h0a1,1,0,0,0,1,1h4.143A1.858,1.858,0,0,0,22,5.143V1a1,1,0,0,0-1-1h0a1,1,0,0,0-1,1V3.078A11.981,11.981,0,0,0,.05,10.9a1.007,1.007,0,0,0,1,1.1h0a.982.982,0,0,0,.989-.878A10.014,10.014,0,0,1,12,2Z"
+                                        fill="#ffffff" data-original="#000000" />
+                                    <path xmlns="http://www.w3.org/2000/svg"
+                                        d="M22.951,12a.982.982,0,0,0-.989.878A9.986,9.986,0,0,1,4.878,19H8a1,1,0,0,0,1-1H9a1,1,0,0,0-1-1H3.857A1.856,1.856,0,0,0,2,18.857V23a1,1,0,0,0,1,1H3a1,1,0,0,0,1-1V20.922A11.981,11.981,0,0,0,23.95,13.1a1.007,1.007,0,0,0-1-1.1Z"
+                                        fill="#ffffff" data-original="#000000" />
+                                </g>
+                            </svg>
                         </button>
 
                         <h4>Codigo: {{rankSeleccionado.cod_rank}}</h4>
@@ -64,9 +100,13 @@
                 </div>
             </div>
             <ng-template #noselec>
-                <div class="titulo-detalle-ranking">
-                    <h1>Ranking</h1>
-                    <h5>No se seleccionó ningún ranking</h5>
+                <div>
+                    <div class="info-superior">
+                        <div class="titulo-detalle-ranking">
+                            <h1>Ranking</h1>
+                            <h3>No se seleccionó ningún ranking</h3>
+                        </div>
+                    </div>
                 </div>
             </ng-template>
             <div class="alumnos-ranking">
@@ -85,8 +125,75 @@
                         {{alumno.apellidos}}
                     </div>
                     <div class="table-puntuacion">
-                        {{alumno.puntuacion}}
+                        {{alumno.puntuacion}} puntuación
                     </div>
+
+                    <!--Button more per agregar parts de menu de administracio i menu ranking-->
+                    <div class="table-more">
+                        <button class="button-more-table" (click)="mostrarDesplegable(alumno)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                                class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                <path
+                                    d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                            </svg>
+                        </button>
+                        <div *ngIf="this.mostrarDesplegableVisual && alumnoSelec == alumno.id_alumno">
+                            <div class="desplegableVisual">
+                                <a href="">
+                                    <p class="texto-desplegable">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                        </svg>
+                                        <label>Ver detalle</label>
+                                    </p>
+                                </a>
+                                <hr>
+                                <a (click)="eliminarAlumno(alumnoSelec)">
+                                    <p class="texto-desplegable">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                        </svg>
+                                        <label>Eliminar</label>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-rankings">
+            <div class="info-superior" *ngIf="entregaSeleccionada">
+                <div class="titulo-detalle-ranking">
+                    <h1>Entrega</h1>
+                    <h3>{{entregaSeleccionada.nom_entrega}}</h3>
+                    <p>Puntuación de entrega: {{entregaSeleccionada.puntuacion_entrega}}</p>
+                </div>
+
+                <div class="contenido-icons">
+                    <!--buttom borrar-->
+                    <button class="button-icons" (click)="eliminarEntrega()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                            class="bi bi-trash-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                        </svg>
+                    </button>
+                    <!--buttom editar-->
+                    <button class="button-icons" (click)="puntuarEntrega()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                            class="bi bi-tools" viewBox="0 0 16 16">
+                            <path
+                                d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.356 3.356a1 1 0 0 0 1.414 0l1.586-1.586a1 1 0 0 0 0-1.414l-3.356-3.356a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0zm9.646 10.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708zM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11z" />
+                        </svg>
+                    </button>
+                    <button class="button-icons">
+                    </button>
                 </div>
             </div>
         </div>
