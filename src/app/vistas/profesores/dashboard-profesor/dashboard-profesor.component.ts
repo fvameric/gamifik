@@ -77,6 +77,43 @@ export class DashboardProfesorComponent implements OnInit {
     });
   }
 
+  generarCodRank() {
+    let nuevoCod = this.generaNss();
+
+    console.log(nuevoCod);
+
+
+  }
+
+  //Funcion que genera el codigo
+  generaNss(): string {
+    let result = '';
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < 12; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+  }
+
+  /*
+  validarCodigoRepetido(codigo: string) {
+    let codExiste: boolean = false;
+      this.rankCodes.forEach((element: any) => {
+        if (element.cod_rank == codigo) {
+          codExiste = true;
+        }
+      });
+
+      if (codExiste) {
+        codigo = this.validarCodigoRepetido(this.generaNss());
+      }
+    return codigo;
+  }
+  */
+
   eliminarRanking() {
     console.log(this.rankSeleccionado.id_rank);
 
