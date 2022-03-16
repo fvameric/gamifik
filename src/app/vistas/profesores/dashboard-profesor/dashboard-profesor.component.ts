@@ -4,7 +4,6 @@ import { UsersService } from 'services/users.service';
 import { FormBuilder } from '@angular/forms';
 import { RankingService } from 'services/ranking.service';
 import { TokenService } from 'services/token.service';
-import { webSocket } from "rxjs/webSocket";
 
 @Component({
   selector: 'app-dashboard-profesor',
@@ -41,13 +40,6 @@ export class DashboardProfesorComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerDatos();
     this.obtenerDatosRanking();
-
-    const subject = webSocket("ws://localhost:4200");
-    subject.subscribe(
-      msg => console.log('message received: ' + msg), // Called whenever there is a message from the server.
-      err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
-      () => console.log('complete') // Called when connection is closed (for whatever reason).
-    );
   }
 
   obtenerDatos() {
