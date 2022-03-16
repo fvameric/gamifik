@@ -11,6 +11,7 @@ import { debounceTime, tap } from 'rxjs/operators';
 import { RankingService } from 'services/ranking.service';
 import { Entrega } from 'app/interfaces/Entrega';
 
+
 @Component({
   selector: 'app-modal-entrega',
   templateUrl: './modal-entrega.component.html',
@@ -20,27 +21,28 @@ export class ModalEntregaComponent implements OnInit {
   submitted: boolean = false;
   rank: any;
 
-  entrega:Entrega={
-    id_entrega:0,
-    nom_entrega:'',
-    puntuacion_entrega:0,
-    id_rank:0
-  }
+  entrega: Entrega = {
+    id_entrega: 0,
+    nom_entrega: '',
+    puntuacion_entrega: 0,
+    id_rank: 0,
+  };
 
   constructor(
     private modalService: NgbModal,
     public formBuilder: FormBuilder,
     private tokenService: TokenService,
-    private rankService: RankingService,
-  ) {
-  }
+    private rankService: RankingService
+  ) {}
   crearPractica!: FormGroup;
   ngOnInit() {
     this.crearForm();
+    this.checkNombre();
     
-
   }
 
+
+  @Input() id_rank:any = {}
 
 
   enviar(modal: any) {
@@ -71,7 +73,7 @@ export class ModalEntregaComponent implements OnInit {
     this.submitted = true;
     if (this.crearPractica.valid) {
       this.crearEntrega();
-      
+
       this.modalService.dismissAll();
     } else {
     }
@@ -79,45 +81,48 @@ export class ModalEntregaComponent implements OnInit {
     this.crearPractica.reset();
   }
 
-  crearEntrega(){
+  crearEntrega() {
     this.entrega.nom_entrega = this.nombrePractica.value;
-    this.entrega.id_rank = 3;
-    console.log(this.entrega);
+    this.entrega.id_rank = this.id_rank;
+    console.log(this.id_rank);
     
-    this.rankService.insertarPractica(this.entrega);
+    console.log(this.entrega);
+
+    this.rankService.insertarPractica(this.entrega).subscribe((val: any) => {
+      console.log(val);
+    });
   }
 
-
   checkNombre() {
-    //   this.nombrePractica.valueChanges
-    //     .pipe(
-    //       debounceTime(500),
-    //       tap((nombreRanking) => {
-    //         console.log('comprobando');
-    //         if (nombreRanking !== '' && this.nombrePractica.invalid) {
-    //           //this.nombreRanking.markAsPending();
-    //           this.nombrePractica.markAsPending({ emitEvent: true });
+    // this.nombrePractica.valueChanges
+    //   .pipe(
+    //     debounceTime(500),
+    //     tap((nombrePractica) => {
+    //       console.log('comprobando');
+    //       if (nombrePractica !== '' && this.nombrePractica.invalid) {
+    //         //this.nombreRanking.markAsPending();
+    //         this.nombrePractica.markAsPending({ emitEvent: true });
+    //       } else {
+    //         this.nombrePractica.setErrors({ invalid: true });
+    //       }
+    //     })
+    //   )
+    //   .subscribe((nombrePractica) => {
+    //     this.rankService
+    //       .validarNombreExisteRanking(this.id_profe, nombrePractica)
+    //       .subscribe((val: any) => {
+    //         if (val.resultado == 'error') {
+    //           this.nombrePractica.markAsPending({ onlySelf: false });
+    //           this.nombrePractica.setErrors({ notUnique: true });
     //         } else {
-    //           this.nombrePractica.setErrors({ invalid: true });
-    //         }
-    //       })
-    //     )
-    //     .subscribe((nombreRanking) => {
-    //       this.rankService
-    //         .validarNombreExisteRanking(this.id_profe, nombreRanking)
-    //         .subscribe((val: any) => {
-    //           if (val.resultado == 'error') {
-    //             this.nombreRanking.markAsPending({ onlySelf: false });
-    //             this.nombreRanking.setErrors({ notUnique: true });
+    //           this.nombrePractica.markAsPending({ onlySelf: false });
+    //           if (nombrePractica.length > 0) {
+    //             this.nombrePractica.setErrors(null);
     //           } else {
-    //             this.nombreRanking.markAsPending({ onlySelf: false });
-    //             if (nombreRanking.length > 0) {
-    //               this.nombreRanking.setErrors(null);
-    //             } else {
-    //               this.nombreRanking.setErrors({ required: true });
-    //             }
+    //             this.nombrePractica.setErrors({ required: true });
     //           }
-    //         });
-    //     });
+    //         }
+    //       });
+    //   });
   }
 }
