@@ -27,9 +27,9 @@ export class AuthService {
       if (val.resultado == "error") {
         this.generarSwal(val.mensaje);
       } else {
-        //this.guardarLocalStorage(val.data);
+        this.guardarLocalStorage(val);
 
-        this.guardarSessionStorage(val);
+        //this.guardarSessionStorage(val);
       }
     });
   }
@@ -39,9 +39,9 @@ export class AuthService {
       if (val.resultado == "error") {
         this.generarSwal(val.mensaje);
       } else {
-        //this.guardarLocalStorage(val.data);
+        this.guardarLocalStorage(val);
 
-        this.guardarSessionStorage(val);
+        //this.guardarSessionStorage(val);
       }
     });
   }
@@ -67,7 +67,9 @@ export class AuthService {
       if (val.resultado == 'error') {
         this.generarSwal(val.mensaje);
       } else {
-        this.guardarSessionStorage(val);
+        this.guardarLocalStorage(val);
+
+        //this.guardarSessionStorage(val);
       }
     });
   }
@@ -77,7 +79,9 @@ export class AuthService {
       if (val.resultado == 'error') {
         this.generarSwal(val.mensaje);
       } else {
-        this.guardarSessionStorage(val);
+        this.guardarLocalStorage(val);
+
+        //this.guardarSessionStorage(val);
       }
     });
   }
@@ -90,7 +94,22 @@ export class AuthService {
     });
   }
 
+  /*
   guardarSessionStorage(data: any) {
+    console.log(data.data.tipo);
+    if (data.data.tipo == 0) {
+      this.tokenService.saveToken(data.accessToken);
+      this.tokenService.saveUser(data.data);
+      this.router.navigate(['dashboard']);
+    } else {
+      this.tokenService.saveToken(data.accessToken);
+      this.tokenService.saveUser(data.data);
+      this.router.navigate(['dashboardprofesor']);
+    }
+  }
+  */
+
+  guardarLocalStorage(data: any) {
     console.log(data.data.tipo);
     if (data.data.tipo == 0) {
       this.tokenService.saveToken(data.accessToken);

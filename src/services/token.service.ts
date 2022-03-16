@@ -14,6 +14,8 @@ export class TokenService {
 
   constructor(private jwtHelper: JwtHelperService, private http: HttpClient) {
   }
+
+  /*
   
   signOut(): void {
     window.sessionStorage.clear();
@@ -49,4 +51,41 @@ export class TokenService {
   generarToken() {
     this.http.get(URL_REFRESCAR_TOKEN);
   }
+  */
+
+  signOut(): void {
+    localStorage.clear();
+    window.location.reload();
+  }
+
+  saveToken(token: string): void {
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.setItem(TOKEN_KEY, token);
+  }
+  
+  getToken(): string {
+    return localStorage.getItem(TOKEN_KEY) || '';
+  }
+  
+  saveUser(user: any): void {
+    localStorage.removeItem(USER_KEY);
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
+  }
+
+  getUser(): any {
+    return JSON.parse(localStorage.getItem(USER_KEY) || '');
+  }
+
+  tokenExpired(token: string) {
+    console.log("expired: " + this.jwtHelper.isTokenExpired(token));
+    
+    if (this.jwtHelper.isTokenExpired(token)) {
+      this.signOut();
+    }
+  }
+  
+  generarToken() {
+    this.http.get(URL_REFRESCAR_TOKEN);
+  }
+
 }
