@@ -4,7 +4,7 @@ import { UsersService } from 'services/users.service';
 import { FormBuilder } from '@angular/forms';
 import { RankingService } from 'services/ranking.service';
 import { TokenService } from 'services/token.service';
-import { webSocket } from "rxjs/webSocket";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dashboard-profesor',
@@ -41,13 +41,6 @@ export class DashboardProfesorComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerDatos();
     this.obtenerDatosRanking();
-
-    const subject = webSocket("ws://localhost:4200");
-    subject.subscribe(
-      msg => console.log('message received: ' + msg), // Called whenever there is a message from the server.
-      err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
-      () => console.log('complete') // Called when connection is closed (for whatever reason).
-    );
   }
 
   obtenerDatos() {
@@ -86,11 +79,44 @@ export class DashboardProfesorComponent implements OnInit {
 
   eliminarRanking() {
     console.log(this.rankSeleccionado.id_rank);
-    this.rankingService.eliminarRanking(this.rankSeleccionado.id_rank).subscribe((val: any) => {
-      if (val.resultado == 'ok') {
-        window.location.reload();
-      } else {
-        console.log(val.mensaje);
+
+    Swal.fire({
+      title: '¿Quieres eliminar el ranking?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: '¿Realmente quieres eliminar el ranking?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Ok',
+              text: 'Se eliminó el ranking',
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Ok'
+            }).then((result) => {
+              this.rankingService.eliminarRanking(this.rankSeleccionado.id_rank).subscribe((val: any) => {
+                if (val.resultado == 'ok') {
+                  window.location.reload();
+                } else {
+                  console.log(val.mensaje);
+                }
+              });
+            });
+          } else if (result.isDenied) {
+            Swal.fire('No se ha eliminado el ranking', '', 'info')
+          }
+        });
       }
     });
   }
