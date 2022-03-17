@@ -207,6 +207,10 @@ export class DashboardProfesorComponent implements OnInit {
     });
   }
 
+  editarRanking() {
+    
+  }
+
   mostrarDesplegable(alumno: any) {
     this.alumnoSelec = alumno.id_alumno;
     let antiguaId = alumno.id_alumno;

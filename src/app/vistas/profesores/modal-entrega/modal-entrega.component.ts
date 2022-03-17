@@ -28,23 +28,23 @@ export class ModalEntregaComponent implements OnInit {
     id_rank: 0,
   };
 
+  crearPractica!: FormGroup;
+
+  @Input() id_rank:any = {}
+
   constructor(
     private modalService: NgbModal,
     public formBuilder: FormBuilder,
     private tokenService: TokenService,
     private rankService: RankingService
   ) {}
-  crearPractica!: FormGroup;
+  
   ngOnInit() {
     this.crearForm();
     this.checkNombre();
     
   }
-
-
-  @Input() id_rank:any = {}
-
-
+  
   enviar(modal: any) {
     this.modalService.open(modal);
   }

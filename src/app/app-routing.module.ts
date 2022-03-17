@@ -17,6 +17,7 @@ import { ModalEntregaComponent } from './vistas/profesores/modal-entrega/modal-e
 import { ModalPerfilAlumnoComponent } from './vistas/profesores/modal-perfil-alumno/modal-perfil-alumno.component';
 import { IdentificacionProfesoresComponent } from './vistas/identificacion/identificacion-profesores/identificacion-profesores.component';
 import { PerfilPruebaComponent } from './vistas/alumnos/perfil-prueba/perfil-prueba.component';
+import { ModalEditarRankingComponent } from './vistas/profesores/modal-editar-ranking/modal-editar-ranking.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'identificacion', pathMatch: 'full' },
@@ -33,8 +34,8 @@ const routes: Routes = [
   { path: 'crear-ranking', component: CrearRankingComponent },
   { path: 'modal', component: ModalComponent }, 
   { path: 'modal-entrega', component: ModalEntregaComponent }, 
-  { path: 'modal-perfil-alumno', component: ModalPerfilAlumnoComponent }
-
+  { path: 'modal-perfil-alumno', component: ModalPerfilAlumnoComponent },
+  { path: 'modal-editar-ranking', component: ModalEditarRankingComponent }
 ];
 
 @NgModule({
@@ -56,5 +57,6 @@ export const routingComponents = [
   CrearRankingComponent,
   ModalComponent,
   ModalEntregaComponent,
-  ModalPerfilAlumnoComponent  
+  ModalPerfilAlumnoComponent,
+  ModalEditarRankingComponent
 ];
