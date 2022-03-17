@@ -18,7 +18,7 @@ body {
 .separador2 {
     justify-content: center;
     margin: 0 20px 0 20px;
-    width: auto;
+    width: 50%;
     height: auto;
 }
 
@@ -421,6 +421,14 @@ a:hover {
     margin-left: 100%;
 }
 
+.btn-pendientes-flex {
+    display: flex;
+}
+
+.btn-pendientes-flex button {
+    margin: 0 2px;
+}
+
 .btn-pendientes {
     padding: 5px 10px;
     border: none;
@@ -428,9 +436,17 @@ a:hover {
     border-radius: 5px;
 }
 
+.btn-pendientes:hover {
+    background-color: #037e34;
+}
+
 .btn-denegar-pendientes {
     padding: 5px 10px;
     border: none;
     background-color: #eb445a;
     border-radius: 5px;
+}
+
+.btn-denegar-pendientes:hover {
+    background-color: #ad0219;
 }
