@@ -3,7 +3,9 @@ import {
   FormGroup,
   FormBuilder,
   Validators,
-  FormControl
+  FormControl,
+  ValidatorFn,
+  AbstractControl,
 } from '@angular/forms';
 
 import { Alumno } from 'app/interfaces/Alumno';
@@ -14,7 +16,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-registro-alumno',
   templateUrl: './registro-alumno.component.html',
-  styleUrls: ['./registro-alumno.component.css']
+  styleUrls: ['./registro-alumno.component.css'],
 })
 export class RegistroAlumnoComponent implements OnInit {
   // formulario
@@ -43,7 +45,7 @@ export class RegistroAlumnoComponent implements OnInit {
     private usersService: UsersService,
     public formBuilder: FormBuilder,
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.crearFormulario();
@@ -67,43 +69,96 @@ export class RegistroAlumnoComponent implements OnInit {
   //Disponibilidad email
   checkEmail() {
     this.email.valueChanges.subscribe((email) => {
-      this.usersService.validarEmailExisteAlumnos(email).subscribe((val: any) => {
-        if (val.resultado == 'error') {
-          this.email.markAsPending({ onlySelf: false });
-          this.email.setErrors({ notUnique: true });
-        }
-      });
+      this.usersService
+        .validarEmailExisteAlumnos(email)
+        .subscribe((val: any) => {
+          if (val.resultado == 'error') {
+            this.email.markAsPending({ onlySelf: false });
+            this.email.setErrors({ notUnique: true });
+          }
+        });
     });
   }
 
   // Disponibilidad usuario
   checkUsername() {
     this.username.valueChanges.subscribe((username) => {
-      this.usersService.validarUsuarioExisteAlumnos(username).subscribe((val: any) => {
-        if (val.resultado == 'error') {
-          //this.username.markAsPending({ onlySelf: false });
-          this.username.setErrors({ notUnique: true });
-        }
-      });
+      this.usersService
+        .validarUsuarioExisteAlumnos(username)
+        .subscribe((val: any) => {
+          if (val.resultado == 'error') {
+            //this.username.markAsPending({ onlySelf: false });
+            this.username.setErrors({ notUnique: true });
+          }
+        });
     });
   }
 
   crearFormulario() {
     //Validadors registre
-    this.registerForm = this.formBuilder.group( {
-        username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9_]+$')]],
-        email: ['', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(64)]],
-        password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
-        confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
-        nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
-        apellidos: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
+    this.registerForm = this.formBuilder.group(
+      {
+        username: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(20),
+            Validators.pattern('^[a-zA-Z0-9_]+$'),
+          ],
+        ],
+        email: [
+          '',
+          [
+            Validators.required,
+            Validators.email,
+            Validators.minLength(3),
+            Validators.maxLength(64),
+          ],
+        ],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(50),
+          ],
+        ],
+        confirmPassword: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(50),
+          ],
+        ],
+        nombre: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(30),
+          ],
+        ],
+        apellidos: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(30),
+          ],
+        ],
         fechaNacimiento: ['', Validators.required],
         userImage: [''],
       },
       {
         //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
-        validator: this.mustMatch('password', 'confirmPassword')
-      });
+        validator: [
+          this.mustMatch('password', 'confirmPassword'), // Validación contraseñas iguales
+          this.ageCheck('fechaNacimiento'), // Validación edad
+        ],
+      }
+    );
   }
 
   // funció per controlar que camps password i confirmarpassword siguin iguals
@@ -122,6 +177,41 @@ export class RegistroAlumnoComponent implements OnInit {
         matchingControl.setErrors(null);
       }
     };
+  }
+
+  // Chequear la edad
+  ageCheck(controlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+
+      if (control?.errors && !control.errors['ageCheck']) {
+        return;
+      }
+
+      if (
+        this.getAge(control?.value) <= 1 || // Que deba tener un año o mas
+        this.getAge(control?.value) > 120 // Que no pueda tener mas de 120 años
+      ) {
+        control.setErrors({ ageCheck: true });
+      } else {
+        control.setErrors(null);
+      }
+    };
+  }
+
+  // Sacar la edad
+  getAge(fecha: string): number {
+    let today = new Date();
+    let fechaNacimiento = new Date(fecha);
+    let edad = today.getFullYear() - fechaNacimiento.getFullYear();
+    let mes = today.getMonth() - fechaNacimiento.getMonth();
+
+    if (mes < 0 || (mes === 0 && today.getDate() > fechaNacimiento.getDate())) {
+      edad--;
+    }
+    console.log('Edad: ' + edad + ' fecha nacimiento' + fechaNacimiento);
+
+    return edad;
   }
 
   //Retorna els valors introduits al formulari
@@ -160,7 +250,7 @@ export class RegistroAlumnoComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Por favor elige una imagen'
+          text: 'Por favor elige una imagen',
         });
       }
     }

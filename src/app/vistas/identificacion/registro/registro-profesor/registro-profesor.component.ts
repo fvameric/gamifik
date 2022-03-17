@@ -104,9 +104,49 @@ export class RegistroProfesorComponent implements OnInit {
       },
       {
         //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
-        validator: this.mustMatch('password', 'confirmPassword'),
+        validator: [
+          this.mustMatch('password', 'confirmPassword'), // Validación contraseñas iguales
+          this.ageCheck('fechaNacimiento'), // Validación edad
+        ]
       });
   }
+
+
+    // Chequear la edad
+    ageCheck(controlName: string) {
+      return (formGroup: FormGroup) => {
+        const control = formGroup.controls[controlName];
+  
+        if (control?.errors && !control.errors['ageCheck']) {
+          return;
+        }
+  
+        if (
+          this.getAge(control?.value) <= 1 || // Que deba tener un año o mas
+          this.getAge(control?.value) > 120 // Que no pueda tener mas de 120 años
+        ) {
+          control.setErrors({ ageCheck: true });
+        } else {
+          control.setErrors(null);
+        }
+      };
+    }
+  
+    // Sacar la edad
+    getAge(fecha: string): number {
+      let today = new Date();
+      let fechaNacimiento = new Date(fecha);
+      let edad = today.getFullYear() - fechaNacimiento.getFullYear();
+      let mes = today.getMonth() - fechaNacimiento.getMonth();
+  
+      if (mes < 0 || (mes === 0 && today.getDate() > fechaNacimiento.getDate())) {
+        edad--;
+      }
+      console.log('Edad: ' + edad + ' fecha nacimiento' + fechaNacimiento);
+  
+      return edad;
+    }
+
 
   // funció per controlar que camps password i confirmarpassword siguin iguals
   mustMatch(controlName: string, matchingControlName: string) {

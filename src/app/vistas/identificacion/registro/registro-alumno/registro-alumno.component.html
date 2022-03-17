@@ -83,10 +83,11 @@
             <div *ngIf="form.apellidos.errors.required">Los apellidos son necesarios</div>
         </div>
 
-        <input type="date" name="currentDate" [ngModel]="currentDate | date:'yyyy-MM-dd'" min="1942-01-01" [max]="currentDate | date:'yyyy-MM-dd'" id="fechaNacimiento" minlength="3" maxlength="30" placeholder=" " class="fadeIn fourth" formControlName="fechaNacimiento">
+        <input type="date" name="currentDate" min="1942-01-01" [max]="currentDate | date:'yyyy-MM-dd'" id="fechaNacimiento" minlength="3" maxlength="30" [ngClass]="{ 'is-invalid': form.fechaNacimiento.errors }" class="fadeIn fourth" formControlName="fechaNacimiento">
         <!-- Missatge error fecha de nacimiento -->
         <div *ngIf="submitted && form.fechaNacimiento.errors" class="invalid-feedback">
             <div *ngIf="form.fechaNacimiento.errors.required">La fecha de nacimiento es necesaria</div>
+            <div *ngIf="form.fechaNacimiento.errors.ageCheck">Edad no válida</div>
         </div>
 
         <input type="submit" value="Registrarse" class="fadeIn fifth">
