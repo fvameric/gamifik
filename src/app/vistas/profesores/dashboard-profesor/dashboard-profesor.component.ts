@@ -38,6 +38,9 @@ export class DashboardProfesorComponent implements OnInit {
   rankDesplegable: any;
   listaAlumnos: any[] = [];
   listaAlumnosPendientes: any[] = [];
+  listaAlumnosEntregas: any[] = [];
+
+  templateFlag: boolean = false;
 
   flagDesplegable: boolean = false;
   indice: number = 0;
@@ -95,8 +98,12 @@ export class DashboardProfesorComponent implements OnInit {
   }
   
   rankSelec(rank: any) {
+    this.templateFlag = true;
+    
     this.listaAlumnos = [];
     this.listaAlumnosPendientes = [];
+    this.listaAlumnosEntregas = [];
+
     this.rankSeleccionado = rank;
 
     this.rankingService
@@ -113,9 +120,19 @@ export class DashboardProfesorComponent implements OnInit {
         });
       }
 
-      console.log(this.listaAlumnos);
-      console.log(this.listaAlumnosPendientes);
+      this.listaAlumnosEntregas = this.listaAlumnos;
+      //this.listaAlumnosEntregas.sort(this.compare);
     });
+  }
+
+  compare(a:any, b:any) {
+    if ( a.apellidos < b.apellidos ){
+      return -1;
+    }
+    if ( a.apellidos > b.apellidos ){
+      return 1;
+    }
+    return 0;
   }
 
   generarCodRank() {
@@ -254,9 +271,12 @@ export class DashboardProfesorComponent implements OnInit {
   }
 
   detalleEntrega(entrega: any) {
+    this.templateFlag = false;
+
     console.log(entrega);
 
     this.entregaSeleccionada = entrega;
+    this.listaAlumnosEntregas.sort(this.compare);
   }
 
   eliminarEntrega() {
