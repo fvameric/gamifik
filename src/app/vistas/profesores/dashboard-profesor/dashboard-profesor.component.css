@@ -339,6 +339,7 @@ div.content {
 
 .contenido-ranking {
     display: flex;
+    margin-bottom: 5px;
 }
 
 .entregas-ranking {

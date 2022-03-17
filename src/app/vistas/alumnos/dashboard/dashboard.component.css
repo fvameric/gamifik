@@ -276,6 +276,7 @@ div.content {
 .pendienteFlex {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 5px;
 }
 
 .btn-pendiente {
