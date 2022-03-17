@@ -20,8 +20,7 @@
   global $datos;
   
   // query
-  $query = "SELECT * FROM alumno INNER JOIN rank_alumnos ON alumno.id_alumno = rank_alumnos.id_alumno WHERE rank_alumnos.id_rank = '$_GET[id]' ORDER BY rank_alumnos.puntuacion DESC";
-  
+  $query = "SELECT * FROM alumno INNER JOIN rank_alumnos ON alumno.id_alumno = rank_alumnos.id_alumno WHERE rank_alumnos.id_rank = '$_GET[id]' ORDER BY alumno.apellidos ASC";
   $res = mysqli_query($con, $query);
 
   // validación de la query

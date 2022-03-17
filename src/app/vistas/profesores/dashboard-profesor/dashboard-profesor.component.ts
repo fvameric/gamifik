@@ -102,7 +102,6 @@ export class DashboardProfesorComponent implements OnInit {
     
     this.listaAlumnos = [];
     this.listaAlumnosPendientes = [];
-    this.listaAlumnosEntregas = [];
 
     this.rankSeleccionado = rank;
 
@@ -119,9 +118,6 @@ export class DashboardProfesorComponent implements OnInit {
           }
         });
       }
-
-      this.listaAlumnosEntregas = this.listaAlumnos;
-      //this.listaAlumnosEntregas.sort(this.compare);
     });
   }
 
@@ -271,12 +267,25 @@ export class DashboardProfesorComponent implements OnInit {
   }
 
   detalleEntrega(entrega: any) {
+    this.listaAlumnosEntregas = [];
     this.templateFlag = false;
 
-    console.log(entrega);
-
     this.entregaSeleccionada = entrega;
-    this.listaAlumnosEntregas.sort(this.compare);
+
+    this.rankingService
+    .obtenerAlumnoPorRankingApellido(entrega.id_rank)
+    .subscribe((val: any) => {
+      console.log(val);
+      if (val != null) {
+        val.forEach((element: any) => {
+          if (element.aceptado == 1) {
+            this.listaAlumnosEntregas.push(element);
+          }
+        });
+      }
+    });
+
+    console.log(this.listaAlumnosEntregas);
   }
 
   eliminarEntrega() {
@@ -377,6 +386,10 @@ export class DashboardProfesorComponent implements OnInit {
         Swal.fire('No se ha eliminado el ranking', '', 'info');
       }
     });
+  }
+
+  editarPuntuacionAlumno(idAlumno: any) {
+    console.log(idAlumno);
   }
 
   aceptarPendientes(pendiente: any) {

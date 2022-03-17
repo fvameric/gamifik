@@ -34,6 +34,7 @@ const URL_QUITAR_ALUMNO_RANK = 'http://localhost:8080/rankings/alumnos/quitarAlu
 const URL_ALUMNOS_PENDIENTES = 'http://localhost:8080/rankings/alumnos/alumnosPendientes.php';     // obtener relacion rankings - alumnos
 const URL_ELIMINAR_ALUMNOS_PENDIENTES = 'http://localhost:8080/rankings/alumnos/eliminarAlumnosPendientes.php';     // obtener relacion rankings - alumnos
 const URL_CHECK_ALUMNOS_ACEPTADO = 'http://localhost:8080/rankings/alumnos/checkAlumnoAceptado.php';     // obtener relacion rankings - alumnos
+const URL_ALUMNOS_POR_RANK_APELLIDOS = 'http://localhost:8080/rankings/alumnos/getAlumnoApellidos.php';      // obtener alumnos via ranking id
 
 // PROFESORES
 const URL_RANK_PROFES = 'http://localhost:8080/rankings/profesores/getRankProfes.php';       // obtener relacion rankings - profes
@@ -139,6 +140,10 @@ export class RankingService {
   // obtener alumnos por codigo de ranking
   obtenerAlumnoPorRanking(id: number) {
     return this.http.get<any[]>(URL_ALUMNOS_POR_RANK +`?id=${id}`);
+  }
+
+  obtenerAlumnoPorRankingApellido(id: number) {
+    return this.http.get<any[]>(URL_ALUMNOS_POR_RANK_APELLIDOS +`?id=${id}`);
   }
 
 
