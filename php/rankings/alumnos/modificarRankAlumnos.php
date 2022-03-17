@@ -21,13 +21,14 @@
   $alumno = json_decode($json);
 
   // query
-  $queryUpdate = "UPDATE `rank_alumnos` SET `puntuacion`='$alumno->puntuacion' WHERE id_alumno = '$alumno->id_alumno' AND id_rank ='$alumno->id_rank'";
+  $queryUpdate = "UPDATE `rank_entregas` SET `puntuacion_entrega`='$alumno->puntuacion' WHERE id_alumno = '$alumno->id_alumno' AND id_rank ='$alumno->id_rank' AND id_entrega = '$alumno->id_entrega'";
+  $queryUpdatePuntTotal = "UPDATE `rank_alumnos` SET `puntuacion`= (SELECT SUM( puntuacion_entrega ) FROM rank_entregas WHERE id_alumno = '$alumno->id_alumno') WHERE id_alumno = '$alumno->id_alumno'";
   $resUpdate = mysqli_query($con, $queryUpdate);
 
   // validacion de la query
   // si se hace bien el insert
   if ($resUpdate) {
-
+    mysqli_query($con, $queryUpdatePuntTotal);
     $response->resultado = 'ok';
     $response->mensaje = 'Se modificó la puntuacion con éxito';
     $response->data = $alumno;

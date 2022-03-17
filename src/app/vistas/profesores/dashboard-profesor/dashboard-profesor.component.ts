@@ -55,7 +55,7 @@ export class DashboardProfesorComponent implements OnInit {
     private usersService: UsersService,
     private rankingService: RankingService,
     private tokenService: TokenService,
-    public formBuilder: FormBuilder) {}
+    public formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
@@ -72,7 +72,7 @@ export class DashboardProfesorComponent implements OnInit {
     this.rankingService.obtenerRanking().subscribe(val => this.rankings = val);
     this.rankingService.obtenerJoinRankingProfes().subscribe((val: any) => {
       this.rankingsConProfes = val;
-      
+
       if (this.rankingsConProfes == null) {
         this.flagRanks = true;
       } else {
@@ -96,36 +96,36 @@ export class DashboardProfesorComponent implements OnInit {
       this.flagEntregas = false;
     }
   }
-  
+
   rankSelec(rank: any) {
     this.templateFlag = true;
-    
+
     this.listaAlumnos = [];
     this.listaAlumnosPendientes = [];
 
     this.rankSeleccionado = rank;
 
     this.rankingService
-    .obtenerAlumnoPorRanking(this.rankSeleccionado.id_rank)
-    .subscribe((val: any) => {
+      .obtenerAlumnoPorRanking(this.rankSeleccionado.id_rank)
+      .subscribe((val: any) => {
 
-      if (val != null) {
-        val.forEach((element: any) => {
-          if (element.aceptado == 1) {
-            this.listaAlumnos.push(element);
-          } else {
-            this.listaAlumnosPendientes.push(element);
-          }
-        });
-      }
-    });
+        if (val != null) {
+          val.forEach((element: any) => {
+            if (element.aceptado == 1) {
+              this.listaAlumnos.push(element);
+            } else {
+              this.listaAlumnosPendientes.push(element);
+            }
+          });
+        }
+      });
   }
 
-  compare(a:any, b:any) {
-    if ( a.apellidos < b.apellidos ){
+  compare(a: any, b: any) {
+    if (a.apellidos < b.apellidos) {
       return -1;
     }
-    if ( a.apellidos > b.apellidos ){
+    if (a.apellidos > b.apellidos) {
       return 1;
     }
     return 0;
@@ -133,8 +133,8 @@ export class DashboardProfesorComponent implements OnInit {
 
   generarCodRank() {
     let nuevoCod = this.generaNss();
-    
-    if (this.rankings != null || this.rankings != undefined ) {
+
+    if (this.rankings != null || this.rankings != undefined) {
       nuevoCod = this.validarCodigoRepetido(nuevoCod);
     }
 
@@ -160,15 +160,15 @@ export class DashboardProfesorComponent implements OnInit {
 
   validarCodigoRepetido(codigo: string) {
     let codExiste: boolean = false;
-      this.rankings.forEach((element: any) => {
-        if (element.cod_rank == codigo) {
-          codExiste = true;
-        }
-      });
-
-      if (codExiste) {
-        codigo = this.validarCodigoRepetido(this.generaNss());
+    this.rankings.forEach((element: any) => {
+      if (element.cod_rank == codigo) {
+        codExiste = true;
       }
+    });
+
+    if (codExiste) {
+      codigo = this.validarCodigoRepetido(this.generaNss());
+    }
     return codigo;
   }
 
@@ -217,7 +217,7 @@ export class DashboardProfesorComponent implements OnInit {
   }
 
   editarRanking() {
-    
+
   }
 
   mostrarDesplegable(alumno: any) {
@@ -258,7 +258,7 @@ export class DashboardProfesorComponent implements OnInit {
       }
     });
 
-    
+
     if (this.arrEntregas.length == 0) {
       this.flagEntregas = true;
     } else {
@@ -273,19 +273,16 @@ export class DashboardProfesorComponent implements OnInit {
     this.entregaSeleccionada = entrega;
 
     this.rankingService
-    .obtenerAlumnoPorRankingApellido(entrega.id_rank)
-    .subscribe((val: any) => {
-      console.log(val);
-      if (val != null) {
-        val.forEach((element: any) => {
-          if (element.aceptado == 1) {
-            this.listaAlumnosEntregas.push(element);
-          }
-        });
-      }
-    });
-
-    console.log(this.listaAlumnosEntregas);
+      .obtenerAlumnoPorRankingApellido(entrega.id_rank)
+      .subscribe((val: any) => {
+        if (val != null) {
+          val.forEach((element: any) => {
+            if (element.aceptado == 1 && element.id_entrega == entrega.id_entrega) {
+              this.listaAlumnosEntregas.push(element);
+            }
+          });
+        }
+      });
   }
 
   eliminarEntrega() {
@@ -355,10 +352,6 @@ export class DashboardProfesorComponent implements OnInit {
   }
 
   editarPuntuacionAlumno(alumno: any) {
-    console.log(alumno);
-
-    /*
-
     var puntuacionAlumno: number = 0;
 
     Swal.fire({
@@ -381,30 +374,49 @@ export class DashboardProfesorComponent implements OnInit {
           console.log(puntuacionAlumno);
           alumno.puntuacion = puntuacionAlumno;
 
-          this.rankingService.modificarRankAlumnos(alumno).subscribe((val: any) => {
-            console.log(val);
+          this.listaAlumnosEntregas.forEach(element => {
+            if (element.id_alumno == alumno.id_alumno) {
+              element.puntuacion_entrega = puntuacionAlumno;
+              this.rankingService.modificarRankAlumnos(element).subscribe((val: any) => {
+                console.log(val);
+              });
+            }
           });
+
+
         });
       } else if (result.isDenied) {
         Swal.fire('No se ha puntuado la entrega', '', 'info');
       }
     });
-    */
-   
   }
 
   aceptarPendientes(pendiente: any) {
     pendiente.aceptado = 1;
-    console.log(pendiente);
 
-    this.rankingService.aceptarAlumnosPendientes(pendiente).subscribe((val:any) => {
+    this.rankingService.aceptarAlumnosPendientes(pendiente).subscribe((val: any) => {
       console.log(val);
-      window.location.reload();
+      if (val.resultado == 'ok') {
+        this.entregas.forEach((element: any) => {
+          if (element.id_rank == pendiente.id_rank) {
+            var ids = {
+              "id_rank": pendiente.id_rank,
+              "id_entrega": element.id_entrega,
+              "id_alumno": pendiente.id_alumno
+            }
+
+            console.log(ids);
+
+            this.rankingService.insertarEntregaJoin(ids).subscribe();
+          }
+        });
+      }
+      //window.location.reload();
     });
   }
 
   denegarPendientes(pendiente: any) {
-    this.rankingService.eliminarAlumnosPendientes(pendiente).subscribe((val:any) => {
+    this.rankingService.eliminarAlumnosPendientes(pendiente).subscribe((val: any) => {
       console.log(val);
       window.location.reload();
     });

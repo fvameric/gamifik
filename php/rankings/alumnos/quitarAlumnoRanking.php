@@ -23,9 +23,11 @@
   // query
   $query = "DELETE FROM rank_alumnos WHERE id_rank='$ids->id_rank' AND id_alumno='$ids->id_alumno'";
   $queryUpdate = "UPDATE `ranking` SET `alumnos`= (SELECT COUNT(id_rank) FROM rank_alumnos WHERE id_rank = '$ids->id_rank') WHERE id_rank='$ids->id_rank'";
+  $queryUpdateRelation = "DELETE FROM rank_entregas WHERE id_rank='$ids->id_rank' AND id_alumno='$ids->id_alumno'";
 
   mysqli_query($con, $query);
   mysqli_query($con, $queryUpdate);
+  mysqli_query($con, $queryUpdateRelation);
 
   $response->resultado = 'ok';
   $response->mensaje = 'El alumno se eliminó quitó del ranking';
