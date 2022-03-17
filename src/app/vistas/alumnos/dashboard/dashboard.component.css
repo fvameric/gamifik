@@ -287,5 +287,6 @@ div.content {
 }
 
 .array-rankings p {
-    color: #fff;
+    color: #cccccc;
+    margin: 5px;
 }

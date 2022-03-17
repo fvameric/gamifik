@@ -93,10 +93,6 @@ export class DashboardProfesorComponent implements OnInit {
       this.flagEntregas = false;
     }
   }
-
-  aceptarAlumnosPendientes() {
-    //this.rankingService.aceptarAlumnosPendientes()
-  }
   
   rankSelec(rank: any) {
     this.listaAlumnos = [];

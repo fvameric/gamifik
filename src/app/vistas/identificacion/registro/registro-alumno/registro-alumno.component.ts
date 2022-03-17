@@ -9,6 +9,7 @@ import {
 import { Alumno } from 'app/interfaces/Alumno';
 import { AuthService } from 'services/auth.service';
 import { UsersService } from 'services/users.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro-alumno',
@@ -156,7 +157,11 @@ export class RegistroAlumnoComponent implements OnInit {
         reader.onload = (e: any) => (this.imgSrc = e.target.result);
         reader.readAsDataURL(file);
       } else {
-        alert('Por favor elige una imagen');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Por favor elige una imagen'
+        });
       }
     }
   }

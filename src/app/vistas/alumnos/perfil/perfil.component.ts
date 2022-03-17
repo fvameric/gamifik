@@ -140,7 +140,11 @@ export class PerfilComponent implements OnInit {
         reader.onload = e => this.imgSrc = reader.result;
         reader.readAsDataURL(file);
       } else {
-        alert('Por favor elige una imagen');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Por favor elige una imagen'
+        });
       }
     }
   }

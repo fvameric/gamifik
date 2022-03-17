@@ -168,4 +168,18 @@ export class DashboardComponent implements OnInit {
       this.listaAlumnos = val;
     });
   }
+
+  checkPendiente(rank: any) {
+    this.rankingService.checkAlumnoAceptado(rank).subscribe((val:any) => {
+      if (val.data.aceptado == 0) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: "Aún no te han aceptado"
+        });
+      } else {
+        window.location.reload();
+      }
+    });
+  }
 }
