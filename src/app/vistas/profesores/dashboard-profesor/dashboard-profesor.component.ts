@@ -357,6 +357,8 @@ export class DashboardProfesorComponent implements OnInit {
   editarPuntuacionAlumno(alumno: any) {
     console.log(alumno);
 
+    /*
+
     var puntuacionAlumno: number = 0;
 
     Swal.fire({
@@ -387,6 +389,8 @@ export class DashboardProfesorComponent implements OnInit {
         Swal.fire('No se ha puntuado la entrega', '', 'info');
       }
     });
+    */
+   
   }
 
   aceptarPendientes(pendiente: any) {

@@ -24,27 +24,27 @@ export class ModalEntregaComponent implements OnInit {
   entrega: Entrega = {
     id_entrega: 0,
     nom_entrega: '',
-    puntuacion_entrega: 0,
     id_rank: 0,
   };
 
   crearPractica!: FormGroup;
 
-  @Input() id_rank:any = {}
+  @Input() rankSelec: any;
+  @Input() alumnosRank: any;
 
   constructor(
     private modalService: NgbModal,
     public formBuilder: FormBuilder,
     private tokenService: TokenService,
     private rankService: RankingService
-  ) {}
-  
+  ) { }
+
   ngOnInit() {
     this.crearForm();
     this.checkNombre();
-    
+
   }
-  
+
   enviar(modal: any) {
     this.modalService.open(modal);
   }
@@ -83,18 +83,32 @@ export class ModalEntregaComponent implements OnInit {
 
   crearEntrega() {
     this.entrega.nom_entrega = this.nombrePractica.value;
-    this.entrega.id_rank = this.id_rank;
-    console.log(this.id_rank);
-    
-    console.log(this.entrega);
+    this.entrega.id_rank = this.rankSelec.id_rank;
 
     this.rankService.insertarPractica(this.entrega).subscribe((val: any) => {
-      console.log(val);
-
       if (val.resultado == 'ok') {
+        if (this.alumnosRank.length != 0) {
+          this.alumnosRank.forEach((element: any) => {
+            var ids = {
+              "id_rank": this.entrega.id_rank,
+              "id_entrega": val.data.id_entrega,
+              "id_alumno": element.id_alumno
+            }
+
+            this.rankService.insertarEntregaJoin(ids).subscribe();
+          });
+        } else {
+          var ids = {
+            "id_rank": this.entrega.id_rank,
+            "id_entrega": val.data.id_entrega
+          }
+
+          this.rankService.insertarEntregaJoin(ids).subscribe();
+        }
         window.location.reload();
       }
     });
+
   }
 
   checkNombre() {

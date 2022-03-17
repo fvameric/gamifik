@@ -21,7 +21,7 @@
   $entrega = json_decode($json);
 
   // query
-  $queryUpdate = "UPDATE `entrega` SET `nom_entrega`='$entrega->nom_entrega',`puntuacion_entrega`='$entrega->puntuacion_entrega',`id_rank`='$entrega->id_rank' WHERE id_entrega = $entrega->id_entrega";
+  $queryUpdate = "UPDATE `entrega` SET `nom_entrega`='$entrega->nom_entrega',`id_rank`='$entrega->id_rank' WHERE id_entrega = $entrega->id_entrega";
   $querySelect = "SELECT * FROM `entrega` WHERE id_entrega = $entrega->id_entrega";
 
   $resUpdate = mysqli_query($con, $queryUpdate);
