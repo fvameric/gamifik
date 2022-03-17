@@ -36,6 +36,8 @@ export class DashboardComponent implements OnInit {
   rankSeleccionado: any;
   listaAlumnos: any;
 
+  flagPendiente: boolean = false;
+
   constructor(
     private usersService: UsersService,
     private rankingService: RankingService,
@@ -63,6 +65,10 @@ export class DashboardComponent implements OnInit {
         this.flagRanks = false;
 
         val.forEach((element: any) => {
+          console.log(element);
+          if (element.aceptado == 0) {
+            this.flagPendiente = true;
+          }
           if (element.id_alumno == this.datosAlumno.id_alumno) {
             this.arrRankings.push(element);
           }
@@ -153,9 +159,9 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  rankSelec(rankId: number) {
+  rankSelec(rank: any) {
     this.listaAlumnos = [];
-    this.rankSeleccionado = this.arrRankings.find(rank => rank.id_rank == rankId);
+    this.rankSeleccionado = rank;
 
     this.rankingService.obtenerAlumnoPorRanking(this.rankSeleccionado.id_rank)
     .subscribe((val: any) => {

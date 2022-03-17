@@ -37,6 +37,7 @@ export class DashboardProfesorComponent implements OnInit {
   rankSeleccionado: any;
   rankDesplegable: any;
   listaAlumnos: any[] = [];
+  listaAlumnosPendientes: any[] = [];
 
   flagDesplegable: boolean = false;
   indice: number = 0;
@@ -92,15 +93,32 @@ export class DashboardProfesorComponent implements OnInit {
       this.flagEntregas = false;
     }
   }
+
+  aceptarAlumnosPendientes() {
+    //this.rankingService.aceptarAlumnosPendientes()
+  }
   
   rankSelec(rank: any) {
     this.listaAlumnos = [];
+    this.listaAlumnosPendientes = [];
     this.rankSeleccionado = rank;
 
     this.rankingService
     .obtenerAlumnoPorRanking(this.rankSeleccionado.id_rank)
     .subscribe((val: any) => {
-      this.listaAlumnos = val;
+
+      if (val != null) {
+        val.forEach((element: any) => {
+          if (element.aceptado == 1) {
+            this.listaAlumnos.push(element);
+          } else {
+            this.listaAlumnosPendientes.push(element);
+          }
+        });
+      }
+
+      console.log(this.listaAlumnos);
+      console.log(this.listaAlumnosPendientes);
     });
   }
 
@@ -338,6 +356,23 @@ export class DashboardProfesorComponent implements OnInit {
       } else if (result.isDenied) {
         Swal.fire('No se ha eliminado el ranking', '', 'info');
       }
+    });
+  }
+
+  aceptarPendientes(pendiente: any) {
+    pendiente.aceptado = 1;
+    console.log(pendiente);
+
+    this.rankingService.aceptarAlumnosPendientes(pendiente).subscribe((val:any) => {
+      console.log(val);
+      window.location.reload();
+    });
+  }
+
+  denegarPendientes(pendiente: any) {
+    this.rankingService.eliminarAlumnosPendientes(pendiente).subscribe((val:any) => {
+      console.log(val);
+      window.location.reload();
     });
   }
 }

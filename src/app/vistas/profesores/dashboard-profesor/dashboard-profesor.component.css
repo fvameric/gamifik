@@ -18,7 +18,7 @@ body {
 .separador2 {
     justify-content: center;
     margin: 0 20px 0 20px;
-    width: 50%;
+    width: auto;
     height: auto;
 }
 
@@ -419,4 +419,18 @@ a:hover {
 .select-puntuacion {
     width: auto;
     margin-left: 100%;
+}
+
+.btn-pendientes {
+    padding: 5px 10px;
+    border: none;
+    background-color: #2dd36f;
+    border-radius: 5px;
+}
+
+.btn-denegar-pendientes {
+    padding: 5px 10px;
+    border: none;
+    background-color: #eb445a;
+    border-radius: 5px;
 }

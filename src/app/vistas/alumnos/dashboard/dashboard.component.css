@@ -272,3 +272,20 @@ div.content {
         border-right: 1px solid #dce8f13d;
     }
 }
+
+.pendienteFlex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-pendiente {
+    padding: 5px 10px;
+    width: 45px;
+    border: none;
+    background-color: #ffc333;
+    border-radius: 5px;
+}
+
+.array-rankings p {
+    color: #fff;
+}
