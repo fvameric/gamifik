@@ -132,7 +132,7 @@
                         </button>
                         <div *ngIf="this.mostrarDesplegableVisual && alumnoSelec == alumno.id_alumno">
                             <div class="desplegableVisual">
-                                <a href="">
+                                <a (click)="editarPuntuacionAlumno(alumnoSelec)">
                                     <p class="texto-desplegable">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                                             <path
@@ -164,7 +164,6 @@
                     <div class="titulo-detalle-ranking">
                         <h1>Entrega</h1>
                         <h3>{{entregaSeleccionada.nom_entrega}}</h3>
-                        <p>Puntuación de entrega: {{entregaSeleccionada.puntuacion_entrega}}</p>
                     </div>
 
                     <div class="contenido-icons">
@@ -177,7 +176,7 @@
                             </svg>
                         </button>
                         <!--button editar-->
-                        <button class="button-icons" (click)="puntuarEntrega()">
+                        <button class="button-icons">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                                 class="bi bi-tools" viewBox="0 0 16 16">
                                 <path
@@ -219,14 +218,18 @@
                             </button>
                             <div *ngIf="this.mostrarDesplegableVisual && alumnoSelec == alumno.id_alumno">
                                 <div class="desplegableVisual">
-                                    <a (click)="editarPuntuacionAlumno(alumnoSelec)">
+                                    <a>
+                                        <app-modal-perfil-alumno [alumnoDetalle]="alumno"></app-modal-perfil-alumno>
+                                    </a>
+                                    <hr>
+                                    <a (click)="editarPuntuacionAlumno(alumno)">
                                         <p class="texto-desplegable">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                            </svg>
-                                            <label>Ver detalle</label>
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="16" height="16" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve"><g>
+                                                <path xmlns="http://www.w3.org/2000/svg" d="M21,11.5V15H18a3,3,0,0,0-3,3v3H4.5A1.5,1.5,0,0,1,3,19.5V4.5A1.5,1.5,0,0,1,4.5,3h9A1.5,1.5,0,0,0,15,1.5h0A1.5,1.5,0,0,0,13.5,0h-9A4.5,4.5,0,0,0,0,4.5v15A4.5,4.5,0,0,0,4.5,24H16.484a4.5,4.5,0,0,0,3.181-1.317l3.017-3.017A4.5,4.5,0,0,0,24,16.485V11.5A1.5,1.5,0,0,0,22.5,10h0A1.5,1.5,0,0,0,21,11.5Z" fill="currentColor" data-original="#000000"/>
+                                                <path xmlns="http://www.w3.org/2000/svg" d="M17.793,1.793l-12.5,12.5A1,1,0,0,0,5,15v3a1,1,0,0,0,1,1H9a1,1,0,0,0,.707-.293L22.038,6.376a3.379,3.379,0,0,0,.952-3.17A3.118,3.118,0,0,0,17.793,1.793Z" fill="currentColor" data-original="#000000"/></g></svg>
+                                            <label>Puntuación</label>
                                         </p>
+
                                     </a>
                                     <hr>
                                     <a (click)="eliminarAlumno(alumnoSelec)">

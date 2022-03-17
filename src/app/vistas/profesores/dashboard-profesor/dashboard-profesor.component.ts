@@ -320,40 +320,6 @@ export class DashboardProfesorComponent implements OnInit {
     });
   }
 
-  puntuarEntrega() {
-    let puntuacion: number = 0;
-    
-    Swal.fire({
-      title: 'How old are you?',
-      icon: 'question',
-      input: 'range',
-      inputLabel: 'Your age',
-      inputValue: 25
-    }).then((result) => {
-      puntuacion = result.value;
-
-      if (result.isConfirmed) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Ok',
-          text: 'Se puntuó la entrega con un ' + puntuacion.toString(),
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'Ok'
-        }).then((result) => {
-          console.log(puntuacion);
-
-          this.entregaSeleccionada.puntuacion_entrega = puntuacion;
-
-          this.rankingService.modificarEntrega(this.entregaSeleccionada).subscribe((val: any) => {
-            console.log(val);
-          });
-        });
-      } else if (result.isDenied) {
-        Swal.fire('No se ha puntuado la entrega', '', 'info');
-      }
-    });
-  }
-
   eliminarAlumno(idAlumno: any) {
     console.log(idAlumno);
 
@@ -388,8 +354,39 @@ export class DashboardProfesorComponent implements OnInit {
     });
   }
 
-  editarPuntuacionAlumno(idAlumno: any) {
-    console.log(idAlumno);
+  editarPuntuacionAlumno(alumno: any) {
+    console.log(alumno);
+
+    var puntuacionAlumno: number = 0;
+
+    Swal.fire({
+      title: 'Puntuación del alumno',
+      icon: 'question',
+      input: 'range',
+      inputLabel: 'Puntuación',
+      inputValue: 25
+    }).then((result) => {
+      puntuacionAlumno = result.value;
+
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Ok',
+          text: 'Se puntuó al alumno con un ' + puntuacionAlumno.toString(),
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Ok'
+        }).then((result) => {
+          console.log(puntuacionAlumno);
+          alumno.puntuacion = puntuacionAlumno;
+
+          this.rankingService.modificarRankAlumnos(alumno).subscribe((val: any) => {
+            console.log(val);
+          });
+        });
+      } else if (result.isDenied) {
+        Swal.fire('No se ha puntuado la entrega', '', 'info');
+      }
+    });
   }
 
   aceptarPendientes(pendiente: any) {

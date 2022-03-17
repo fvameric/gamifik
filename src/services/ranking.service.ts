@@ -35,6 +35,7 @@ const URL_ALUMNOS_PENDIENTES = 'http://localhost:8080/rankings/alumnos/alumnosPe
 const URL_ELIMINAR_ALUMNOS_PENDIENTES = 'http://localhost:8080/rankings/alumnos/eliminarAlumnosPendientes.php';     // obtener relacion rankings - alumnos
 const URL_CHECK_ALUMNOS_ACEPTADO = 'http://localhost:8080/rankings/alumnos/checkAlumnoAceptado.php';     // obtener relacion rankings - alumnos
 const URL_ALUMNOS_POR_RANK_APELLIDOS = 'http://localhost:8080/rankings/alumnos/getAlumnoApellidos.php';      // obtener alumnos via ranking id
+const URL_MODIFICAR_RANK_ALUMNOS = 'http://localhost:8080/rankings/alumnos/modificarRankAlumnos.php';
 
 // PROFESORES
 const URL_RANK_PROFES = 'http://localhost:8080/rankings/profesores/getRankProfes.php';       // obtener relacion rankings - profes
@@ -190,5 +191,9 @@ export class RankingService {
 
   checkAlumnoAceptado(alumno: any) {
     return this.http.post(URL_CHECK_ALUMNOS_ACEPTADO, JSON.stringify(alumno));
+  }
+
+  modificarRankAlumnos(alumno: any) {
+    return this.http.post(URL_MODIFICAR_RANK_ALUMNOS, JSON.stringify(alumno));
   }
 }

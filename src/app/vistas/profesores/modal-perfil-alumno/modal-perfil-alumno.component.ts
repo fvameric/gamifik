@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Alumno } from 'app/interfaces/Alumno';
 
@@ -19,6 +19,8 @@ export class ModalPerfilAlumnoComponent implements OnInit {
     tipo: 0,
     imagen: ''
   };
+
+  @Input() alumnoDetalle: any;
 
   constructor(private modalService: NgbModal) { }
 

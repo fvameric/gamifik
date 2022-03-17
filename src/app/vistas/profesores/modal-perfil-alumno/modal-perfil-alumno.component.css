@@ -1,4 +1,4 @@
-.button-modal-perfil{
+.button-modal-perfil {
     margin-left: 5%;
     padding: 10px;
     border-radius: 5px;
@@ -14,4 +14,18 @@
 .button-modal-perfil:hover {
     background-color: #56baed;
     color: #ffffff;
+}
+
+a {
+    color: #cccc;
+    margin: 10px 10px 10px 5px;
+}
+
+a:hover {
+    cursor: pointer;
+    color: #56baed;
+}
+
+label:hover {
+    cursor: pointer;
 }
