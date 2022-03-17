@@ -23,7 +23,7 @@ $json = file_get_contents('php://input');
 $entrega = json_decode($json);
 
 // query
-$queryInsert = "INSERT INTO `entrega`(`id_entrega`, `nom_entrega`, `puntuacion_entrega`, `id_rank`) VALUES (0,'$entrega->nom_entrega',0,$entrega->id_rank)";
+$queryInsert = "INSERT INTO `entrega`(`id_entrega`, `nom_entrega`, `id_rank`) VALUES (NULL, '$entrega->nom_entrega', $entrega->id_rank)";
 $querySelect = "SELECT * FROM `entrega` WHERE nom_entrega = '$entrega->nom_entrega'";
 
 $resInsert = mysqli_query($con, $queryInsert);

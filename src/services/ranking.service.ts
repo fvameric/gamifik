@@ -23,6 +23,7 @@ const URL_CREATE_ENTREGA = 'http://localhost:8080/rankings/insertarEntrega.php';
 const URL_DATOS_ENTREGA = 'http://localhost:8080/rankings/datosEntrega.php';
 const URL_ELIMINAR_ENTREGA = 'http://localhost:8080/rankings/eliminarEntrega.php';
 const URL_MODIFICAR_ENTREGA = 'http://localhost:8080/rankings/modificarEntrega.php';
+const URL_CREATE_ENTREGA_JOIN = 'http://localhost:8080/rankings/insertarEntregaJoin.php';
 
 // ALUMNOS
 const URL_RANK_ALUMNOS = 'http://localhost:8080/rankings/alumnos/getRankAlumnos.php';     // obtener relacion rankings - alumnos
@@ -195,5 +196,11 @@ export class RankingService {
 
   modificarRankAlumnos(alumno: any) {
     return this.http.post(URL_MODIFICAR_RANK_ALUMNOS, JSON.stringify(alumno));
+  }
+
+  insertarEntregaJoin(entrega:any){
+    console.log(entrega);
+    
+    return this.http.post(URL_CREATE_ENTREGA_JOIN, JSON.stringify(entrega));
   }
 }
