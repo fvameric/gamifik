@@ -422,7 +422,7 @@ export class DashboardProfesorComponent implements OnInit {
           }
         });
       }
-      //window.location.reload();
+      window.location.reload();
     });
   }
 
