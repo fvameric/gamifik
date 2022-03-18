@@ -72,7 +72,7 @@
                             <!-- Modificar nombre -->
                             <div class="centrar-configuracion">
                                 <h5>Nombre: </h5>
-                                <input class="inputEditar" type="text" [placeholder]="this.nombre" [value]="this.nombre" id="inputNombre" formControlName="inputNombre" [readonly]="this.editableNombre">
+                                <input class="inputEditar" type="text" [placeholder]="this.nombre" maxlength="20" [value]="this.nombre" id="inputNombre" formControlName="inputNombre" [readonly]="this.editableNombre">
                                 <div class="pruebaConfiguracion">
                                     <!-- Lapiz nombre -->
                                     <svg *ngIf="this.editableNombre" (click)="editarNombre()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" id="iconos-configuracion" viewBox="0 0 16 16">
@@ -91,7 +91,7 @@
                             <!-- Modificar apellidos -->
                             <div class="centrar-configuracion">
                                 <h5>Apellidos:</h5>
-                                <input class="inputEditar" type="text" [placeholder]="this.apellidos" [value]="this.apellidos" id="inputApellidos" formControlName="inputApellidos" [readonly]="this.editableApellidos">
+                                <input class="inputEditar" type="text" maxlength="25" [placeholder]="this.apellidos" [value]="this.apellidos" id="inputApellidos" formControlName="inputApellidos" [readonly]="this.editableApellidos">
                                 <div class="pruebaConfiguracion">
                                     <!-- Lápiz Apellidos -->
                                     <svg *ngIf="this.editableApellidos" (click)="editarApellidos()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" id="iconos-configuracion" viewBox="0 0 16 16">
@@ -110,7 +110,7 @@
                             <!-- Modificar email -->
                             <div class="centrar-configuracion">
                                 <h5>Email: </h5>
-                                <input class="inputEditar" type="email" [value]="this.email" id="inputEmail" formControlName="inputEmail" [ngClass]="{ 'is-invalid': form.inputEmail.errors }" email [readonly]="this.editableEmail">
+                                <input class="inputEditar" type="email" [value]="this.email" maxlength="50" id="inputEmail" formControlName="inputEmail" [ngClass]="{ 'is-invalid': form.inputEmail.errors }" email [readonly]="this.editableEmail">
                                 <!-- Div que divide las imagenes -->
                                 <div class="pruebaConfiguracion">
                                     <!-- Lápiz -->
@@ -159,7 +159,7 @@
                             <div *ngIf="mostrarEditarContrasena">
                                 <div class="centrar-configuracion">
                                     <h5>Contraseña: </h5>
-                                    <input type="password" class="inputEditar" [type]="passType" formControlName="inputOldPass" placeholder="Contraseña actual" id="contrasenaAntigua">
+                                    <input type="password" class="inputEditar" maxlength="50" [type]="passType" formControlName="inputOldPass" placeholder="Contraseña actual" id="contrasenaAntigua">
                                     <!-- Div que divide las imagenes -->
                                     <div class="pruebaConfiguracion">
                                         <!-- Lápiz -->
@@ -177,7 +177,7 @@
 
                                 <div class="centrar-configuracion">
                                     <h5>Nueva Contraseña: </h5>
-                                    <input class="inputEditar" [type]="passTypeNew" formControlName="inputPass" placeholder="Nueva contraseña" id="contrasenaAntigua">
+                                    <input class="inputEditar" [type]="passTypeNew" maxlength="50" formControlName="inputPass" placeholder="Nueva contraseña" id="contrasenaAntigua">
                                     <!-- Div que divide las imagenes -->
                                     <div class="pruebaConfiguracion">
                                         <!-- Lápiz -->
@@ -197,7 +197,7 @@
 
                                 <div class="centrar-configuracion">
                                     <h5>Confirmar Contraseña: </h5>
-                                    <input class="inputEditar" [type]="passTypeConfirmNew" formControlName="inputConfirmPass" placeholder="Confirmar contraseña" id="contrasenaAntigua">
+                                    <input class="inputEditar" [type]="passTypeConfirmNew" maxlength="50" formControlName="inputConfirmPass" placeholder="Confirmar contraseña" id="contrasenaAntigua">
                                     <!-- Div que divide las imagenes -->
                                     <div class="pruebaConfiguracion">
                                         <!-- Lápiz -->
