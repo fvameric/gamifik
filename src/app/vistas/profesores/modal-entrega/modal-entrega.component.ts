@@ -88,6 +88,7 @@ export class ModalEntregaComponent implements OnInit {
     this.rankService.insertarPractica(this.entrega).subscribe((val: any) => {
       if (val.resultado == 'ok') {
         if (this.alumnosRank.length != 0) {
+          console.log("insert con alumnos");
           this.alumnosRank.forEach((element: any) => {
             var ids = {
               "id_rank": this.entrega.id_rank,
@@ -98,6 +99,7 @@ export class ModalEntregaComponent implements OnInit {
             this.rankService.insertarEntregaJoin(ids).subscribe();
           });
         } else {
+          console.log("insert SIN alumnos");
           var ids = {
             "id_rank": this.entrega.id_rank,
             "id_entrega": val.data.id_entrega

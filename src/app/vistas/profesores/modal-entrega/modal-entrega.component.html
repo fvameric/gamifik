@@ -1,26 +1,25 @@
-<button class="button-svg"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-    class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16" (click)="enviar(nombreModal)">
+<a class="button-svg">
+    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16" (click)="enviar(nombreModal)">
     <path fill-rule="evenodd"
       d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z" />
   </svg>
-</button>
+</a>
 <ng-template #nombreModal let-c="close" let-d="dismiss">
-
-  <div class="modal-header">
-    <h1>Crear práctica/entrega</h1>
-    <button type="button" class="close" data-dismiss="modal" (click)="retornar()">&times;</button>
-  </div>
-  <form [formGroup]="crearPractica">
-    <div class="modal-body">
-      <p>Nombre de la práctica/entrega:</p>
-      <input type="text" formControlName="nombrePractica" [ngClass]="{ 'is-invalid': form.nombrePractica.errors }">
-      <button class="crear-ranking" (click)="onSubmit()" >Crear práctica/entrega</button>
-
-      <div *ngIf="form.nombrePractica.errors && this.submitted" class="invalid-feedback">
-        <div *ngIf="form.nombrePractica.errors.required">El nombre es necesario</div>
-        <div *ngIf="form.nombrePractica.invalid && form.nombrePractica.errors?.notUnique">Nombre de practica ya existe</div>
-        <div *ngIf="form.nombrePractica.pending">Consultando disponibilidad del nombre</div>
+    <div class="modal-header">
+        <h1>Crear entrega</h1>
+        <button type="button" class="close" data-dismiss="modal" (click)="retornar()">&times;</button>
     </div>
-    </div>
-  </form>
+    <form [formGroup]="crearPractica">
+        <div class="modal-body">
+            <p>Nombre de la entrega:</p>
+            <input type="text" formControlName="nombrePractica" [ngClass]="{ 'is-invalid': form.nombrePractica.errors }">
+            <button class="crear-ranking" (click)="onSubmit()">Crear entrega</button>
+
+            <div *ngIf="form.nombrePractica.errors && this.submitted" class="invalid-feedback">
+                <div *ngIf="form.nombrePractica.errors.required">El nombre es necesario</div>
+                <div *ngIf="form.nombrePractica.invalid && form.nombrePractica.errors?.notUnique">Nombre de practica ya existe</div>
+                <div *ngIf="form.nombrePractica.pending">Consultando disponibilidad del nombre</div>
+            </div>
+        </div>
+    </form>
 </ng-template>

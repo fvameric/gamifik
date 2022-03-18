@@ -91,12 +91,6 @@ export class DashboardProfesorComponent implements OnInit {
 
   obtenerDatosEntregas() {
     this.rankingService.obtenerEntregas().subscribe(val => this.entregas = val);
-
-    if (this.entregas) {
-      this.flagEntregas = true;
-    } else {
-      this.flagEntregas = false;
-    }
   }
 
   rankSelec(rank: any, index: number) {
@@ -127,7 +121,7 @@ export class DashboardProfesorComponent implements OnInit {
       });
 
       let arrows = this.elem.nativeElement.querySelectorAll('.svgArrow');
-      
+
       var oldIndex: number = this.indice;
       this.arrEntregas = [];
       this.indice = index;
@@ -146,19 +140,17 @@ export class DashboardProfesorComponent implements OnInit {
         arrows[oldIndex].setAttribute("style", "transform: rotate(0deg);");
         arrows[index].setAttribute("style", "transform: rotate(90deg);");
       }
-  
-      this.entregas.forEach((element: any) => {
-        if (element.id_rank == this.rankDesplegable.id_rank) {
-          this.arrEntregas.push(element);
-        }
-      });
 
-      if (this.arrEntregas.length == 0) {
-        this.flagEntregas = true;
-      } else {
+      if (this.entregas) {
         this.flagEntregas = false;
+        this.entregas.forEach((element: any) => {
+          if (element.id_rank == this.rankDesplegable.id_rank) {
+            this.arrEntregas.push(element);
+          }
+        });
+      } else {
+        this.flagEntregas = true;
       }
-
   }
 
   generarCodRank() {
@@ -246,10 +238,6 @@ export class DashboardProfesorComponent implements OnInit {
     });
   }
 
-  editarRanking() {
-
-  }
-
   mostrarDesplegable(alumno: any) {
     this.alumnoSelec = alumno.id_alumno;
     let antiguaId = alumno.id_alumno;
@@ -325,7 +313,7 @@ export class DashboardProfesorComponent implements OnInit {
 
   eliminarEntrega() {
     Swal.fire({
-      title: '¿Quieres eliminar esta práctica/entrega?',
+      title: '¿Quieres eliminar esta entrega?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

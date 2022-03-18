@@ -23,7 +23,7 @@ export class ModalEditarRankingComponent implements OnInit {
 
   modRankForm!: FormGroup;
 
-  @Input() rankSelec:any = {};
+  @Input() rankSelec:any;
 
   constructor(
     private modalService: NgbModal,

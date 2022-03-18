@@ -154,8 +154,8 @@ div.content {
 
 .info-superior {
     width: 100%;
-    margin: 10px;
     display: flex;
+    justify-content: space-between;
 }
 
 .contenido-icons {

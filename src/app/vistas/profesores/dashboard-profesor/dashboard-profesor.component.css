@@ -157,7 +157,11 @@ div.content {
     word-wrap: break-word;
 }
 
-.button-ranking-class:hover {
+.contenido-ranking {
+    border-radius: 7px;
+}
+
+.contenido-ranking:hover {
     transition: 200ms;
     color: white;
     background-color: #56baed;
@@ -174,8 +178,8 @@ div.content {
 
 .info-superior {
     width: 100%;
-    margin: 10px;
     display: flex;
+    justify-content: space-between;
 }
 
 .contenido-icons {
@@ -184,18 +188,27 @@ div.content {
     width: 100%;
 }
 
+.flex-cons {
+    display: flex;
+    align-items: flex-start;
+}
+
+.flex-cons a {
+    cursor: pointer;
+    transition: none;
+}
+
 .button-icons {
     float: right;
     border: none;
     background-color: transparent;
     color: white;
     cursor: pointer;
-    transition: 1s;
 }
 
-.button-icons:hover {
-    transition: 1s;
+svg:hover {
     color: #1292f8;
+    cursor: pointer;
 }
 
 .entregas-ranking {
@@ -208,6 +221,7 @@ div.content {
 
 .no-entregas p {
     color: #afafaf;
+    margin: 10px;
 }
 
 
@@ -439,9 +453,7 @@ div.content {
 }
 
 a {
-    color: #949393 !important;
-    transition: 1s !important;
-    margin-left: 6px;
+    margin: 10px;
 }
 
 a:hover {
