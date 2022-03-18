@@ -150,7 +150,7 @@ div.content {
     height: 50px;
     text-align: left;
     border: none;
-    color: #cccccc;
+    color: #ffffff;
     cursor: pointer;
     transition: 200ms;
     border-radius: 7px;
@@ -159,6 +159,11 @@ div.content {
 
 .button-ranking-class:hover {
     transition: 200ms;
+    color: white;
+    background-color: #56baed;
+}
+
+.button-ranking-class:focus {
     color: white;
     background-color: #56baed;
 }
@@ -248,7 +253,7 @@ div.content {
 }
 
 @media screen and (max-width:768px) {
-        .main-separador {
+    .main-separador {
         flex-direction: column;
         margin: 12px;
         margin-top: 150px;
@@ -277,6 +282,7 @@ div.content {
         border-right: 1px solid #dce8f13d;
     }
 }
+
 .dropdown {
     float: left;
     overflow: hidden;
@@ -293,7 +299,8 @@ div.content {
     margin: 0;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
+.navbar a:hover,
+.dropdown:hover .dropbtn {
     background-color: red;
 }
 
@@ -357,11 +364,36 @@ div.content {
     margin: 5px;
 }
 
-.practicas-ranking{
+.practicas-ranking {
     display: block;
 }
 
-.texto-practica{
+.btn-entrega {
+    background-color: transparent;
+    width: 96%;
+    /* height: 50px; */
+    text-align: left;
+    border: none;
+    color: #cccccc;
+    cursor: pointer;
+    transition: 200ms;
+    border-radius: 4px;
+    word-wrap: break-word;
+    margin: 5px;
+}
+
+.btn-entrega:hover {
+    transition: 200ms;
+    color: white;
+    background-color: #56baed;
+}
+
+.btn-entrega:focus {
+    color: white;
+    background-color: #56baed;
+}
+
+.texto-practica {
     margin-left: 10px;
     color: #949393;
 }

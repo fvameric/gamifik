@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, OnInit, Output } from '@angular/core';
 import { Profesor } from '../../../interfaces/Profesor';
 import { UsersService } from 'services/users.service';
 import { FormBuilder } from '@angular/forms';
@@ -44,6 +44,7 @@ export class DashboardProfesorComponent implements OnInit {
 
   flagDesplegable: boolean = false;
   indice: number = 0;
+  indiceRank: number = 0;
 
   // entregas
   entregas: any;
@@ -55,7 +56,8 @@ export class DashboardProfesorComponent implements OnInit {
     private usersService: UsersService,
     private rankingService: RankingService,
     private tokenService: TokenService,
-    public formBuilder: FormBuilder) { }
+    public formBuilder: FormBuilder,
+    private elem: ElementRef) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
@@ -97,7 +99,15 @@ export class DashboardProfesorComponent implements OnInit {
     }
   }
 
-  rankSelec(rank: any) {
+  rankSelec(rank: any, index: number) {
+    let btnRanks = this.elem.nativeElement.querySelectorAll('.button-ranking-class');
+    btnRanks[index].setAttribute("style", "background-color: #56baed;");
+    btnRanks[this.indiceRank].setAttribute("style", "background-color: transparent;");
+    if (index == this.indiceRank) {
+      btnRanks[index].setAttribute("style", "background-color: #56baed;");
+    }
+    this.indiceRank = index;
+
     this.templateFlag = true;
 
     this.listaAlumnos = [];
@@ -119,16 +129,6 @@ export class DashboardProfesorComponent implements OnInit {
           });
         }
       });
-  }
-
-  compare(a: any, b: any) {
-    if (a.apellidos < b.apellidos) {
-      return -1;
-    }
-    if (a.apellidos > b.apellidos) {
-      return 1;
-    }
-    return 0;
   }
 
   generarCodRank() {
@@ -237,6 +237,9 @@ export class DashboardProfesorComponent implements OnInit {
   }
 
   mostrarDesplegablePractica(index: number, rank: any) {
+    let arrows = this.elem.nativeElement.querySelectorAll('.svgArrow');
+    let btnDesplegable = this.elem.nativeElement.querySelectorAll('.button-desplegable');
+
     var oldIndex: number = this.indice;
     this.arrEntregas = [];
     this.indice = index;
@@ -245,11 +248,19 @@ export class DashboardProfesorComponent implements OnInit {
     if (index == oldIndex) {
       if (this.flagDesplegable) {
         this.flagDesplegable = false;
+        arrows[index].setAttribute("style", "transform: rotate(0deg);");
+        btnDesplegable[index].setAttribute("style", "background-color: transparent;");
       } else {
         this.flagDesplegable = true;
+        arrows[index].setAttribute("style", "transform: rotate(90deg);");
+        btnDesplegable[index].setAttribute("style", "background-color: #031526;");
       }
     } else {
       this.flagDesplegable = true;
+      arrows[oldIndex].setAttribute("style", "transform: rotate(0deg);");
+      arrows[index].setAttribute("style", "transform: rotate(90deg);");
+      btnDesplegable[oldIndex].setAttribute("style", "background-color: transparent;");
+      btnDesplegable[index].setAttribute("style", "background-color: #031526;");
     }
 
     this.entregas.forEach((element: any) => {
