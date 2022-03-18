@@ -15,34 +15,30 @@
                     <div class="array-rankings">
                         <div *ngFor="let rank of arrRankings; let i = index" class="rank">
                             <div class="contenido-ranking">
-                                <button class="button-ranking-class" (click)="rankSelec(rank, i)">{{rank.nom_rank}}
-                                    <div class="cantidad-alumnos">
-                                        {{rank.alumnos}} alumnos
-                                    </div>
-                                </button>
-                                <!--button para el desplegable del sidebar-->
-                                <button class="button-desplegable" (click)="mostrarDesplegablePractica(i, rank)">
+                                <button class="button-ranking-class" (click)="rankSelec(rank, i)">
                                     <svg class='svgArrow' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" width="20" height="20">
                                         <g xmlns="http://www.w3.org/2000/svg" data-name="Layer 2">
                                             <path d="M10.46 18a2.23 2.23 0 0 1-.91-.2 1.76 1.76 0 0 1-1.05-1.59V7.79A1.76 1.76 0 0 1 9.55 6.2a2.1 2.1 0 0 1 2.21.26l5.1 4.21a1.7 1.7 0 0 1 0 2.66l-5.1 4.21a2.06 2.06 0 0 1-1.3.46z" data-name="arrow-right" style="fill: rgb(255, 255, 255);">
                                             </path>
                                         </g>
                                     </svg>
+                                    {{rank.nom_rank}}
+                                    <div class="cantidad-alumnos">
+                                        {{rank.alumnos}} alumnos
+                                    </div>
                                 </button>
                             </div>
 
-                            <div class="entregas-ranking" *ngIf="i == indice && flagDesplegable">
-                                <h3 class="texto-h3">Práctica/Entrega</h3>
+                            <div class="entregas-ranking" *ngIf="flagDesplegable && indiceRank == i">
                                 <div class="no-entregas" *ngIf="flagEntregas; else tieneEntregas">
                                     <p>No tiene entregas</p>
                                 </div>
                                 <ng-template #tieneEntregas>
+                                    <h3 class="texto-h3">Práctica/Entrega</h3>
                                     <div class="practicas-ranking" *ngFor="let entrega of arrEntregas">
-
                                         <button (click)="detalleEntrega(entrega)" class="btn-entrega">{{entrega.nom_entrega}}</button>
                                     </div>
                                 </ng-template>
-
                             </div>
                         </div>
                     </div>

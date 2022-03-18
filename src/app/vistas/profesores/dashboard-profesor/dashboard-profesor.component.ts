@@ -100,6 +100,8 @@ export class DashboardProfesorComponent implements OnInit {
   }
 
   rankSelec(rank: any, index: number) {
+    this.rankSeleccionado = rank;
+
     let btnRanks = this.elem.nativeElement.querySelectorAll('.button-ranking-class');
     btnRanks[index].setAttribute("style", "background-color: #56baed;");
     btnRanks[this.indiceRank].setAttribute("style", "background-color: transparent;");
@@ -107,18 +109,12 @@ export class DashboardProfesorComponent implements OnInit {
       btnRanks[index].setAttribute("style", "background-color: #56baed;");
     }
     this.indiceRank = index;
-
     this.templateFlag = true;
-
     this.listaAlumnos = [];
     this.listaAlumnosPendientes = [];
-
-    this.rankSeleccionado = rank;
-
     this.rankingService
       .obtenerAlumnoPorRanking(this.rankSeleccionado.id_rank)
       .subscribe((val: any) => {
-
         if (val != null) {
           val.forEach((element: any) => {
             if (element.aceptado == 1) {
@@ -129,6 +125,40 @@ export class DashboardProfesorComponent implements OnInit {
           });
         }
       });
+
+      let arrows = this.elem.nativeElement.querySelectorAll('.svgArrow');
+      
+      var oldIndex: number = this.indice;
+      this.arrEntregas = [];
+      this.indice = index;
+      this.rankDesplegable = rank;
+  
+      if (index == oldIndex) {
+        if (this.flagDesplegable) {
+          this.flagDesplegable = false;
+          arrows[index].setAttribute("style", "transform: rotate(0deg);");
+        } else {
+          this.flagDesplegable = true;
+          arrows[index].setAttribute("style", "transform: rotate(90deg);");
+        }
+      } else {
+        this.flagDesplegable = true;
+        arrows[oldIndex].setAttribute("style", "transform: rotate(0deg);");
+        arrows[index].setAttribute("style", "transform: rotate(90deg);");
+      }
+  
+      this.entregas.forEach((element: any) => {
+        if (element.id_rank == this.rankDesplegable.id_rank) {
+          this.arrEntregas.push(element);
+        }
+      });
+
+      if (this.arrEntregas.length == 0) {
+        this.flagEntregas = true;
+      } else {
+        this.flagEntregas = false;
+      }
+
   }
 
   generarCodRank() {
@@ -236,9 +266,9 @@ export class DashboardProfesorComponent implements OnInit {
     }
   }
 
+  /*
   mostrarDesplegablePractica(index: number, rank: any) {
     let arrows = this.elem.nativeElement.querySelectorAll('.svgArrow');
-    let btnDesplegable = this.elem.nativeElement.querySelectorAll('.button-desplegable');
 
     var oldIndex: number = this.indice;
     this.arrEntregas = [];
@@ -249,18 +279,14 @@ export class DashboardProfesorComponent implements OnInit {
       if (this.flagDesplegable) {
         this.flagDesplegable = false;
         arrows[index].setAttribute("style", "transform: rotate(0deg);");
-        btnDesplegable[index].setAttribute("style", "background-color: transparent;");
       } else {
         this.flagDesplegable = true;
         arrows[index].setAttribute("style", "transform: rotate(90deg);");
-        btnDesplegable[index].setAttribute("style", "background-color: #031526;");
       }
     } else {
       this.flagDesplegable = true;
       arrows[oldIndex].setAttribute("style", "transform: rotate(0deg);");
       arrows[index].setAttribute("style", "transform: rotate(90deg);");
-      btnDesplegable[oldIndex].setAttribute("style", "background-color: transparent;");
-      btnDesplegable[index].setAttribute("style", "background-color: #031526;");
     }
 
     this.entregas.forEach((element: any) => {
@@ -276,6 +302,7 @@ export class DashboardProfesorComponent implements OnInit {
       this.flagEntregas = false;
     }
   }
+  */
 
   detalleEntrega(entrega: any) {
     this.listaAlumnosEntregas = [];
