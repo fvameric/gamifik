@@ -72,7 +72,7 @@ export class CrearRankingComponent implements OnInit {
 
   obtenerDatosRankings() {
     this.rankService
-      .obtenerRanking()
+      .obtenerRanking() 
       .subscribe((val) => (this.rankCodes = val));
   }
 

@@ -3,11 +3,22 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 /* BASIC */
+.light-theme {
+    --background-color: linear-gradient(35deg, rgb(15, 65, 156) 0%, rgb(11, 143, 219) 100%);
+    --perfil-Contact-Background-color: white;
+  
+  }
+  
+  .dark-theme {
+    --background-color: linear-gradient(35deg, rgb(8, 31, 73) 0%, rgb(4, 46, 70) 100%);
+    --perfil-Contact-Background-color: #0000008c;
+  }
 
 body {
+    
     font-family: "Poppins", sans-serif;
     height: 100vh;
-    background: linear-gradient(35deg, rgb(15, 65, 156) 0%, rgb(11, 143, 219) 100%);
+    background: var( --background-color);
     background-repeat: no-repeat;
     background-attachment: fixed;
 }

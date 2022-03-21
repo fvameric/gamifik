@@ -1,64 +1,86 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<header id="header">
-    <nav class="navbar-todo">
-        <ul id="nav-menu">
-            <li class="nav-items-right">
-                <div *ngIf="user.tipo == 0;else perfilProfe">
-                    <div class="dropdown">
-                        <img class="dropbtn"  src={{user.imagen}} />
-                        <div class="dropdown-content">
-                            <a routerLink="/perfil"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="color: white; margin-right: 10px;"
-                                    fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
-                                    <path
-                                        d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
-                                    <path
-                                        d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                </svg><p>Perfil</p> </a>
-                            <a (click)="cerrarSesion()"><svg xmlns="http://www.w3.org/2000/svg" style="color: white;  margin-right: 5px;" width="20" height="20" fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16">
-                                <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
-                              </svg> <p>Cerrar Sesion</p>  </a>
+    <header id="header">
+        <nav class="navbar-todo">
+            <ul id="nav-menu">
+                <li class="nav-items-right">
+                    <div *ngIf="user.tipo == 0;else perfilProfe">
+                        <div class="dropdown">
+                            <img class="dropbtn" src={{user.imagen}} />
+                            <div class="dropdown-content">
+                                <a routerLink="/perfil"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        style="color: white; margin-right: 10px;" fill="currentColor"
+                                        class="bi bi-person-bounding-box" viewBox="0 0 16 16">
+                                        <path
+                                            d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
+                                        <path
+                                            d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                    </svg>
+                                    <p>Perfil</p>
+                                </a>
+                                <a (click)="cerrarSesion()"><svg xmlns="http://www.w3.org/2000/svg"
+                                        style="color: white;  margin-right: 5px;" width="20" height="20" fill="currentColor"
+                                        class="bi bi-door-open-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
+                                    </svg>
+                                    <p>Cerrar Sesion</p>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <ng-template #perfilProfe>
-                    <div class="dropdown">
-                        <img class="dropbtn"  src={{user.imagen}} />
-                        <div class="dropdown-content">
-                            <a routerLink="/perfilprofesor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="color: white; margin-right: 5px;"
-                                    fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
-                                    <path
-                                        d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
-                                    <path
-                                        d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                </svg><p>Perfil</p> </a>
-                            <a (click)="cerrarSesion()"><svg xmlns="http://www.w3.org/2000/svg" style="color: white;  margin-right: 5px;" width="20" height="20" fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16">
-                                <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
-                              </svg> <p>Cerrar Sesion</p>  </a>
+
+                    <ng-template #perfilProfe>
+                        <div class="dropdown">
+                            <img class="dropbtn" src={{user.imagen}} />
+                            <div class="dropdown-content">
+                                <a routerLink="/perfilprofesor"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                        height="20" style="color: white; margin-right: 5px;" fill="currentColor"
+                                        class="bi bi-person-bounding-box" viewBox="0 0 16 16">
+                                        <path
+                                            d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
+                                        <path
+                                            d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                    </svg>
+                                    <p>Perfil</p>
+                                </a>
+                                <a (click)="cerrarSesion()"><svg xmlns="http://www.w3.org/2000/svg"
+                                        style="color: white;  margin-right: 5px;" width="20" height="20" fill="currentColor"
+                                        class="bi bi-door-open-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
+                                    </svg>
+                                    <p>Cerrar Sesion</p>
+                                </a>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                </li>
+
+                <li class="nav-items-right">
+                    <!-- <img style="cursor: pointer;" routerLink="/perfilprofesor"  src={{user.imagen}} />-->
+                </li>
+                <li class="nav-items-right">
+                    <a routerLink="/dashboard"> Mis Rankins</a>
+                </li>
+                <li class="nav-items-right">
+                    <app-dark-mode></app-dark-mode>
+                </li>
+
+                <a routerLink="/dashboard">
+                    <div class="containerlogo">
+                        <div class="logotest">
+                            <div class="barralogo1"></div>
+                            <div class="barralogo2"></div>
+                            <div class="barralogo3"></div>
+                            <div class="barralogo4"></div>
                         </div>
                     </div>
-                </ng-template>
-            </li>
-            <li class="nav-items-right">
-                <!-- <img style="cursor: pointer;" routerLink="/perfilprofesor"  src={{user.imagen}} />-->
-            </li>
-            <li class="nav-items-right">
-                <a routerLink="/dashboard"> Mis Rankins</a>
-            </li>
-
-            <a routerLink="/dashboard">
-                <div class="containerlogo">
-                    <div class="logotest">
-                        <div class="barralogo1"></div>
-                        <div class="barralogo2"></div>
-                        <div class="barralogo3"></div>
-                        <div class="barralogo4"></div>
-                    </div>
-                </div>
-            </a>
-        </ul>
-        <span id="abrir-menu" class="material-icons" (click)="onclickToggle()">
-            reorder
-        </span>
-    </nav>
-</header>
+                </a>
+            </ul>
+            <span id="abrir-menu" class="material-icons" (click)="onclickToggle()">
+                reorder
+            </span>
+        </nav>
+    </header>

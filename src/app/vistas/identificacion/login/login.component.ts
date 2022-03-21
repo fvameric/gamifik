@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'app/interfaces/User';
+
 import { AuthService } from 'services/auth.service';
 
 @Component({
@@ -23,13 +24,14 @@ export class LoginComponent implements OnInit {
 
   alumnos: any;
 
+
   // variables token
   userRoles: any;
 
   constructor(
     public formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -77,4 +79,14 @@ export class LoginComponent implements OnInit {
       this.passType = 'text';
     }
   }
+
+  cambiarButton():void{
+    
+   document.getElementsByClassName('toggle')[0].classList.toggle('dark');
+   document.getElementsByClassName('toggle')[0].classList.toggle('active');
+
+   document.getElementsByClassName('hola')[0].classList.toggle('dark');
+   document.getElementsByClassName('toggle')[0].classList.toggle('active');
+
+    }
 }
