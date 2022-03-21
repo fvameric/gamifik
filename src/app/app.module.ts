@@ -26,6 +26,7 @@ import { FooterComponent } from './plantillas/footer/footer.component';
 import { RegistroAlumnoComponent } from './vistas/identificacion/registro/registro-alumno/registro-alumno.component';
 import { RegistroProfesorComponent } from './vistas/identificacion/registro/registro-profesor/registro-profesor.component';
 import { ModalEditarRankingComponent } from './vistas/profesores/modal-editar-ranking/modal-editar-ranking.component';
+import { ModalEditarEntregaComponent } from './vistas/profesores/modal-editar-entrega/modal-editar-entrega.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,8 @@ import { ModalEditarRankingComponent } from './vistas/profesores/modal-editar-ra
     RegistroAlumnoComponent,
     RegistroProfesorComponent,
     LoaderComponent,
-    routingComponents
+    routingComponents,
+    ModalEditarEntregaComponent
   ],
   imports: [
     BrowserModule,
