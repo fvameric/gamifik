@@ -18,6 +18,7 @@ import { ModalPerfilAlumnoComponent } from './vistas/profesores/modal-perfil-alu
 import { IdentificacionProfesoresComponent } from './vistas/identificacion/identificacion-profesores/identificacion-profesores.component';
 import { PerfilPruebaComponent } from './vistas/alumnos/perfil-prueba/perfil-prueba.component';
 import { ModalEditarRankingComponent } from './vistas/profesores/modal-editar-ranking/modal-editar-ranking.component';
+import { DarkModeComponent } from './vistas/dark-mode/dark-mode.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'identificacion', pathMatch: 'full' },
@@ -35,7 +36,8 @@ const routes: Routes = [
   { path: 'modal', component: ModalComponent }, 
   { path: 'modal-entrega', component: ModalEntregaComponent }, 
   { path: 'modal-perfil-alumno', component: ModalPerfilAlumnoComponent },
-  { path: 'modal-editar-ranking', component: ModalEditarRankingComponent }
+  { path: 'modal-editar-ranking', component: ModalEditarRankingComponent },
+  { path: 'dark-mode', component: DarkModeComponent }
 ];
 
 @NgModule({
@@ -58,5 +60,6 @@ export const routingComponents = [
   ModalComponent,
   ModalEntregaComponent,
   ModalPerfilAlumnoComponent,
-  ModalEditarRankingComponent
+  ModalEditarRankingComponent,
+  DarkModeComponent
 ];

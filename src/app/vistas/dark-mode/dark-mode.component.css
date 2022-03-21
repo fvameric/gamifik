@@ -1,0 +1,37 @@
+
+.dark {
+  background-color: #FFF;
+}
+
+.toggle {
+  margin: 5px;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  transition: all .5s ease-in-out;
+
+}
+.toggle:hover{
+  background-color: rgba(58, 173, 231, 0.431);
+  box-shadow: 5px;
+}
+
+
+
+.active {
+  background-color: transparent;
+  color: white;
+  
+}
+
+.active:hover{
+  background-color: rgba(86, 186, 237, 0.1);
+  box-shadow: 5px;
+}
+
