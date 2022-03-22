@@ -13,7 +13,7 @@
                             <img src="{{datosAlumno.imagen}}" alt="ImagenPerfil" class="imgPerfil">
                         </div>
                         <h1>{{datosAlumno.nombre}}</h1>
-                        <p>Alumno</p>
+                        <p  class="p-perfil">Alumno</p>
                     </aside>
                 </div>
             </section>
@@ -62,7 +62,7 @@
                         <form [formGroup]="modificacionForm" (ngSubmit)="confirmarModif(modificacionForm)" enctype="multipart/form-data">
                             <div class="centrar-configuracion">
                                 <!--imagen configuracion-->
-                                <h5>Avatar:</h5><br>
+                                <h5 class="h5-perfil">Avatar:</h5><br>
                                 <div class="image-upload">
                                     <img id="preview" [src]="imgSrc" alt="ImagenPerfil" class="img-perfil">
                                 </div>
@@ -71,7 +71,7 @@
 
                             <!-- Modificar nombre -->
                             <div class="centrar-configuracion">
-                                <h5>Nombre: </h5>
+                                <h5  class="h5-perfil">Nombre: </h5>
                                 <input class="inputEditar" type="text" [placeholder]="this.nombre" [value]="this.nombre" maxlength="20"id="inputNombre" formControlName="inputNombre" [readonly]="this.editableNombre">
                                 <div class="pruebaConfiguracion">
                                     <!-- Lapiz nombre -->
@@ -90,7 +90,7 @@
                             </div>
                             <!-- Modificar apellidos -->
                             <div class="centrar-configuracion">
-                                <h5>Apellidos:</h5>
+                                <h5  class="h5-perfil">Apellidos:</h5>
                                 <input class="inputEditar" type="text" [placeholder]="this.apellidos" maxlength="25" [value]="this.apellidos" id="inputApellidos" formControlName="inputApellidos" [readonly]="this.editableApellidos">
                                 <div class="pruebaConfiguracion">
                                     <!-- Lápiz Apellidos -->
@@ -109,7 +109,7 @@
                             </div>
                             <!-- Div para cada linia ej. :  Nombre, apellidos, email... -->
                             <div class="centrar-configuracion">
-                                <h5>Email: </h5>
+                                <h5  class="h5-perfil">Email: </h5>
                                 <input class="inputEditar" type="email" [value]="this.email" id="inputEmail" maxlength="50" formControlName="inputEmail" [ngClass]="{ 'is-invalid': form.inputEmail.errors }" email [readonly]="this.editableEmail">
                                 <!-- Div que divide las imagenes -->
                                 <div class="pruebaConfiguracion">
@@ -148,7 +148,7 @@
 
                             <div *ngIf="mostrarEditarContrasena">
                                 <div class="centrar-configuracion">
-                                    <h5>Contraseña: </h5>
+                                    <h5  class="h5-perfil">Contraseña: </h5>
                                     <input type="password" class="inputEditar" maxlength="50" [type]="passType" formControlName="inputOldPass" placeholder="Contraseña actual" id="contrasenaAntigua">
                                     <!-- Div que divide las imagenes -->
                                     <div class="pruebaConfiguracion">
@@ -166,7 +166,7 @@
                                 </div>
 
                                 <div class="centrar-configuracion">
-                                    <h5>Nueva Contraseña: </h5>
+                                    <h5  class="h5-perfil">Nueva Contraseña: </h5>
                                     <input class="inputEditar" [type]="passTypeNew" maxlength="50" formControlName="inputPass" placeholder="Nueva contraseña" id="contrasenaAntigua">
                                     <!-- Div que divide las imagenes -->
                                     <div class="pruebaConfiguracion">
@@ -185,7 +185,7 @@
                                 </div>
 
                                 <div class="centrar-configuracion">
-                                    <h5>Confirmar Contraseña: </h5>
+                                    <h5  class="h5-perfil">Confirmar Contraseña: </h5>
                                     <input class="inputEditar" [type]="passTypeConfirmNew" maxlength="50" formControlName="inputConfirmPass" placeholder="Confirmar contraseña" id="contrasenaAntigua">
                                     <!-- Div que divide las imagenes -->
                                     <div class="pruebaConfiguracion">

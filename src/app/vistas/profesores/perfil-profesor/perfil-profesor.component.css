@@ -66,7 +66,7 @@ body {
     border-radius: 5px;
     float: left;
     width: 100%;
-    background: linear-gradient(10deg, rgb(0, 44, 100) 0%, rgb(0, 91, 165) 100%);
+    background: var(--perfil-info-backgournd-color);
 }
 
 .contact main section .content {
@@ -75,6 +75,10 @@ body {
     padding: 20px 30px 50px 30px;
     position: relative;
     text-align: center;
+}
+
+input[type="file"]{
+    color: var(--perfil-h5-color);
 }
 
 @media (min-width: 10px) {
@@ -292,6 +296,16 @@ svg {
     color: #007bff;
 }
 
+.h5-perfil{
+    color: var(--perfil-h5-color);
+    margin: 5px;
+    font-size: 15px;
+}
+
+.p-perfil{
+color: var(--perfil-color-p);
+}
+
 hr {
     color: #007bff;
 }
@@ -299,7 +313,7 @@ hr {
 .configuracion-profe {
     float: left;
     width: 100%;
-    background-color: #fff;
+    background-color: var(--perfil-Contact-Background-color);
     padding: 18px 20px;
     border-radius: 5px;
     text-decoration: none;
@@ -334,7 +348,7 @@ hr {
 .cerrar-profe {
     float: left;
     width: 80%;
-    background-color: #fff;
+    background-color: var(--perfil-Contact-Background-color);
     padding: 18px 20px;
     border-radius: 5px;
     text-decoration: none;
@@ -420,6 +434,7 @@ hr {
 .pruebaConfiguracion {
     float: right;
     width: 20%;
+    color: var(--perfil-h5-color);
 }
 
 .passFlex {
@@ -451,7 +466,7 @@ hr {
 }
 
 .inputEditar {
-    color: black !important;
+    color: var(--perfil-h5-color) !important;
     padding: 0 !important;
     margin: 0 !important;
 }

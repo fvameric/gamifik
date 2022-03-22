@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins");
+@import url("../../../../styles.css");
 *,
 *:before,
 *:after {
@@ -6,12 +7,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-body {
-    background: linear-gradient( 60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
-    font-family: "Poppins", sans-serif;
-}
-
 
 /* CONTACT ========================================== */
 
@@ -66,7 +61,7 @@ body {
     border-radius: 5px;
     float: left;
     width: 100%;
-    background: linear-gradient(10deg, rgb(0, 44, 100) 0%, rgb(0, 91, 165) 100%);
+    background:var(--perfil-info-backgournd-color);
 }
 
 .contact main section .content {
@@ -199,7 +194,7 @@ body {
     float: left;
     width: 100%;
     margin-top: 18px;
-    background-color: #fff;
+    background-color: var(--perfil-Contact-Background-color);
     padding: 18px 20px;
     border-radius: 5px;
     text-decoration: none;
@@ -288,8 +283,21 @@ svg {
     margin-left: 5%;
 }
 
+input[type="file"]{
+    color: var(--perfil-h5-color);
+}
+
 .h2-perfil {
     color: #007bff;
+}
+.h5-perfil{
+    color: var(--perfil-h5-color);
+    margin: 5px;
+    font-size: 15px;
+}
+
+.p-perfil{
+color: var(--perfil-color-p);
 }
 
 hr {
@@ -299,7 +307,7 @@ hr {
 .configuracion-profe {
     float: left;
     width: 100%;
-    background-color: #fff;
+    background-color: var(--perfil-Contact-Background-color);
     padding: 18px 20px;
     border-radius: 5px;
     text-decoration: none;
@@ -420,6 +428,7 @@ hr {
 .pruebaConfiguracion {
     float: right;
     width: 20%;
+    color: var(--perfil-h5-color);
 }
 
 .passFlex {
@@ -451,7 +460,7 @@ hr {
 }
 
 .inputEditar {
-    color: black !important;
+    color: var(--perfil-h5-color) !important;
     padding: 0 !important;
     margin: 0 !important;
 }
@@ -465,7 +474,7 @@ input[type=email],
 input[type=password],
 input[type=date] {
     background-color: #f6f6f600;
-    color: white;
+    color: var(--perfil-h5-color);
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
