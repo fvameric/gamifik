@@ -385,7 +385,7 @@ export class DashboardProfesorComponent implements OnInit {
       icon: 'question',
       input: 'range',
       inputLabel: 'Puntuación',
-      inputValue: 25
+      inputValue: alumno.puntuacion_entrega
     }).then((result) => {
       puntuacionAlumno = result.value;
 
@@ -408,8 +408,6 @@ export class DashboardProfesorComponent implements OnInit {
               });
             }
           });
-
-
         });
       } else if (result.isDenied) {
         Swal.fire('No se ha puntuado la entrega', '', 'info');

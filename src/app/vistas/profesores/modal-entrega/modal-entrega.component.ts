@@ -75,10 +75,7 @@ export class ModalEntregaComponent implements OnInit {
       this.crearEntrega();
 
       this.modalService.dismissAll();
-    } else {
     }
-
-    this.crearPractica.reset();
   }
 
   crearEntrega() {
@@ -87,6 +84,8 @@ export class ModalEntregaComponent implements OnInit {
 
     this.rankService.insertarPractica(this.entrega).subscribe((val: any) => {
       if (val.resultado == 'ok') {
+        console.log
+        console.log("alumnosrank length: " + this.alumnosRank.length);
         if (this.alumnosRank.length != 0) {
           console.log("insert con alumnos");
           this.alumnosRank.forEach((element: any) => {
@@ -114,35 +113,17 @@ export class ModalEntregaComponent implements OnInit {
   }
 
   checkNombre() {
-    // this.nombrePractica.valueChanges
-    //   .pipe(
-    //     debounceTime(500),
-    //     tap((nombrePractica) => {
-    //       console.log('comprobando');
-    //       if (nombrePractica !== '' && this.nombrePractica.invalid) {
-    //         //this.nombreRanking.markAsPending();
-    //         this.nombrePractica.markAsPending({ emitEvent: true });
-    //       } else {
-    //         this.nombrePractica.setErrors({ invalid: true });
-    //       }
-    //     })
-    //   )
-    //   .subscribe((nombrePractica) => {
-    //     this.rankService
-    //       .validarNombreExisteRanking(this.id_profe, nombrePractica)
-    //       .subscribe((val: any) => {
-    //         if (val.resultado == 'error') {
-    //           this.nombrePractica.markAsPending({ onlySelf: false });
-    //           this.nombrePractica.setErrors({ notUnique: true });
-    //         } else {
-    //           this.nombrePractica.markAsPending({ onlySelf: false });
-    //           if (nombrePractica.length > 0) {
-    //             this.nombrePractica.setErrors(null);
-    //           } else {
-    //             this.nombrePractica.setErrors({ required: true });
-    //           }
-    //         }
-    //       });
-    //   });
+    this.nombrePractica.valueChanges.subscribe((nombrePractica) => {
+        if (nombrePractica == '') {
+          this.nombrePractica.setErrors({ required: true });
+        }
+        this.rankService
+          .validarNombreExistePractica(this.rankSelec.id_rank, nombrePractica)
+          .subscribe((val: any) => {
+            if (val.resultado == 'error') {
+              this.nombrePractica.setErrors({ notUnique: true });
+            }
+          });
+      });
   }
 }

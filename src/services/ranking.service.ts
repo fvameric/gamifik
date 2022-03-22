@@ -154,8 +154,8 @@ export class RankingService {
   }
 
   //
-  validarNombreExistePractica(idProfe: number, nombrePractica:string){
-    return this.http.get(URL_NOMBRE_EXISTE_PRACTICA + `?nom_practica=${nombrePractica}&id_profe=${idProfe}`);
+  validarNombreExistePractica(id_rank: number, nombrePractica:string){
+    return this.http.get(URL_NOMBRE_EXISTE_PRACTICA + `?nom_practica=${nombrePractica}&id_rank=${id_rank}`);
   }
 
 

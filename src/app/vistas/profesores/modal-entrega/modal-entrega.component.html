@@ -13,12 +13,13 @@
         <div class="modal-body">
             <p>Nombre de la entrega:</p>
             <input type="text" formControlName="nombrePractica" [ngClass]="{ 'is-invalid': form.nombrePractica.errors }">
-            <button class="crear-ranking" (click)="onSubmit()">Crear entrega</button>
-
-            <div *ngIf="form.nombrePractica.errors && this.submitted" class="invalid-feedback">
+            <button type="submit" class="crear-ranking" (click)="onSubmit()" [disabled]="!crearPractica.valid">Crear entrega</button>
+            <div *ngIf="form.nombrePractica.pending" class="invalid-feedback">
+                <div>Consultando disponibilidad del nombre</div>
+            </div>
+            <div *ngIf="form.nombrePractica.errors" class="invalid-feedback">
                 <div *ngIf="form.nombrePractica.errors.required">El nombre es necesario</div>
-                <div *ngIf="form.nombrePractica.invalid && form.nombrePractica.errors?.notUnique">Nombre de practica ya existe</div>
-                <div *ngIf="form.nombrePractica.pending">Consultando disponibilidad del nombre</div>
+                <div *ngIf="form.nombrePractica.errors.notUnique">Nombre de practica ya existe</div>
             </div>
         </div>
     </form>

@@ -24,7 +24,7 @@ $entrega = json_decode($json);
 
 // query
 $queryInsert = "INSERT INTO `entrega`(`id_entrega`, `nom_entrega`, `id_rank`) VALUES (NULL, '$entrega->nom_entrega', $entrega->id_rank)";
-$querySelect = "SELECT * FROM `entrega` WHERE nom_entrega = '$entrega->nom_entrega'";
+$querySelect = "SELECT * FROM `entrega` WHERE nom_entrega = '$entrega->nom_entrega' AND id_rank = '$entrega->id_rank'";
 
 $resInsert = mysqli_query($con, $queryInsert);
 

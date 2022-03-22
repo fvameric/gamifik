@@ -28,8 +28,6 @@ export class AuthService {
         this.generarSwal(val.mensaje);
       } else {
         this.guardarLocalStorage(val);
-
-        //this.guardarSessionStorage(val);
       }
     });
   }
@@ -40,8 +38,6 @@ export class AuthService {
         this.generarSwal(val.mensaje);
       } else {
         this.guardarLocalStorage(val);
-
-        //this.guardarSessionStorage(val);
       }
     });
   }
@@ -68,8 +64,6 @@ export class AuthService {
         this.generarSwal(val.mensaje);
       } else {
         this.guardarLocalStorage(val);
-
-        //this.guardarSessionStorage(val);
       }
     });
   }
@@ -80,8 +74,6 @@ export class AuthService {
         this.generarSwal(val.mensaje);
       } else {
         this.guardarLocalStorage(val);
-
-        //this.guardarSessionStorage(val);
       }
     });
   }

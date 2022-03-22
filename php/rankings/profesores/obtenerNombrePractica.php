@@ -13,13 +13,11 @@ $bd = new claseBD();
 $con = $bd->obtenerConexion();
 
 // clase respuesta
-class Result
-{
-}
+class Result{}
 $response = new Result();
 
 // query
-$query = "SELECT * FROM `ranking`, `rank_profes`, `entrega` WHERE ranking.id_rank = rank_profes.id_rank AND rank_profes.id_profe=$_GET[id_profe] AND ranking.nom_rank='$_GET[nom_rank]'";
+$query = "SELECT nom_entrega FROM `entrega` WHERE id_rank='$_GET[id_rank]' AND nom_entrega='$_GET[nom_practica]'";
 $res = mysqli_query($con, $query);
 
 // validación de la query

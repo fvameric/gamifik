@@ -117,8 +117,13 @@ div.content {
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: column;
-    margin: 20px;
+    margin: 20px 0px 0px 20px;
     width: 50%;
+}
+
+.subtitulo {
+    margin-left: 20px;
+    color: #a0acc4;
 }
 
 .codFlex {
@@ -363,8 +368,6 @@ svg:hover {
     margin-bottom: 5px;
 }
 
-
-
 .entregas-ranking {
     width: 100%;
     background: #0000008c;
@@ -437,6 +440,12 @@ svg:hover {
     width: auto;
     margin: 5px;
     border-radius: 5px;
+}
+
+.desplegableVisual a {
+    margin: 0;
+    margin-left: 10px;
+    color: #fff;
 }
 
 .desplegableVisual hr {
