@@ -6,12 +6,22 @@
 .light-theme {
     --background-color: linear-gradient(35deg, rgb(15, 65, 156) 0%, rgb(11, 143, 219) 100%);
     --perfil-Contact-Background-color: white;
+    --perfil-info-backgournd-color:linear-gradient(10deg, rgb(0, 44, 100) 0%, rgb(0, 91, 165) 100%);
+    --perfil-h5-color:black;
+    --perfil-color-select: black;
+    --perfil-color-p:white;
+
+    
   
   }
   
   .dark-theme {
     --background-color: linear-gradient(35deg, rgb(8, 31, 73) 0%, rgb(4, 46, 70) 100%);
     --perfil-Contact-Background-color: #0000008c;
+    --perfil-info-backgournd-color:linear-gradient(10deg, rgb(0, 19, 43) 0%, rgb(1, 54, 97) 100%);
+    --perfil-h5-color:#b2bfc8;
+    --perfil-color-select:#b2bfc8;
+    --perfil-color-p:#b2bfc8;
   }
 
 body {
@@ -248,14 +258,15 @@ input[type="date"] {
   width: 89% !important;
 }
 
+
+
 .select-Centros {
   border-radius: 5px 5px 5px 5px;
-  color: #636c72;
+  color: var(--perfil-color-select);
   font-size: 16px;
   margin: 5px;
   width: 85%;
-  padding: 15px 32px;
-  border: 1px solid #636c72;
+  border: 1px solid #636c72 ;
   background-color: transparent;
 }
 
@@ -266,7 +277,7 @@ select.select-Centros option.option-select-centros {
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-  color: white;
+  color: var(--perfil-h5-color);
   background-color: transparent;
   border-bottom: 2px solid #5fbae9;
 }
@@ -276,7 +287,7 @@ input[type="password"]:focus {
 }
 
 input[type="text"]:placeholder {
-  color: #cccccc;
+  color: var(--perfil-h5-color);
 }
 
 .Icon-inside {
