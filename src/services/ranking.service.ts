@@ -176,8 +176,7 @@ export class RankingService {
     return this.http.post(URL_ELIMINAR_ENTREGA, JSON.stringify(entrega));
   }
 
-  modificarEntrega(entrega: any) {
-    console.log(entrega);
+  modificarEntrega(entrega: Entrega) {
 
     return this.http.post(URL_MODIFICAR_ENTREGA, JSON.stringify(entrega));
   }
