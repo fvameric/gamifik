@@ -1,3 +1,5 @@
+@import url("../../../../styles.css");
+
 input {
     color: black !important;
     width: 100% !important;
@@ -6,6 +8,7 @@ input {
 
 p {
     font-size: 15px;
+    color: var( --modal-color-text);
 }
 
 .modificar-nombre {

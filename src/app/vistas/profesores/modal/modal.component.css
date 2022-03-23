@@ -1,3 +1,5 @@
+@import url("../../../../styles.css");
+
 .crear-ranking {
     margin-left: 5%;
     padding: 10px;
@@ -15,7 +17,24 @@
     color: #ffffff;
 }
 
+.h1-modal{
+    color: white;
+    font: 400 24px/32px Roboto, "Helvetica Neue", sans-serif;
+}
+
+
 ::ng-deep .modal-dialog {
     margin-top: 200px;
     z-index: 900000;
+}
+
+::ng-deep .modal-body{
+    background-color: var(--modal-backgound-color);
+
+}
+
+::ng-deep .modal-header{
+    background-color: var(--modal-backgound-header);
+    opacity: 40px;
+    border-bottom: 0px solid !important;
 }

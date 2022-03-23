@@ -10,6 +10,9 @@
     --perfil-h5-color:black;
     --perfil-color-select: black;
     --perfil-color-p:white;
+    --modal-backgound-color: white;
+    --modal-backgound-header: white;
+    --modal-color-text:black;
 
     
   
@@ -22,6 +25,11 @@
     --perfil-h5-color:#b2bfc8;
     --perfil-color-select:#b2bfc8;
     --perfil-color-p:#b2bfc8;
+    --modal-backgound-color:rgb(2 9 16);
+    --modal-backgound-header:#56baed;
+    --modal-color-text:white;
+
+    
   }
 
 body {
