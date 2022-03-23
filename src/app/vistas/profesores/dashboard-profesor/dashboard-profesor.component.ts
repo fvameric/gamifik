@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Output, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { Profesor } from '../../../interfaces/Profesor';
 import { UsersService } from 'services/users.service';
 import { FormBuilder } from '@angular/forms';
@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CrearRankingComponent } from '../crear-ranking/crear-ranking.component';
 import { ModalComponent } from '../modal/modal.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-profesor',
@@ -15,6 +16,10 @@ import { ModalComponent } from '../modal/modal.component';
   styleUrls: ['./dashboard-profesor.component.css']
 })
 export class DashboardProfesorComponent implements OnInit {
+
+  //@ViewChildren('toggleButton') toggleBtn: ElementRef | undefined;
+  //@ViewChildren('despVisual') despVisual: ElementRef | undefined
+
   datosProfesor: Profesor = {
     id_profe: 0,
     nick: '',
@@ -55,6 +60,10 @@ export class DashboardProfesorComponent implements OnInit {
   entregaSeleccionada: any;
   flagEntregas: boolean = false;
 
+  antiguaId: number = 0;
+
+  //documentClickedTarget: Subject<HTMLElement> = new Subject<HTMLElement>()
+
   constructor(
     private modalService: NgbModal,
     private usersService: UsersService,
@@ -63,11 +72,34 @@ export class DashboardProfesorComponent implements OnInit {
     public formBuilder: FormBuilder,
     private elem: ElementRef) { }
 
+
+  /*
+@HostListener('document:click', ['$event'])
+documentClick(event: any): void {
+  this.documentClickedTarget.next(event.target);
+}
+*/
+
   ngOnInit(): void {
     this.obtenerDatos();
     this.obtenerDatosRanking();
     this.obtenerDatosEntregas();
+
+    //this.documentClickedTarget.subscribe(val => this.documentClickListener(val));
   }
+
+  /*
+  documentClickListener(target: any): void {
+    console.log(target);
+    
+    if (this.toggleBtn?.nativeElement.contains(target) || this.despVisual?.nativeElement.contains(target)) {
+      console.log("entra");
+    } else {
+      console.log("no entra");
+      this.mostrarDesplegableVisual = false;
+    }
+ }
+ */
 
   obtenerDatos() {
     this.datosProfesor = this.tokenService.getUser();
@@ -124,37 +156,37 @@ export class DashboardProfesorComponent implements OnInit {
         }
       });
 
-      let arrows = this.elem.nativeElement.querySelectorAll('.svgArrow');
+    let arrows = this.elem.nativeElement.querySelectorAll('.svgArrow');
 
-      var oldIndex: number = this.indice;
-      this.arrEntregas = [];
-      this.indice = index;
-      this.rankDesplegable = rank;
-  
-      if (index == oldIndex) {
-        if (this.flagDesplegable) {
-          this.flagDesplegable = false;
-          arrows[index].setAttribute("style", "transform: rotate(0deg);");
-        } else {
-          this.flagDesplegable = true;
-          arrows[index].setAttribute("style", "transform: rotate(90deg);");
-        }
+    var oldIndex: number = this.indice;
+    this.arrEntregas = [];
+    this.indice = index;
+    this.rankDesplegable = rank;
+
+    if (index == oldIndex) {
+      if (this.flagDesplegable) {
+        this.flagDesplegable = false;
+        arrows[index].setAttribute("style", "transform: rotate(0deg);");
       } else {
         this.flagDesplegable = true;
-        arrows[oldIndex].setAttribute("style", "transform: rotate(0deg);");
         arrows[index].setAttribute("style", "transform: rotate(90deg);");
       }
+    } else {
+      this.flagDesplegable = true;
+      arrows[oldIndex].setAttribute("style", "transform: rotate(0deg);");
+      arrows[index].setAttribute("style", "transform: rotate(90deg);");
+    }
 
-      if (this.entregas) {
-        this.flagEntregas = false;
-        this.entregas.forEach((element: any) => {
-          if (element.id_rank == this.rankDesplegable.id_rank) {
-            this.arrEntregas.push(element);
-          }
-        });
-      } else {
-        this.flagEntregas = true;
-      }
+    if (this.entregas) {
+      this.flagEntregas = false;
+      this.entregas.forEach((element: any) => {
+        if (element.id_rank == this.rankDesplegable.id_rank) {
+          this.arrEntregas.push(element);
+        }
+      });
+    } else {
+      this.flagEntregas = true;
+    }
   }
 
   generarCodRank() {
@@ -242,21 +274,25 @@ export class DashboardProfesorComponent implements OnInit {
     });
   }
 
+
+
   mostrarDesplegable(alumno: any) {
     this.alumnoSelec = alumno;
     console.log(this.alumnoSelec);
-    let antiguaId = alumno.id_alumno;
 
-    if (antiguaId == alumno.id_alumno) {
+    if (this.antiguaId == alumno.id_alumno) {
       if (this.mostrarDesplegableVisual) {
         this.mostrarDesplegableVisual = false;
       } else {
         this.mostrarDesplegableVisual = true;
       }
+    } else {
+      this.mostrarDesplegableVisual = true;
     }
-    if (antiguaId != alumno.id_alumno) {
-      this.mostrarDesplegableVisual = false;
-    }
+
+    this.antiguaId = alumno.id_alumno;
+
+
   }
 
   /*
