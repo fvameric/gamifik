@@ -18,7 +18,7 @@
 }
 
 .h1-modal{
-    color: white;
+    color: var( --modal-color-text);
     font: 400 24px/32px Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -30,11 +30,13 @@
 
 ::ng-deep .modal-body{
     background-color: var(--modal-backgound-color);
+    backdrop-filter: blur(6px);
 
 }
 
 ::ng-deep .modal-header{
     background-color: var(--modal-backgound-header);
+    backdrop-filter: blur(6px);
     opacity: 40px;
     border-bottom: 0px solid !important;
 }
