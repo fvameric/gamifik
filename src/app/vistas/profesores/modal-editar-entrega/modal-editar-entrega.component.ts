@@ -31,7 +31,7 @@ export class ModalEditarEntregaComponent implements OnInit {
 
   crearForm() {
     this.modEntregaForm = this.formBuilder.group({
-      nomEntrega: ['', Validators.required],
+      nomEntrega: [this.entregaSelec.nom_entrega, Validators.required],
     });
   }
 

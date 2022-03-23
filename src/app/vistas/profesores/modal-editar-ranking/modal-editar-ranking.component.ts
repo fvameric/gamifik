@@ -38,8 +38,10 @@ export class ModalEditarRankingComponent implements OnInit {
 
   crearForm() {
     this.modRankForm = this.formBuilder.group({
-      nomRank: ['', Validators.required],
+      nomRank: [this.rankSelec.nomRank, Validators.required],
     });
+
+    this.modRankForm.controls.nomRank.setValue(this.rankSelec.nom_rank);
   }
 
   retornar() {
@@ -48,6 +50,7 @@ export class ModalEditarRankingComponent implements OnInit {
   }
 
   enviar(modal: any) {
+    console.log("abrir modal editar rank");
     this.modalService.open(modal);
   }
 

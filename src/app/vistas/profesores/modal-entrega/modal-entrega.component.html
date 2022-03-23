@@ -1,4 +1,5 @@
-<a class="button-svg">
+<!--
+    <a class="button-svg">
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16" (click)="enviar(nombreModal)">
     <path fill-rule="evenodd"
       d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z" />
@@ -24,3 +25,17 @@
         </div>
     </form>
 </ng-template>
+-->
+
+<form [formGroup]="crearPractica">
+    <p>Nombre de la entrega:</p>
+    <input type="text" formControlName="nombrePractica" [ngClass]="{ 'is-invalid': form.nombrePractica.errors }">
+    <button type="submit" class="crear-ranking" (click)="onSubmit()" [disabled]="!crearPractica.valid">Crear entrega</button>
+    <div *ngIf="form.nombrePractica.pending" class="invalid-feedback">
+        <div>Consultando disponibilidad del nombre</div>
+    </div>
+    <div *ngIf="form.nombrePractica.errors" class="invalid-feedback">
+        <div *ngIf="form.nombrePractica.errors.required">El nombre es necesario</div>
+        <div *ngIf="form.nombrePractica.errors.notUnique">Nombre de practica ya existe</div>
+    </div>
+</form>

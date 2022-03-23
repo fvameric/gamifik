@@ -5,6 +5,9 @@ import { FormBuilder } from '@angular/forms';
 import { RankingService } from 'services/ranking.service';
 import { TokenService } from 'services/token.service';
 import Swal from 'sweetalert2';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CrearRankingComponent } from '../crear-ranking/crear-ranking.component';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-dashboard-profesor',
@@ -53,6 +56,7 @@ export class DashboardProfesorComponent implements OnInit {
   flagEntregas: boolean = false;
 
   constructor(
+    private modalService: NgbModal,
     private usersService: UsersService,
     private rankingService: RankingService,
     private tokenService: TokenService,
@@ -444,5 +448,15 @@ export class DashboardProfesorComponent implements OnInit {
       console.log(val);
       window.location.reload();
     });
+  }
+
+  // modals
+  abrirModal(idModal: number) {
+    const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.idModal = idModal;
+    modalRef.componentInstance.rankSelec = this.rankSeleccionado;
+    modalRef.componentInstance.alumnosRank = this.listaAlumnos;
+    modalRef.componentInstance.entregaSelec = this.entregaSeleccionada;
+    modalRef.componentInstance.alumnoDetalle = this.alumnoSelec;
   }
 }

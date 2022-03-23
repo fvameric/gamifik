@@ -4,7 +4,9 @@
         <div class="sidebar">
             <div class="cabecera-mis-rankings">
                 <h2>Mis Rankings</h2>
-                <app-modal></app-modal>
+                <button class="crear-ranking" (click)="abrirModal(1)">Crear</button>
+                <!--<app-modal></app-modal>-->
+
             </div>
             <div class="no-ranks" *ngIf="flagRanks;else tieneRankings">
                 <p>No tiene rankings</p>
@@ -78,11 +80,11 @@
 
                 <div class="flex-cons">
                     <a>
-                        <app-modal-entrega [rankSelec]="this.rankSeleccionado" [alumnosRank]="listaAlumnos"></app-modal-entrega>
+                        <button class="crear-ranking" (click)="abrirModal(3)">Crear entrega rank</button>
                     </a>
 
                     <a>
-                        <app-modal-editar-ranking [rankSelec]="this.rankSeleccionado"></app-modal-editar-ranking>
+                        <button class="crear-ranking" (click)="abrirModal(2)">Editar rank</button>
                     </a>
 
                     <a (click)="eliminarRanking()">
@@ -175,7 +177,7 @@
                     <div class="flex-cons">
                         <!--button editar-->
                         <a>
-                            <app-modal-editar-entrega [entregaSelec]="this.entregaSeleccionada"></app-modal-editar-entrega>
+                            <button class="crear-ranking" (click)="abrirModal(4)">Editar entrega</button>
                         </a>
 
                         <!--button borrar-->
@@ -220,7 +222,9 @@
                             <div *ngIf="this.mostrarDesplegableVisual && alumnoSelec == alumno.id_alumno">
                                 <div class="desplegableVisual">
                                     <a>
-                                        <app-modal-perfil-alumno [alumnoDetalle]="alumno"></app-modal-perfil-alumno>
+                                        <button (click)="abrirModal(5)">Ver detalle</button>
+                                        <!--<app-modal-perfil-alumno [alumnoDetalle]="alumno"></app-modal-perfil-alumno>-->
+
                                     </a>
                                     <hr>
                                     <a (click)="editarPuntuacionAlumno(alumno)">

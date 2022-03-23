@@ -25,7 +25,10 @@ export class ModalPerfilAlumnoComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
+    console.log(this.alumnoDetalle);
+    
   }
+  
   enviar(modal:any){
     this.modalService.open(modal); 
   }

@@ -1,4 +1,6 @@
-<button type="button " class="crear-ranking" (click)="enviar(nombreModal)">Crear</button>
+<!--
+    
+    <button type="button " class="crear-ranking" (click)="enviar(nombreModal)">Crear</button>
 <ng-template #nombreModal let-c="close" let-d="dismiss">
     <div class="modal-header">
         <h1>Crear ranking</h1>
@@ -8,3 +10,53 @@
         <app-crear-ranking></app-crear-ranking>
     </div>
 </ng-template>
+-->
+<div *ngIf="idModal === 1">
+    <div class="modal-header">
+        <h1>Crear ranking</h1>
+        <button type="button" class="close" data-dismiss="modal" (click)="retornar()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <app-crear-ranking></app-crear-ranking>
+    </div>
+</div>
+
+<div *ngIf="idModal === 2">
+    <div class="modal-header">
+        <h1>Editar ranking</h1>
+        <button type="button" class="close" data-dismiss="modal" (click)="retornar()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <app-modal-editar-ranking [rankSelec]="rankSelec"></app-modal-editar-ranking>
+    </div>
+</div>
+
+<div *ngIf="idModal === 3">
+    <div class="modal-header">
+        <h1>Crear entrega</h1>
+        <button type="button" class="close" data-dismiss="modal" (click)="retornar()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <app-modal-entrega [rankSelec]="rankSelec" [alumnosRank]="alumnosRank"></app-modal-entrega>
+    </div>
+</div>
+
+<div *ngIf="idModal === 4">
+    <div class="modal-header">
+        <h1>Editar entrega</h1>
+        <button type="button" class="close" data-dismiss="modal" (click)="retornar()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <app-modal-editar-entrega [entregaSelec]="entregaSelec"></app-modal-editar-entrega>
+    </div>
+</div>
+
+<div *ngIf="idModal === 5">
+    <div class="modal-header">
+        <h1>Ver detalle usuario</h1>
+        <button type="button" class="close" data-dismiss="modal" (click)="retornar()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <app-modal-perfil-alumno [alumnoDetalle]="alumnoDetalle"></app-modal-perfil-alumno>
+    </div>
+</div>

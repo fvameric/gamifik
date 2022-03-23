@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -8,10 +8,18 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalComponent implements OnInit {
 
+  @Input() idModal:any;
+  @Input() rankSelec:any;
+  @Input() alumnosRank:any;
+  @Input() entregaSelec:any;
+  @Input() alumnoDetalle:any;
 
   constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
+    console.log(this.alumnoDetalle);
+    
+    console.log(this.idModal);
   }
 
   ngOnDestroy() {
