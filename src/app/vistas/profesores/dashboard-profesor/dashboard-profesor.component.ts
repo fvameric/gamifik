@@ -29,7 +29,7 @@ export class DashboardProfesorComponent implements OnInit {
 
   mostrarDesplegableVisual: boolean = false;
   mostrarDesplegablePracticaVisual: boolean = false;
-  alumnoSelec: number = 0;
+  alumnoSelec: any;
   rankingSelec: number = 0;
 
   // rankings
@@ -243,7 +243,8 @@ export class DashboardProfesorComponent implements OnInit {
   }
 
   mostrarDesplegable(alumno: any) {
-    this.alumnoSelec = alumno.id_alumno;
+    this.alumnoSelec = alumno;
+    console.log(this.alumnoSelec);
     let antiguaId = alumno.id_alumno;
 
     if (antiguaId == alumno.id_alumno) {
@@ -347,8 +348,7 @@ export class DashboardProfesorComponent implements OnInit {
     });
   }
 
-  eliminarAlumno(idAlumno: any) {
-    console.log(idAlumno);
+  eliminarAlumno(alumno: any) {
 
     Swal.fire({
       title: '¿Quieres quitar este alumno del ranking?',
@@ -367,7 +367,7 @@ export class DashboardProfesorComponent implements OnInit {
           confirmButtonText: 'Ok'
         }).then((result) => {
 
-          this.rankingService.quitarAlumnoRanking(this.rankSeleccionado.id_rank, idAlumno).subscribe((val: any) => {
+          this.rankingService.quitarAlumnoRanking(this.rankSeleccionado.id_rank, alumno.id_alumno).subscribe((val: any) => {
             if (val.resultado == 'ok') {
               window.location.reload();
             } else {
@@ -457,6 +457,7 @@ export class DashboardProfesorComponent implements OnInit {
     modalRef.componentInstance.rankSelec = this.rankSeleccionado;
     modalRef.componentInstance.alumnosRank = this.listaAlumnos;
     modalRef.componentInstance.entregaSelec = this.entregaSeleccionada;
+    console.log(this.alumnoSelec);
     modalRef.componentInstance.alumnoDetalle = this.alumnoSelec;
   }
 }
