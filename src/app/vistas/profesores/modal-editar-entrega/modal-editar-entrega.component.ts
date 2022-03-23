@@ -1,5 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RankingService } from 'services/ranking.service';
 import { TokenService } from 'services/token.service';
@@ -27,6 +32,7 @@ export class ModalEditarEntregaComponent implements OnInit {
 
   ngOnInit(): void {
     this.crearForm();
+    this.checkNombre();
   }
 
   crearForm() {
@@ -45,6 +51,30 @@ export class ModalEditarEntregaComponent implements OnInit {
     this.submitted = false;
   }
 
+  get nombreEntrega() {
+    return this.modEntregaForm.get('nomEntrega') as FormControl;
+  }
+
+  get form() {
+    return this.modEntregaForm.controls;
+  }
+
+  checkNombre() {
+    this.form.nomEntrega.valueChanges.subscribe((nombreEntrega) => {
+      this.rankService
+        .validarNombreExistePractica(this.entregaSelec.id_rank, nombreEntrega)
+        .subscribe((val: any) => {
+          if (nombreEntrega==this.entregaSelec.nom_entrega) {
+          } else {
+            if (val.resultado == 'error') {
+              this.nombreEntrega.markAsPending({ onlySelf: false });
+              this.nombreEntrega.setErrors({ notUnique: true });
+            }
+          }
+        });
+    });
+  }
+
   onSubmit(form: any) {
     console.log(form.controls.nomEntrega.value);
     console.log(this.entregaSelec);
@@ -57,6 +87,8 @@ export class ModalEditarEntregaComponent implements OnInit {
       console.log(entrega);
 
       this.rankService.modificarEntrega(entrega).subscribe();
+
+      window.location.reload();
     }
   }
 }

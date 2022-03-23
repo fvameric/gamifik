@@ -10,6 +10,7 @@ import {
 import { TokenService } from '../../../../services/token.service';
 import { debounceTime, tap } from 'rxjs/operators';
 import { RankingService } from 'services/ranking.service';
+import { Ranking } from '../../../interfaces/Ranking';
 
 @Component({
   selector: 'app-modal-editar-ranking',
@@ -49,13 +50,36 @@ export class ModalEditarRankingComponent implements OnInit {
     this.submitted = false;
   }
 
+  get nombreEntrega() {
+    return this.modRankForm.get('nomRank') as FormControl;
+  }
+
+  get form() {
+    return this.modRankForm.controls;
+  }
+
   enviar(modal: any) {
     console.log("abrir modal editar rank");
     this.modalService.open(modal);
   }
 
+  //FALTA PONER CHECK NOMBRE RANKING
+
   onSubmit(form: any) {
     console.log(form.controls.nomRank.value);
     console.log(this.rankSelec);
+    if (this.modRankForm.valid) {
+      let ranking: Ranking = {
+        id_rank: this.rankSelec.id_rank,
+        nom_rank: this.modRankForm.get('nomRank')?.value,
+        alumnos: this.rankSelec.alumnos,
+        cod_rank: this.rankSelec.cod_rank
+      };
+      console.log(ranking);
+
+      this.rankService.modificarRanking(ranking).subscribe();
+
+      window.location.reload();
+    }
   }
 }

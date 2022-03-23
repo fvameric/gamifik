@@ -24,6 +24,12 @@
 
 <form [formGroup]="modEntregaForm">
     <p>Nombre de la practica:</p>
-    <input type="text" formControlName="nomEntrega">
+    <input type="text" formControlName="nomEntrega" [ngClass]="{ 'is-invalid': form.nomEntrega.errors }">
+    <div *ngIf="form.nomEntrega.errors" class="invalid-feedback">
+        <div *ngIf="form.nomEntrega.errors.notUnique">Nombre de entrega ya existe</div>
+        <div *ngIf="form.nomEntrega.errors.email">Nombre de entrega no válido</div>
+        <div *ngIf="form.nomEntrega.errors.required">Nombre de entrega vacio</div>
+    </div>
+
     <button class="modificar-nombre" (click)="onSubmit(modEntregaForm)">Editar nombre de la practica</button>
 </form>

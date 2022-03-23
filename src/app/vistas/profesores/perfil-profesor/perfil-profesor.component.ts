@@ -6,7 +6,7 @@ import {
   FormGroup,
   FormBuilder,
   Validators,
-  FormControl
+  FormControl,
 } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { TokenService } from 'services/token.service';
@@ -15,10 +15,9 @@ import { AuthService } from 'services/auth.service';
 @Component({
   selector: 'app-perfil-profesor',
   templateUrl: './perfil-profesor.component.html',
-  styleUrls: ['./perfil-profesor.component.css']
+  styleUrls: ['./perfil-profesor.component.css'],
 })
 export class PerfilProfesorComponent implements OnInit {
-
   modificacionForm!: FormGroup;
 
   profesores: any;
@@ -53,7 +52,7 @@ export class PerfilProfesorComponent implements OnInit {
     apellidos: '',
     centro: 0,
     tipo: 1,
-    imagen: ''
+    imagen: '',
   };
 
   datosStorage: any;
@@ -85,14 +84,15 @@ export class PerfilProfesorComponent implements OnInit {
   listaCentros = [
     { id: 0, nombre: 'Ilerna' },
     { id: 1, nombre: 'Caparrella' },
-    { id: 2, nombre: 'Almenar' }
+    { id: 2, nombre: 'Almenar' },
   ];
 
   constructor(
     private usersService: UsersService,
     private authService: AuthService,
     private tokenService: TokenService,
-    public formBuilder: FormBuilder) { }
+    public formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.obtenerDatosProfesor();
@@ -112,18 +112,21 @@ export class PerfilProfesorComponent implements OnInit {
   /********** funciones formulario **********/
   crearFormulario() {
     //Validadors registre
-    this.modificacionForm = this.formBuilder.group({
-      inputNombre: [this.nombre],
-      inputApellidos: [this.apellidos],
-      inputEmail: [this.email],
-      inputOldPass: [''],
-      inputPass: ['', [Validators.minLength(6), Validators.maxLength(50)]],
-      inputConfirmPass: [''],
-      inputCentro: [this.centroSelec]
-    }, {
-      //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
-      validator: this.mustMatch("inputPass", "inputConfirmPass")
-    });
+    this.modificacionForm = this.formBuilder.group(
+      {
+        inputNombre: [this.nombre],
+        inputApellidos: [this.apellidos],
+        inputEmail: [this.email],
+        inputOldPass: [''],
+        inputPass: ['', [Validators.minLength(6), Validators.maxLength(50)]],
+        inputConfirmPass: [''],
+        inputCentro: [this.centroSelec],
+      },
+      {
+        //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
+        validator: this.mustMatch('inputPass', 'inputConfirmPass'),
+      }
+    );
   }
 
   // funció per controlar que camps password i confirmarpassword siguin iguals
@@ -154,13 +157,13 @@ export class PerfilProfesorComponent implements OnInit {
       if (event.target.files[0].type.indexOf('image') == 0) {
         const file = event.target.files[0];
         const reader = new FileReader();
-        reader.onload = e => this.imgSrc = reader.result;
+        reader.onload = (e) => (this.imgSrc = reader.result);
         reader.readAsDataURL(file);
       } else {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Por favor elige una imagen'
+          text: 'Por favor elige una imagen',
         });
       }
     }
@@ -182,7 +185,7 @@ export class PerfilProfesorComponent implements OnInit {
           apellidos: form.controls.inputApellidos.value,
           imagen: this.imgSrc,
           centro: form.controls.inputCentro.value,
-        }
+        };
       } else {
         userModif = {
           id: this.datosProfesor.id_profe,
@@ -191,7 +194,7 @@ export class PerfilProfesorComponent implements OnInit {
           apellidos: form.controls.inputApellidos.value,
           imagen: this.imgSrc,
           centro: form.controls.inputCentro.value,
-        }
+        };
       }
       Swal.fire({
         title: '¿Quieres guardar los cambios?',
@@ -199,7 +202,7 @@ export class PerfilProfesorComponent implements OnInit {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí'
+        confirmButtonText: 'Sí',
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire({
@@ -208,20 +211,21 @@ export class PerfilProfesorComponent implements OnInit {
             text: 'Se han guardaron los cambios',
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Ok'
+            confirmButtonText: 'Ok',
           }).then((result) => {
-            this.usersService.modificarProfesor(userModif).subscribe((val: any) => {
-              this.editableNombre = true;
-              this.editableApellidos = true;
-              this.editableEmail = true;
-              this.tokenService.saveUser(val.data);
-              this.obtenerDatosProfesor();
-              window.location.reload();
-            });
+            this.usersService
+              .modificarProfesor(userModif)
+              .subscribe((val: any) => {
+                this.editableNombre = true;
+                this.editableApellidos = true;
+                this.editableEmail = true;
+                this.tokenService.saveUser(val.data);
+                this.obtenerDatosProfesor();
+                window.location.reload();
+              });
           });
         }
       });
-
     }
   }
 
@@ -243,11 +247,13 @@ export class PerfilProfesorComponent implements OnInit {
   checkEmail() {
     this.form.inputEmail.valueChanges.subscribe((formEmail) => {
       if (this.datosProfesor.email != this.form.inputEmail.value) {
-        this.usersService.validarEmailExisteProfes(formEmail).subscribe((val: any) => {
-          if (val.resultado == 'error') {
-            this.formEmail.setErrors({ notUnique: true });
-          }
-        });
+        this.usersService
+          .validarEmailExisteProfes(formEmail)
+          .subscribe((val: any) => {
+            if (val.resultado == 'error') {
+              this.formEmail.setErrors({ notUnique: true });
+            }
+          });
       } else {
         this.formEmail.setErrors(null);
       }
@@ -257,11 +263,13 @@ export class PerfilProfesorComponent implements OnInit {
   checkPass() {
     this.form.inputOldPass.valueChanges.subscribe((formPass) => {
       if (formPass != '') {
-        this.usersService.validarPassProfes(formPass, this.datosProfesor.id_profe).subscribe((val: any) => {
-          if (val.resultado == 'error') {
-            this.formPass.setErrors({ notUnique: true });
-          }
-        });
+        this.usersService
+          .validarPassProfes(formPass, this.datosProfesor.id_profe)
+          .subscribe((val: any) => {
+            if (val.resultado == 'error') {
+              this.formPass.setErrors({ notUnique: true });
+            }
+          });
       } else {
         this.formPass.setErrors(null);
       }
@@ -325,11 +333,11 @@ export class PerfilProfesorComponent implements OnInit {
 
     if (this.mostrarEditarContrasena == true) {
       this.mostrarEditarContrasena = false;
-      parent.setAttribute("style", "transform: rotate(0deg);");
+      parent.setAttribute('style', 'transform: rotate(0deg);');
     } else {
       this.checkPass();
       this.mostrarEditarContrasena = true;
-      parent.setAttribute("style", "transform: rotate(90deg);");
+      parent.setAttribute('style', 'transform: rotate(90deg);');
     }
   }
 

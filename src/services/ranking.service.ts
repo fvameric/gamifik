@@ -177,9 +177,9 @@ export class RankingService {
   }
 
   modificarEntrega(entrega: Entrega) {
-
     return this.http.post(URL_MODIFICAR_ENTREGA, JSON.stringify(entrega));
   }
+
 
   aceptarAlumnosPendientes(alumno: any) {
     return this.http.post(URL_ALUMNOS_PENDIENTES, JSON.stringify(alumno));

@@ -25,6 +25,10 @@
 
 <form [formGroup]="modRankForm">
     <p>Nombre del ranking:</p>
-    <input type="text" formControlName="nomRank">
+    <input type="text" formControlName="nomRank" [ngClass]="{ 'is-invalid': form.nomRank.errors }">
     <button class="modificar-nombre" (click)="onSubmit(modRankForm)">Editar nombre del ranking</button>
+    <div *ngIf="form.nomRank.errors" class="invalid-feedback">
+        <div *ngIf="form.nomRank.errors.notUnique">Nombre de entrega ya existe</div>
+        <div *ngIf="form.nomRank.errors.required">Nombre de entrega vacio</div>
+    </div>
 </form>
