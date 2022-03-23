@@ -82,6 +82,13 @@ p {
     animation-duration: 20s;
 }
 
+.h1-logotest{
+    color: #007bff;
+    letter-spacing: 5px;
+    margin-left: 15px;
+    animation: barra1 0.2s forwards;
+}
+
 .parallax > use:nth-child(3) {
     animation-delay: -4s;
     animation-duration: 20s;
@@ -121,8 +128,8 @@ p {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    padding: 40px;
-    padding-top: 110px;
+    padding: 0px;
+    padding-top: 120px;
 }
 
 .logotest > div {
