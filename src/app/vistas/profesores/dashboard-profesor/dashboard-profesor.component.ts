@@ -455,13 +455,13 @@ documentClick(event: any): void {
     });
   }
 
-  async aceptarPendientes(pendiente: any) {
+  aceptarPendientes(pendiente: any) {
     pendiente.aceptado = 1;
     let i: number = 0;
 
-    await this.rankingService.aceptarAlumnosPendientes(pendiente).subscribe((val: any) => {
+    this.rankingService.aceptarAlumnosPendientes(pendiente).subscribe((val: any) => {
       if (val.resultado == 'ok') {
-        this.entregas.forEach(async (element: any) => {
+        this.entregas.forEach((element: any) => {
           console.log(i++);
           if (element.id_rank == pendiente.id_rank) {
             var ids = {
@@ -470,11 +470,11 @@ documentClick(event: any): void {
               "id_alumno": pendiente.id_alumno
             }
 
-            await this.rankingService.insertarEntregaJoin(ids).subscribe();
+            this.rankingService.insertarEntregaJoin(ids).subscribe();
+            window.location.reload();
           }
         });
       }
-      window.location.reload();
     });
   }
 
