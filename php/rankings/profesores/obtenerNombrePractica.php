@@ -25,11 +25,11 @@ if ($res) {
     $datosUsername = mysqli_fetch_assoc($res);
     if ($datosUsername == '' || $datosUsername == null) {
         $response->resultado = 'ok';
-        $response->mensaje = 'Este nombre del ranking no está en uso';
+        $response->mensaje = 'Este nombre de la entrega no está en uso';
         echo json_encode($response);
     } else {
         $response->resultado = 'error';
-        $response->mensaje = 'Este nombre del ranking está en uso';
+        $response->mensaje = 'Este nombre de la entrega está en uso';
         echo json_encode($response);
     }
 } else {

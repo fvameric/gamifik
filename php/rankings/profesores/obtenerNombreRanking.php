@@ -19,7 +19,7 @@ class Result
 $response = new Result();
 
 // query
-$query = "SELECT * FROM `ranking`, `rank_profes` WHERE ranking.id_rank = rank_profes.id_rank AND rank_profes.id_profe=$_GET[id_profe] AND ranking.nom_rank='$_GET[nom_rank]'";
+$query = "SELECT nom_rank FROM ranking, rank_profes WHERE ranking.id_rank=rank_profes.id_rank AND rank_profes.id_profe='$_GET[id_profe]' AND ranking.nom_rank='$_GET[nom_rank]'";
 $res = mysqli_query($con, $query);
 
 // validación de la query
