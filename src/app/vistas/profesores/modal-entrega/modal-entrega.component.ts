@@ -82,34 +82,41 @@ export class ModalEntregaComponent implements OnInit {
     this.entrega.nom_entrega = this.nombrePractica.value;
     this.entrega.id_rank = this.rankSelec.id_rank;
 
-    this.rankService.insertarPractica(this.entrega).subscribe((val: any) => {
-      if (val.resultado == 'ok') {
-        console.log
-        console.log("alumnosrank length: " + this.alumnosRank.length);
-        if (this.alumnosRank.length != 0) {
-          console.log("insert con alumnos");
-          this.alumnosRank.forEach((element: any) => {
-            var ids = {
-              "id_rank": this.entrega.id_rank,
-              "id_entrega": val.data.id_entrega,
-              "id_alumno": element.id_alumno
-            }
+    this.rankService.insertarPractica(this.entrega).subscribe(val => this.doSomething(val));
+    
+    
+   // window.location.reload();
+  }
 
-            this.rankService.insertarEntregaJoin(ids).subscribe();
-          });
-        } else {
-          console.log("insert SIN alumnos");
+  doSomething(val: any) {
+    if (val.resultado == 'ok') {
+      console.log("alumnosrank length: " + this.alumnosRank.length);
+      if (this.alumnosRank.length != 0) {
+        console.log("insert con alumnos");
+        this.alumnosRank.forEach((element: any) => {
           var ids = {
             "id_rank": this.entrega.id_rank,
-            "id_entrega": val.data.id_entrega
+            "id_entrega": val.data.id_entrega,
+            "id_alumno": element.id_alumno
           }
 
           this.rankService.insertarEntregaJoin(ids).subscribe();
+          console.log("final1");
+          
+        });
+      } else {
+        console.log("insert SIN alumnos");
+        var ids = {
+          "id_rank": this.entrega.id_rank,
+          "id_entrega": val.data.id_entrega
         }
-        window.location.reload();
-      }
-    });
 
+        this.rankService.insertarEntregaJoin(ids).subscribe();
+        console.log("final2");
+      }
+      console.log("final3");
+    }
+    console.log("final4");
   }
 
   checkNombre() {
