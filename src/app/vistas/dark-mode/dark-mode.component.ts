@@ -7,20 +7,27 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./dark-mode.component.css']
 })
 export class DarkModeComponent implements OnInit {
-  theme: Theme = 'light-theme';
+  theme: string = 'light-theme';
   mostrarSolVisual:boolean = true;
-  mostrarLunaVisual:boolean =false;
+  mostrarLunaVisual:boolean = false;
+  GuardarDatos:string = "" ;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2
-  ) { }
+  ) {
+    
+   }
 
   ngOnInit() {
+    this.GuardarDatos = JSON.parse(localStorage.getItem('DarkMode') ||'[]');
+    this.theme = this.GuardarDatos;
     this.initializeTheme();
   }
 
      switchTheme():void {
+
+
       this.document.body.classList.replace(
         this.theme,
         this.theme === 'light-theme'
@@ -38,10 +45,14 @@ export class DarkModeComponent implements OnInit {
        this.mostrarSolVisual=true;
        this.mostrarLunaVisual=false;
      }
-
+     this.guardarLocalStorage();
 
     }
-  
+
+    guardarLocalStorage(){
+      localStorage.setItem('DarkMode',JSON.stringify(this.theme) );
+    }
+    
     initializeTheme = (): void =>
       this.renderer.addClass(this.document.body, this.theme);
 }
