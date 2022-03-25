@@ -1,0 +1,63 @@
+@import url('../../../styles.css');
+
+body {
+    font-family: sans-serif;
+  }
+  
+  .container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .podium__item {
+    width: 500px;
+  }
+  
+  .podium__rank {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    color: #fff;
+  }
+  
+  .podium__city {
+    text-align: center;
+    padding: 0 .5rem;
+  }
+  
+  .podium__number {
+    width: 27px;
+    height: 75px;
+  }
+  
+  .podium .first {
+    min-height: 570px;
+    background: #007bff;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    border-radius: 10px 10px 0px 0px;
+  }
+  
+  .podium .second {
+    min-height: 375px;
+    background: #56baed;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    border-radius: 10px 0px 0px 0px;
+  }
+  
+  .podium .third {
+    min-height: 210px;
+    background: #92badd;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    border-radius: 0px 10px 0px 0px;
+  }
+  
