@@ -48,4 +48,3 @@
     $response->mensaje = 'Hubo un error al registrar el ranking';
     echo json_encode($response);
   }
-?>

@@ -28,6 +28,7 @@ import { RegistroProfesorComponent } from './vistas/identificacion/registro/regi
 import { ModalEditarRankingComponent } from './vistas/profesores/modal-editar-ranking/modal-editar-ranking.component';
 import { ModalEditarEntregaComponent } from './vistas/profesores/modal-editar-entrega/modal-editar-entrega.component';
 import { VerDetallesAlumnoComponent } from './vistas/profesores/ver-detalles-alumno/ver-detalles-alumno.component';
+import { LoaderSkeletonComponent } from './plantillas/loader-skeleton/loader-skeleton.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,8 @@ import { VerDetallesAlumnoComponent } from './vistas/profesores/ver-detalles-alu
     LoaderComponent,
     routingComponents,
     ModalEditarEntregaComponent,
-    VerDetallesAlumnoComponent
+    VerDetallesAlumnoComponent,
+    LoaderSkeletonComponent,
   ],
   imports: [
     BrowserModule,

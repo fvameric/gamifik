@@ -1,4 +1,13 @@
-import { Component, ElementRef, HostListener, OnInit, Output, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  Output,
+  Renderer2,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { Profesor } from '../../../interfaces/Profesor';
 import { UsersService } from 'services/users.service';
 import { FormBuilder } from '@angular/forms';
@@ -13,10 +22,9 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'app-dashboard-profesor',
   templateUrl: './dashboard-profesor.component.html',
-  styleUrls: ['./dashboard-profesor.component.css']
+  styleUrls: ['./dashboard-profesor.component.css'],
 })
 export class DashboardProfesorComponent implements OnInit {
-
   //@ViewChildren('toggleButton') toggleBtn: ElementRef | undefined;
   //@ViewChildren('despVisual') despVisual: ElementRef | undefined
 
@@ -29,7 +37,7 @@ export class DashboardProfesorComponent implements OnInit {
     apellidos: '',
     centro: 0,
     tipo: 1,
-    imagen: ''
+    imagen: '',
   };
 
   mostrarDesplegableVisual: boolean = false;
@@ -53,6 +61,7 @@ export class DashboardProfesorComponent implements OnInit {
   flagDesplegable: boolean = false;
   indice: number = 0;
   indiceRank: number = 0;
+  indiceEntrega: number = 0;
 
   // entregas
   entregas: any;
@@ -70,8 +79,8 @@ export class DashboardProfesorComponent implements OnInit {
     private rankingService: RankingService,
     private tokenService: TokenService,
     public formBuilder: FormBuilder,
-    private elem: ElementRef) { }
-
+    private elem: ElementRef
+  ) {}
 
   /*
 @HostListener('document:click', ['$event'])
@@ -107,7 +116,9 @@ documentClick(event: any): void {
 
   obtenerDatosRanking() {
     this.arrRankings = [];
-    this.rankingService.obtenerRanking().subscribe(val => this.rankings = val);
+    this.rankingService
+      .obtenerRanking()
+      .subscribe((val) => (this.rankings = val));
     this.rankingService.obtenerJoinRankingProfes().subscribe((val: any) => {
       this.rankingsConProfes = val;
 
@@ -126,17 +137,24 @@ documentClick(event: any): void {
   }
 
   obtenerDatosEntregas() {
-    this.rankingService.obtenerEntregas().subscribe(val => this.entregas = val);
+    this.rankingService
+      .obtenerEntregas()
+      .subscribe((val) => (this.entregas = val));
   }
 
   rankSelec(rank: any, index: number) {
     this.rankSeleccionado = rank;
 
-    let btnRanks = this.elem.nativeElement.querySelectorAll('.button-ranking-class');
-    btnRanks[index].setAttribute("style", "background-color: #56baed;");
-    btnRanks[this.indiceRank].setAttribute("style", "background-color: transparent;");
+    let btnRanks = this.elem.nativeElement.querySelectorAll(
+      '.button-ranking-class'
+    );
+    btnRanks[index].setAttribute('style', 'background-color: #56baed;');
+    btnRanks[this.indiceRank].setAttribute(
+      'style',
+      'background-color: transparent;'
+    );
     if (index == this.indiceRank) {
-      btnRanks[index].setAttribute("style", "background-color: #56baed;");
+      btnRanks[index].setAttribute('style', 'background-color: #56baed;');
     }
     this.indiceRank = index;
     this.templateFlag = true;
@@ -166,15 +184,15 @@ documentClick(event: any): void {
     if (index == oldIndex) {
       if (this.flagDesplegable) {
         this.flagDesplegable = false;
-        arrows[index].setAttribute("style", "transform: rotate(0deg);");
+        arrows[index].setAttribute('style', 'transform: rotate(0deg);');
       } else {
         this.flagDesplegable = true;
-        arrows[index].setAttribute("style", "transform: rotate(90deg);");
+        arrows[index].setAttribute('style', 'transform: rotate(90deg);');
       }
     } else {
       this.flagDesplegable = true;
-      arrows[oldIndex].setAttribute("style", "transform: rotate(0deg);");
-      arrows[index].setAttribute("style", "transform: rotate(90deg);");
+      arrows[oldIndex].setAttribute('style', 'transform: rotate(0deg);');
+      arrows[index].setAttribute('style', 'transform: rotate(90deg);');
     }
 
     if (this.entregas) {
@@ -198,9 +216,11 @@ documentClick(event: any): void {
 
     this.rankSeleccionado.cod_rank = nuevoCod;
 
-    this.rankingService.modificarRanking(this.rankSeleccionado).subscribe((val: any) => {
-      console.log(val);
-    });
+    this.rankingService
+      .modificarRanking(this.rankSeleccionado)
+      .subscribe((val: any) => {
+        console.log(val);
+      });
   }
 
   //Funcion que genera el codigo
@@ -239,7 +259,7 @@ documentClick(event: any): void {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí'
+      confirmButtonText: 'Sí',
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
@@ -248,7 +268,7 @@ documentClick(event: any): void {
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Sí'
+          confirmButtonText: 'Sí',
         }).then((result) => {
           if (result.isConfirmed) {
             Swal.fire({
@@ -256,15 +276,17 @@ documentClick(event: any): void {
               title: 'Ok',
               text: 'Se eliminó el ranking',
               confirmButtonColor: '#3085d6',
-              confirmButtonText: 'Ok'
+              confirmButtonText: 'Ok',
             }).then((result) => {
-              this.rankingService.eliminarRanking(this.rankSeleccionado.id_rank).subscribe((val: any) => {
-                if (val.resultado == 'ok') {
-                  this.obtenerDatosRanking();
-                } else {
-                  console.log(val.mensaje);
-                }
-              });
+              this.rankingService
+                .eliminarRanking(this.entregaSeleccionada.id_rank)
+                .subscribe((val: any) => {
+                  if (val.resultado == 'ok') {
+                    this.obtenerDatosRanking();
+                  } else {
+                    console.log(val.mensaje);
+                  }
+                });
             });
           } else if (result.isDenied) {
             Swal.fire('No se ha eliminado el ranking', '', 'info');
@@ -273,8 +295,6 @@ documentClick(event: any): void {
       }
     });
   }
-
-
 
   mostrarDesplegable(alumno: any) {
     this.alumnoSelec = alumno;
@@ -291,8 +311,6 @@ documentClick(event: any): void {
     }
 
     this.antiguaId = alumno.id_alumno;
-
-
   }
 
   /*
@@ -344,7 +362,10 @@ documentClick(event: any): void {
       .subscribe((val: any) => {
         if (val != null) {
           val.forEach((element: any) => {
-            if (element.aceptado == 1 && element.id_entrega == entrega.id_entrega) {
+            if (
+              element.aceptado == 1 &&
+              element.id_entrega == entrega.id_entrega
+            ) {
               this.listaAlumnosEntregas.push(element);
             }
           });
@@ -359,7 +380,7 @@ documentClick(event: any): void {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí'
+      confirmButtonText: 'Sí',
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
@@ -367,16 +388,17 @@ documentClick(event: any): void {
           title: 'Ok',
           text: 'Se eliminó la entrega',
           confirmButtonColor: '#3085d6',
-          confirmButtonText: 'Ok'
+          confirmButtonText: 'Ok',
         }).then((result) => {
-
-          this.rankingService.eliminarEntregas(this.entregaSeleccionada).subscribe((val: any) => {
-            if (val.resultado == 'ok') {
-              window.location.reload();
-            } else {
-              console.log(val.mensaje);
-            }
-          });
+          this.rankingService
+            .eliminarEntregas(this.entregaSeleccionada)
+            .subscribe((val: any) => {
+              if (val.resultado == 'ok') {
+                window.location.reload();
+              } else {
+                console.log(val.mensaje);
+              }
+            });
         });
       } else if (result.isDenied) {
         Swal.fire('No se ha eliminado la entrega', '', 'info');
@@ -385,14 +407,13 @@ documentClick(event: any): void {
   }
 
   eliminarAlumno(alumno: any) {
-
     Swal.fire({
       title: '¿Quieres quitar este alumno del ranking?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí'
+      confirmButtonText: 'Sí',
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
@@ -400,16 +421,20 @@ documentClick(event: any): void {
           title: 'Ok',
           text: 'Se quitó al usuario del ranking',
           confirmButtonColor: '#3085d6',
-          confirmButtonText: 'Ok'
+          confirmButtonText: 'Ok',
         }).then((result) => {
-
-          this.rankingService.quitarAlumnoRanking(this.rankSeleccionado.id_rank, alumno.id_alumno).subscribe((val: any) => {
-            if (val.resultado == 'ok') {
-              window.location.reload();
-            } else {
-              console.log(val.mensaje);
-            }
-          });
+          this.rankingService
+            .quitarAlumnoRanking(
+              this.rankSeleccionado.id_rank,
+              alumno.id_alumno
+            )
+            .subscribe((val: any) => {
+              if (val.resultado == 'ok') {
+                window.location.reload();
+              } else {
+                console.log(val.mensaje);
+              }
+            });
         });
       } else if (result.isDenied) {
         Swal.fire('No se ha eliminado el ranking', '', 'info');
@@ -425,7 +450,7 @@ documentClick(event: any): void {
       icon: 'question',
       input: 'range',
       inputLabel: 'Puntuación',
-      inputValue: alumno.puntuacion_entrega
+      inputValue: alumno.puntuacion_entrega,
     }).then((result) => {
       puntuacionAlumno = result.value;
 
@@ -435,17 +460,19 @@ documentClick(event: any): void {
           title: 'Ok',
           text: 'Se puntuó al alumno con un ' + puntuacionAlumno.toString(),
           confirmButtonColor: '#3085d6',
-          confirmButtonText: 'Ok'
+          confirmButtonText: 'Ok',
         }).then((result) => {
           console.log(puntuacionAlumno);
           alumno.puntuacion = puntuacionAlumno;
 
-          this.listaAlumnosEntregas.forEach(element => {
+          this.listaAlumnosEntregas.forEach((element) => {
             if (element.id_alumno == alumno.id_alumno) {
               element.puntuacion_entrega = puntuacionAlumno;
-              this.rankingService.modificarRankAlumnos(element).subscribe((val: any) => {
-                console.log(val);
-              });
+              this.rankingService
+                .modificarRankAlumnos(element)
+                .subscribe((val: any) => {
+                  console.log(val);
+                });
             }
           });
         });
@@ -459,30 +486,34 @@ documentClick(event: any): void {
     pendiente.aceptado = 1;
     let i: number = 0;
 
-    this.rankingService.aceptarAlumnosPendientes(pendiente).subscribe((val: any) => {
-      if (val.resultado == 'ok') {
-        this.entregas.forEach((element: any) => {
-          console.log(i++);
-          if (element.id_rank == pendiente.id_rank) {
-            var ids = {
-              "id_rank": pendiente.id_rank,
-              "id_entrega": element.id_entrega,
-              "id_alumno": pendiente.id_alumno
-            }
+    this.rankingService
+      .aceptarAlumnosPendientes(pendiente)
+      .subscribe((val: any) => {
+        if (val.resultado == 'ok') {
+          this.entregas.forEach((element: any) => {
+            console.log(i++);
+            if (element.id_rank == pendiente.id_rank) {
+              var ids = {
+                id_rank: pendiente.id_rank,
+                id_entrega: element.id_entrega,
+                id_alumno: pendiente.id_alumno,
+              };
 
-            this.rankingService.insertarEntregaJoin(ids).subscribe();
-            window.location.reload();
-          }
-        });
-      }
-    });
+              this.rankingService.insertarEntregaJoin(ids).subscribe();
+              window.location.reload();
+            }
+          });
+        }
+      });
   }
 
   denegarPendientes(pendiente: any) {
-    this.rankingService.eliminarAlumnosPendientes(pendiente).subscribe((val: any) => {
-      console.log(val);
-      window.location.reload();
-    });
+    this.rankingService
+      .eliminarAlumnosPendientes(pendiente)
+      .subscribe((val: any) => {
+        console.log(val);
+        window.location.reload();
+      });
   }
 
   // modals
