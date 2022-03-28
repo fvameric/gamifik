@@ -6,9 +6,10 @@
                 <li class="nav-items-right">
                     <div *ngIf="user.tipo == 0;else perfilProfe">
                         <div class="dropdown">
-                            <img class="dropbtn" src={{user.imagen}} />
+                            <app-loader-skeleton Cwidth="50" Cheight="50" *ngIf="!loaded" [circle]="true"></app-loader-skeleton>
+                            <img class="dropbtn" *ngIf="loaded" src={{user.imagen}} />
                             <div class="dropdown-content">
-                                <a routerLink="/perfil"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                <a routerLink="/perfil"><svg *ngIf="loaded" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                         style="color: white; margin-right: 10px;" fill="currentColor"
                                         class="bi bi-person-bounding-box" viewBox="0 0 16 16">
                                         <path
@@ -16,15 +17,17 @@
                                         <path
                                             d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                                     </svg>
-                                    <p>Perfil</p>
+                                    <app-loader-skeleton Cwidth="140" Cheight="55" *ngIf="!loaded"></app-loader-skeleton>
+                                    <p *ngIf="loaded">Perfil</p>
                                 </a>
-                                <a (click)="cerrarSesion()"><svg xmlns="http://www.w3.org/2000/svg"
+                                <a (click)="cerrarSesion()"><svg *ngIf="loaded" xmlns="http://www.w3.org/2000/svg"
                                         style="color: white;  margin-right: 5px;" width="20" height="20" fill="currentColor"
                                         class="bi bi-door-open-fill" viewBox="0 0 16 16">
                                         <path
                                             d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
                                     </svg>
-                                    <p>Cerrar Sesion</p>
+                                    <app-loader-skeleton Cwidth="140" Cheight="55" *ngIf="!loaded"></app-loader-skeleton>
+                                    <p *ngIf="loaded">Cerrar Sesion</p>
                                 </a>
                             </div>
                         </div>
@@ -62,7 +65,8 @@
                     <!-- <img style="cursor: pointer;" routerLink="/perfilprofesor"  src={{user.imagen}} />-->
                 </li>
                 <li class="nav-items-right">
-                    <a routerLink="/dashboard"> Mis Rankins</a>
+                    <app-loader-skeleton Cwidth="129" Cheight="48" *ngIf="!loaded"></app-loader-skeleton>
+                    <a *ngIf="loaded" routerLink="/dashboard"> Mis Rankins</a>
                 </li>
                 <li class="nav-items-right">
                     <app-dark-mode></app-dark-mode>
