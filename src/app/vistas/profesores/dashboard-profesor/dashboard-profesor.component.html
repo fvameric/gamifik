@@ -36,6 +36,9 @@
                                     <p>No tiene entregas</p>
                                 </div>
                                 <ng-template #tieneEntregas>
+                                    <form [formGroup]="buscadorInput">
+                                    <input type="text" formControlName="nombreBuscador" class="input-buscador" id="buscadorId" (click)="buscador()" placeholder="Buscador...">
+                                    </form>
                                     <h3 class="texto-h3">Entrega</h3>
                                     <div class="practicas-ranking" *ngFor="let entrega of arrEntregas">
                                         <button (click)="detalleEntrega(entrega)" class="btn-entrega">{{entrega.nom_entrega}}</button>

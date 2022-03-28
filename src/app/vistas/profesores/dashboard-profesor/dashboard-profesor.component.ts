@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { Profesor } from '../../../interfaces/Profesor';
 import { UsersService } from 'services/users.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { RankingService } from 'services/ranking.service';
 import { TokenService } from 'services/token.service';
 import Swal from 'sweetalert2';
@@ -44,6 +44,8 @@ export class DashboardProfesorComponent implements OnInit {
   mostrarDesplegablePracticaVisual: boolean = false;
   alumnoSelec: any;
   rankingSelec: number = 0;
+  buscadorInput!: FormGroup;
+
 
   // rankings
   rankings: any;
@@ -80,7 +82,7 @@ export class DashboardProfesorComponent implements OnInit {
     private tokenService: TokenService,
     public formBuilder: FormBuilder,
     private elem: ElementRef
-  ) {}
+  ) { }
 
   /*
 @HostListener('document:click', ['$event'])
@@ -93,6 +95,7 @@ documentClick(event: any): void {
     this.obtenerDatos();
     this.obtenerDatosRanking();
     this.obtenerDatosEntregas();
+    this.crearformInput();
 
     //this.documentClickedTarget.subscribe(val => this.documentClickListener(val));
   }
@@ -526,4 +529,50 @@ documentClick(event: any): void {
     console.log(this.alumnoSelec);
     modalRef.componentInstance.alumnoDetalle = this.alumnoSelec;
   }
+
+
+  //buscador 
+  filtro: any;
+  entregasPracticasBuscar: any;
+  splitArray: any;
+  i: any;
+  textoBuscador: any;
+  imputBuscador: any = undefined;
+
+
+  crearformInput() {
+    this.buscadorInput = this.formBuilder.group({
+      nombreBuscador: [''],
+    })
+  }
+
+  get nombreBuscador() {
+    return this.buscadorInput.get('nombreBuscador') as FormControl;
+  }
+
+
+  buscador(): any {
+
+    this.nombreBuscador.valueChanges.subscribe((nombreBuscador) => {
+
+      this.imputBuscador = document.getElementById('buscadorId');
+      this.filtro = nombreBuscador.toUpperCase();
+      this.entregasPracticasBuscar = document.getElementsByClassName('btn-entrega');
+
+      for (this.i = 0; this.i < this.entregasPracticasBuscar.length; this.i++) {
+        var text = this.entregasPracticasBuscar[this.i].innerText.split("\n");
+        if (text[0].toUpperCase().indexOf(this.filtro) > -1) {
+          this.entregasPracticasBuscar[this.i].style.display = "";
+        } else {
+          this.entregasPracticasBuscar[this.i].style.display = "none";
+        }
+
+      }
+    })
+
+  }
+
+
 }
+
+
