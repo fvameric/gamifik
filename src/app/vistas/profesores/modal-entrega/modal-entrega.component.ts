@@ -83,40 +83,37 @@ export class ModalEntregaComponent implements OnInit {
     this.entrega.id_rank = this.rankSelec.id_rank;
 
     this.rankService.insertarPractica(this.entrega).subscribe(val => this.doSomething(val));
-    
-    
    // window.location.reload();
   }
 
   doSomething(val: any) {
+    var paqueteAlumnos: any = [];
+
     if (val.resultado == 'ok') {
-      console.log("alumnosrank length: " + this.alumnosRank.length);
       if (this.alumnosRank.length != 0) {
-        console.log("insert con alumnos");
         this.alumnosRank.forEach((element: any) => {
-          var ids = {
+          var idsAlumnos = {
             "id_rank": this.entrega.id_rank,
             "id_entrega": val.data.id_entrega,
             "id_alumno": element.id_alumno
           }
-
-          this.rankService.insertarEntregaJoin(ids).subscribe();
-          console.log("final1");
-          
+          paqueteAlumnos.push(idsAlumnos);
         });
       } else {
-        console.log("insert SIN alumnos");
         var ids = {
           "id_rank": this.entrega.id_rank,
           "id_entrega": val.data.id_entrega
         }
-
-        this.rankService.insertarEntregaJoin(ids).subscribe();
-        console.log("final2");
+        paqueteAlumnos.push(ids);
       }
-      console.log("final3");
     }
-    console.log("final4");
+    console.log(paqueteAlumnos);
+    
+    this.rankService.insertarEntregaJoin(paqueteAlumnos).subscribe((val:any) => {
+      console.log(val);
+      
+    });
+    //window.location.reload();
   }
 
   checkNombre() {
