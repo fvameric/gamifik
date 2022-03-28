@@ -69,6 +69,8 @@ export class PerfilComponent implements OnInit {
 
   oldPassValidation: boolean = false;
 
+  loaded = false;
+
   // token
   logUserToken: any;
 
@@ -79,8 +81,12 @@ export class PerfilComponent implements OnInit {
     public formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    
     this.obtenerDatosAlumno();
     this.crearFormulario();
+    setInterval(() => {
+      this.loaded = true;
+    }, 6000);
   }
 
   obtenerDatosAlumno() {

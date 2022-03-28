@@ -28,7 +28,7 @@ import { RegistroProfesorComponent } from './vistas/identificacion/registro/regi
 import { ModalEditarRankingComponent } from './vistas/profesores/modal-editar-ranking/modal-editar-ranking.component';
 import { ModalEditarEntregaComponent } from './vistas/profesores/modal-editar-entrega/modal-editar-entrega.component';
 import { VerDetallesAlumnoComponent } from './vistas/profesores/ver-detalles-alumno/ver-detalles-alumno.component';
-import { LoaderSkeletonComponent } from './plantillas/loader-skeleton/loader-skeleton.component';
+import { SkeletonLoaderModule } from './plantillas/loader-skeleton/skeleton-loader/skeleton-loader.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +40,6 @@ import { LoaderSkeletonComponent } from './plantillas/loader-skeleton/loader-ske
     routingComponents,
     ModalEditarEntregaComponent,
     VerDetallesAlumnoComponent,
-    LoaderSkeletonComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +49,8 @@ import { LoaderSkeletonComponent } from './plantillas/loader-skeleton/loader-ske
     NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    SkeletonLoaderModule
   ],
   providers: [
     DatePipe,

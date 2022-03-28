@@ -11,12 +11,17 @@ export class HeaderComponent implements OnInit {
   toggleMenu: boolean = false;
 
   user: any;
+
+  loaded = false;
   
   constructor(private tokenService: TokenService,
     private authService: AuthService) {}
 
   ngOnInit(): void {
     this.user = this.tokenService.getUser();
+    setInterval(() => {
+      this.loaded = true;
+    }, 6000);
   }
 
   expirado() {
