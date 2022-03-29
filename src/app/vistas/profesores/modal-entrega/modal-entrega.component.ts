@@ -107,8 +107,15 @@ export class ModalEntregaComponent implements OnInit {
       }
     }
     
-    this.rankService.insertarEntregaJoin(paqueteAlumnos).subscribe();
-    window.location.reload();
+    this.rankService.insertarEntregaJoin(paqueteAlumnos).subscribe(val => this.resultadoInsert(val));
+  }
+
+  resultadoInsert(val: any) {
+    if (val.resultado == 'ok') {
+      window.location.reload();
+    } else {
+      console.log(val);
+    }
   }
 
   checkNombre() {
