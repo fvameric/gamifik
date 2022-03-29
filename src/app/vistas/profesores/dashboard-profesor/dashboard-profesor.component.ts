@@ -301,7 +301,6 @@ documentClick(event: any): void {
 
   mostrarDesplegable(alumno: any) {
     this.alumnoSelec = alumno;
-    console.log(this.alumnoSelec);
 
     if (this.antiguaId == alumno.id_alumno) {
       if (this.mostrarDesplegableVisual) {
@@ -465,7 +464,6 @@ documentClick(event: any): void {
           confirmButtonColor: '#3085d6',
           confirmButtonText: 'Ok',
         }).then((result) => {
-          console.log(puntuacionAlumno);
           alumno.puntuacion = puntuacionAlumno;
 
           this.listaAlumnosEntregas.forEach((element) => {
@@ -487,27 +485,26 @@ documentClick(event: any): void {
 
   aceptarPendientes(pendiente: any) {
     pendiente.aceptado = 1;
-    let i: number = 0;
+    this.rankingService.aceptarAlumnosPendientes(pendiente).subscribe(val => this.insertarAlumnosJoin(pendiente, val));
+  }
 
-    this.rankingService
-      .aceptarAlumnosPendientes(pendiente)
-      .subscribe((val: any) => {
-        if (val.resultado == 'ok') {
-          this.entregas.forEach((element: any) => {
-            console.log(i++);
-            if (element.id_rank == pendiente.id_rank) {
-              var ids = {
-                id_rank: pendiente.id_rank,
-                id_entrega: element.id_entrega,
-                id_alumno: pendiente.id_alumno,
-              };
-
-              this.rankingService.insertarEntregaJoin(ids).subscribe();
-              window.location.reload();
-            }
-          });
+  insertarAlumnosJoin(pendiente: any, val: any) {
+    var arrPendientes: any = [];
+    
+    if (val.resultado == 'ok') {
+      this.entregas.forEach((element: any) => {
+        if (element.id_rank == pendiente.id_rank) {
+          var ids = {
+            "id_rank": pendiente.id_rank,
+            "id_entrega": element.id_entrega,
+            "id_alumno": pendiente.id_alumno
+          }
+          arrPendientes.push(ids);
         }
       });
+    }
+    this.rankingService.insertarEntregaJoin(arrPendientes).subscribe();
+    window.location.reload();
   }
 
   denegarPendientes(pendiente: any) {
@@ -526,7 +523,6 @@ documentClick(event: any): void {
     modalRef.componentInstance.rankSelec = this.rankSeleccionado;
     modalRef.componentInstance.alumnosRank = this.listaAlumnos;
     modalRef.componentInstance.entregaSelec = this.entregaSeleccionada;
-    console.log(this.alumnoSelec);
     modalRef.componentInstance.alumnoDetalle = this.alumnoSelec;
   }
 
@@ -569,10 +565,5 @@ documentClick(event: any): void {
 
       }
     })
-
   }
-
-
 }
-
-

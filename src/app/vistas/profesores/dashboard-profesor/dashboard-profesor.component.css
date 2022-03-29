@@ -523,3 +523,27 @@ a:hover {
 .btn-denegar-pendientes:hover {
     background-color: #ad0219;
 }
+
+
+/* header entregas */
+
+.header-entregas {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-crear-entrega {
+    border: 0;
+    background: none;
+}
+
+
+/* buscador */
+
+.form-buscador {
+    padding-left: 10px;
+}
+
+.input-buscador {
+    width: 90%;
+}

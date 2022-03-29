@@ -65,7 +65,6 @@ export class DashboardComponent implements OnInit {
         this.flagRanks = false;
 
         val.forEach((element: any) => {
-          console.log(element);
           if (element.aceptado == 0) {
             this.flagPendiente = true;
           }
@@ -99,7 +98,6 @@ export class DashboardComponent implements OnInit {
     let alumnoExiste: boolean = false;
     this.rankings.forEach((element: any) => {
       if (codRank == element.cod_rank) {
-        console.log("rank existe");
         rankId = element.id_rank;
         rankExiste = true;
       }
@@ -120,7 +118,6 @@ export class DashboardComponent implements OnInit {
           text: 'ya está en el ranking'
         });
       } else {
-        console.log("alumno NO está en el rank");
         Swal.fire({
           title: "¿Quieres unirte a " + codRank + "?",
           icon: 'warning',
@@ -135,7 +132,6 @@ export class DashboardComponent implements OnInit {
               title: 'Ok',
               text: 'Se une al ranking'
             });
-            console.log("Se une al ranking");
 
             this.rankingService.insertarAlumnoEnRanking(rankId, this.datosAlumno.id_alumno).subscribe((val: any) => {
               if (val.resultado == 'ok') {
@@ -155,7 +151,6 @@ export class DashboardComponent implements OnInit {
         title: 'Error',
         text: "Codigo " + codRank + " no existe"
       });
-      console.log(codRank + " no existe");
     }
   }
 

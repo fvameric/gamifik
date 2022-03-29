@@ -82,11 +82,10 @@ export class ModalEntregaComponent implements OnInit {
     this.entrega.nom_entrega = this.nombrePractica.value;
     this.entrega.id_rank = this.rankSelec.id_rank;
 
-    this.rankService.insertarPractica(this.entrega).subscribe(val => this.doSomething(val));
-   // window.location.reload();
+    this.rankService.insertarPractica(this.entrega).subscribe(val => this.insertarAlumnosJoin(val));
   }
 
-  doSomething(val: any) {
+  insertarAlumnosJoin(val: any) {
     var paqueteAlumnos: any = [];
 
     if (val.resultado == 'ok') {
@@ -107,13 +106,9 @@ export class ModalEntregaComponent implements OnInit {
         paqueteAlumnos.push(ids);
       }
     }
-    console.log(paqueteAlumnos);
     
-    this.rankService.insertarEntregaJoin(paqueteAlumnos).subscribe((val:any) => {
-      console.log(val);
-      
-    });
-    //window.location.reload();
+    this.rankService.insertarEntregaJoin(paqueteAlumnos).subscribe();
+    window.location.reload();
   }
 
   checkNombre() {

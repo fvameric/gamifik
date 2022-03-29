@@ -209,7 +209,6 @@ export class RegistroAlumnoComponent implements OnInit {
     if (mes < 0 || (mes === 0 && today.getDate() > fechaNacimiento.getDate())) {
       edad--;
     }
-    console.log('Edad: ' + edad + ' fecha nacimiento' + fechaNacimiento);
 
     return edad;
   }
