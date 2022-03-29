@@ -9,7 +9,7 @@
                             <app-loader-skeleton Cwidth="50" Cheight="50" *ngIf="!loaded" [circle]="true"></app-loader-skeleton>
                             <img class="dropbtn" *ngIf="loaded" src={{user.imagen}} />
                             <div class="dropdown-content">
-                                <a routerLink="/perfil"><svg *ngIf="loaded" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                <a routerLink="/perfil" *ngIf="loaded"><svg *ngIf="loaded" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                         style="color: white; margin-right: 10px;" fill="currentColor"
                                         class="bi bi-person-bounding-box" viewBox="0 0 16 16">
                                         <path
@@ -20,7 +20,7 @@
                                     <app-loader-skeleton Cwidth="140" Cheight="55" *ngIf="!loaded"></app-loader-skeleton>
                                     <p *ngIf="loaded">Perfil</p>
                                 </a>
-                                <a (click)="cerrarSesion()"><svg *ngIf="loaded" xmlns="http://www.w3.org/2000/svg"
+                                <a (click)="cerrarSesion()" *ngIf="loaded"><svg *ngIf="loaded" xmlns="http://www.w3.org/2000/svg"
                                         style="color: white;  margin-right: 5px;" width="20" height="20" fill="currentColor"
                                         class="bi bi-door-open-fill" viewBox="0 0 16 16">
                                         <path
@@ -65,8 +65,7 @@
                     <!-- <img style="cursor: pointer;" routerLink="/perfilprofesor"  src={{user.imagen}} />-->
                 </li>
                 <li class="nav-items-right">
-                    <app-loader-skeleton Cwidth="129" Cheight="48" *ngIf="!loaded"></app-loader-skeleton>
-                    <a *ngIf="loaded" routerLink="/dashboard"> Mis Rankins</a>
+                    <a routerLink="/dashboard"> Mis Rankins</a>
                 </li>
                 <li class="nav-items-right">
                     <app-dark-mode></app-dark-mode>

@@ -6,9 +6,10 @@ body {
 
 .main-separador {
     display: flex;
-    margin-top: 150px;
+    top: 150px;
     padding-bottom: 150px;
     justify-content: center;
+    position: sticky;
 }
 
 .separador1 {
