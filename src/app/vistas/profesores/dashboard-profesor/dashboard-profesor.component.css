@@ -294,32 +294,26 @@ svg:hover {
         margin: 12px;
         margin-top: 150px;
     }
-
     .separador1 {
         margin: 0px;
         margin-bottom: 40px;
         width: 100%;
     }
-
     .separador2 {
         margin: 0px;
         width: 100%;
     }
-
     .cabecera-lista-rankings {
         display: block;
     }
-
     .array-rankings {
         display: flex;
         overflow-x: scroll;
         padding: 6px;
     }
-
     .button-ranking-class {
         text-align: center;
     }
-
     .rank {
         border-right: 1px solid #dce8f13d;
     }
@@ -431,7 +425,7 @@ svg:hover {
     display: block;
 }
 
-.button-buscar{
+.button-buscar {
     background: transparent;
     border: none;
     color: #929191;
@@ -570,11 +564,19 @@ a:hover {
     background: none;
 }
 
+.hr-entrega {
+    margin-top: 0;
+    margin-bottom: 0;
+    border: 0;
+    width: 80%;
+    border-top: 1px solid rgb(255 255 255 / 50%);
+}
+
 
 /* buscador */
 
-.form-buscador {
-    padding-left: 10px;
+input[type="text"]:focus {
+    color: var(--backgound-color-skeleton);
 }
 
 .input-buscador {
