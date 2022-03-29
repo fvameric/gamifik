@@ -294,26 +294,32 @@ svg:hover {
         margin: 12px;
         margin-top: 150px;
     }
+
     .separador1 {
         margin: 0px;
         margin-bottom: 40px;
         width: 100%;
     }
+
     .separador2 {
         margin: 0px;
         width: 100%;
     }
+
     .cabecera-lista-rankings {
         display: block;
     }
+
     .array-rankings {
         display: flex;
         overflow-x: scroll;
         padding: 6px;
     }
+
     .button-ranking-class {
         text-align: center;
     }
+
     .rank {
         border-right: 1px solid #dce8f13d;
     }
@@ -398,6 +404,27 @@ svg:hover {
 .texto-h3 {
     color: #cccccc;
     margin: 5px;
+}
+
+.input-buscador {
+    background: transparent;
+    border-radius: 5px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    color: #cccccc;
+}
+
+.contenido-buscar {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+
+.svg-buscar {
+    margin-top: 5px;
+    color: #929191;
 }
 
 .practicas-ranking {
