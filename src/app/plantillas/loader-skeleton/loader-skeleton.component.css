@@ -1,13 +1,15 @@
+@import url("../../../styles.css");
+
 .loader {
   display: inline-block;
-  background-color: #dddbdd;
+  background-color: var(--backgound-color-skeleton);
   position: relative;
   width: 200px;
   height: 20px;
   overflow: hidden;
   border-radius: 4px;
   margin-bottom: 4px;
-  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  background: linear-gradient(110deg, var(--backgound-color-skeleton-gradien1) 8%, var(--backgound-color-skeleton-gradien2) 18%, var(--backgound-color-skeleton-gradien3) 33%);
   border-radius: 5px;
   background-size: 200% 100%;
   animation: 1.5s shine linear infinite;

@@ -13,6 +13,10 @@
     --modal-backgound-color: white;
     --modal-backgound-header: white;
     --modal-color-text:black;
+    --backgound-color-skeleton: #dddbdd;
+    --backgound-color-skeleton-gradien1: #ececec;
+    --backgound-color-skeleton-gradien2: #ececec;
+    --backgound-color-skeleton-gradien: #ececec;
 
     
   
@@ -28,6 +32,10 @@
     --modal-backgound-color:rgb(2 9 16);
     --modal-backgound-header:#56baed;
     --modal-color-text:white;
+    --backgound-color-skeleton: #707070;
+    --backgound-color-skeleton-gradien1: #494949;
+    --backgound-color-skeleton-gradien2: #292929;
+    --backgound-color-skeleton-gradien3: #494949;
 
     
   }

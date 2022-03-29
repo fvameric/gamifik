@@ -431,6 +431,12 @@ svg:hover {
     display: block;
 }
 
+.button-buscar{
+    background: transparent;
+    border: none;
+    color: #929191;
+}
+
 .btn-entrega {
     background-color: transparent;
     width: 96%;
