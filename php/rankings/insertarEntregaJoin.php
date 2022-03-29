@@ -29,7 +29,7 @@ if (isset($paqueteAlumnos[0]->id_alumno) != null) {
         $queryRelation = "INSERT INTO `rank_entregas`(`id_rank_entregas`, `id_rank`, `id_entrega`, `id_alumno`, `puntuacion_entrega`) VALUES (NULL, '$entrega->id_rank', '$entrega->id_entrega', '$entrega->id_alumno', 0)";
         $resInsertRelation = mysqli_query($con, $queryRelation);
     }
-    /*
+    
     // validacion de la query
     if ($resInsertRelation) {
         $response->resultado = 'ok';
@@ -42,15 +42,15 @@ if (isset($paqueteAlumnos[0]->id_alumno) != null) {
         echo json_encode($response);
         exit;
     }
-    */
+    
 } else {
     foreach($paqueteAlumnos as $entrega) {
         $queryRelation = "INSERT INTO `rank_entregas`(`id_rank_entregas`, `id_rank`, `id_entrega`, `puntuacion_entrega`) VALUES (NULL, '$entrega->id_rank', '$entrega->id_entrega', 0)";
-        $resInsertRelation = mysqli_query($con, $queryRelation);
+        $resInsertRelationSinAlumnos = mysqli_query($con, $queryRelation);
     }
-    /*
+    
     // validacion de la query
-    if ($resInsertRelation) {
+    if ($resInsertRelationSinAlumnos) {
         $response->resultado = 'ok';
         $response->mensaje = 'Se registró correctamente';
         echo json_encode($response);
@@ -61,7 +61,7 @@ if (isset($paqueteAlumnos[0]->id_alumno) != null) {
         echo json_encode($response);
         exit;
     }
-    */
+    
 }
 
 
