@@ -503,8 +503,15 @@ documentClick(event: any): void {
         }
       });
     }
-    this.rankingService.insertarEntregaJoin(arrPendientes).subscribe();
-    window.location.reload();
+    this.rankingService.insertarEntregaJoin(arrPendientes).subscribe(val => this.resultadoInsert(val));
+  }
+
+  resultadoInsert(val: any) {
+    if (val.resultado == 'ok') {
+      window.location.reload();
+    } else {
+      console.log(val);
+    }
   }
 
   denegarPendientes(pendiente: any) {
