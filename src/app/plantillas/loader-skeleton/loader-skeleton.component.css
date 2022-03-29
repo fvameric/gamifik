@@ -9,7 +9,7 @@
   overflow: hidden;
   border-radius: 4px;
   margin-bottom: 4px;
-  background: linear-gradient(110deg, var(--backgound-color-skeleton-gradien1) 8%, var(--backgound-color-skeleton-gradien2) 18%, var(--backgound-color-skeleton-gradien3) 33%);
+  background: var(--backgound-color-skeleton-gradien);
   border-radius: 5px;
   background-size: 200% 100%;
   animation: 1.5s shine linear infinite;
