@@ -13,8 +13,8 @@
             </div>
             <div class="lista-rankings">
                 <ng-template #tieneRankings>
-                    <app-loader></app-loader>
-                    <div class="array-rankings">
+                    <app-loader-skeleton Cwidth="255" Cheight="50" *ngIf="!loaded"></app-loader-skeleton>
+                    <div class="array-rankings" *ngIf="loaded">
                         <div *ngFor="let rank of arrRankings; let i = index" class="rank">
                             <div class="contenido-ranking">
                                 <button class="button-ranking-class" (click)="rankSelec(rank, i)">
@@ -130,7 +130,7 @@
                 </div>
             </div>
             <div class="alumnos-ranking">
-                <app-loader></app-loader>
+                <app-loader-skeleton Cwidth="192" Cheight="20" *ngIf="!loaded"></app-loader-skeleton>
                 <div class="table-element" *ngFor="let alumno of listaAlumnos; let i = index">
                     <div class="table-num">
                         {{i+1}}
@@ -222,7 +222,7 @@
                 </div>
 
                 <div class="alumnos-ranking">
-                    <app-loader></app-loader>
+                    <app-loader-skeleton Cwidth="192" Cheight="20" *ngIf="!loaded"></app-loader-skeleton>
                     <div class="table-element" *ngFor="let alumno of listaAlumnosEntregas; let i = index">
                         <div class="table-num">
                             {{i+1}}
