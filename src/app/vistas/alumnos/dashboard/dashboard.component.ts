@@ -9,6 +9,8 @@ import { TokenService } from 'services/token.service';
 import { LoadingInterceptorService } from 'services/loading-interceptor.service';
 import { concat, forkJoin } from 'rxjs';
 import { concatMap, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { AuthService } from 'services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -44,14 +46,15 @@ export class DashboardComponent implements OnInit {
     private usersService: UsersService,
     private rankingService: RankingService,
     private tokenService: TokenService,
-    public formBuilder: FormBuilder) {}
+    public formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.obtenerDatos();
     this.obtenerDatosRanking();
-    setInterval(() => {
-      this.loaded = true;
-    }, 6000);
+
+    this.authService.guardarRoute(this.router.url);
   }
 
   obtenerDatos() {
