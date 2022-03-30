@@ -39,6 +39,7 @@ import { SkeletonLoaderModule } from './plantillas/loader-skeleton/skeleton-load
     LoaderComponent,
     routingComponents,
     ModalEditarEntregaComponent,
+    ModalEditarRankingComponent,
     VerDetallesAlumnoComponent,
   ],
   imports: [

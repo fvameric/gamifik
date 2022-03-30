@@ -1,23 +1,24 @@
 @import url("../../../styles.css");
-
 .loader {
-  display: inline-block;
-  background-color: var(--backgound-color-skeleton);
-  position: relative;
-  width: 200px;
-  height: 20px;
-  overflow: hidden;
-  border-radius: 4px;
-  margin-bottom: 4px;
-  background: var(--backgound-color-skeleton-gradien);
-  border-radius: 5px;
-  background-size: 200% 100%;
-  animation: 1.5s shine linear infinite;
+    display: inline-block;
+    background-color: var(--backgound-color-skeleton);
+    position: relative;
+    width: 200px;
+    height: 20px;
+    overflow: hidden;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    background: var(--backgound-color-skeleton-gradien);
+    border-radius: 5px;
+    background-size: 200% 100%;
+    animation: 1.5s shine linear infinite;
 }
 
 @keyframes shine {
-  to {
-    background-position-x: -200%;
-  }
+    to {
+        background-position-x: -200%;
+    }
 }
+
+
 /* https://www.youtube.com/watch?v=Ay6hhL-dDdI */

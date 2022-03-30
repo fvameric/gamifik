@@ -10,8 +10,11 @@ export class LoaderService {
 
   show() {
     this.isLoading.next(true);
+    console.log("isloading true");
+    
   }
   hide() {
     this.isLoading.next(false);
+    console.log("isloading false");
   }
 }

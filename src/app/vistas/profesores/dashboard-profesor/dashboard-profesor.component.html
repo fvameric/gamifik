@@ -1,7 +1,9 @@
 <app-header></app-header>
+
 <div class="main-separador">
     <div class="separador1">
         <div class="sidebar">
+
             <div class="cabecera-mis-rankings">
                 <h2>Mis Rankings</h2>
                 <button class="crear-ranking" (click)="abrirModal(1)">Crear</button>
@@ -13,11 +15,12 @@
             </div>
             <div class="lista-rankings">
                 <ng-template #tieneRankings>
-                    <app-loader-skeleton Cwidth="255" Cheight="50" *ngIf="!loaded"></app-loader-skeleton>
-                    <div class="array-rankings" *ngIf="loaded">
-                        <div *ngFor="let rank of arrRankings; let i = index" class="rank">
+
+                    <div class="array-rankings">
+                        <div *ngFor="let rank of arrRankings; let i = index;" class="rank">
                             <div class="contenido-ranking">
-                                <button class="button-ranking-class" (click)="rankSelec(rank, i)">
+                                <app-loader-skeleton Cwidth="255" Cheight="30" *ngIf="!loaded"></app-loader-skeleton>
+                                <button class="button-ranking-class" (click)="rankSelec(rank, i)" *ngIf="loaded">
                                     <svg class='svgArrow' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                         xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" width="20"
                                         height="20">

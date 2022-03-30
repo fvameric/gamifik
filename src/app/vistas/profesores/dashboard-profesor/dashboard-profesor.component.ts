@@ -102,9 +102,12 @@ documentClick(event: any): void {
     this.obtenerDatosRanking();
     this.obtenerDatosEntregas();
     this.crearformInput();
+
+    
     setInterval(() => {
       this.loaded = true;
     }, 6000);
+    
 
     this.authService.guardarRoute(this.router.url);
 
@@ -293,7 +296,7 @@ documentClick(event: any): void {
               confirmButtonText: 'Ok',
             }).then((result) => {
               this.rankingService
-                .eliminarRanking(this.entregaSeleccionada.id_rank)
+                .eliminarRanking(this.rankSeleccionado.id_rank)
                 .subscribe((val: any) => {
                   if (val.resultado == 'ok') {
                     this.obtenerDatosRanking();
