@@ -18,6 +18,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CrearRankingComponent } from '../crear-ranking/crear-ranking.component';
 import { ModalComponent } from '../modal/modal.component';
 import { Subject } from 'rxjs';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard-profesor',
@@ -83,7 +84,8 @@ export class DashboardProfesorComponent implements OnInit {
     private rankingService: RankingService,
     private tokenService: TokenService,
     public formBuilder: FormBuilder,
-    private elem: ElementRef
+    private elem: ElementRef,
+    private authService:AuthService
   ) { }
 
   /*
@@ -101,6 +103,8 @@ documentClick(event: any): void {
     setInterval(() => {
       this.loaded = true;
     }, 6000);
+
+    //this.authService.guardarRoute(this.router.url);
 
     //this.documentClickedTarget.subscribe(val => this.documentClickListener(val));
   }
