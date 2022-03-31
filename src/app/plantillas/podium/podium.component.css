@@ -7,13 +7,73 @@
     justify-content: center;
     width: 100%;
     height: 100%; 
+    z-index: 99;
+    
   }
   
 
   .podium__item {
     width: 500px;
+    animation:move 4s;
+  }
+
+  .animacion-podium-nombre1{
+    text-align: center;
+    position: relative;
+    animation:move1 10s forwards;
+    z-index: 9;
+  }
+  .animacion-podium-nombre2{
+    text-align: center;
+    position: relative;
+    animation:move2 10s forwards;
+    z-index: 9;
+  }
+  .animacion-podium-nombre3{
+    text-align: center;
+    position: relative;
+    animation:move3 10s forwards;
+    z-index: 9;
   }
   
+
+  .animacion-podium{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    animation:move 5s;
+    z-index: 9;
+  }
+
+
+  .posicion-ranking{
+    font-size: 50px;
+    color: white;
+    text-align: center;
+  }
+
+  @keyframes move{
+
+    from {top: 500px;}
+    to {top: 0px;}
+  }
+ 
+  @keyframes move1{
+
+    from {top: 1500px;}
+    to {top: 0px;}
+  }
+  @keyframes move2{
+
+    from {top: 1300px;}
+    to {top: 0px;}
+  }
+  @keyframes move3{
+
+    from {top: 1000px;}
+    to {top: 0px;}
+  }
+
 
   .podium__rank {
     display: flex;
@@ -25,6 +85,8 @@
 
   
   .podium__city {
+    font-size: 25px;
+    color: white;
     text-align: center;
     padding: 0 .5rem;
   }
@@ -44,6 +106,7 @@
     backdrop-filter: blur(6px);
     border-radius: 10px 10px 0px 0px;
     width: 350px;
+
   }
   
 
@@ -55,6 +118,7 @@
     backdrop-filter: blur(6px);
     border-radius: 10px 0px 0px 0px;
     width: 350px;
+
   }
   
   
