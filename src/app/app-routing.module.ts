@@ -19,7 +19,6 @@ import { IdentificacionProfesoresComponent } from './vistas/identificacion/ident
 import { PerfilPruebaComponent } from './vistas/alumnos/perfil-prueba/perfil-prueba.component';
 import { ModalEditarRankingComponent } from './vistas/profesores/modal-editar-ranking/modal-editar-ranking.component';
 import { DarkModeComponent } from './vistas/dark-mode/dark-mode.component';
-import { ConfettiComponent } from './plantillas/Confetti/Confetti.component';
 import { PodiumComponent } from './plantillas/podium/podium.component';
 
 const routes: Routes = [
@@ -40,7 +39,6 @@ const routes: Routes = [
   { path: 'modal-perfil-alumno', component: ModalPerfilAlumnoComponent },
   { path: 'modal-editar-ranking', component: ModalEditarRankingComponent },
   { path: 'dark-mode', component: DarkModeComponent },
-  { path:  'confetti', component: ConfettiComponent },
   { path: 'podium', component: PodiumComponent}
 ];
 
@@ -66,6 +64,5 @@ export const routingComponents = [
   ModalPerfilAlumnoComponent,
   ModalEditarRankingComponent,
   DarkModeComponent,
-  ConfettiComponent,
   PodiumComponent
 ];
