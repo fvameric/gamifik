@@ -9,6 +9,7 @@ const URL_LOGIN_ALUMNOS = 'http://localhost:8080/identificacion/loginAlumnos.php
 const URL_LOGIN_PROFESORES = 'http://localhost:8080/identificacion/loginProfes.php';
 const URL_REGISTRO_ALUMNO = 'http://localhost:8080/alumnos/insertarAlumno.php';
 const URL_REGISTRO_PROFESOR = 'http://localhost:8080/profesores/insertarProfesor.php';
+const USER_LS = 'userLocalStorage';
 const ROUTE_LS = 'userRoute';
 
 @Injectable({

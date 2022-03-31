@@ -15,7 +15,6 @@ export class LoaderComponent implements OnInit {
   constructor(private loaderService: LoaderService) {}
 
   ngOnInit(): void {
-    console.log("loader ngoninit");
   }
 
 }

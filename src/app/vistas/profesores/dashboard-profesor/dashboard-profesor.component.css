@@ -183,7 +183,7 @@ div.content {
     border-radius: 7px;
 }
 
-.button-ranking-class:hover {
+.contenido-ranking:hover {
     transition: 200ms;
     color: white;
     background-color: #56baed;
