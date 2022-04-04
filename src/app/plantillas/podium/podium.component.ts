@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Alumno } from 'app/interfaces/Alumno';
+import { RankingService } from 'services/ranking.service';
 
 @Component({
   selector: 'app-podium',
@@ -20,10 +21,20 @@ export class PodiumComponent implements OnInit {
     imagen: ''
   };
 
-  constructor() { }
+  constructor(
+    private rankingService: RankingService,
+  ) { }
 
   ngOnInit() {
     console.log(this.datosAlumno);
+    
+  }
+
+
+  ObtenerDatosPuntacionPodium(){
+
+    
+    console.log(this.rankingService.obtenerPuntuacionPodium().subscribe);
     
   }
 

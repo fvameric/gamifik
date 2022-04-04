@@ -16,6 +16,7 @@ const URL_GET_RANK_ID = 'http://localhost:8080/rankings/getRankingId.php'; // ob
 const URL_NOMBRE_EXISTE_RANKING =
   'http://localhost:8080/rankings/profesores/obtenerNombreRanking.php'; // Obtener nombre ranking
 const URL_CONTAR_RANKINGS = 'http://localhost:8080/rankings/contarRankings.php'; // Contar el numero total de rankings
+const URL_SELECT_PUNTUACION_PODIUM_RANKINGS = 'http://localhost:8080/rankings/podium/contarPodium.php';
 
 // ENTREGAS
 const URL_NOMBRE_EXISTE_PRACTICA =
@@ -54,6 +55,8 @@ const URL_ALUMNOS_POR_RANK_APELLIDOS =
 const URL_MODIFICAR_RANK_ALUMNOS =
   'http://localhost:8080/rankings/alumnos/modificarRankAlumnos.php';
 
+
+
 // PROFESORES
 const URL_RANK_PROFES =
   'http://localhost:8080/rankings/profesores/getRankProfes.php'; // obtener relacion rankings - profes
@@ -83,6 +86,13 @@ export class RankingService {
 
     return this.http.post(URL_CREATE_ENTREGA, JSON.stringify(entrega));
   }
+  
+  //cojer puntuacion podium
+
+  obtenerPuntuacionPodium(){
+    return this.http.get(URL_SELECT_PUNTUACION_PODIUM_RANKINGS);
+  }
+
 
   // read ranking
   obtenerRanking() {

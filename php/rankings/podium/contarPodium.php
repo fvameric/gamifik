@@ -20,7 +20,7 @@
   global $datos;
 
   // query
-  $query = "SELECT * FROM `ranking` WHERE 1";
+  $query = "SELECT * FROM rank_alumnos  ORDER BY ‘campo_ordenar’ DESC LIMIT 3";
   $registros = mysqli_query($con, $query);
   
   // si la query ha sido correcta hacemos fetch
