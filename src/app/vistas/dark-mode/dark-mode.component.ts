@@ -20,9 +20,13 @@ export class DarkModeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.guardarLocalStorage();
     this.GuardarDatos = JSON.parse(localStorage.getItem('DarkMode') || '[]');
-    this.theme = this.GuardarDatos;
+    if (this.GuardarDatos.length == 0) {
+      this.guardarLocalStorage();
+    } else {
+      this.theme = this.GuardarDatos;
+    }
+    
     this.initializeTheme();
   }
 
