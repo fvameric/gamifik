@@ -28,27 +28,11 @@ export class AuthService {
   ) { }
 
   loginAlumnos(user: User) {
-    return this.http
-      .post(URL_LOGIN_ALUMNOS, JSON.stringify(user))
-      .subscribe((val: any) => {
-        if (val.resultado == 'error') {
-          this.generarSwal(val.mensaje);
-        } else {
-          this.guardarLocalStorage(val);
-        }
-      });
+    return this.http.post(URL_LOGIN_ALUMNOS, JSON.stringify(user));
   }
 
   loginProfesores(user: User) {
-    return this.http
-      .post(URL_LOGIN_PROFESORES, JSON.stringify(user))
-      .subscribe((val: any) => {
-        if (val.resultado == 'error') {
-          this.generarSwal(val.mensaje);
-        } else {
-          this.guardarLocalStorage(val);
-        }
-      });
+    return this.http.post(URL_LOGIN_PROFESORES, JSON.stringify(user));
   }
 
   logout() {
