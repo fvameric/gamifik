@@ -11,6 +11,7 @@ import {
 import Swal from 'sweetalert2';
 import { TokenService } from 'services/token.service';
 import { AuthService } from 'services/auth.service';
+import { Router } from '@angular/router';
 
 
 
@@ -78,7 +79,8 @@ export class PerfilComponent implements OnInit {
     private usersService: UsersService,
     private authService: AuthService,
     private tokenService: TokenService,
-    public formBuilder: FormBuilder) { }
+    public formBuilder: FormBuilder,
+    private router: Router) { }
 
   ngOnInit(): void {
     
@@ -87,6 +89,8 @@ export class PerfilComponent implements OnInit {
     setInterval(() => {
       this.loaded = true;
     }, 6000);
+
+    this.authService.guardarRoute(this.router.url);
   }
 
   obtenerDatosAlumno() {

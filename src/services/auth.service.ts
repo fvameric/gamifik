@@ -108,4 +108,13 @@ export class AuthService {
       this.router.navigate(['dashboardprofesor']);
     }
   }
+
+  guardarRoute(route: any) {
+    localStorage.removeItem(ROUTE_LS);
+    localStorage.setItem(ROUTE_LS, route);
+  }
+
+  getSavedRoute() {
+    return localStorage.getItem(ROUTE_LS);
+  }
 }
