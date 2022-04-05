@@ -19,6 +19,8 @@ export class IdentificacionComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.router.navigate([this.authService.getSavedRoute()]);
+    if (this.authService.getSavedRoute()) {
+      this.router.navigate([this.authService.getSavedRoute()]);
+    }
   }
 }

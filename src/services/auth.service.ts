@@ -4,6 +4,8 @@ import { User } from 'app/interfaces/User';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { TokenService } from './token.service';
+import { catchError, tap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 const URL_LOGIN_ALUMNOS =
   'http://localhost:8080/identificacion/loginAlumnos.php';
@@ -23,7 +25,7 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
     private tokenService: TokenService
-  ) {}
+  ) { }
 
   loginAlumnos(user: User) {
     return this.http
