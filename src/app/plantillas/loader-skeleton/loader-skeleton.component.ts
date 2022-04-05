@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Subject } from 'rxjs';
+import { LoaderService } from 'services/loader.service';
 
 @Component({
   selector: 'app-loader-skeleton',
@@ -10,7 +12,9 @@ export class LoaderSkeletonComponent implements OnInit {
   @Input() Cheight: any;
   @Input() circle: boolean=false;
 
-  constructor() {}
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+
+  constructor(private loaderService: LoaderService) {}
 
   ngOnInit(): void {}
 

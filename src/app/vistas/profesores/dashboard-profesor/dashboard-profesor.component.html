@@ -4,7 +4,7 @@
         <div class="sidebar">
             <div class="cabecera-mis-rankings">
                 <h2>Mis Rankings</h2>
-                <button class="crear-ranking" (click)="abrirModal(1)">Crear</button>
+                <button class="crear-ranking" [disabled]="!loaded" (click)="abrirModal(1)">Crear</button>
                 <!--<app-modal></app-modal>-->
 
             </div>
@@ -45,20 +45,23 @@
                                             <div class="contenido-buscar">
                                                 <div class="svg-buscar">
                                                     <button class="button-buscar" click="buscador()">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                        fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                                    </svg>
-                                                </button>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                            fill="currentColor" class="bi bi-search"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                                        </svg>
+                                                    </button>
                                                 </div>
-                                                <input type="text" formControlName="nombreBuscador" class="input-buscador" id="buscadorId" (click)="buscador()" placeholder="Buscador...">
+                                                <input type="text" formControlName="nombreBuscador"
+                                                    class="input-buscador" id="buscadorId" (click)="buscador()"
+                                                    placeholder="Buscador...">
                                             </div>
                                         </form>
                                         <button class="btn-crear-entrega" (click)="abrirModal(3)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" style="color: #56baed;"
-                                                fill="currentColor" class="bi bi-bookmark-plus-fill"
-                                                viewBox="0 0 16 16">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                style="color: #56baed;" fill="currentColor"
+                                                class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd"
                                                     d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z" />
                                             </svg>
@@ -67,7 +70,8 @@
                                     <hr class="hr-entrega">
                                     <h3 class="texto-h3">Entrega:</h3>
                                     <div class="practicas-ranking" *ngFor="let entrega of arrEntregas">
-                                        <button (click)="detalleEntrega(entrega)" class="btn-entrega">{{entrega.nom_entrega}}</button>
+                                        <button (click)="detalleEntrega(entrega)"
+                                            class="btn-entrega">{{entrega.nom_entrega}}</button>
                                     </div>
                                 </ng-template>
                             </div>
@@ -150,7 +154,8 @@
 
                     <!--Button more per agregar parts de menu de administracio i menu ranking-->
                     <div class="table-more">
-                        <button #toggleButton id="userOptions" class="button-more-table" (click)="mostrarDesplegable(alumno)">
+                        <button #toggleButton id="userOptions" class="button-more-table"
+                            (click)="mostrarDesplegable(alumno)">
                             <svg id="svgdesplegable" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                 fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                                 <path
@@ -162,7 +167,8 @@
                                 <!--<app-modal-perfil-alumno [alumnoDetalle]="alumno"></app-modal-perfil-alumno>-->
 
                                 <a (click)="abrirModal(5)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-person-fill" viewBox="0 0 16 16">
                                         <path
                                             d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                                     </svg>
@@ -171,7 +177,8 @@
                                 <hr>
                                 <a (click)="eliminarAlumno(alumnoSelec)">
                                     <p class="texto-desplegable">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                             <path
                                                 d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                         </svg>
@@ -252,7 +259,8 @@
                             <div *ngIf="this.mostrarDesplegableVisual && alumnoSelec.id_alumno == alumno.id_alumno">
                                 <div class="desplegableVisual">
                                     <a (click)="abrirModal(5)">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                                             <path
                                                 d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                                         </svg>
@@ -263,7 +271,11 @@
                                     <hr>
                                     <a (click)="editarPuntuacionAlumno(alumno)">
                                         <p class="texto-desplegable">
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="16" height="16" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="16"
+                                                height="16" x="0" y="0" viewBox="0 0 24 24"
+                                                style="enable-background:new 0 0 512 512" xml:space="preserve">
                                                 <g>
                                                     <path xmlns="http://www.w3.org/2000/svg"
                                                         d="M21,11.5V15H18a3,3,0,0,0-3,3v3H4.5A1.5,1.5,0,0,1,3,19.5V4.5A1.5,1.5,0,0,1,4.5,3h9A1.5,1.5,0,0,0,15,1.5h0A1.5,1.5,0,0,0,13.5,0h-9A4.5,4.5,0,0,0,0,4.5v15A4.5,4.5,0,0,0,4.5,24H16.484a4.5,4.5,0,0,0,3.181-1.317l3.017-3.017A4.5,4.5,0,0,0,24,16.485V11.5A1.5,1.5,0,0,0,22.5,10h0A1.5,1.5,0,0,0,21,11.5Z"
