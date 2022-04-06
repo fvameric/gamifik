@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'app/interfaces/User';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, Subject, Subscription, throwError } from 'rxjs';
+import { catchError, takeUntil } from 'rxjs/operators';
 
 import { AuthService } from 'services/auth.service';
 
@@ -13,7 +13,10 @@ import { AuthService } from 'services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  private unsubscribe = new Subject();
+  // 1. pipe takeUntil
+  private subject = new Subject();
+  // 2. objecto Suscription
+  private logProfSub = new Subscription();
 
   // variables formulario
   loginForm!: FormGroup;
@@ -35,13 +38,22 @@ export class LoginComponent implements OnInit {
     public formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+  }
+
+  ngOnDestroy(): void {
+    // 1. pipe takeUntil para unsuscribe en ngOnDestroy
+    this.subject.next();
+    this.subject.complete();
+
+    // 2. Unsuscribe del objecto Suscription
+    this.logProfSub.unsubscribe();
   }
 
   //Funció rebre valors del formulari
@@ -64,20 +76,26 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm.valid) {
       if (this.router.url == '/identificacion') {
+
+        // 1. pipe takeUntil para unsuscribe en ngOnDestroy
         this.authService.loginAlumnos(user)
-        .pipe(takeUntil(this.unsubscribe))
-        .subscribe(val => this.authService.guardarLocalStorage(val));
+          .pipe(
+            takeUntil(this.subject),
+            catchError(err => throwError(err))
+          ).subscribe(val => {
+            this.authService.guardarLocalStorage(val);
+          });
+
       } else if (this.router.url == '/identificacion-profesores') {
-        this.authService.loginProfesores(user)
-        .pipe(takeUntil(this.unsubscribe))
-        .subscribe(val => this.authService.guardarLocalStorage(val));
+
+        // 2. suscription, unsuscribe manual en ngondestroy
+        this.logProfSub = this.authService.loginProfesores(user).subscribe({
+          next: val => this.authService.guardarLocalStorage(val),
+          complete: () => console.log('logProfSub complete'),
+          error: val => console.log(`Error: ${val}`)
+        });
       }
     }
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
   }
 
   public togglePass() {
@@ -90,13 +108,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  cambiarButton():void{
-    
-   document.getElementsByClassName('toggle')[0].classList.toggle('dark');
-   document.getElementsByClassName('toggle')[0].classList.toggle('active');
+  cambiarButton(): void { 
+    document.getElementsByClassName('toggle')[0].classList.toggle('dark');
+    document.getElementsByClassName('toggle')[0].classList.toggle('active');
 
-   document.getElementsByClassName('hola')[0].classList.toggle('dark');
-   document.getElementsByClassName('toggle')[0].classList.toggle('active');
-
-    }
+    document.getElementsByClassName('hola')[0].classList.toggle('dark');
+    document.getElementsByClassName('toggle')[0].classList.toggle('active');
+  }
 }
