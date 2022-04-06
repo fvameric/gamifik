@@ -4,6 +4,8 @@ import { User } from 'app/interfaces/User';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { TokenService } from './token.service';
+import { catchError, tap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 const URL_LOGIN_ALUMNOS =
   'http://localhost:8080/identificacion/loginAlumnos.php';
@@ -23,30 +25,14 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
     private tokenService: TokenService
-  ) {}
+  ) { }
 
   loginAlumnos(user: User) {
-    return this.http
-      .post(URL_LOGIN_ALUMNOS, JSON.stringify(user))
-      .subscribe((val: any) => {
-        if (val.resultado == 'error') {
-          this.generarSwal(val.mensaje);
-        } else {
-          this.guardarLocalStorage(val);
-        }
-      });
+    return this.http.post(URL_LOGIN_ALUMNOS, JSON.stringify(user));
   }
 
   loginProfesores(user: User) {
-    return this.http
-      .post(URL_LOGIN_PROFESORES, JSON.stringify(user))
-      .subscribe((val: any) => {
-        if (val.resultado == 'error') {
-          this.generarSwal(val.mensaje);
-        } else {
-          this.guardarLocalStorage(val);
-        }
-      });
+    return this.http.post(URL_LOGIN_PROFESORES, JSON.stringify(user));
   }
 
   logout() {
@@ -107,5 +93,14 @@ export class AuthService {
       this.tokenService.saveUser(data.data);
       this.router.navigate(['dashboardprofesor']);
     }
+  }
+
+  guardarRoute(route: any) {
+    localStorage.removeItem(ROUTE_LS);
+    localStorage.setItem(ROUTE_LS, route);
+  }
+
+  getSavedRoute() {
+    return localStorage.getItem(ROUTE_LS);
   }
 }

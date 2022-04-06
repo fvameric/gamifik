@@ -19,6 +19,7 @@ import { CrearRankingComponent } from '../crear-ranking/crear-ranking.component'
 import { ModalComponent } from '../modal/modal.component';
 import { Subject } from 'rxjs';
 import { AuthService } from '../../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-profesor',
@@ -38,7 +39,7 @@ export class DashboardProfesorComponent implements OnInit {
     apellidos: '',
     centro: 0,
     tipo: 1,
-    imagen: '',
+    imagen: ''
   };
 
   loaded = false;
@@ -85,7 +86,8 @@ export class DashboardProfesorComponent implements OnInit {
     private tokenService: TokenService,
     public formBuilder: FormBuilder,
     private elem: ElementRef,
-    private authService:AuthService
+    private authService:AuthService,
+    private router: Router
   ) { }
 
   /*
@@ -104,7 +106,7 @@ documentClick(event: any): void {
       this.loaded = true;
     }, 6000);
 
-    //this.authService.guardarRoute(this.router.url);
+    this.authService.guardarRoute(this.router.url);
 
     //this.documentClickedTarget.subscribe(val => this.documentClickListener(val));
   }
@@ -207,14 +209,16 @@ documentClick(event: any): void {
       arrows[index].setAttribute('style', 'transform: rotate(90deg);');
     }
 
-    if (this.entregas) {
-      this.flagEntregas = false;
-      this.entregas.forEach((element: any) => {
-        if (element.id_rank == this.rankDesplegable.id_rank) {
-          this.arrEntregas.push(element);
-        }
-      });
-    } else {
+    this.flagEntregas = false;
+
+    // búsqueda de entregas por ranking
+    this.entregas.forEach((element: any) => {
+      if (element.id_rank == this.rankDesplegable.id_rank) {
+        this.arrEntregas.push(element);
+      }
+    });
+
+    if (this.arrEntregas.length == 0) {
       this.flagEntregas = true;
     }
   }
@@ -291,7 +295,7 @@ documentClick(event: any): void {
               confirmButtonText: 'Ok',
             }).then((result) => {
               this.rankingService
-                .eliminarRanking(this.entregaSeleccionada.id_rank)
+                .eliminarRanking(this.rankSeleccionado.id_rank)
                 .subscribe((val: any) => {
                   if (val.resultado == 'ok') {
                     this.obtenerDatosRanking();

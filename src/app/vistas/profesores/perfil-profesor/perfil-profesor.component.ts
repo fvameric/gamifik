@@ -11,6 +11,7 @@ import {
 import Swal from 'sweetalert2';
 import { TokenService } from 'services/token.service';
 import { AuthService } from 'services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil-profesor',
@@ -65,6 +66,7 @@ export class PerfilProfesorComponent implements OnInit {
   imgError: boolean = false;
 
   oldPassValidation: boolean = false;
+  loaded = false;
 
   flagRanks: boolean = false;
   rankingIds: any;
@@ -91,12 +93,18 @@ export class PerfilProfesorComponent implements OnInit {
     private usersService: UsersService,
     private authService: AuthService,
     private tokenService: TokenService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.obtenerDatosProfesor();
     this.crearFormulario();
+
+    this.authService.guardarRoute(this.router.url);
+    setInterval(() => {
+      this.loaded = true;
+    }, 6000);
   }
 
   obtenerDatosProfesor() {

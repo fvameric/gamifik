@@ -18,7 +18,8 @@
     
   // input body
   $json = file_get_contents('php://input');
-
+  $ranking = json_decode($json);
+  
   // query
   $queryInsert = "INSERT INTO `ranking`(`id_rank`, `nom_rank`, `alumnos`, `cod_rank`) VALUES (NULL,'$ranking->nom_rank',$ranking->alumnos,'$ranking->cod_rank')";
   $querySelect = "SELECT * FROM `ranking` WHERE nom_rank = '$ranking->nom_rank'";

@@ -1,1 +1,3 @@
-<div [ngStyle]="getMyStyles()" class="skelt-load loader"></div>
+<div *ngIf="isLoading | async">
+    <div [ngStyle]="getMyStyles()" class="skelt-load loader"></div>
+</div>
