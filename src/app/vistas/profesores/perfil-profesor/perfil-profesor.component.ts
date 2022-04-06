@@ -104,7 +104,7 @@ export class PerfilProfesorComponent implements OnInit {
     this.authService.guardarRoute(this.router.url);
     setInterval(() => {
       this.loaded = true;
-    }, 6000);
+    }, 1000);
   }
 
   obtenerDatosProfesor() {

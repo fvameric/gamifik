@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
     this.user = this.tokenService.getUser();
     setInterval(() => {
       this.loaded = true;
-    }, 6000);
+    }, 1000);
   }
 
   expirado() {

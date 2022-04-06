@@ -104,7 +104,7 @@ documentClick(event: any): void {
     this.crearformInput();
     setInterval(() => {
       this.loaded = true;
-    }, 6000);
+    }, 1000);
 
     this.authService.guardarRoute(this.router.url);
 

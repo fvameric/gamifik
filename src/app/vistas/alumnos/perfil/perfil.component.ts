@@ -88,7 +88,7 @@ export class PerfilComponent implements OnInit {
     this.crearFormulario();
     setInterval(() => {
       this.loaded = true;
-    }, 6000);
+    }, 1000);
 
     this.authService.guardarRoute(this.router.url);
   }

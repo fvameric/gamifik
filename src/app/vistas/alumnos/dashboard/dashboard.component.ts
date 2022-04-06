@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
     this.obtenerDatosRanking();
     setInterval(() => {
       this.loaded = true;
-    }, 6000);
+    }, 1000);
 
     this.authService.guardarRoute(this.router.url);
   }
