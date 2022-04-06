@@ -3,7 +3,7 @@ import {
   FormGroup,
   FormBuilder,
   Validators,
-  FormControl
+  FormControl,
 } from '@angular/forms';
 import { AuthService } from 'services/auth.service';
 import { Profesor } from 'app/interfaces/Profesor';
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-registro-profesor',
   templateUrl: './registro-profesor.component.html',
-  styleUrls: ['./registro-profesor.component.css']
+  styleUrls: ['./registro-profesor.component.css'],
 })
 export class RegistroProfesorComponent implements OnInit {
   // formulario
@@ -45,7 +45,7 @@ export class RegistroProfesorComponent implements OnInit {
     private usersService: UsersService,
     public formBuilder: FormBuilder,
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.crearFormulario();
@@ -67,45 +67,88 @@ export class RegistroProfesorComponent implements OnInit {
   //Disponibilidad email
   checkEmail() {
     this.email.valueChanges.subscribe((email) => {
-      this.usersService.validarEmailExisteProfes(email).subscribe((val: any) => {
-        if (val.resultado == 'error') {
-          this.email.markAsPending({ onlySelf: false });
-          this.email.setErrors({ notUnique: true });
-        }
-      });
+      this.usersService
+        .validarEmailExisteProfes(email)
+        .subscribe((val: any) => {
+          if (val.resultado == 'error') {
+            this.email.markAsPending({ onlySelf: false });
+            this.email.setErrors({ notUnique: true });
+          }
+        });
     });
   }
 
   // Disponibilidad usuario
   checkUsername() {
     this.username.valueChanges.subscribe((username) => {
-      this.usersService.validarUsuarioExisteProfes(username).subscribe((val: any) => {
-        if (val.resultado == 'error') {
-          //this.username.markAsPending({ onlySelf: false });
-          this.username.setErrors({ notUnique: true });
-        }
-      });
+      this.usersService
+        .validarUsuarioExisteProfes(username)
+        .subscribe((val: any) => {
+          if (val.resultado == 'error') {
+            //this.username.markAsPending({ onlySelf: false });
+            this.username.setErrors({ notUnique: true });
+          }
+        });
     });
   }
 
   crearFormulario() {
     //Validadors registre
-    this.registerForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9_]+$')]],
-      email: ['', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(64)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
-      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
-      apellidos: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
-      centro: ['', Validators.required],
-      userImage: [''],
-    },
+    this.registerForm = this.formBuilder.group(
+      {
+        username: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(20),
+            Validators.pattern('^[a-zA-Z0-9_]+$'),
+          ],
+        ],
+        email: [
+          '',
+          [
+            Validators.required,
+            Validators.email,
+            Validators.minLength(3),
+            Validators.maxLength(64),
+          ],
+        ],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(50),
+          ],
+        ],
+        confirmPassword: ['', [Validators.required, Validators.maxLength(50)]],
+        nombre: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(30),
+          ],
+        ],
+        apellidos: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(30),
+          ],
+        ],
+        centro: ['', Validators.required],
+        userImage: [''],
+      },
       {
         //Validador que passa a la funció MustMatch els valors de 'password' i de 'confirmPassword' per a comparar-los i verificar-los
         validator: [
           this.mustMatch('password', 'confirmPassword'), // Validación contraseñas iguales
-        ]
-      });
+        ],
+      }
+    );
   }
 
   // funció per controlar que camps password i confirmarpassword siguin iguals
@@ -162,7 +205,7 @@ export class RegistroProfesorComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Por favor elige una imagen'
+          text: 'Por favor elige una imagen',
         });
       }
     }
