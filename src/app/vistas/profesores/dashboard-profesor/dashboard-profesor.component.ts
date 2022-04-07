@@ -266,50 +266,47 @@ documentClick(event: any): void {
     return codigo;
   }
 
-  eliminarRanking() {
-    console.log(this.rankSeleccionado.id_rank);
-
-    Swal.fire({
-      title: '¿Quieres eliminar el ranking?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: '¿Realmente quieres eliminar el ranking?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Sí',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Ok',
-              text: 'Se eliminó el ranking',
-              confirmButtonColor: '#3085d6',
-              confirmButtonText: 'Ok',
-            }).then((result) => {
-              this.rankingService
-                .eliminarRanking(this.rankSeleccionado.id_rank)
-                .subscribe((val: any) => {
-                  if (val.resultado == 'ok') {
-                    this.obtenerDatosRanking();
-                  } else {
-                    console.log(val.mensaje);
-                  }
-                });
-            });
-          } else if (result.isDenied) {
-            Swal.fire('No se ha eliminado el ranking', '', 'info');
-          }
-        });
-      }
+  async inputBorrarRanking() {
+    const { value: test } = await Swal.fire({
+      icon: 'info',
+      title: 'Borrar Ranking',
+      input: 'text',
+      inputLabel: 'Porfavor Escriba '+this.rankSeleccionado.nom_rank+' para poder borrar el ranking.',
+      inputPlaceholder: 'Escribe algo',
+      confirmButtonColor: '#56baed',
+      showCancelButton: true
     });
+    if(test){
+        if (test == this.rankSeleccionado.nom_rank) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Se eliminó el ranking',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ok',
+          }).then((result) => {
+            this.rankingService
+              .eliminarRanking(this.rankSeleccionado.id_rank)
+              .subscribe((val: any) => {
+                if (val.resultado == 'ok') {
+                  this.obtenerDatosRanking();
+                } else {
+                  console.log(val.mensaje);
+                }
+              });
+          });
+          
+        } else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Ooops..',
+            text: 'No se ha eliminado el ranking, escriba bien el nombre del ranking',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ok',
+          })
+        }
+
+   
+      }
   }
 
   mostrarDesplegable(alumno: any) {
