@@ -30,8 +30,6 @@ export class DashboardComponent implements OnInit {
     imagen: ''
   };
 
-  loaded = false;
-
   // rankings
   rankings: any;
   rankingsConAlumnos: any;
@@ -53,9 +51,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerDatos();
     this.obtenerDatosRanking();
-    setInterval(() => {
-      this.loaded = true;
-    }, 1000);
 
     this.authService.guardarRoute(this.router.url);
   }
