@@ -4,7 +4,7 @@
         <div class="sidebar">
             <div class="cabecera-mis-rankings">
                 <h2>Mis Rankings</h2>
-                <button class="crear-ranking" [disabled]="!loaded" (click)="abrirModal(1)">Crear</button>
+                <button class="crear-ranking" (click)="abrirModal(1)">Crear</button>
                 <!--<app-modal></app-modal>-->
 
             </div>
@@ -92,11 +92,13 @@
 
     <div class="separador2">
         <div class="info-rankings" *ngIf="templateFlag;else entregaselec">
+            <app-loader-skeleton Cwidth="546" Cheight="20" [circle]="false"></app-loader-skeleton>
             <div class="subtitulo">
                 {{rankSeleccionado.nom_rank}}
             </div>
             <div class="info-superior">
                 <div class="titulo-detalle-ranking">
+                    <app-loader-skeleton Cwidth="167" Cheight="30"></app-loader-skeleton>
                     <h1>{{rankSeleccionado.nom_rank}}</h1>
                     <h3></h3>
                     <div class="codFlex">
@@ -114,7 +116,7 @@
                                 </g>
                             </svg>
                         </button>
-
+                        <app-loader-skeleton Cwidth="150" Cheight="24"></app-loader-skeleton>
                         <h4>Codigo: {{rankSeleccionado.cod_rank}}</h4>
                     </div>
                 </div>

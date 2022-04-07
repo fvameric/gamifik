@@ -42,8 +42,6 @@ export class DashboardProfesorComponent implements OnInit {
     imagen: ''
   };
 
-  loaded = false;
-
   mostrarDesplegableVisual: boolean = false;
   mostrarDesplegablePracticaVisual: boolean = false;
   alumnoSelec: any;
@@ -102,9 +100,6 @@ documentClick(event: any): void {
     this.obtenerDatosRanking();
     this.obtenerDatosEntregas();
     this.crearformInput();
-    setInterval(() => {
-      this.loaded = true;
-    }, 1000);
 
     this.authService.guardarRoute(this.router.url);
 

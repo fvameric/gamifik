@@ -66,7 +66,6 @@ export class PerfilProfesorComponent implements OnInit {
   imgError: boolean = false;
 
   oldPassValidation: boolean = false;
-  loaded = false;
 
   flagRanks: boolean = false;
   rankingIds: any;
@@ -102,9 +101,6 @@ export class PerfilProfesorComponent implements OnInit {
     this.crearFormulario();
 
     this.authService.guardarRoute(this.router.url);
-    setInterval(() => {
-      this.loaded = true;
-    }, 1000);
   }
 
   obtenerDatosProfesor() {

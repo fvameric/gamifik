@@ -70,7 +70,6 @@ export class PerfilComponent implements OnInit {
 
   oldPassValidation: boolean = false;
 
-  loaded = false;
 
   // token
   logUserToken: any;
@@ -86,9 +85,6 @@ export class PerfilComponent implements OnInit {
     
     this.obtenerDatosAlumno();
     this.crearFormulario();
-    setInterval(() => {
-      this.loaded = true;
-    }, 1000);
 
     this.authService.guardarRoute(this.router.url);
   }

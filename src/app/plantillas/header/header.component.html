@@ -9,7 +9,7 @@
                             <app-loader-skeleton Cwidth="50" Cheight="50" [circle]="true"></app-loader-skeleton>
                             <img class="dropbtn" src={{user.imagen}} />
                             <div class="dropdown-content">
-                                <a routerLink="/perfil"><svg *ngIf="loaded" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                <a routerLink="/perfil"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                         style="color: white; margin-right: 10px;" fill="currentColor"
                                         class="bi bi-person-bounding-box" viewBox="0 0 16 16">
                                         <path
@@ -20,7 +20,7 @@
                                     <app-loader-skeleton Cwidth="140" Cheight="55"></app-loader-skeleton>
                                     <p>Perfil</p>
                                 </a>
-                                <a (click)="cerrarSesion()" *ngIf="loaded"><svg *ngIf="loaded" xmlns="http://www.w3.org/2000/svg"
+                                <a (click)="cerrarSesion()"><svg xmlns="http://www.w3.org/2000/svg"
                                         style="color: white;  margin-right: 5px;" width="20" height="20" fill="currentColor"
                                         class="bi bi-door-open-fill" viewBox="0 0 16 16">
                                         <path
