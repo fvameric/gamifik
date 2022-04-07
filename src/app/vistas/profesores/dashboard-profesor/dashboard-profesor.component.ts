@@ -412,6 +412,50 @@ documentClick(event: any): void {
     });
   }
 
+  async inputeliminarEntrega() {
+    const { value: test } = await Swal.fire({
+      icon: 'info',
+      title: 'Borrar Entrega/Pactica',
+      input: 'text',
+      inputLabel: 'Porfavor Escriba '+this.entregaSeleccionada.nom_entrega+' para poder borrar una Entrega/Pactica.',
+      inputPlaceholder: 'Escribe algo',
+      confirmButtonColor: '#56baed',
+      showCancelButton: true
+    });
+    if(test){
+        if (test == this.entregaSeleccionada.nom_entrega) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Se eliminó la Entrega/Pactica',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ok',
+          }).then((result) => {
+            this.rankingService
+            .eliminarEntregas(this.entregaSeleccionada)
+            .subscribe((val: any) => {
+              if (val.resultado == 'ok') {
+                window.location.reload();
+              } else {
+                console.log(val.mensaje);
+              }
+              });
+          });
+          
+        } else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Ooops..',
+            text: 'No se ha eliminado la entrega, escriba bien el nombre del ranking',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ok',
+          })
+        }
+
+   
+      }
+  }
+
+
   eliminarAlumno(alumno: any) {
     Swal.fire({
       title: '¿Quieres quitar este alumno del ranking?',
