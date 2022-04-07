@@ -39,7 +39,7 @@ export class DashboardProfesorComponent implements OnInit {
     apellidos: '',
     centro: 0,
     tipo: 1,
-    imagen: ''
+    imagen: '',
   };
 
   mostrarDesplegableVisual: boolean = false;
@@ -47,7 +47,6 @@ export class DashboardProfesorComponent implements OnInit {
   alumnoSelec: any;
   rankingSelec: number = 0;
   buscadorInput!: FormGroup;
-
 
   // rankings
   rankings: any;
@@ -84,9 +83,9 @@ export class DashboardProfesorComponent implements OnInit {
     private tokenService: TokenService,
     public formBuilder: FormBuilder,
     private elem: ElementRef,
-    private authService:AuthService,
+    private authService: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   /*
 @HostListener('document:click', ['$event'])
@@ -266,42 +265,42 @@ documentClick(event: any): void {
       icon: 'info',
       title: 'Borrar Ranking',
       input: 'text',
-      inputLabel: 'Porfavor Escriba '+this.rankSeleccionado.nom_rank+' para poder borrar el ranking.',
+      inputLabel:
+        'Porfavor Escriba ' +
+        this.rankSeleccionado.nom_rank +
+        ' para poder borrar el ranking.',
       inputPlaceholder: 'Escribe algo',
       confirmButtonColor: '#56baed',
-      showCancelButton: true
+      showCancelButton: true,
     });
-    if(test){
-        if (test == this.rankSeleccionado.nom_rank) {
-          Swal.fire({
-            icon: 'success',
-            title: 'Se eliminó el ranking',
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Ok',
-          }).then((result) => {
-            this.rankingService
-              .eliminarRanking(this.rankSeleccionado.id_rank)
-              .subscribe((val: any) => {
-                if (val.resultado == 'ok') {
-                  this.obtenerDatosRanking();
-                } else {
-                  console.log(val.mensaje);
-                }
-              });
-          });
-          
-        } else{
-          Swal.fire({
-            icon: 'error',
-            title: 'Ooops..',
-            text: 'No se ha eliminado el ranking, escriba bien el nombre del ranking',
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Ok',
-          })
-        }
-
-   
+    if (test) {
+      if (test == this.rankSeleccionado.nom_rank) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Se eliminó el ranking',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Ok',
+        }).then((result) => {
+          this.rankingService
+            .eliminarRanking(this.rankSeleccionado.id_rank)
+            .subscribe((val: any) => {
+              if (val.resultado == 'ok') {
+                this.obtenerDatosRanking();
+              } else {
+                console.log(val.mensaje);
+              }
+            });
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ooops..',
+          text: 'No se ha eliminado el ranking, escriba bien el nombre del ranking',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Ok',
+        });
       }
+    }
   }
 
   mostrarDesplegable(alumno: any) {
@@ -490,25 +489,29 @@ documentClick(event: any): void {
 
   aceptarPendientes(pendiente: any) {
     pendiente.aceptado = 1;
-    this.rankingService.aceptarAlumnosPendientes(pendiente).subscribe(val => this.insertarAlumnosJoin(pendiente, val));
+    this.rankingService
+      .aceptarAlumnosPendientes(pendiente)
+      .subscribe((val) => this.insertarAlumnosJoin(pendiente, val));
   }
 
   insertarAlumnosJoin(pendiente: any, val: any) {
     var arrPendientes: any = [];
-    
+
     if (val.resultado == 'ok') {
       this.entregas.forEach((element: any) => {
         if (element.id_rank == pendiente.id_rank) {
           var ids = {
-            "id_rank": pendiente.id_rank,
-            "id_entrega": element.id_entrega,
-            "id_alumno": pendiente.id_alumno
-          }
+            id_rank: pendiente.id_rank,
+            id_entrega: element.id_entrega,
+            id_alumno: pendiente.id_alumno,
+          };
           arrPendientes.push(ids);
         }
       });
     }
-    this.rankingService.insertarEntregaJoin(arrPendientes).subscribe(val => this.resultadoInsert(val));
+    this.rankingService
+      .insertarEntregaJoin(arrPendientes)
+      .subscribe((val) => this.resultadoInsert(val));
   }
 
   resultadoInsert(val: any) {
@@ -538,8 +541,7 @@ documentClick(event: any): void {
     modalRef.componentInstance.alumnoDetalle = this.alumnoSelec;
   }
 
-
-  //buscador 
+  //buscador
   filtro: any;
   entregasPracticasBuscar: any;
   splitArray: any;
@@ -547,35 +549,31 @@ documentClick(event: any): void {
   textoBuscador: any;
   imputBuscador: any = undefined;
 
-
   crearformInput() {
     this.buscadorInput = this.formBuilder.group({
       nombreBuscador: [''],
-    })
+    });
   }
 
   get nombreBuscador() {
     return this.buscadorInput.get('nombreBuscador') as FormControl;
   }
 
-
   buscador(): any {
-
     this.nombreBuscador.valueChanges.subscribe((nombreBuscador) => {
-
       this.imputBuscador = document.getElementById('buscadorId');
       this.filtro = nombreBuscador.toUpperCase();
-      this.entregasPracticasBuscar = document.getElementsByClassName('btn-entrega');
+      this.entregasPracticasBuscar =
+        document.getElementsByClassName('btn-entrega');
 
       for (this.i = 0; this.i < this.entregasPracticasBuscar.length; this.i++) {
-        var text = this.entregasPracticasBuscar[this.i].innerText.split("\n");
+        var text = this.entregasPracticasBuscar[this.i].innerText.split('\n');
         if (text[0].toUpperCase().indexOf(this.filtro) > -1) {
-          this.entregasPracticasBuscar[this.i].style.display = "";
+          this.entregasPracticasBuscar[this.i].style.display = '';
         } else {
-          this.entregasPracticasBuscar[this.i].style.display = "none";
+          this.entregasPracticasBuscar[this.i].style.display = 'none';
         }
-
       }
-    })
+    });
   }
 }

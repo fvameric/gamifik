@@ -29,6 +29,8 @@ import { ModalEditarRankingComponent } from './vistas/profesores/modal-editar-ra
 import { ModalEditarEntregaComponent } from './vistas/profesores/modal-editar-entrega/modal-editar-entrega.component';
 import { VerDetallesAlumnoComponent } from './vistas/profesores/ver-detalles-alumno/ver-detalles-alumno.component';
 import { SkeletonLoaderModule } from './plantillas/loader-skeleton/skeleton-loader/skeleton-loader.module';
+import { HomeComponent } from './plantillas/home/home.component';
+import { ModalPodiumComponent } from './plantillas/modal-podium/modal-podium.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +42,8 @@ import { SkeletonLoaderModule } from './plantillas/loader-skeleton/skeleton-load
     routingComponents,
     ModalEditarEntregaComponent,
     VerDetallesAlumnoComponent,
+    HomeComponent,
+    ModalPodiumComponent,
   ],
   imports: [
     BrowserModule,
