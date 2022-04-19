@@ -10,8 +10,9 @@ import { Router } from '@angular/router';
 import { SkillService } from 'services/skill.service';
 import { ModalComponent } from 'app/vistas/profesores/modal/modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { forkJoin, interval, Subject, Subscription, throwError } from 'rxjs';
+import { forkJoin, interval, merge, Observable, Subject, Subscription, throwError } from 'rxjs';
 import { catchError, debounceTime, map, mergeMap, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { Skill } from 'app/interfaces/Skill';
 
 @Component({
   selector: 'app-dashboard',
@@ -44,8 +45,22 @@ export class DashboardComponent implements OnInit {
   flagPendiente: boolean = false;
 
   // skills
-  skills: any;
+  skills: Skill[] = [];
+  skillHover: Skill = {
+    id_skill: 0,
+    nombre: '',
+    descripcion: '',
+    niveles: {
+      lvl1: 0,
+      img1: '',
+      lvl2: 0,
+      img2: '',
+      lvl3: 0,
+      img3: ''
+    }
+  }
   skillSelec: any;
+  showHover: boolean = false;
 
   constructor(
     private usersService: UsersService,
@@ -60,7 +75,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerDatos();
     this.obtenerDatosRanking();
-    this.obtenerDatosSkills();
+    this.obtenerSkills();
 
     this.authService.guardarRoute(this.router.url);
   }
@@ -92,23 +107,9 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  obtenerDatosSkills() {
-    /*
-    this.skillService.obtenerSkills().subscribe(val => {
-      this.skills = val;
-      console.log(this.skills);
-    });
-    */
-
-    this.skillService.obtenerSkills()
-    .pipe(
-      takeUntil(this.subject),
-      mergeMap(valor => this.skillService.obtenerSkillLevel(valor).pipe(
-        map(val => console.log(val))
-      ))
-    ).subscribe(val => {
-      console.log(val);
-    });
+  obtenerSkills() {
+    this.skills = this.skillService.getSkills();
+    console.log(this.skills);
   }
 
   async unirseRanking() {
@@ -218,5 +219,16 @@ export class DashboardComponent implements OnInit {
     modalRef.componentInstance.idModal = idModal;
     modalRef.componentInstance.skillSelec = skill;
     modalRef.componentInstance.datosAlumno = this.datosAlumno;
+  }
+
+  over(skill: Skill) {
+    console.log("over");
+    this.showHover = true;
+    this.skillHover = skill;
+  }
+
+  out() {
+    console.log("out");
+    this.showHover = false;
   }
 }

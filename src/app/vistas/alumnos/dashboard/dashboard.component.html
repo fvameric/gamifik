@@ -60,11 +60,17 @@
 
     <div class="separador2">
         <div class="info-rankings">
-            <div class="titulo-detalle-ranking" *ngIf="rankSeleccionado;else noselec">
-                <h1>Ranking</h1>
-                <app-loader-skeleton Cwidth="546" Cheight="20" [circle]="false"></app-loader-skeleton>
-                <h3>{{rankSeleccionado.nom_rank}}</h3>
+            <div class="titulo-skills">
+                <div class="titulo-detalle-ranking" *ngIf="rankSeleccionado;else noselec">
+                    <h1>Ranking</h1>
+                    <app-loader-skeleton Cwidth="546" Cheight="20" [circle]="false"></app-loader-skeleton>
+                    <h3>{{rankSeleccionado.nom_rank}}</h3>
+                </div>
+                <div class="dropdown-content" *ngIf="showHover">
+                    {{skillHover.nombre}}<br> {{skillHover.descripcion}}
+                </div>
             </div>
+
             <ng-template #noselec>
                 <div class="titulo-detalle-ranking">
                     <h1>Ranking</h1>
@@ -72,6 +78,14 @@
                 </div>
             </ng-template>
             <div class="alumnos-ranking">
+
+                <div class="dropdown">
+                    <div class="dropdown-content">
+                        {{skillHover.nombre}}<br> {{skillHover.descripcion}}
+                    </div>
+                </div>
+
+
                 <app-loader-skeleton Cwidth="192" Cheight="20"></app-loader-skeleton>
                 <div class="table-element" *ngFor="let alumno of listaAlumnos; let i = index">
                     <div class="table-num">
@@ -88,7 +102,7 @@
                     </div>
                     <div class="table-softskills" *ngFor="let skill of skills">
                         <button (click)="abrirModal(7, skill)">
-                            {{skill.nombre}}
+                            <img src="{{skill.niveles.img1}}" (mouseover)='over(skill)' (mouseout)='out()'>
                         </button>
                     </div>
                     <div class="table-puntuacion">
