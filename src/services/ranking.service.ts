@@ -230,7 +230,10 @@ export class RankingService {
   }
 
   modificarRankAlumnos(alumno: any) {
+    console.log(alumno);
     return this.http.post(URL_MODIFICAR_RANK_ALUMNOS, JSON.stringify(alumno));
+    
+    
   }
 
   insertarEntregaJoin(entrega: any) {
