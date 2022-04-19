@@ -73,3 +73,13 @@
     </div>
 </div>
 
+<!-- skills -->
+<div *ngIf="idModal === 7">
+    <div class="modal-header">
+        <h2 class="h1-modal">Skill</h2>
+        <button type="button" class="close" data-dismiss="modal" (click)="retornar()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <app-modal-skill [skillSelec]="skillSelec"></app-modal-skill>
+    </div>
+</div>

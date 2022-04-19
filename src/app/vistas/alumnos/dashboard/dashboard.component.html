@@ -49,8 +49,7 @@
                                 </button>
                             </div>
                             <ng-template #noPendiente>
-                                <button class="button-ranking-class"
-                                    (click)="rankSelec(rank)">{{rank.nom_rank}}</button>
+                                <button class="button-ranking-class" (click)="rankSelec(rank)">{{rank.nom_rank}}</button>
                             </ng-template>
                         </div>
                     </div>
@@ -86,6 +85,11 @@
                     </div>
                     <div class="table-apellidos">
                         {{alumno.apellidos}}
+                    </div>
+                    <div class="table-softskills" *ngFor="let skill of skills">
+                        <button (click)="abrirModal(7, skill)">
+                            {{skill.nombre}}
+                        </button>
                     </div>
                     <div class="table-puntuacion">
                         {{alumno.puntuacion}}

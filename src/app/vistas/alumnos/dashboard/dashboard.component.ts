@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Alumno } from 'app/interfaces/Alumno';
-import { Profesor } from '../../../interfaces/Profesor';
 import { UsersService } from 'services/users.service';
 import { FormBuilder } from '@angular/forms';
 import { RankingService } from 'services/ranking.service';
 import Swal from 'sweetalert2';
 import { TokenService } from 'services/token.service';
-import { LoadingInterceptorService } from 'services/loading-interceptor.service';
-import { concat, forkJoin } from 'rxjs';
-import { concatMap, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from 'services/auth.service';
 import { Router } from '@angular/router';
+import { SkillService } from 'services/skill.service';
+import { ModalComponent } from 'app/vistas/profesores/modal/modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { forkJoin, interval, Subject, Subscription, throwError } from 'rxjs';
+import { catchError, debounceTime, map, mergeMap, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +19,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  private subject = new Subject();
+
   datosAlumno: Alumno = {
     id_alumno: 0,
     nick: '',
@@ -40,10 +43,16 @@ export class DashboardComponent implements OnInit {
 
   flagPendiente: boolean = false;
 
+  // skills
+  skills: any;
+  skillSelec: any;
+
   constructor(
     private usersService: UsersService,
     private rankingService: RankingService,
     private tokenService: TokenService,
+    private skillService: SkillService,
+    private modalService: NgbModal,
     public formBuilder: FormBuilder,
     private authService:AuthService,
     private router: Router) {}
@@ -51,6 +60,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerDatos();
     this.obtenerDatosRanking();
+    this.obtenerDatosSkills();
 
     this.authService.guardarRoute(this.router.url);
   }
@@ -79,6 +89,25 @@ export class DashboardComponent implements OnInit {
           }
         });
       }
+    });
+  }
+
+  obtenerDatosSkills() {
+    /*
+    this.skillService.obtenerSkills().subscribe(val => {
+      this.skills = val;
+      console.log(this.skills);
+    });
+    */
+
+    this.skillService.obtenerSkills()
+    .pipe(
+      takeUntil(this.subject),
+      mergeMap(valor => this.skillService.obtenerSkillLevel(valor).pipe(
+        map(val => console.log(val))
+      ))
+    ).subscribe(val => {
+      console.log(val);
     });
   }
 
@@ -182,5 +211,12 @@ export class DashboardComponent implements OnInit {
         window.location.reload();
       }
     });
+  }
+
+  abrirModal(idModal: number, skill: any) {
+    const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.idModal = idModal;
+    modalRef.componentInstance.skillSelec = skill;
+    modalRef.componentInstance.datosAlumno = this.datosAlumno;
   }
 }

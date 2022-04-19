@@ -31,6 +31,7 @@ import { VerDetallesAlumnoComponent } from './vistas/profesores/ver-detalles-alu
 import { SkeletonLoaderModule } from './plantillas/loader-skeleton/skeleton-loader/skeleton-loader.module';
 import { HomeComponent } from './plantillas/home/home.component';
 import { ModalPodiumComponent } from './plantillas/modal-podium/modal-podium.component';
+import { ModalSkillComponent } from './vistas/alumnos/modal-skill/modal-skill.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +45,7 @@ import { ModalPodiumComponent } from './plantillas/modal-podium/modal-podium.com
     VerDetallesAlumnoComponent,
     HomeComponent,
     ModalPodiumComponent,
+    ModalSkillComponent,
   ],
   imports: [
     BrowserModule,

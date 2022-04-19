@@ -1,0 +1,5 @@
+{{skillSelec.nombre}}
+<br> {{skillSelec.descripcion}}
+<br> Evaluar:
+<input type="number" [(ngModel)]="puntosInput" max={{datosAlumno.puntos_semanales}}> / {{datosAlumno.puntos_semanales}}
+<input type="submit" (click)="onSubmit()">
