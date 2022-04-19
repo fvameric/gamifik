@@ -71,6 +71,7 @@ export class DashboardProfesorComponent implements OnInit {
   arrEntregas: any[] = [];
   entregaSeleccionada: any;
   flagEntregas: boolean = false;
+  puntuacionAlumno: string = '';
 
   antiguaId: number = 0;
 
@@ -417,20 +418,23 @@ documentClick(event: any): void {
       icon: 'info',
       title: 'Borrar Entrega/Pactica',
       input: 'text',
-      inputLabel: 'Porfavor Escriba '+this.entregaSeleccionada.nom_entrega+' para poder borrar una Entrega/Pactica.',
+      inputLabel:
+        'Porfavor Escriba ' +
+        this.entregaSeleccionada.nom_entrega +
+        ' para poder borrar una Entrega/Pactica.',
       inputPlaceholder: 'Escribe algo',
       confirmButtonColor: '#56baed',
-      showCancelButton: true
+      showCancelButton: true,
     });
-    if(test){
-        if (test == this.entregaSeleccionada.nom_entrega) {
-          Swal.fire({
-            icon: 'success',
-            title: 'Se eliminó la Entrega/Pactica',
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Ok',
-          }).then((result) => {
-            this.rankingService
+    if (test) {
+      if (test == this.entregaSeleccionada.nom_entrega) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Se eliminó la Entrega/Pactica',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Ok',
+        }).then((result) => {
+          this.rankingService
             .eliminarEntregas(this.entregaSeleccionada)
             .subscribe((val: any) => {
               if (val.resultado == 'ok') {
@@ -438,23 +442,19 @@ documentClick(event: any): void {
               } else {
                 console.log(val.mensaje);
               }
-              });
-          });
-          
-        } else{
-          Swal.fire({
-            icon: 'error',
-            title: 'Ooops..',
-            text: 'No se ha eliminado la entrega, escriba bien el nombre del ranking',
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Ok',
-          })
-        }
-
-   
+            });
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ooops..',
+          text: 'No se ha eliminado la entrega, escriba bien el nombre del ranking',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Ok',
+        });
       }
+    }
   }
-
 
   eliminarAlumno(alumno: any) {
     Swal.fire({
@@ -563,6 +563,27 @@ documentClick(event: any): void {
       window.location.reload();
     } else {
       console.log(val);
+    }
+  }
+
+  editarPuntuacion(alumno: any) {
+    this.puntuacionAlumno = (<HTMLInputElement>(
+      document.getElementById('puntuacionAlumno')
+    )).value;
+    var numPuntuacion:number = +this.puntuacionAlumno;
+    if (numPuntuacion > 100 || numPuntuacion < 0) {
+      console.log("No vàlido");
+      Swal.fire({
+        icon: 'error',
+        title: 'No se ha podido puntuar al alumno',
+        text: '¡Puntuación incorrecta, debes escribir un numero entre el 0 y el 100!',
+      })
+      
+    } else {
+      alumno.puntuacion = this.puntuacionAlumno;
+      this.rankingService.modificarRankAlumnos(alumno).subscribe((val: any) => {
+        console.log(val);
+      });
     }
   }
 
