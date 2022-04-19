@@ -21,12 +21,13 @@ export class DarkModeComponent implements OnInit {
 
   ngOnInit() {
     this.GuardarDatos = JSON.parse(localStorage.getItem('DarkMode') || '[]');
+    this.iconsButton();
     if (this.GuardarDatos.length == 0) {
       this.guardarLocalStorage();
     } else {
       this.theme = this.GuardarDatos;
     }
-    
+
     this.initializeTheme();
   }
 
@@ -40,8 +41,7 @@ export class DarkModeComponent implements OnInit {
         : (this.theme = 'light-theme')
 
     );
-    document.getElementsByClassName('toggle')[0].classList.toggle('dark');
-    document.getElementsByClassName('toggle')[0].classList.toggle('active');
+    this.iconsButton();
 
     if (this.mostrarSolVisual == true) {
       this.mostrarSolVisual = false;
@@ -51,6 +51,17 @@ export class DarkModeComponent implements OnInit {
       this.mostrarLunaVisual = false;
     }
     this.guardarLocalStorage();
+
+  }
+
+  iconsButton() {
+
+    if (this.theme == 'light-theme') {
+      document.getElementsByClassName('toggle')[0].classList.toggle('dark');
+    } else if (this.theme == 'dark-theme') {
+      document.getElementsByClassName('toggle')[0].classList.toggle('active');
+    }
+
 
   }
 
