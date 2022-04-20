@@ -30,6 +30,8 @@ export class DashboardProfesorComponent implements OnInit {
   //@ViewChildren('toggleButton') toggleBtn: ElementRef | undefined;
   //@ViewChildren('despVisual') despVisual: ElementRef | undefined
 
+  testpunts: any;
+
   datosProfesor: Profesor = {
     id_profe: 0,
     nick: '',
@@ -531,9 +533,11 @@ documentClick(event: any): void {
     this.puntuacionAlumno = (<HTMLInputElement>(
       document.getElementById('puntuacionAlumno')
     )).value;
+    console.log(document.querySelectorAll('.punts-test'));
+    
     var numPuntuacion:number = +this.puntuacionAlumno;
     if (numPuntuacion > 100 || numPuntuacion < 0) {
-      console.log("No vàlido");
+      console.log("No valido");
       Swal.fire({
         icon: 'error',
         title: 'No se ha podido puntuar al alumno',
