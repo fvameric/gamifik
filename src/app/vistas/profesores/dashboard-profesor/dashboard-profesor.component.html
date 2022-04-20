@@ -266,7 +266,7 @@
                                 </div>
                                 <div class="table-puntuacion">
                                     <form (submit)="editarPuntuacion(alumno)">
-                                        <input style="border:none; border-radius:5px" type="number" class="punts-test" id="puntuacionAlumno" value="{{alumno.puntuacion_entrega}}"> puntuación
+                                        <input style="border:none; border-radius:5px" max="100" min="0" type="number" class="puntos" value="{{alumno.puntuacion_entrega}}"> puntuación
                                         <input type="submit" hidden>
                                     </form>
                                 </div>

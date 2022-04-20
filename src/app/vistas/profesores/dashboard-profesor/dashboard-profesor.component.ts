@@ -530,12 +530,47 @@ documentClick(event: any): void {
   }
 
   editarPuntuacion(alumno: any) {
+    console.log(alumno);
+    var flagInvalid: boolean = false;
+
+    var arrPuntos = document.querySelectorAll('.puntos');
+    arrPuntos.forEach(puntos => {
+      var puntuacion = parseInt((puntos as HTMLInputElement).value);
+
+      if (puntuacion > 100 || puntuacion < 0) {
+        flagInvalid = true;
+      }
+    });
+
+    if (flagInvalid) {
+      console.log("No valido");
+      Swal.fire({
+        icon: 'error',
+        title: 'No se ha podido puntuar al alumno',
+        text: '¡Puntuación incorrecta, debes escribir un numero entre el 0 y el 100!',
+      });
+    } else {
+      for(var i = 0; i < arrPuntos.length; i++) {
+        this.listaAlumnosEntregas[i].puntuacion_entrega = (<HTMLInputElement>arrPuntos[i]).value;
+      }
+
+      this.listaAlumnosEntregas.forEach(element => {
+        console.log(element);
+        
+        this.rankingService.modificarRankAlumnos(element).subscribe((val: any) => {
+          console.log(val);
+        });
+        
+      });
+    }
+    
+
+    /*
     this.puntuacionAlumno = (<HTMLInputElement>(
       document.getElementById('puntuacionAlumno')
     )).value;
-    console.log(document.querySelectorAll('.punts-test'));
     
-    var numPuntuacion:number = +this.puntuacionAlumno;
+    var numPuntuacion:number = this.puntuacionAlumno;
     if (numPuntuacion > 100 || numPuntuacion < 0) {
       console.log("No valido");
       Swal.fire({
@@ -550,6 +585,7 @@ documentClick(event: any): void {
         console.log(val);
       });
     }
+    */
   }
 
   denegarPendientes(pendiente: any) {
