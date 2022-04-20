@@ -17,8 +17,8 @@
                     <div class="cabecera-mis-rankings">
                         <h2>Mis Rankings</h2>
                         <button class="unirse-ranking" (click)="unirseRanking()">
-                        Unirse
-                    </button>
+                            Unirse
+                        </button>
                     </div>
                     <div class="no-ranks" *ngIf="flagRanks;else tieneRankings">
                         <p>No tiene rankings</p>
@@ -31,34 +31,35 @@
                                     <div class="pendienteFlex" *ngIf="flagPendiente && rank.aceptado == 0; else noPendiente">
                                         <p>{{rank.nom_rank}}</p>
                                         <button class="btn-pendiente" (click)="checkPendiente(rank)">
-                                        <svg width="24px" height="24px" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <style>
-                                                    .a,
-                                                    .b {
-                                                        fill: none;
-                                                        stroke: #000;
-                                                        stroke-linecap: round;
-                                                        stroke-width: 1.5px;
-                                                    }
-    
-                                                    .a {
-                                                        stroke-linejoin: round;
-                                                    }
-    
-                                                    .b {
-                                                        stroke-linejoin: bevel;
-                                                    }
-                                                </style>
-                                            </defs>
-                                            <path class="a"
-                                                d="M2.5,21.02394l.78984-2.87249C4.5964,13.39978,8.0482,10.992,11.5,10.992" />
-                                            <circle class="b" cx="11.5" cy="5.99202" r="5" />
-                                            <circle class="a" cx="16.5" cy="18.00798" r="5" />
-                                            <polyline class="a" points="16.202 15.383 16.202 18.362 19.128 18.362" />
-                                        </svg>
-                                    </button>
+                                            <svg width="24px" height="24px" viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <style>
+                                                        .a,
+                                                        .b {
+                                                            fill: none;
+                                                            stroke: #000;
+                                                            stroke-linecap: round;
+                                                            stroke-width: 1.5px;
+                                                        }
+
+                                                        .a {
+                                                            stroke-linejoin: round;
+                                                        }
+
+                                                        .b {
+                                                            stroke-linejoin: bevel;
+                                                        }
+                                                    </style>
+                                                </defs>
+                                                <path class="a"
+                                                    d="M2.5,21.02394l.78984-2.87249C4.5964,13.39978,8.0482,10.992,11.5,10.992" />
+                                                <circle class="b" cx="11.5" cy="5.99202" r="5" />
+                                                <circle class="a" cx="16.5" cy="18.00798" r="5" />
+                                                <polyline class="a"
+                                                    points="16.202 15.383 16.202 18.362 19.128 18.362" />
+                                            </svg>
+                                        </button>
                                     </div>
                                     <ng-template #noPendiente>
                                         <button class="button-ranking-class" (click)="rankSelec(rank)">{{rank.nom_rank}}</button>
@@ -86,43 +87,52 @@
                             <p>No se seleccionó ningún ranking</p>
                         </div>
                     </ng-template>
-                    <div class="alumnos-ranking">
-                        <!--
-                        <div class="skill_hover" *ngIf="showHover">
-                            {{skillHover.nombre}}
-                        </div>
-                        -->
+                    <div class="alumnos-ranking" *ngFor="let alumno of listaAlumnos; let i = index">
                         <app-loader-skeleton Cwidth="192" Cheight="20"></app-loader-skeleton>
 
-                        <button class="table-element" *ngFor="let alumno of listaAlumnos; let i = index">
-                                    <div class="table-num">
-                                        {{i+1}}
-                                    </div>
-                                    <div class="table-imagen">
-                                        <img src="{{alumno.imagen}}">
-                                    </div>
-                                    <div class="table-nombre">
-                                        {{alumno.nombre}}
-                                    </div>
-                                    <div class="table-apellidos">
-                                        {{alumno.apellidos}}
-                                    </div>
-                                
-                            <!--
-                                <div class="table-softskills" *ngFor="let skill of skills">
-                                    <button (click)="abrirModal(7, skill)">
+                        <button class="table-element" (click)="detalleSkills(alumno)">
+                            <div class="table-num">
+                                {{i+1}}
+                            </div>
+                            <div class="table-imagen">
+                                <img src="{{alumno.imagen}}">
+                            </div>
+                            <div class="table-nombre">
+                                {{alumno.nombre}}
+                            </div>
+                            <div class="table-apellidos">
+                                {{alumno.apellidos}}
+                            </div>
+                            
+                            <div class="table-skills">
+                                <div class="current-skills" *ngFor="let skill of skills">
                                     <img src="{{skill.niveles.img1}}" (mouseover)='over(skill)' (mouseout)='out()'>
-                                </button>
+                                </div>
+                            </div>
+                            
+                            <div class="table-puntuacion">
+                                {{alumno.puntuacion}}
+                            </div>
+                        </button>
+                        <div class="skill_details" *ngIf="skillDetails && alumnSelec == alumno">
+                            <div class="list-softskills">
+                                <div class="softskills" *ngFor="let skill of skills">
+                                    <button (click)="abrirModal(7, alumnSelec, skill)">
+                                        <img src="{{skill.niveles.img1}}">
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!--
+                            <div class="skill_hover" *ngIf="showHover">
+                                {{skillHover.nombre}}
+                            </div>
+                            -->
+                        </div>
                     </div>
-                    -->
-                    <div class="table-puntuacion">
-                        {{alumno.puntuacion}}
-                    </div>
-                    </button>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
 </body>

@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Evaluacion } from 'app/interfaces/Evaluacion';
+import { EvaluacionService } from 'services/evaluacion.service';
+import { RankingService } from 'services/ranking.service';
 import { TokenService } from 'services/token.service';
 
 @Component({
@@ -9,10 +12,16 @@ import { TokenService } from 'services/token.service';
 export class ModalSkillComponent implements OnInit {
 
   @Input() skillSelec: any;
+  @Input() alumnoSelec: any;
+  @Input() datosRanking: any;
+
   datosAlumno: any;
   puntosInput: number = 0;
+  profesorRank: any;
+
   
-  constructor(private tokenService: TokenService) { }
+  
+  constructor(private evaluacionService: EvaluacionService, private rankingService: RankingService ,private tokenService: TokenService) { }
 
   ngOnInit(): void {
     this.datosAlumno = this.tokenService.getUser();
@@ -21,7 +30,22 @@ export class ModalSkillComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("le has dado: " + this.puntosInput + ' de ' + this.datosAlumno.puntos_semanales + ' en ' + this.skillSelec.nombre);
+    const evaluacion: Evaluacion = {
+      id_alumno: this.alumnoSelec.id_alumno,
+      id_evaluador: this.datosAlumno.id_alumno,
+      id_profesor: 0,
+      id_ranking: this.datosRanking.id_rank,
+      id_skill: this.skillSelec.id_skill,
+      puntos: this.puntosInput,
+      fecha: new Date()
+    }
+    this.rankingService.obtenerProfeRankId(this.datosRanking.id_rank).subscribe(val => {
+      this.profesorRank = val;
+      evaluacion.id_profesor = this.profesorRank[0].id_profe;
+      console.log(evaluacion);
+
+      this.evaluacionService.insertarEvaluacion(evaluacion).subscribe(val => console.log(val));
+    });
   }
 
 }

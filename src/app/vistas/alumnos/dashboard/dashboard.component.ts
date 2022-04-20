@@ -61,6 +61,11 @@ export class DashboardComponent implements OnInit {
   }
   skillSelec: any;
   showHover: boolean = false;
+  skillDetails: boolean = false;
+  alumnSelec: any;
+
+  // evaluaciones
+  
 
   constructor(
     private usersService: UsersService,
@@ -110,6 +115,10 @@ export class DashboardComponent implements OnInit {
   obtenerSkills() {
     this.skills = this.skillService.getSkills();
     console.log(this.skills);
+  }
+
+  obtenerEvaluaciones() {
+
   }
 
   async unirseRanking() {
@@ -214,11 +223,13 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  abrirModal(idModal: number, skill: any) {
+  abrirModal(idModal: number, alumnoSelec: any, skill: any) {
     const modalRef = this.modalService.open(ModalComponent);
     modalRef.componentInstance.idModal = idModal;
     modalRef.componentInstance.skillSelec = skill;
     modalRef.componentInstance.datosAlumno = this.datosAlumno;
+    modalRef.componentInstance.alumnoSelec = alumnoSelec;
+    modalRef.componentInstance.datosRanking = this.rankSeleccionado;
   }
 
   over(skill: Skill) {
@@ -230,5 +241,18 @@ export class DashboardComponent implements OnInit {
   out() {
     console.log("out");
     this.showHover = false;
+  }
+
+  detalleSkills(alumno: any) {
+    console.log(alumno);
+    var lastAlumno = this.alumnSelec;
+    this.alumnSelec = alumno;
+    
+    if (lastAlumno == this.alumnSelec && this.skillDetails == true) {
+      this.skillDetails = false;
+      lastAlumno = null;
+    } else {
+      this.skillDetails = true;
+    }
   }
 }

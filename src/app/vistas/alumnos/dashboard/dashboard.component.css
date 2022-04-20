@@ -121,6 +121,12 @@ div.content {
     width: 100%;
     background: none;
     border: none;
+    color: #fff;
+}
+
+.table-element:hover,
+.table-element:nth-child(odd):hover {
+    background-color: #00000046;
 }
 
 .table-element:nth-child(odd) {
@@ -179,11 +185,35 @@ div.content {
     justify-content: space-between;
 }
 
+.table-skills {
+    display: flex;
+    width: 226px;
+    margin-left: 140px;
+    justify-content: space-around;
+}
+
 .skill_hover {
-    position: absolute;
     width: 100px;
     height: 100px;
     background-color: #00000097;
     border-radius: 10px;
     z-index: 9999;
+}
+
+.skill_details {
+    display: flex;
+    width: 100%;
+    height: 60px;
+    background-color: #0000003c;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.skill_details button {
+    background: none;
+    border: none;
+}
+
+.list-softskills {
+    display: flex;
 }

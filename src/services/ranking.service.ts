@@ -60,6 +60,8 @@ const URL_MODIFICAR_RANK_ALUMNOS =
 // PROFESORES
 const URL_RANK_PROFES =
   'http://localhost:8080/rankings/profesores/getRankProfes.php'; // obtener relacion rankings - profes
+const URL_PROFE_RANK_ID =
+  'http://localhost:8080/rankings/profesores/getProfeRankId.php'; // obtener relacion profesor - id de ranking
 const URL_RANK_PROFES_ID =
   'http://localhost:8080/rankings/profesores/getRankProfesId.php'; // obtener relacion rankings - id de profesor
 const URL_RANK_JOIN_PROFES =
@@ -136,6 +138,11 @@ export class RankingService {
   // obtener ranking - profes
   obtenerRankingProfes() {
     return this.http.get(URL_RANK_PROFES);
+  }
+
+  // obtener profesor - rankings
+  obtenerProfeRankId(id: number) {
+    return this.http.get(URL_PROFE_RANK_ID + `?id=${id}`);
   }
 
   // obtener ranking - alumnos

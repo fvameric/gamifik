@@ -1,11 +1,11 @@
 <?php
   // headers
-  header('Access-Control-Allow-Origin: *');
+  header('Access-Control-Allow-Origin: *'); 
   header("Access-Control-Allow-Headers: Authorization, Origin, X-Requested-With, Content-Type, Accept");
   header('Content-Type: application/json');
 
   // includes
-  include_once("../conexion/bd.php");
+  include_once("../../conexion/bd.php");
 
   // clases
   // clase conexión
@@ -15,22 +15,27 @@
   // clase respuesta
   class Result {}
   $response = new Result();
-  
+
   // variable donde guardar los datos del fetch
   global $datos;
-
-  // query
-  $query = "SELECT * FROM `skill_level` WHERE id_skill='$_GET[id]'";
-  $registros = mysqli_query($con, $query);
-
-  // si la query ha sido correcta hacemos fetch
-  if ($registros) {
   
-    $json = json_encode($registros);
-    echo $json;
+  // query
+  $query = "SELECT * FROM `rank_profes` WHERE id_rank=$_GET[id]";
+  $res = mysqli_query($con, $query);
+
+  // validación de la query
+  if ($res) {
+    while ($registros = mysqli_fetch_array($res))
+    {
+      $datos[] = $registros;
+    }
+  
+    $data = json_encode($datos);
+    echo $data;
+
   } else {
     $response->resultado = 'error';
-    $response->mensaje = 'Hubo un problema con la base de datos.';
+    $response->mensaje = 'No se encontró el profesor del ranking';
     echo json_encode($response);
   }
 ?>

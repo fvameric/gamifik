@@ -14,6 +14,8 @@ export class ModalComponent implements OnInit {
   @Input() entregaSelec:any;
   @Input() alumnoDetalle:any;
   @Input() skillSelec:any;
+  @Input() alumnoSelec:any;
+  @Input() datosRanking:any;
 
   constructor(private modalService: NgbModal) { }
 
