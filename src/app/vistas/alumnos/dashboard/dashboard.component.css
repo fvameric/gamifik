@@ -3,14 +3,6 @@ body {
     height: 100% !important;
 }
 
-.main-separador {
-    display: flex;
-    top: 150px;
-    padding-bottom: 150px;
-    justify-content: center;
-    position: sticky;
-}
-
 .separador1 {
     height: 100%;
     width: 295px;
@@ -23,56 +15,10 @@ body {
     height: auto;
 }
 
-
-/* sidebar */
-
-.sidebar {
-    width: 100%;
-    background: #0000008c;
-    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-    /*backdrop-filter: blur(6px);*/
-    overflow: auto;
-    border-radius: 5px;
-    height: 80%;
-    padding: 20px;
-    /*margin-left: 20px;*/
-}
-
-.sidebar a {
-    display: block;
-    color: rgb(117, 117, 117);
-    padding: 16px;
-    text-decoration: none;
-    transition: 1s ease-in-out;
-}
-
-.sidebar a.active {
-    background-color: transparent;
-    color: white;
-}
-
-.sidebar a:hover:not(.active) {
-    transition: 1s;
-    background-color: #1292f8;
-    color: white;
-    border-radius: 5px 5px 5px 5px;
-}
-
 div.content {
     margin-left: 200px;
     padding: 1px 16px;
     height: 1000px;
-}
-
-
-/*info  rankings dashboard*/
-
-.info-rankings {
-    padding: 10px;
-    background: #0000008c;
-    -webkit-backdrop-filter: blur(6px);
-    box-shadow: 0 3px 6px 0 rgb(32 33 36 / 28%);
-    border-radius: 5px 5px 5px 5px;
 }
 
 .unirse-ranking {
@@ -99,17 +45,7 @@ div.content {
     bottom: 0;
 }
 
-.cabecera-mis-rankings {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-}
-
 .lista-rankings p {
-    color: #ffffff;
-}
-
-.info-rankings {
     color: #ffffff;
 }
 
@@ -119,16 +55,6 @@ div.content {
     align-items: flex-start;
     flex-direction: column;
     margin: 20px;
-}
-
-.alumnos-ranking {
-    color: #ffffff;
-    margin: 20px;
-}
-
-.alumnos-ranking img {
-    width: 30px;
-    height: auto;
 }
 
 .button-ranking-class {
@@ -192,6 +118,9 @@ div.content {
     align-items: center;
     padding: 10px;
     border-radius: 10px;
+    width: 100%;
+    background: none;
+    border: none;
 }
 
 .table-element:nth-child(odd) {
@@ -226,55 +155,6 @@ div.content {
     }
 }
 
-@media screen and (max-width:768px) {
-    /*
-    .sidebar {
-        margin: 3rem;
-        margin-left: none;
-    }
-    .separador1 {
-        float: none;
-        display: flex;
-    }
-    .info-rankings {
-        margin: 0 3rem 0 3rem;
-        width: 100%;
-    }
-    .button-ranking-class {
-        width: 100%;
-    }
-    */
-    .main-separador {
-        flex-direction: column;
-        margin: 12px;
-        top: 150px;
-        position: sticky;
-    }
-    .separador1 {
-        margin: 0px;
-        margin-bottom: 40px;
-        width: 100%;
-    }
-    .separador2 {
-        margin: 0px;
-        width: 100%;
-    }
-    .cabecera-lista-rankings {
-        display: block;
-    }
-    .array-rankings {
-        display: flex;
-        overflow-x: scroll;
-        padding: 6px;
-    }
-    .button-ranking-class {
-        text-align: center;
-    }
-    .rank {
-        border-right: 1px solid #dce8f13d;
-    }
-}
-
 .pendienteFlex {
     display: flex;
     justify-content: space-between;
@@ -300,28 +180,10 @@ div.content {
 }
 
 .skill_hover {
-    width: 400px;
+    position: absolute;
+    width: 100px;
     height: 100px;
     background-color: #00000097;
     border-radius: 10px;
     z-index: 9999;
-}
-
-.dropdown {
-    width: 100px;
-    height: 100px;
-    background-color: #3298ec;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-.table-softskills img:hover .dropdown-content {
-    display: block;
 }

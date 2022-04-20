@@ -204,17 +204,16 @@ documentClick(event: any): void {
       arrows[index].setAttribute('style', 'transform: rotate(90deg);');
     }
 
-    this.flagEntregas = false;
-
     // búsqueda de entregas por ranking
-    this.entregas.forEach((element: any) => {
-      if (element.id_rank == this.rankDesplegable.id_rank) {
-        this.arrEntregas.push(element);
-      }
-    });
-
-    if (this.arrEntregas.length == 0) {
+    if (this.entregas == null || this.entregas == undefined) {
       this.flagEntregas = true;
+    } else {
+      this.flagEntregas = false;
+      this.entregas.forEach((element: any) => {
+        if (element.id_rank == this.rankDesplegable.id_rank) {
+          this.arrEntregas.push(element);
+        }
+      });
     }
   }
 
@@ -319,44 +318,6 @@ documentClick(event: any): void {
 
     this.antiguaId = alumno.id_alumno;
   }
-
-  /*
-  mostrarDesplegablePractica(index: number, rank: any) {
-    let arrows = this.elem.nativeElement.querySelectorAll('.svgArrow');
-
-    var oldIndex: number = this.indice;
-    this.arrEntregas = [];
-    this.indice = index;
-    this.rankDesplegable = rank;
-
-    if (index == oldIndex) {
-      if (this.flagDesplegable) {
-        this.flagDesplegable = false;
-        arrows[index].setAttribute("style", "transform: rotate(0deg);");
-      } else {
-        this.flagDesplegable = true;
-        arrows[index].setAttribute("style", "transform: rotate(90deg);");
-      }
-    } else {
-      this.flagDesplegable = true;
-      arrows[oldIndex].setAttribute("style", "transform: rotate(0deg);");
-      arrows[index].setAttribute("style", "transform: rotate(90deg);");
-    }
-
-    this.entregas.forEach((element: any) => {
-      if (element.id_rank == this.rankDesplegable.id_rank) {
-        this.arrEntregas.push(element);
-      }
-    });
-
-
-    if (this.arrEntregas.length == 0) {
-      this.flagEntregas = true;
-    } else {
-      this.flagEntregas = false;
-    }
-  }
-  */
 
   detalleEntrega(entrega: any) {
     this.listaAlumnosEntregas = [];

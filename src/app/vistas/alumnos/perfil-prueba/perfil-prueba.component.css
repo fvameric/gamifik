@@ -12,13 +12,6 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
-.main-separador {
-    display: flex;
-    margin-top: 150px;
-    padding-bottom: 150px;
-    justify-content: center;
-}
-
 .separador1 {
     flex-direction: column;
     height: 100%;
@@ -30,38 +23,6 @@ body {
     margin: 0 20px 0 20px;
     width: 50%;
     height: auto;
-}
-
-
-/* sidebar */
-
-.sidebar {
-    width: 100%;
-    background: #0000008c;
-    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-    overflow: auto;
-    border-radius: 5px;
-    height: 80%;
-    padding: 20px;
-}
-
-.sidebar a {
-    color: rgb(117, 117, 117);
-    padding: 16px;
-    text-decoration: none;
-    transition: 1s ease-in-out;
-}
-
-.sidebar a.active {
-    background-color: transparent;
-    color: white;
-}
-
-.sidebar a:hover:not(.active) {
-    transition: 1s;
-    background-color: #1292f8;
-    color: white;
-    border-radius: 5px 5px 5px 5px;
 }
 
 .mis-rankings {

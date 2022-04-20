@@ -1,19 +1,12 @@
 header {
-    list-style-type: none;
-    margin: 0;
-    top: 0;
-    left: 0;
-    background: #0000001a;
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
-    border-radius: 0px 0px 2px 2px;
-    animation: animacion-navbar linear 0.6s;
-    transition: 0.5s;
-    position: fixed;
-    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    display: flex;
+    justify-content: space-around;
     width: 100%;
-    padding: 0px 10px;
-    z-index: 90;
+    list-style-type: none;
+    background: #0000009f;
+    border-radius: 0px 0px 2px 2px;
+    transition: 0.5s;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
 }
 
 #abrir-menu {
@@ -21,12 +14,15 @@ header {
     color: white;
 }
 
+
+/*
 header.sticky {
     padding: 0px 5px;
     background: #0000008c;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
     backdrop-filter: blur(6px);
 }
+
 
 .nav-items-right {
     float: right;
@@ -40,6 +36,7 @@ header.sticky {
     display: block;
     opacity: 1;
 }
+*/
 
 li {
     float: left;
