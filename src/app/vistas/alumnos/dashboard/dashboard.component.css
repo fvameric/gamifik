@@ -113,25 +113,34 @@ div.content {
 
 /* tabla alumnos */
 
-.table-element {
+.container-lista-alumnos {}
+
+.container-lista-alumnos:nth-child(odd) {
+    border-radius: 10px;
+    background-color: #002d52;
+}
+
+.lista-alumnos-ranking {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-element {
     align-items: center;
     padding: 10px;
     border-radius: 10px;
-    width: 100%;
+    width: 50px;
+    height: 50px;
     background: none;
+    background-color: #00000059;
     border: none;
     color: #fff;
 }
 
 .table-element:hover,
 .table-element:nth-child(odd):hover {
-    background-color: #00000046;
-}
-
-.alumnos-ranking:nth-child(odd) {
-    border-radius: 10px;
-    background-color: #002d52;
+    background-color: #FFD700;
 }
 
 .table-imagen {
@@ -196,7 +205,8 @@ div.content {
     display: flex;
     width: 245px;
     margin-left: 60px;
-    justify-content: space-around;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .image-skill {
@@ -204,13 +214,16 @@ div.content {
 }
 
 .skill_hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
-    width: 130px;
-    height: 50px;
+    width: 150px;
+    height: 60px;
     bottom: 40px;
-    right: -45px;
+    right: -55px;
     /* left: -37px; */
-    background-color: #00000097;
+    background-color: #000000a6;
     border-radius: 10px;
     z-index: 9999;
 }
@@ -224,6 +237,11 @@ div.content {
     align-items: center;
 }
 
+.skill_details img {
+    width: 30px;
+    height: 30px;
+}
+
 .skill_details button {
     background: none;
     border: none;
@@ -231,4 +249,10 @@ div.content {
 
 .list-softskills {
     display: flex;
+}
+
+.alumnos-ranking {
+    display: flex;
+    align-items: center;
+    width: 100%;
 }

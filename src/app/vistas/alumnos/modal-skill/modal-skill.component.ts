@@ -19,8 +19,6 @@ export class ModalSkillComponent implements OnInit {
   puntosInput: number = 0;
   profesorRank: any;
 
-  
-  
   constructor(private evaluacionService: EvaluacionService, private rankingService: RankingService ,private tokenService: TokenService) { }
 
   ngOnInit(): void {
@@ -44,7 +42,10 @@ export class ModalSkillComponent implements OnInit {
       evaluacion.id_profesor = this.profesorRank[0].id_profe;
       console.log(evaluacion);
 
-      this.evaluacionService.insertarEvaluacion(evaluacion).subscribe(val => console.log(val));
+      this.evaluacionService.insertarEvaluacion(evaluacion).subscribe(val => {
+        console.log(val);
+        window.location.reload();
+      });
     });
   }
 
