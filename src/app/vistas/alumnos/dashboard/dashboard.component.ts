@@ -13,6 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, interval, merge, Observable, Subject, Subscription, throwError } from 'rxjs';
 import { catchError, debounceTime, map, mergeMap, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Skill } from 'app/interfaces/Skill';
+import { EvaluacionService } from 'services/evaluacion.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -63,12 +64,16 @@ export class DashboardComponent implements OnInit {
   showHover: boolean = false;
   skillDetails: boolean = false;
   alumnSelec: any;
+  alumnHover: any;
 
   // evaluaciones
-  
+  evaluaciones: any;
+  dataEval: any;
+  evaluacionAlumno: any;
 
   constructor(
     private usersService: UsersService,
+    private evaluacionService: EvaluacionService,
     private rankingService: RankingService,
     private tokenService: TokenService,
     private skillService: SkillService,
@@ -114,11 +119,9 @@ export class DashboardComponent implements OnInit {
 
   obtenerSkills() {
     this.skills = this.skillService.getSkills();
+    //this.evaluaciones = this.evaluacionService.obtenerEval();
     console.log(this.skills);
-  }
-
-  obtenerEvaluaciones() {
-
+    console.log(this.evaluaciones);
   }
 
   async unirseRanking() {
@@ -232,13 +235,29 @@ export class DashboardComponent implements OnInit {
     modalRef.componentInstance.datosRanking = this.rankSeleccionado;
   }
 
-  over(skill: Skill) {
+  over(alumno: any, skill: Skill) {
+    this.alumnHover = alumno;
     console.log("over");
     this.showHover = true;
     this.skillHover = skill;
+    var ids = {
+      id_alumno: alumno.id_alumno,
+      id_ranking: alumno.id_rank,
+      id_skill: skill.id_skill,
+    };
+    console.log(ids);
+    this.evaluacionService.obtenerEvalAlumnoRankIds(ids).subscribe(val => {
+      this.dataEval = val;
+      console.log(this.dataEval);
+      if (this.dataEval.resultado == 'ok') {
+        this.evaluacionAlumno = this.dataEval.data;
+        
+      }
+    });
   }
 
   out() {
+    this.evaluacionAlumno = undefined;
     console.log("out");
     this.showHover = false;
   }

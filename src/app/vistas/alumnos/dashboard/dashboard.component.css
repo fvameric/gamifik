@@ -129,7 +129,8 @@ div.content {
     background-color: #00000046;
 }
 
-.table-element:nth-child(odd) {
+.alumnos-ranking:nth-child(odd) {
+    border-radius: 10px;
     background-color: #002d52;
 }
 
@@ -193,6 +194,7 @@ div.content {
 }
 
 .skill_hover {
+    position: absolute;
     width: 100px;
     height: 100px;
     background-color: #00000097;

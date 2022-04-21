@@ -25,7 +25,7 @@
                     </div>
                     <div class="lista-rankings">
                         <ng-template #tieneRankings>
-                            <app-loader-skeleton Cwidth="255" Cheight="50"></app-loader-skeleton>
+                            <!--<app-loader-skeleton Cwidth="255" Cheight="50"></app-loader-skeleton>-->
                             <div class="array-rankings">
                                 <div *ngFor="let rank of arrRankings; let i = index" class="rank">
                                     <div class="pendienteFlex" *ngIf="flagPendiente && rank.aceptado == 0; else noPendiente">
@@ -76,7 +76,7 @@
                     <div class="titulo-skills">
                         <div class="titulo-detalle-ranking" *ngIf="rankSeleccionado;else noselec">
                             <h1>Ranking</h1>
-                            <app-loader-skeleton Cwidth="546" Cheight="20" [circle]="false"></app-loader-skeleton>
+                            <!--<app-loader-skeleton Cwidth="546" Cheight="20" [circle]="false"></app-loader-skeleton>-->
                             <h3>{{rankSeleccionado.nom_rank}}</h3>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                         </div>
                     </ng-template>
                     <div class="alumnos-ranking" *ngFor="let alumno of listaAlumnos; let i = index">
-                        <app-loader-skeleton Cwidth="192" Cheight="20"></app-loader-skeleton>
+                        <!--<app-loader-skeleton Cwidth="192" Cheight="20"></app-loader-skeleton>-->
 
                         <button class="table-element" (click)="detalleSkills(alumno)">
                             <div class="table-num">
@@ -103,12 +103,22 @@
                             <div class="table-apellidos">
                                 {{alumno.apellidos}}
                             </div>
-                            
+                            <!--
+                            <div class="skill_hover" *ngIf="showHover && alumnHover == alumno;">
+                                <div *ngIf="evaluacionAlumno != null; else noeval">
+                                    {{evaluacionAlumno.puntos}}
+                                </div>
+                                <ng-template #noeval>
+                                    sin puntos
+                                </ng-template>
+                            </div>
+                            -->
                             <div class="table-skills">
                                 <div class="current-skills" *ngFor="let skill of skills">
-                                    <img src="{{skill.niveles.img1}}" (mouseover)='over(skill)' (mouseout)='out()'>
+                                    <img src="{{skill.niveles.img1}}" (mouseover)='over(alumno, skill)' (mouseout)='out()'>
                                 </div>
                             </div>
+                            
                             
                             <div class="table-puntuacion">
                                 {{alumno.puntuacion}}
@@ -122,12 +132,6 @@
                                     </button>
                                 </div>
                             </div>
-
-                            <!--
-                            <div class="skill_hover" *ngIf="showHover">
-                                {{skillHover.nombre}}
-                            </div>
-                            -->
                         </div>
                     </div>
                 </div>
