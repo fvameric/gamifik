@@ -32,6 +32,7 @@ import { SkeletonLoaderModule } from './plantillas/loader-skeleton/skeleton-load
 import { HomeComponent } from './plantillas/home/home.component';
 import { ModalPodiumComponent } from './plantillas/modal-podium/modal-podium.component';
 import { ModalSkillComponent } from './vistas/alumnos/modal-skill/modal-skill.component';
+import { LandingComponent } from './vistas/landing/landing.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +47,7 @@ import { ModalSkillComponent } from './vistas/alumnos/modal-skill/modal-skill.co
     HomeComponent,
     ModalPodiumComponent,
     ModalSkillComponent,
+    LandingComponent,
   ],
   imports: [
     BrowserModule,

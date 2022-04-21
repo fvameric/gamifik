@@ -20,6 +20,7 @@ import { PerfilPruebaComponent } from './vistas/alumnos/perfil-prueba/perfil-pru
 import { ModalEditarRankingComponent } from './vistas/profesores/modal-editar-ranking/modal-editar-ranking.component';
 import { DarkModeComponent } from './vistas/dark-mode/dark-mode.component';
 import { PodiumComponent } from './plantillas/podium/podium.component';
+import { LandingComponent } from './vistas/landing/landing.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'identificacion', pathMatch: 'full' },
@@ -39,7 +40,8 @@ const routes: Routes = [
   { path: 'modal-perfil-alumno', component: ModalPerfilAlumnoComponent },
   { path: 'modal-editar-ranking', component: ModalEditarRankingComponent },
   { path: 'dark-mode', component: DarkModeComponent },
-  { path: 'podium', component: PodiumComponent}
+  { path: 'podium', component: PodiumComponent},
+  { path: 'landing', component: LandingComponent}
 ];
 
 @NgModule({
