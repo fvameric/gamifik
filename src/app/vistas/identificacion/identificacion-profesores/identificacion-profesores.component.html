@@ -35,12 +35,7 @@
                     </div>
                 </div>
 
-                <div class="acceso-profes" class="fadeIn first" *ngIf="!accesoProfe">
-                    <input type="password" [(ngModel)]="passAcceso" [ngModelOptions]="{standalone: true}" placeholder="12">
-                    <input type="submit" value="Acceso profes" (click)="accesoProfes()">
-                </div>
-
-                <div *ngIf="accesoProfe">
+                <div>
                     <ul ngbNav #nav="ngbNav" class="nav-tabs">
                         <li [ngbNavItem]="1">
                             <a ngbNavLink>Login</a>

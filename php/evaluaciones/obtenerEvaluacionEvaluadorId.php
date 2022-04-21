@@ -12,12 +12,16 @@
   $bd = new claseBD();
   $con = $bd->obtenerConexion();
 
+  $json = file_get_contents('php://input');
+  $evaluacion = json_decode($json);
+
   // clase respuesta
   class Result {}
   $response = new Result();
   
   // query
-  $query = "SELECT * FROM `evaluaciones` WHERE id_ranking=$_GET[id]";
+  $query = "SELECT * FROM `evaluaciones` WHERE `id_evaluador`='$evaluacion->id_evaluador' AND `id_ranking`='$evaluacion->id_ranking'";
+  
   $res = mysqli_query($con, $query);
 
   // validación de la query
@@ -26,20 +30,19 @@
     {
       $datos[] = $resultado;
     }
-  
     if (isset($datos)) {
       $response->resultado = 'ok';
-      $response->mensaje = 'Se selecciono el user con éxito';
+      $response->mensaje = 'Se selecciono la evaluación con éxito';
       $response->data = $datos;
       echo json_encode($response);  
     } else {
       $response->resultado = 'error';
-      $response->mensaje = 'No se encontró al alumno';
+      $response->mensaje = 'No se encontró la evaluación';
       echo json_encode($response);
     }
   } else {
     $response->resultado = 'error';
-    $response->mensaje = 'Hubo un error de base de datos';
+    $response->mensaje = 'Hubo un error en la selección a base de datos';
     echo json_encode($response);
   }
 ?>

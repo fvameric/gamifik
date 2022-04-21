@@ -103,23 +103,37 @@
                             <div class="table-apellidos">
                                 {{alumno.apellidos}}
                             </div>
-                            <!--
-                            <div class="skill_hover" *ngIf="showHover && alumnHover == alumno;">
-                                <div *ngIf="evaluacionAlumno != null; else noeval">
-                                    {{evaluacionAlumno.puntos}}
-                                </div>
-                                <ng-template #noeval>
-                                    sin puntos
-                                </ng-template>
-                            </div>
-                            -->
+
                             <div class="table-skills">
-                                <div class="current-skills" *ngFor="let skill of skills">
-                                    <img src="{{skill.niveles.img1}}" (mouseover)='over(alumno, skill)' (mouseout)='out()'>
+                                <div class="image-skill" *ngFor="let eval of evaluaciones.data">
+                                    <div  *ngIf="eval.id_alumno == alumno.id_alumno">
+                                        <div class="current-skills" *ngFor="let skill of skills">
+                                            <div *ngIf="eval.id_skill == skill.id_skill">
+                                                <div class="skill_hover" *ngIf="showHover && alumnHover == alumno && skillHover == skill">
+                                                    <div *ngIf="evaluacionAlumno != null; else noeval">
+                                                        {{skill.nombre}}
+                                                        <br>
+                                                        Puntos: {{evaluacionAlumno.puntos}}
+                                                    </div>
+                                                    <ng-template #noeval>
+                                                        sin puntos
+                                                    </ng-template>
+                                                </div>
+                                                <div *ngIf="eval.puntos > 99 && eval.puntos < 200">
+                                                    <img src="{{skill.niveles.img1}}" (mouseover)='over(alumno, skill)' (mouseout)='out()'>
+                                                </div>
+                                                <div *ngIf="eval.puntos > 199 && eval.puntos < 300">
+                                                    <img src="{{skill.niveles.img2}}" (mouseover)='over(alumno, skill)' (mouseout)='out()'>
+                                                </div>
+                                                <div *ngIf="eval.puntos > 399 && eval.puntos < 500">
+                                                    <img src="{{skill.niveles.img3}}" (mouseover)='over(alumno, skill)' (mouseout)='out()'>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            
+
                             <div class="table-puntuacion">
                                 {{alumno.puntuacion}}
                             </div>

@@ -67,9 +67,13 @@ export class DashboardComponent implements OnInit {
   alumnHover: any;
 
   // evaluaciones
+  arrEvaluaciones: any[] = [];
   evaluaciones: any;
   dataEval: any;
   evaluacionAlumno: any;
+
+  innerWidth: number = 0;
+  innerHeight: number = 0;
 
   constructor(
     private usersService: UsersService,
@@ -85,9 +89,11 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerDatos();
     this.obtenerDatosRanking();
-    this.obtenerSkills();
 
     this.authService.guardarRoute(this.router.url);
+
+    this.innerWidth = window.innerWidth;
+    this.innerHeight = window.innerHeight;
   }
 
   obtenerDatos() {
@@ -115,13 +121,6 @@ export class DashboardComponent implements OnInit {
         });
       }
     });
-  }
-
-  obtenerSkills() {
-    this.skills = this.skillService.getSkills();
-    //this.evaluaciones = this.evaluacionService.obtenerEval();
-    console.log(this.skills);
-    console.log(this.evaluaciones);
   }
 
   async unirseRanking() {
@@ -210,6 +209,33 @@ export class DashboardComponent implements OnInit {
     .subscribe((val: any) => {
       this.listaAlumnos = val;
     });
+
+    this.obtenerSkills();
+  }
+
+  
+  obtenerSkills() {
+    this.arrEvaluaciones = [];
+    this.skills = this.skillService.getSkills();
+    console.log(this.rankSeleccionado);
+
+    var ids = {
+      id_evaluador: this.datosAlumno.id_alumno,
+      id_ranking: this.rankSeleccionado.id_rank,
+    }
+
+    this.evaluacionService.obtenerEvalEvaluadorId(ids).subscribe(val => {
+      this.evaluaciones = val;
+      if (this.evaluaciones.resultado == 'ok') {
+        this.evaluaciones.data.forEach((element: any) => {
+          if (element.id_evaluador == this.datosAlumno.id_alumno) {
+            this.arrEvaluaciones.push(element);
+          }
+        });
+      }
+
+      console.log(this.arrEvaluaciones);
+    });
   }
 
   checkPendiente(rank: any) {
@@ -237,7 +263,7 @@ export class DashboardComponent implements OnInit {
 
   over(alumno: any, skill: Skill) {
     this.alumnHover = alumno;
-    console.log("over");
+    
     this.showHover = true;
     this.skillHover = skill;
     var ids = {
@@ -245,10 +271,10 @@ export class DashboardComponent implements OnInit {
       id_ranking: alumno.id_rank,
       id_skill: skill.id_skill,
     };
-    console.log(ids);
+    
     this.evaluacionService.obtenerEvalAlumnoRankIds(ids).subscribe(val => {
       this.dataEval = val;
-      console.log(this.dataEval);
+      
       if (this.dataEval.resultado == 'ok') {
         this.evaluacionAlumno = this.dataEval.data;
         
@@ -258,12 +284,11 @@ export class DashboardComponent implements OnInit {
 
   out() {
     this.evaluacionAlumno = undefined;
-    console.log("out");
     this.showHover = false;
   }
 
   detalleSkills(alumno: any) {
-    console.log(alumno);
+    
     var lastAlumno = this.alumnSelec;
     this.alumnSelec = alumno;
     
