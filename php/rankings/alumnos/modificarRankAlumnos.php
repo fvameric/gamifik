@@ -38,4 +38,3 @@
     $response->mensaje = 'Hubo un error al registrar la entrega';
     echo json_encode($response);
   }
-?>

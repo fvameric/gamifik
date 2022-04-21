@@ -534,7 +534,7 @@ documentClick(event: any): void {
     var flagInvalid: boolean = false;
 
     var arrPuntos = document.querySelectorAll('.puntos');
-    arrPuntos.forEach(puntos => {
+    arrPuntos.forEach((puntos) => {
       var puntuacion = parseInt((puntos as HTMLInputElement).value);
 
       if (puntuacion > 100 || puntuacion < 0) {
@@ -543,27 +543,29 @@ documentClick(event: any): void {
     });
 
     if (flagInvalid) {
-      console.log("No valido");
+      console.log('No valido');
       Swal.fire({
         icon: 'error',
         title: 'No se ha podido puntuar al alumno',
         text: '¡Puntuación incorrecta, debes escribir un numero entre el 0 y el 100!',
       });
     } else {
-      for(var i = 0; i < arrPuntos.length; i++) {
-        this.listaAlumnosEntregas[i].puntuacion_entrega = (<HTMLInputElement>arrPuntos[i]).value;
+      for (var i = 0; i < arrPuntos.length; i++) {
+        this.listaAlumnosEntregas[i].puntuacion_entrega = (<HTMLInputElement>(
+          arrPuntos[i]
+        )).value;
       }
 
-      this.listaAlumnosEntregas.forEach(element => {
+      this.listaAlumnosEntregas.forEach((element) => {
         console.log(element);
-        
-        this.rankingService.modificarRankAlumnos(element).subscribe((val: any) => {
-          console.log(val);
-        });
-        
+
+        this.rankingService
+          .modificarRankAlumnos(element)
+          .subscribe((val: any) => {
+            console.log(val);
+          });
       });
     }
-    
 
     /*
     this.puntuacionAlumno = (<HTMLInputElement>(

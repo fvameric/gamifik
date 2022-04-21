@@ -31,29 +31,29 @@
                                 <div *ngFor="let rank of arrRankings; let i = index" class="rank">
                                     <div class="contenido-ranking">
                                         <button class="button-ranking-class" (click)="rankSelec(rank, i)">
-                                    <svg class='svgArrow' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" width="20"
-                                        height="20">
-                                        <g xmlns="http://www.w3.org/2000/svg" data-name="Layer 2">
-                                            <path
-                                                d="M10.46 18a2.23 2.23 0 0 1-.91-.2 1.76 1.76 0 0 1-1.05-1.59V7.79A1.76 1.76 0 0 1 9.55 6.2a2.1 2.1 0 0 1 2.21.26l5.1 4.21a1.7 1.7 0 0 1 0 2.66l-5.1 4.21a2.06 2.06 0 0 1-1.3.46z"
-                                                data-name="arrow-right" style="fill: rgb(255, 255, 255);">
-                                            </path>
-                                        </g>
-                                    </svg>
-                                    {{rank.nom_rank}}
-                                    <div class="cantidad-alumnos">
-                                        {{rank.alumnos}} alumnos
-                                    </div>
-                                </button>
+                                            <svg class='svgArrow' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
+                                                width="20" height="20">
+                                                <g xmlns="http://www.w3.org/2000/svg" data-name="Layer 2">
+                                                    <path
+                                                        d="M10.46 18a2.23 2.23 0 0 1-.91-.2 1.76 1.76 0 0 1-1.05-1.59V7.79A1.76 1.76 0 0 1 9.55 6.2a2.1 2.1 0 0 1 2.21.26l5.1 4.21a1.7 1.7 0 0 1 0 2.66l-5.1 4.21a2.06 2.06 0 0 1-1.3.46z"
+                                                        data-name="arrow-right" style="fill: rgb(255, 255, 255);">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                            {{rank.nom_rank}}
+                                            <div class="cantidad-alumnos">
+                                                {{rank.alumnos}} alumnos
+                                            </div>
+                                        </button>
                                     </div>
 
                                     <div class="entregas-ranking" *ngIf="flagDesplegable && indiceRank == i">
                                         <div class="no-entregas" *ngIf="flagEntregas; else tieneEntregas">
                                             <button class="btn-crear-entrega" (click)="abrirModal(3)">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                    style="color: #56baed;" fill="currentColor" class="bi bi-bookmark-plus-fill"
-                                                    viewBox="0 0 16 16">
+                                                    style="color: #56baed;" fill="currentColor"
+                                                    class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16">
                                                     <path fill-rule="evenodd"
                                                         d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z" />
                                                 </svg>
@@ -66,30 +66,33 @@
                                                     <div class="contenido-buscar">
                                                         <div class="svg-buscar">
                                                             <button class="button-buscar" click="buscador()">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                            fill="currentColor" class="bi bi-search"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                                        </svg>
-                                                    </button>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                                                    height="14" fill="currentColor" class="bi bi-search"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                                                </svg>
+                                                            </button>
                                                         </div>
-                                                        <input type="text" formControlName="nombreBuscador" class="input-buscador" id="buscadorId" (click)="buscador()" placeholder="Buscador...">
+                                                        <input type="text" formControlName="nombreBuscador"
+                                                            class="input-buscador" id="buscadorId" (click)="buscador()"
+                                                            placeholder="Buscador...">
                                                     </div>
                                                 </form>
                                                 <button class="btn-crear-entrega" (click)="abrirModal(3)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                style="color: #56baed;" fill="currentColor"
-                                                class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd"
-                                                    d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z" />
-                                            </svg>
-                                        </button>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        style="color: #56baed;" fill="currentColor"
+                                                        class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                            d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z" />
+                                                    </svg>
+                                                </button>
                                             </div>
                                             <hr class="hr-entrega">
                                             <h3 class="texto-h3">Entrega:</h3>
                                             <div class="practicas-ranking" *ngFor="let entrega of arrEntregas">
-                                                <button (click)="detalleEntrega(entrega)" class="btn-entrega">{{entrega.nom_entrega}}</button>
+                                                <button (click)="detalleEntrega(entrega)"
+                                                    class="btn-entrega">{{entrega.nom_entrega}}</button>
                                             </div>
                                         </ng-template>
                                     </div>
@@ -110,19 +113,20 @@
                             <h3></h3>
                             <div class="codFlex">
                                 <button (click)="generarCodRank()">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="20" height="20" x="0" y="0"
-                                viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve">
-                                <g>
-                                    <path xmlns="http://www.w3.org/2000/svg"
-                                        d="M12,2a10.032,10.032,0,0,1,7.122,3H16a1,1,0,0,0-1,1h0a1,1,0,0,0,1,1h4.143A1.858,1.858,0,0,0,22,5.143V1a1,1,0,0,0-1-1h0a1,1,0,0,0-1,1V3.078A11.981,11.981,0,0,0,.05,10.9a1.007,1.007,0,0,0,1,1.1h0a.982.982,0,0,0,.989-.878A10.014,10.014,0,0,1,12,2Z"
-                                        fill="#ffffff" data-original="#000000" />
-                                    <path xmlns="http://www.w3.org/2000/svg"
-                                        d="M22.951,12a.982.982,0,0,0-.989.878A9.986,9.986,0,0,1,4.878,19H8a1,1,0,0,0,1-1H9a1,1,0,0,0-1-1H3.857A1.856,1.856,0,0,0,2,18.857V23a1,1,0,0,0,1,1H3a1,1,0,0,0,1-1V20.922A11.981,11.981,0,0,0,23.95,13.1a1.007,1.007,0,0,0-1-1.1Z"
-                                        fill="#ffffff" data-original="#000000" />
-                                </g>
-                            </svg>
-                        </button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="20" height="20" x="0"
+                                        y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512"
+                                        xml:space="preserve">
+                                        <g>
+                                            <path xmlns="http://www.w3.org/2000/svg"
+                                                d="M12,2a10.032,10.032,0,0,1,7.122,3H16a1,1,0,0,0-1,1h0a1,1,0,0,0,1,1h4.143A1.858,1.858,0,0,0,22,5.143V1a1,1,0,0,0-1-1h0a1,1,0,0,0-1,1V3.078A11.981,11.981,0,0,0,.05,10.9a1.007,1.007,0,0,0,1,1.1h0a.982.982,0,0,0,.989-.878A10.014,10.014,0,0,1,12,2Z"
+                                                fill="#ffffff" data-original="#000000" />
+                                            <path xmlns="http://www.w3.org/2000/svg"
+                                                d="M22.951,12a.982.982,0,0,0-.989.878A9.986,9.986,0,0,1,4.878,19H8a1,1,0,0,0,1-1H9a1,1,0,0,0-1-1H3.857A1.856,1.856,0,0,0,2,18.857V23a1,1,0,0,0,1,1H3a1,1,0,0,0,1-1V20.922A11.981,11.981,0,0,0,23.95,13.1a1.007,1.007,0,0,0-1-1.1Z"
+                                                fill="#ffffff" data-original="#000000" />
+                                        </g>
+                                    </svg>
+                                </button>
                                 <app-loader-skeleton Cwidth="150" Cheight="24"></app-loader-skeleton>
                                 <h4>Codigo: {{rankSeleccionado.cod_rank}}</h4>
                             </div>
@@ -132,32 +136,32 @@
                             <!-- Modal podio con el top 3 alumnos -->
                             <a>
                                 <button class="crear-ranking" (click)="abrirModal(6)">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                class="bi bi-trophy-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935z" />
-                            </svg>
-                        </button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                        class="bi bi-trophy-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935z" />
+                                    </svg>
+                                </button>
                             </a>
 
                             <a>
                                 <button class="crear-ranking" (click)="abrirModal(2)">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                class="bi bi-tools" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.356 3.356a1 1 0 0 0 1.414 0l1.586-1.586a1 1 0 0 0 0-1.414l-3.356-3.356a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0zm9.646 10.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708zM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11z" />
-                            </svg>
-                        </button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                        class="bi bi-tools" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.356 3.356a1 1 0 0 0 1.414 0l1.586-1.586a1 1 0 0 0 0-1.414l-3.356-3.356a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0zm9.646 10.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708zM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11z" />
+                                    </svg>
+                                </button>
                             </a>
 
                             <a>
                                 <button class="crear-ranking" (click)="inputBorrarRanking()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                            </svg>
-                        </button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                        class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                    </svg>
+                                </button>
                             </a>
                         </div>
                     </div>
@@ -182,31 +186,34 @@
 
                             <!--Button more per agregar parts de menu de administracio i menu ranking-->
                             <div class="table-more">
-                                <button #toggleButton id="userOptions" class="button-more-table" (click)="mostrarDesplegable(alumno)">
-                            <svg id="svgdesplegable" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                <path
-                                    d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                            </svg>
-                        </button>
+                                <button #toggleButton id="userOptions" class="button-more-table"
+                                    (click)="mostrarDesplegable(alumno)">
+                                    <svg id="svgdesplegable" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                        fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                        <path
+                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                    </svg>
+                                </button>
                                 <div *ngIf="this.mostrarDesplegableVisual && alumnoSelec.id_alumno == alumno.id_alumno">
                                     <div #despVisual class="desplegableVisual">
                                         <!--<app-modal-perfil-alumno [alumnoDetalle]="alumno"></app-modal-perfil-alumno>-->
 
                                         <a (click)="abrirModal(5)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                                        <path
-                                            d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                    </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                            </svg>
                                             <label>Ver detalle</label>
                                         </a>
                                         <hr>
                                         <a (click)="eliminarAlumno(alumnoSelec)">
                                             <p class="texto-desplegable">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                        </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                                </svg>
                                                 <label>Eliminar</label>
                                             </p>
                                         </a>
@@ -228,8 +235,8 @@
                                 <!--button editar-->
                                 <a>
                                     <button class="crear-ranking" (click)="abrirModal(4)">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                            class="bi bi-tools" viewBox="0 0 16 16">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                            fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16">
                                             <path
                                                 d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.356 3.356a1 1 0 0 0 1.414 0l1.586-1.586a1 1 0 0 0 0-1.414l-3.356-3.356a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0zm9.646 10.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708zM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11z" />
                                         </svg>
@@ -239,8 +246,8 @@
                                 <!--button borrar-->
                                 <a>
                                     <button class="crear-ranking" (click)="inputeliminarEntrega()">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                            class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                            fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                             <path
                                                 d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                         </svg>
@@ -266,7 +273,8 @@
                                 </div>
                                 <div class="table-puntuacion">
                                     <form (submit)="editarPuntuacion(alumno)">
-                                        <input style="border:none; border-radius:5px" max="100" min="0" type="number" class="puntos" value="{{alumno.puntuacion_entrega}}"> puntuación
+                                        <input style="border:none; border-radius:5px" max="100" min="0" type="number"
+                                            class="puntos" value="{{alumno.puntuacion_entrega}}"> puntuación
                                         <input type="submit" hidden>
                                     </form>
                                 </div>
@@ -274,19 +282,21 @@
                                 <!--Button more per agregar parts de menu de administracio i menu ranking-->
                                 <div class="table-more">
                                     <button class="button-more-table" (click)="mostrarDesplegable(alumno)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                                                class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                                            </svg>
-                                        </button>
-                                    <div *ngIf="this.mostrarDesplegableVisual && alumnoSelec.id_alumno == alumno.id_alumno">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                            fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                            <path
+                                                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                        </svg>
+                                    </button>
+                                    <div
+                                        *ngIf="this.mostrarDesplegableVisual && alumnoSelec.id_alumno == alumno.id_alumno">
                                         <div class="desplegableVisual">
                                             <a (click)="abrirModal(5)">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                                    </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                                </svg>
                                                 <label>Ver detalle</label>
                                             </a>
 
@@ -294,16 +304,20 @@
                                             <hr>
                                             <a (click)="editarPuntuacionAlumno(alumno)">
                                                 <p class="texto-desplegable">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="16" height="16" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve">
-                                                            <g>
-                                                                <path xmlns="http://www.w3.org/2000/svg"
-                                                                    d="M21,11.5V15H18a3,3,0,0,0-3,3v3H4.5A1.5,1.5,0,0,1,3,19.5V4.5A1.5,1.5,0,0,1,4.5,3h9A1.5,1.5,0,0,0,15,1.5h0A1.5,1.5,0,0,0,13.5,0h-9A4.5,4.5,0,0,0,0,4.5v15A4.5,4.5,0,0,0,4.5,24H16.484a4.5,4.5,0,0,0,3.181-1.317l3.017-3.017A4.5,4.5,0,0,0,24,16.485V11.5A1.5,1.5,0,0,0,22.5,10h0A1.5,1.5,0,0,0,21,11.5Z"
-                                                                    fill="currentColor" data-original="#000000" />
-                                                                <path xmlns="http://www.w3.org/2000/svg"
-                                                                    d="M17.793,1.793l-12.5,12.5A1,1,0,0,0,5,15v3a1,1,0,0,0,1,1H9a1,1,0,0,0,.707-.293L22.038,6.376a3.379,3.379,0,0,0,.952-3.17A3.118,3.118,0,0,0,17.793,1.793Z"
-                                                                    fill="currentColor" data-original="#000000" />
-                                                            </g>
-                                                        </svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="16"
+                                                        height="16" x="0" y="0" viewBox="0 0 24 24"
+                                                        style="enable-background:new 0 0 512 512" xml:space="preserve">
+                                                        <g>
+                                                            <path xmlns="http://www.w3.org/2000/svg"
+                                                                d="M21,11.5V15H18a3,3,0,0,0-3,3v3H4.5A1.5,1.5,0,0,1,3,19.5V4.5A1.5,1.5,0,0,1,4.5,3h9A1.5,1.5,0,0,0,15,1.5h0A1.5,1.5,0,0,0,13.5,0h-9A4.5,4.5,0,0,0,0,4.5v15A4.5,4.5,0,0,0,4.5,24H16.484a4.5,4.5,0,0,0,3.181-1.317l3.017-3.017A4.5,4.5,0,0,0,24,16.485V11.5A1.5,1.5,0,0,0,22.5,10h0A1.5,1.5,0,0,0,21,11.5Z"
+                                                                fill="currentColor" data-original="#000000" />
+                                                            <path xmlns="http://www.w3.org/2000/svg"
+                                                                d="M17.793,1.793l-12.5,12.5A1,1,0,0,0,5,15v3a1,1,0,0,0,1,1H9a1,1,0,0,0,.707-.293L22.038,6.376a3.379,3.379,0,0,0,.952-3.17A3.118,3.118,0,0,0,17.793,1.793Z"
+                                                                fill="currentColor" data-original="#000000" />
+                                                        </g>
+                                                    </svg>
                                                     <label>Puntuación</label>
                                                 </p>
                                             </a>
@@ -321,10 +335,12 @@
                                                 <p>{{pendientes.nombre}}</p>
 
                                                 <button (click)="aceptarPendientes(pendientes)" class="btn-pendientes">
-                                                    <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;"
-                                                        xmlns:graph="&ns_graphs;" xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px"
-                                                        viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+                                                    <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;"
+                                                        xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                        width="24px" height="24px" viewBox="0 0 24 24"
+                                                        enable-background="new 0 0 24 24" xml:space="preserve">
                                                         <g>
                                                             <g>
                                                                 <path d="M11,16c-0.3,0-0.5-0.1-0.7-0.3l-3-3c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l3,3c0.4,0.4,0.4,1,0,1.4C11.5,15.9,11.3,16,11,16z
@@ -339,11 +355,14 @@
 
                                                 </button>
 
-                                                <button (click)="denegarPendientes(pendientes)" class="btn-denegar-pendientes">
-                                                    <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;"
-                                                        xmlns:graph="&ns_graphs;" xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px"
-                                                        viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+                                                <button (click)="denegarPendientes(pendientes)"
+                                                    class="btn-denegar-pendientes">
+                                                    <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;"
+                                                        xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                        width="24px" height="24px" viewBox="0 0 24 24"
+                                                        enable-background="new 0 0 24 24" xml:space="preserve">
                                                         <g>
                                                             <g>
                                                                 <path
