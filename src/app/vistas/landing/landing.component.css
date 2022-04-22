@@ -1,57 +1,124 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
+/* body{
+    background-color: #fff !important;
+} */
 
+header {
+  width: 100%;
+  height: 80px;
+  margin-top: 40px;
+  *position: fixed;
+  z-index: 1;
 }
 
-.container{
-    width: 90%;
-    max-width: 1200px;
-    display: grid;
-    grid-template-rows: max-content 1fr;
-    grid-template-areas: "nav" "content";
+.logo img {
+  width: 60px;
 }
 
-.header{
-    background-image: linear-gradient(to top, 35deg, rgb(15, 65, 156) 0%, rgb(11, 143, 219) 100%);
-    color: #fff;
+.container__menu {
+  max-width: 1200px;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
 }
 
-.nav{
-    display: grid;
-    justify-content: space-between;
-    grid-auto-flow: column;
-    gap: 1em;
-    align-items: center;
-    height: 90px;
+.logo {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
-.nav-link{
-    color: #fff;
+.menu {
+  display: flex;
+  align-items: center;
+}
+
+.menu ul {
+  display: flex;
+}
+
+.menu ul li {
+  list-style: none;
+    margin-left: 36px;
+}
+
+.menu ul li a{
     text-decoration: none;
+    font-size: 16px;
+    color: #fff;
+    text-transform: uppercase;
 }
 
-.nav-list{
-    list-style: none;
-    display: grid;
-    grid-auto-flow: column;
-    gap: 1em;
+/* ------- */
+
+.container__cover{
+    width: 100%;
+    height: 800px;
+    background-image: url(assets/landing/Background-page.svg);
+    background-position: right;
+    background-repeat: no-repeat;
 }
 
-.nav-logo{
-    font-size: 1.8rem;
-    font-weight: 300;
+.cover{
+    max-width: 1200px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.nav-menu{
-    display: none;
+.container__cover .text{
+    max-width: 400px;
 }
 
+.container__cover .text h1{
+    font-size: 36px;
+    font-weight: 600;
 
-.header-main{
+}
+
+.container__cover .text p{
+    font-size: 18px;
+    margin-top: 40px;
+}
+
+.container__cover .text input{
+    padding: 18px 80px;
+    border: none;
+    font-size: 16px;
+    border-radius: 50px;
+    margin-top: 40px;
+    background: linear-gradient(to right, #42bbebaa, #426febaa);
+    cursor: pointer;
+    box-shadow: 1px 1px 30px -12px #426febaa;
+}
+
+.container__cover .text input:hover{
+    box-shadow: 1px 1px 30px -6px #426febaa;
+    transition: all 300ms;
+}
+
+.container__cover .svg img{
+    width: 600px;
+    animation: move-vector 4s linear infinite;
+}
+
+@keyframes move-vector {
+    0%{
+        transform: translateY(15px);
+    }
+    50%{
+        transform: translateY(0px);
+    }
+    100%{
+        transform: translateY(15px);
+    }
     
 }
