@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="main-content">
+        <app-header></app-header>
+        <div class="main-separador">
+            <div class="separador1">
+                <div class="sidebar">
+                    <div class="cabecera-mis-rankings">
+                        <h2>Mis Rankings</h2>
+                    </div>
+                    <div class="no-ranks" *ngIf="flagRanks;else tieneRankings">
+                        <p>No tiene rankings</p>
+                    </div>
+                    <div class="lista-rankings">
+                        <ng-template #tieneRankings>
+                            <!--<app-loader-skeleton Cwidth="255" Cheight="50"></app-loader-skeleton>-->
+                            <div class="array-rankings">
+                                <div *ngFor="let rank of arrRankings; let i = index" class="rank">
+                                    <button class="button-ranking-class" (click)="rankSelec(rank)">{{rank.nom_rank}}</button>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+
+            <div class="separador2">
+                <div class="info-rankings">
+                    <div class="titulo-skills">
+                        <div class="titulo-detalle-ranking" *ngIf="rankSeleccionado;else noselec">
+                            <h1>Ranking</h1>
+                            <!--<app-loader-skeleton Cwidth="546" Cheight="20" [circle]="false"></app-loader-skeleton>-->
+                            <h3>{{rankSeleccionado.nom_rank}}</h3>
+                        </div>
+
+                        <div class="table-element">
+                            Fecha - Evaluado - Evaluador - Apellidos - Skill - Puntos
+                        </div>
+                        <div *ngIf="!filtrado">
+                            <div class="table-element" *ngFor="let eval of arrEvaluaciones; let i = index">
+                                {{eval.fecha}} - {{eval.nombre}} {{eval.apellidos}} - {{eval.nom1}} {{eval.apellidos1}}
+                                <div class="lista-skills" *ngFor="let skill of skills">
+                                    <div *ngIf="eval.id_skill == skill.id_skill">
+                                        <img src="{{skill.niveles.img1}}">
+                                    </div>
+                                </div>
+                                - {{eval.puntos}}
+                            </div>
+                        </div>
+
+                        <div *ngIf="filtrado">
+                            <div class="table-element" *ngFor="let eval of filteredArray; let i = index">
+                                {{eval.fecha}} - {{eval.nombre}} {{eval.apellidos}} - {{eval.nom1}} {{eval.apellidos1}}
+                                <div *ngFor="let skill of skills">
+                                    <div class="lista-skills" *ngIf="eval.id_skill == skill.id_skill">
+                                        <img src="{{skill.niveles.img1}}">
+                                    </div>
+                                </div>
+                                - {{eval.puntos}}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <ng-template #noselec>
+                        <div class="titulo-detalle-ranking">
+                            <h1>Ranking</h1>
+                            <p>No se seleccionó ningún ranking</p>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+
+            <ng-template #noselec>
+                <div class="titulo-detalle-ranking">
+                    <h1>Ranking</h1>
+                    <p>No se seleccionó ningún ranking</p>
+                </div>
+            </ng-template>
+
+            <div class="separador3" *ngIf="rankSeleccionado">
+                <div class="filtros">
+                    <button (click)="restaurar()">Restaurar</button>
+                    <button (click)="ordenarFecha()">Ordenar por fecha</button>
+                    <div class="lista-skills">
+                        <div *ngFor="let skill of skills">
+                            <button (click)="filtrarSkill(skill)"><img src="{{skill.niveles.img1}}"></button>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Filtrar por evaluado:</label><br>
+                        <select [(ngModel)]="sel" (ngModelChange)="onChange()">
+                            <option selected></option>
+                            <option *ngFor="let alumno of arrAlumnos" [value]="alumno.id_alumno">
+                                {{alumno.nombre}} {{alumno.apellidos}}
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Filtrar por evaluador:</label><br>
+                        <select [(ngModel)]="selEvaluador" (ngModelChange)="onChangeEvaluador()">
+                            <option selected></option>
+                            <option *ngFor="let evaluador of arrEvaluadores" [value]="evaluador.id_evaluador">
+                                {{evaluador.nom1}} {{evaluador.apellidos1}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

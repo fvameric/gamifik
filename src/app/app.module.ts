@@ -33,6 +33,7 @@ import { HomeComponent } from './plantillas/home/home.component';
 import { ModalPodiumComponent } from './plantillas/modal-podium/modal-podium.component';
 import { ModalSkillComponent } from './vistas/alumnos/modal-skill/modal-skill.component';
 import { LandingComponent } from './vistas/landing/landing.component';
+import { DashboardEvaluacionesComponent } from './vistas/profesores/dashboard-evaluaciones/dashboard-evaluaciones.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { LandingComponent } from './vistas/landing/landing.component';
     ModalPodiumComponent,
     ModalSkillComponent,
     LandingComponent,
+    DashboardEvaluacionesComponent,
   ],
   imports: [
     BrowserModule,

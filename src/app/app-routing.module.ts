@@ -21,6 +21,7 @@ import { ModalEditarRankingComponent } from './vistas/profesores/modal-editar-ra
 import { DarkModeComponent } from './vistas/dark-mode/dark-mode.component';
 import { PodiumComponent } from './plantillas/podium/podium.component';
 import { LandingComponent } from './vistas/landing/landing.component';
+import { DashboardEvaluacionesComponent } from './vistas/profesores/dashboard-evaluaciones/dashboard-evaluaciones.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'identificacion', pathMatch: 'full' },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService, RoleGuardService] },
   { path: 'dashboardprofesor', component: DashboardProfesorComponent, canActivate: [AuthGuardService, RoleGuardService] },
+  { path: 'evaluaciones', component: DashboardEvaluacionesComponent },
   { path: 'header', component: HeaderComponent, canActivate: [AuthGuardService] },
   { path: 'footer', component: FooterComponent },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuardService, RoleGuardService]},

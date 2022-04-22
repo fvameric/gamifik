@@ -30,8 +30,8 @@ export class EvaluacionService {
     return this.http.get(URL_READ_EVAL_ALUMNO_ID + `?id=${id}`);
   }
 
-  obtenerEvalProfesorId(id: number) {
-    return this.http.get(URL_READ_EVAL_PROFESOR_ID + `?id=${id}`);
+  obtenerEvalProfesorId(ids: any) {
+    return this.http.post(URL_READ_EVAL_PROFESOR_ID, JSON.stringify(ids));
   }
 
   obtenerEvalRankingId(id: number) {
