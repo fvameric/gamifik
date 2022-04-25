@@ -22,6 +22,7 @@ import { DarkModeComponent } from './vistas/dark-mode/dark-mode.component';
 import { PodiumComponent } from './plantillas/podium/podium.component';
 import { LandingComponent } from './vistas/landing/landing.component';
 import { DashboardEvaluacionesComponent } from './vistas/profesores/dashboard-evaluaciones/dashboard-evaluaciones.component';
+import { HomeComponent } from './plantillas/home/home.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'identificacion', pathMatch: 'full' },
@@ -43,7 +44,8 @@ const routes: Routes = [
   { path: 'modal-editar-ranking', component: ModalEditarRankingComponent },
   { path: 'dark-mode', component: DarkModeComponent },
   { path: 'podium', component: PodiumComponent},
-  { path: 'landing', component: LandingComponent}
+  { path: 'landing', component: LandingComponent},
+  { path: 'home', component: HomeComponent}
 ];
 
 @NgModule({
@@ -68,5 +70,6 @@ export const routingComponents = [
   ModalPerfilAlumnoComponent,
   ModalEditarRankingComponent,
   DarkModeComponent,
-  PodiumComponent
+  PodiumComponent,
+  HomeComponent
 ];
