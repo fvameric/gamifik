@@ -28,7 +28,7 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./dashboard-profesor.component.css'],
 })
 export class DashboardProfesorComponent implements OnInit {
-  
+
   private subject = new Subject();
 
   testpunts: any;
@@ -92,6 +92,8 @@ export class DashboardProfesorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log("test");
+
     this.obtenerDatos();
     this.obtenerDatosRanking();
     this.obtenerDatosEntregas();
@@ -114,35 +116,36 @@ export class DashboardProfesorComponent implements OnInit {
       .subscribe((val) => (this.rankings = val));
 
     this.rankingService.obtenerJoinRankingProfes()
-    .pipe(
-      takeUntil(this.subject)
-    )
-    .subscribe((val: any) => {
-      this.rankingsConProfes = val;
+      .pipe(
+        takeUntil(this.subject)
+      )
+      .subscribe((val: any) => {
+        this.rankingsConProfes = val;
 
-      if (this.rankingsConProfes == null) {
-        this.flagRanks = true;
-      } else {
-        this.flagRanks = false;
+        if (this.rankingsConProfes == null) {
+          this.flagRanks = true;
+        } else {
+          this.flagRanks = false;
 
-        val.forEach((element: any) => {
-          if (element.id_profe == this.datosProfesor.id_profe) {
-            this.arrRankings.push(element);
-          }
-        });
-      }
-    });
+          val.forEach((element: any) => {
+            if (element.id_profe == this.datosProfesor.id_profe) {
+              this.arrRankings.push(element);
+            }
+          });
+        }
+      });
   }
 
   obtenerDatosEntregas() {
     this.rankingService.obtenerEntregas()
-    .pipe(
-      takeUntil(this.subject)
-    )
-    .subscribe((val) => (this.entregas = val));
+      .pipe(
+        takeUntil(this.subject)
+      )
+      .subscribe((val) => (this.entregas = val));
   }
 
   rankSelec(rank: any, index: number) {
+    // ranks
     this.rankSeleccionado = rank;
 
     let btnRanks = this.elem.nativeElement.querySelectorAll(
@@ -156,33 +159,17 @@ export class DashboardProfesorComponent implements OnInit {
     if (index == this.indiceRank) {
       btnRanks[index].setAttribute('style', 'background-color: #56baed;');
     }
-    this.indiceRank = index;
+
+    this.obtenerAlumnosRank();
+
     this.templateFlag = true;
-    this.listaAlumnos = [];
-    this.listaAlumnosPendientes = [];
-    
-    this.rankingService.obtenerAlumnoPorRanking(this.rankSeleccionado.id_rank)
-    .pipe(
-      takeUntil(this.subject)
-    )
-    .subscribe((val: any) => {
-      if (val != null) {
-        val.forEach((element: any) => {
-          if (element.aceptado == 1) {
-            this.listaAlumnos.push(element);
-          } else {
-            this.listaAlumnosPendientes.push(element);
-          }
-        });
-      }
-    });
-
-    let arrows = this.elem.nativeElement.querySelectorAll('.svgArrow');
-
-    var oldIndex: number = this.indice;
-    this.arrEntregas = [];
-    this.indice = index;
+    this.indiceRank = index;
     this.rankDesplegable = rank;
+
+    // entregas
+    let arrows = this.elem.nativeElement.querySelectorAll('.svgArrow');
+    var oldIndex: number = this.indice;
+    this.indice = index;
 
     if (index == oldIndex) {
       if (this.flagDesplegable) {
@@ -198,22 +185,56 @@ export class DashboardProfesorComponent implements OnInit {
       arrows[index].setAttribute('style', 'transform: rotate(90deg);');
     }
 
-    // búsqueda de entregas por ranking
-    if (this.entregas != null || this.entregas != undefined) {
-      this.entregas.forEach((element: any) => {
-        if (element.id_rank == this.rankDesplegable.id_rank) {
-          this.arrEntregas.push(element);
+    this.obtenerEntregasRank();
+  }
+
+  obtenerAlumnosRank() {
+    this.listaAlumnos = [];
+    this.listaAlumnosPendientes = [];
+
+    this.rankingService.obtenerAlumnoPorRanking(this.rankSeleccionado.id_rank)
+      .pipe(
+        takeUntil(this.subject)
+      )
+      .subscribe((val: any) => {
+        if (val != null) {
+          val.forEach((element: any) => {
+            if (element.aceptado == 1) {
+              this.listaAlumnos.push(element);
+            } else {
+              this.listaAlumnosPendientes.push(element);
+            }
+          });
         }
       });
+  }
 
-      if (this.arrEntregas.length > 0) {
-        this.flagEntregas = false;
-      } else {
-        this.flagEntregas = true;
-      }
-    } else {
-      this.flagEntregas = true;
-    }
+  obtenerEntregasRank() {
+    this.arrEntregas = [];
+    this.rankingService.obtenerEntregas()
+      .pipe(
+        takeUntil(this.subject)
+      )
+      .subscribe((val) => {
+        this.entregas = val;
+
+        // búsqueda de entregas por ranking
+        if (this.entregas != null || this.entregas != undefined) {
+          this.entregas.forEach((element: any) => {
+            if (element.id_rank == this.rankDesplegable.id_rank) {
+              this.arrEntregas.push(element);
+            }
+          });
+
+          if (this.arrEntregas.length > 0) {
+            this.flagEntregas = false;
+          } else {
+            this.flagEntregas = true;
+          }
+        } else {
+          this.flagEntregas = true;
+        }
+      });
   }
 
   generarCodRank() {
@@ -226,12 +247,12 @@ export class DashboardProfesorComponent implements OnInit {
     this.rankSeleccionado.cod_rank = nuevoCod;
 
     this.rankingService.modificarRanking(this.rankSeleccionado)
-    .pipe(
-      takeUntil(this.subject)
-    )
-    .subscribe((val: any) => {
-      console.log(val);
-    });
+      .pipe(
+        takeUntil(this.subject)
+      )
+      .subscribe((val: any) => {
+        console.log(val);
+      });
   }
 
   //Funcion que genera el codigo
@@ -348,42 +369,6 @@ export class DashboardProfesorComponent implements OnInit {
       });
   }
 
-  eliminarEntrega() {
-    Swal.fire({
-      title: '¿Quieres eliminar esta entrega?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Ok',
-          text: 'Se eliminó la entrega',
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'Ok',
-        }).then((result) => {
-          this.rankingService
-            .eliminarEntregas(this.entregaSeleccionada)
-            .pipe(
-              takeUntil(this.subject)
-            )
-            .subscribe((val: any) => {
-              if (val.resultado == 'ok') {
-                window.location.reload();
-              } else {
-                console.log(val.mensaje);
-              }
-            });
-        });
-      } else if (result.isDenied) {
-        Swal.fire('No se ha eliminado la entrega', '', 'info');
-      }
-    });
-  }
-
   async inputeliminarEntrega() {
     const { value: test } = await Swal.fire({
       icon: 'info',
@@ -412,7 +397,7 @@ export class DashboardProfesorComponent implements OnInit {
             )
             .subscribe((val: any) => {
               if (val.resultado == 'ok') {
-                window.location.reload();
+                this.obtenerEntregasRank();
               } else {
                 console.log(val.mensaje);
               }
@@ -447,13 +432,13 @@ export class DashboardProfesorComponent implements OnInit {
           confirmButtonColor: '#3085d6',
           confirmButtonText: 'Ok',
         }).then((result) => {
-          this.rankingService .quitarAlumnoRanking(this.rankSeleccionado.id_rank, alumno.id_alumno)
+          this.rankingService.quitarAlumnoRanking(this.rankSeleccionado.id_rank, alumno.id_alumno)
             .pipe(
               takeUntil(this.subject)
             )
             .subscribe((val: any) => {
               if (val.resultado == 'ok') {
-                window.location.reload();
+                this.obtenerAlumnosRank();
               } else {
                 console.log(val.mensaje);
               }
@@ -548,7 +533,7 @@ export class DashboardProfesorComponent implements OnInit {
 
   resultadoInsert(val: any) {
     if (val.resultado == 'ok') {
-      window.location.reload();
+      this.obtenerAlumnosRank();
     } else {
       console.log(val);
     }
@@ -597,6 +582,9 @@ export class DashboardProfesorComponent implements OnInit {
   }
 
   denegarPendientes(pendiente: any) {
+    var index = this.listaAlumnosPendientes.findIndex(x => x.id_alumno === pendiente.id_alumno);
+    this.listaAlumnosPendientes.splice(index,1)
+    
     this.rankingService
       .eliminarAlumnosPendientes(pendiente)
       .pipe(
@@ -604,7 +592,6 @@ export class DashboardProfesorComponent implements OnInit {
       )
       .subscribe((val: any) => {
         console.log(val);
-        window.location.reload();
       });
   }
 

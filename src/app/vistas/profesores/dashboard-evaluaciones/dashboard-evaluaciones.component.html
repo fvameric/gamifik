@@ -47,6 +47,9 @@
                         </div>
                         <div *ngIf="!filtrado">
                             <div class="table-element" *ngFor="let eval of arrEvaluaciones; let i = index">
+                                <div>
+                                    <button (click)="eliminarEval(eval)">Borrar</button>
+                                </div>
                                 {{eval.fecha}} - {{eval.nombre}} {{eval.apellidos}} - {{eval.nom1}} {{eval.apellidos1}}
                                 <div class="lista-skills" *ngFor="let skill of skills">
                                     <div *ngIf="eval.id_skill == skill.id_skill">
