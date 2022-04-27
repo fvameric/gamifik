@@ -7,9 +7,10 @@ import {
   FormControl,
 } from '@angular/forms';
 import { TokenService } from '../../../../services/token.service';
-import { debounceTime, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { RankingService } from 'services/ranking.service';
 import { Entrega } from 'app/interfaces/Entrega';
+import { of, Subject } from 'rxjs';
 
 
 @Component({
@@ -18,6 +19,8 @@ import { Entrega } from 'app/interfaces/Entrega';
   styleUrls: ['./modal-entrega.component.css'],
 })
 export class ModalEntregaComponent implements OnInit {
+  private subject = new Subject();
+  
   submitted: boolean = false;
   rank: any;
 
@@ -32,6 +35,9 @@ export class ModalEntregaComponent implements OnInit {
   @Input() rankSelec: any;
   @Input() alumnosRank: any;
 
+  // wait for interval to end
+  pendingName: boolean = false;
+  
   constructor(
     private modalService: NgbModal,
     public formBuilder: FormBuilder,
@@ -119,17 +125,25 @@ export class ModalEntregaComponent implements OnInit {
   }
 
   checkNombre() {
-    this.nombrePractica.valueChanges.subscribe((nombrePractica) => {
-        if (nombrePractica == '') {
-          this.nombrePractica.setErrors({ required: true });
+    this.nombrePractica.valueChanges
+    .pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap(nom => this.rankService.validarNombreExistePractica(this.rankSelec.id_rank, nom)),
+      takeUntil(this.subject)
+    ).subscribe((val: any) => {
+      this.pendingName = true;
+      setTimeout(() => {
+        if (val.resultado == 'error') {
+          this.nombrePractica?.setErrors({ notUnique: true });
         }
-        this.rankService
-          .validarNombreExistePractica(this.rankSelec.id_rank, nombrePractica)
-          .subscribe((val: any) => {
-            if (val.resultado == 'error') {
-              this.nombrePractica.setErrors({ notUnique: true });
-            }
-          });
-      });
+        this.pendingName = false;
+      }, 600);
+    });
+  }
+
+  ngOnDestroy() {
+    this.subject.next();
+    this.subject.complete();
   }
 }

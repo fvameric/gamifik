@@ -588,3 +588,11 @@ body {
         border-right: 1px solid #dce8f13d;
     }
 }
+
+.disponibilidad-white {
+    color: #0000006b;
+}
+
+.disponibilidad-black {
+    color: #ffffff6b;
+}

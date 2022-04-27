@@ -9,6 +9,8 @@ import { AuthService } from 'services/auth.service';
 import { Profesor } from 'app/interfaces/Profesor';
 import { UsersService } from 'services/users.service';
 import Swal from 'sweetalert2';
+import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-registro-profesor',
@@ -16,6 +18,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./registro-profesor.component.css'],
 })
 export class RegistroProfesorComponent implements OnInit {
+  
+  private subject = new Subject();
+  
   // formulario
   registerForm!: FormGroup;
 
@@ -41,6 +46,10 @@ export class RegistroProfesorComponent implements OnInit {
   minDate: Date = new Date();
   currentDate: Date = new Date();
 
+  // wait for interval to end
+  pendingName: boolean = false;
+  pendingEmail: boolean = false;
+  
   constructor(
     private usersService: UsersService,
     public formBuilder: FormBuilder,
@@ -66,6 +75,22 @@ export class RegistroProfesorComponent implements OnInit {
 
   //Disponibilidad email
   checkEmail() {
+    this.email.valueChanges
+    .pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap(email => this.usersService.validarEmailExisteProfes(email)),
+      takeUntil(this.subject)
+    ).subscribe((val: any) => {
+      this.pendingEmail = true;
+      setTimeout(() => {
+        if (val.resultado == 'error') {
+          this.email.setErrors({ notUnique: true });
+        }
+        this.pendingEmail = false;
+      }, 600);
+    });
+    /*
     this.email.valueChanges.subscribe((email) => {
       this.usersService
         .validarEmailExisteProfes(email)
@@ -76,10 +101,27 @@ export class RegistroProfesorComponent implements OnInit {
           }
         });
     });
+    */
   }
 
   // Disponibilidad usuario
   checkUsername() {
+    this.username.valueChanges
+    .pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap(nom => this.usersService.validarUsuarioExisteProfes(nom)),
+      takeUntil(this.subject)
+    ).subscribe((val: any) => {
+      this.pendingName = true;
+      setTimeout(() => {
+        if (val.resultado == 'error') {
+          this.username.setErrors({ notUnique: true });
+        }
+        this.pendingName = false;
+      }, 600);
+    });
+    /*
     this.username.valueChanges.subscribe((username) => {
       this.usersService
         .validarUsuarioExisteProfes(username)
@@ -90,6 +132,7 @@ export class RegistroProfesorComponent implements OnInit {
           }
         });
     });
+    */
   }
 
   crearFormulario() {
@@ -229,5 +272,10 @@ export class RegistroProfesorComponent implements OnInit {
       };
       this.authService.registroProfesor(nuevoProfesor);
     }
+  }
+
+  ngOnDestroy() {
+    this.subject.next();
+    this.subject.complete();
   }
 }

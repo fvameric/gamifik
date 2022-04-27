@@ -84,6 +84,7 @@ export class AuthService {
   }
 
   guardarLocalStorage(data: any) {
+    console.log(data);
     if (data.data.tipo == 0) {
       this.tokenService.saveToken(data.accessToken);
       this.tokenService.saveUser(data.data);

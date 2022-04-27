@@ -9,6 +9,8 @@ import {
 } from '@angular/forms';
 
 import { Alumno } from 'app/interfaces/Alumno';
+import { Subject } from 'rxjs';
+import { debounce, debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
 import { AuthService } from 'services/auth.service';
 import { UsersService } from 'services/users.service';
 import Swal from 'sweetalert2';
@@ -19,6 +21,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./registro-alumno.component.css'],
 })
 export class RegistroAlumnoComponent implements OnInit {
+  private subject = new Subject();
+  
   // formulario
   registerForm!: FormGroup;
 
@@ -40,6 +44,10 @@ export class RegistroAlumnoComponent implements OnInit {
   //validaciones para fechas
   minDate: Date = new Date();
   currentDate: Date = new Date();
+
+  // wait for interval to end
+  pendingName: boolean = false;
+  pendingEmail: boolean = false;
 
   constructor(
     private usersService: UsersService,
@@ -68,6 +76,22 @@ export class RegistroAlumnoComponent implements OnInit {
 
   //Disponibilidad email
   checkEmail() {
+    this.email.valueChanges
+    .pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap(email => this.usersService.validarEmailExisteAlumnos(email)),
+      takeUntil(this.subject)
+    ).subscribe((val: any) => {
+      this.pendingEmail = true;
+      setTimeout(() => {
+        if (val.resultado == 'error') {
+          this.email.setErrors({ notUnique: true });
+        }
+        this.pendingEmail = false;
+      }, 600);
+    });
+    /*
     this.email.valueChanges.subscribe((email) => {
       this.usersService
         .validarEmailExisteAlumnos(email)
@@ -78,10 +102,27 @@ export class RegistroAlumnoComponent implements OnInit {
           }
         });
     });
+    */
   }
 
   // Disponibilidad usuario
   checkUsername() {
+    this.username.valueChanges
+    .pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap(nom => this.usersService.validarUsuarioExisteAlumnos(nom)),
+      takeUntil(this.subject)
+    ).subscribe((val: any) => {
+      this.pendingName = true;
+      setTimeout(() => {
+        if (val.resultado == 'error') {
+          this.username.setErrors({ notUnique: true });
+        }
+        this.pendingName = false;
+      }, 600);
+    });
+    /*
     this.username.valueChanges.subscribe((username) => {
       this.usersService
         .validarUsuarioExisteAlumnos(username)
@@ -92,6 +133,7 @@ export class RegistroAlumnoComponent implements OnInit {
           }
         });
     });
+    */
   }
 
   crearFormulario() {
@@ -272,5 +314,10 @@ export class RegistroAlumnoComponent implements OnInit {
       };
       this.authService.registroAlumno(nuevoAlumno);
     }
+  }
+
+  ngOnDestroy() {
+    this.subject.next();
+    this.subject.complete();
   }
 }

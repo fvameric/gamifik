@@ -8,7 +8,7 @@
                 <img id="preview" [src]="imgSrc" class="fadeIn first">
             </label>
         </div>
-        <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg" formControlName="userImage" class="fadeIn second"/>
+        <input id="file-input" type="file" (change)="readURL($event)" accept="image/png, image/gif, image/jpeg" formControlName="userImage" class="fadeIn second" />
         <br>
 
         <input type="text" id="login" formControlName="username" minlength="3" maxlength="20" placeholder="Usuario" class="fadeIn second" [ngClass]="{ 'is-invalid': form.username.errors }">
@@ -16,11 +16,13 @@
         <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
             <div *ngIf="form.username.errors.required">El nombre de usuario es necesario</div>
         </div>
+        <div *ngIf="pendingName" class="disponibilidad-black">
+            Consultando disponibilidad del nombre
+        </div>
         <div *ngIf="form.username.errors" class="invalid-feedback">
             <div *ngIf="form.username.errors.minlength">Se requieren mínimo 3 caracteres</div>
             <div *ngIf="form.username.errors.pattern">Solo se permiten letras, números y guiones bajos</div>
             <div *ngIf="form.username.errors.notUnique">El nombre de usuario ya existe</div>
-            <div *ngIf="form.username.pending">Consultando disponibilidad</div>
         </div>
 
         <input type="email" id="email" formControlName="email" maxlength="64" placeholder="Correo Electrónico" class="fadeIn third" [ngClass]="{ 'is-invalid': form.email.errors }" email>
@@ -28,10 +30,12 @@
         <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
             <div *ngIf="form.email.errors.required">El correo electrónico es necesario</div>
         </div>
+        <div *ngIf="pendingEmail" class="disponibilidad-black">
+            Consultando disponibilidad del correo electrónico
+        </div>
         <div *ngIf="form.email.errors" class="invalid-feedback">
             <div *ngIf="form.email.errors.notUnique">El correo electrónico ya existe</div>
             <div *ngIf="form.email.errors.email">Correo electrónico no válido</div>
-            <div *ngIf="form.email.pending">Consultando disponibilidad del correo electrónico</div>
         </div>
 
         <div class="form-group">

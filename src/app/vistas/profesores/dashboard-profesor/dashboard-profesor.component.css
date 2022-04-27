@@ -413,6 +413,7 @@ a:hover {
 
 .btn-pendientes-flex {
     display: flex;
+    align-items: baseline;
 }
 
 .btn-pendientes-flex button {
@@ -420,7 +421,7 @@ a:hover {
 }
 
 .btn-pendientes {
-    padding: 5px 10px;
+    padding: 2px 5px;
     border: none;
     background-color: #2dd36f;
     border-radius: 5px;
@@ -431,7 +432,7 @@ a:hover {
 }
 
 .btn-denegar-pendientes {
-    padding: 5px 10px;
+    padding: 2px 5px;
     border: none;
     background-color: #eb445a;
     border-radius: 5px;
@@ -471,4 +472,13 @@ input[type="text"]:focus {
 
 .input-buscador {
     width: 90%;
+}
+
+.lista-pendientes {
+    display: flex;
+    flex-direction: column;
+}
+
+.alumno-pendiente {
+    display: flex;
 }

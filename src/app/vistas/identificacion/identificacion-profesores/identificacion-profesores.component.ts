@@ -15,11 +15,4 @@ export class IdentificacionProfesoresComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  accesoProfes(){
-    if (this.passAcceso == '12') {
-      this.accesoProfe = true;
-    }
-  }
-
 }

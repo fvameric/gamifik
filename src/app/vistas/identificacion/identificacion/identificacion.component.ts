@@ -14,7 +14,6 @@ export class IdentificacionComponent implements OnInit {
   profesores: any;
 
   constructor(
-    private usersService: UsersService,
     private authService: AuthService,
     private router: Router) { }
 

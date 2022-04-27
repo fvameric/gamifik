@@ -11,22 +11,23 @@
 
 <body>
     <div class="main-content">
+
         <app-header></app-header>
+
         <div class="main-separador">
+
             <div class="separador1">
                 <div class="sidebar">
                     <div class="cabecera-mis-rankings">
                         <h2>Mis Rankings</h2>
                         <button class="crear-ranking" (click)="abrirModal(1)">Crear</button>
-                        <!--<app-modal></app-modal>-->
-
                     </div>
                     <div class="no-ranks" *ngIf="flagRanks;else tieneRankings">
                         <p>No tiene rankings</p>
                     </div>
                     <div class="lista-rankings">
                         <ng-template #tieneRankings>
-                            <app-loader-skeleton Cwidth="255" Cheight="50"></app-loader-skeleton>
+                            <!--<app-loader-skeleton Cwidth="255" Cheight="50"></app-loader-skeleton>-->
                             <div class="array-rankings">
                                 <div *ngFor="let rank of arrRankings; let i = index" class="rank">
                                     <div class="contenido-ranking">
@@ -74,9 +75,7 @@
                                                                 </svg>
                                                             </button>
                                                         </div>
-                                                        <input type="text" formControlName="nombreBuscador"
-                                                            class="input-buscador" id="buscadorId" (click)="buscador()"
-                                                            placeholder="Buscador...">
+                                                        <input type="text" formControlName="nombreBuscador" class="input-buscador" id="buscadorId" (click)="buscador()" placeholder="Buscador...">
                                                     </div>
                                                 </form>
                                                 <button class="btn-crear-entrega" (click)="abrirModal(3)">
@@ -91,8 +90,7 @@
                                             <hr class="hr-entrega">
                                             <h3 class="texto-h3">Entrega:</h3>
                                             <div class="practicas-ranking" *ngFor="let entrega of arrEntregas">
-                                                <button (click)="detalleEntrega(entrega)"
-                                                    class="btn-entrega">{{entrega.nom_entrega}}</button>
+                                                <button (click)="detalleEntrega(entrega)" class="btn-entrega">{{entrega.nom_entrega}}</button>
                                             </div>
                                         </ng-template>
                                     </div>
@@ -105,10 +103,10 @@
 
             <div class="separador2">
                 <div class="info-rankings" *ngIf="templateFlag;else entregaselec">
-                    <app-loader-skeleton Cwidth="546" Cheight="20" [circle]="false"></app-loader-skeleton>
+                    <!--<app-loader-skeleton Cwidth="546" Cheight="20" [circle]="false"></app-loader-skeleton>-->
                     <div class="info-superior">
                         <div class="titulo-detalle-ranking">
-                            <app-loader-skeleton Cwidth="167" Cheight="30"></app-loader-skeleton>
+                            <!--<app-loader-skeleton Cwidth="167" Cheight="30"></app-loader-skeleton>-->
                             <h1>{{rankSeleccionado.nom_rank}}</h1>
                             <h3></h3>
                             <div class="codFlex">
@@ -127,7 +125,7 @@
                                         </g>
                                     </svg>
                                 </button>
-                                <app-loader-skeleton Cwidth="150" Cheight="24"></app-loader-skeleton>
+                                <!--<app-loader-skeleton Cwidth="150" Cheight="24"></app-loader-skeleton>-->
                                 <h4>Codigo: {{rankSeleccionado.cod_rank}}</h4>
                             </div>
                         </div>
@@ -166,7 +164,7 @@
                         </div>
                     </div>
                     <div class="alumnos-ranking">
-                        <app-loader-skeleton Cwidth="192" Cheight="20"></app-loader-skeleton>
+                        <!--<app-loader-skeleton Cwidth="192" Cheight="20"></app-loader-skeleton>-->
                         <div class="table-element" *ngFor="let alumno of listaAlumnos; let i = index">
                             <div class="table-num">
                                 {{i+1}}
@@ -186,8 +184,7 @@
 
                             <!--Button more per agregar parts de menu de administracio i menu ranking-->
                             <div class="table-more">
-                                <button #toggleButton id="userOptions" class="button-more-table"
-                                    (click)="mostrarDesplegable(alumno)">
+                                <button #toggleButton id="userOptions" class="button-more-table" (click)="mostrarDesplegable(alumno)">
                                     <svg id="svgdesplegable" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                         fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                                         <path
@@ -199,8 +196,7 @@
                                         <!--<app-modal-perfil-alumno [alumnoDetalle]="alumno"></app-modal-perfil-alumno>-->
 
                                         <a (click)="abrirModal(5)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                                                 <path
                                                     d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                                             </svg>
@@ -209,8 +205,7 @@
                                         <hr>
                                         <a (click)="eliminarAlumno(alumnoSelec)">
                                             <p class="texto-desplegable">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                     <path
                                                         d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                                 </svg>
@@ -257,7 +252,7 @@
                         </div>
 
                         <div class="alumnos-ranking">
-                            <app-loader-skeleton Cwidth="192" Cheight="20"></app-loader-skeleton>
+                            <!--<app-loader-skeleton Cwidth="192" Cheight="20"></app-loader-skeleton>-->
                             <div class="table-element" *ngFor="let alumno of listaAlumnosEntregas; let i = index">
                                 <div class="table-num">
                                     {{i+1}}
@@ -273,8 +268,7 @@
                                 </div>
                                 <div class="table-puntuacion">
                                     <form (submit)="editarPuntuacion(alumno)">
-                                        <input style="border:none; border-radius:5px" max="100" min="0" type="number"
-                                            class="puntos" value="{{alumno.puntuacion_entrega}}"> puntuación
+                                        <input style="border:none; border-radius:5px" max="100" min="0" type="number" class="puntos" value="{{alumno.puntuacion_entrega}}"> puntuación
                                         <input type="submit" hidden>
                                     </form>
                                 </div>
@@ -288,12 +282,10 @@
                                                 d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                                         </svg>
                                     </button>
-                                    <div
-                                        *ngIf="this.mostrarDesplegableVisual && alumnoSelec.id_alumno == alumno.id_alumno">
+                                    <div *ngIf="this.mostrarDesplegableVisual && alumnoSelec.id_alumno == alumno.id_alumno">
                                         <div class="desplegableVisual">
                                             <a (click)="abrirModal(5)">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                                                     <path
                                                         d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                                                 </svg>
@@ -304,11 +296,7 @@
                                             <hr>
                                             <a (click)="editarPuntuacionAlumno(alumno)">
                                                 <p class="texto-desplegable">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                        xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="16"
-                                                        height="16" x="0" y="0" viewBox="0 0 24 24"
-                                                        style="enable-background:new 0 0 512 512" xml:space="preserve">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="16" height="16" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve">
                                                         <g>
                                                             <path xmlns="http://www.w3.org/2000/svg"
                                                                 d="M21,11.5V15H18a3,3,0,0,0-3,3v3H4.5A1.5,1.5,0,0,1,3,19.5V4.5A1.5,1.5,0,0,1,4.5,3h9A1.5,1.5,0,0,0,15,1.5h0A1.5,1.5,0,0,0,13.5,0h-9A4.5,4.5,0,0,0,0,4.5v15A4.5,4.5,0,0,0,4.5,24H16.484a4.5,4.5,0,0,0,3.181-1.317l3.017-3.017A4.5,4.5,0,0,0,24,16.485V11.5A1.5,1.5,0,0,0,22.5,10h0A1.5,1.5,0,0,0,21,11.5Z"
@@ -321,63 +309,6 @@
                                                     <label>Puntuación</label>
                                                 </p>
                                             </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="separador3" *ngIf="listaAlumnosPendientes.length != 0">
-                                <div class="info-rankings">
-                                    <div class="titulo-detalle-ranking">
-                                        <h1>Alumnos pendientes:</h1>
-                                        <div *ngFor="let pendientes of listaAlumnosPendientes; let i = index">
-                                            <div class="btn-pendientes-flex">
-                                                <p>{{pendientes.nombre}}</p>
-
-                                                <button (click)="aceptarPendientes(pendientes)" class="btn-pendientes">
-                                                    <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;"
-                                                        xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                        width="24px" height="24px" viewBox="0 0 24 24"
-                                                        enable-background="new 0 0 24 24" xml:space="preserve">
-                                                        <g>
-                                                            <g>
-                                                                <path d="M11,16c-0.3,0-0.5-0.1-0.7-0.3l-3-3c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l3,3c0.4,0.4,0.4,1,0,1.4C11.5,15.9,11.3,16,11,16z
-                                                            " fill="#ffffff" />
-                                                            </g>
-                                                            <g>
-                                                                <path d="M11,16c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l6-6c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-6,6C11.5,15.9,11.3,16,11,16z
-                                                            " fill="#ffffff" />
-                                                            </g>
-                                                        </g>
-                                                    </svg>
-
-                                                </button>
-
-                                                <button (click)="denegarPendientes(pendientes)"
-                                                    class="btn-denegar-pendientes">
-                                                    <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;"
-                                                        xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                        width="24px" height="24px" viewBox="0 0 24 24"
-                                                        enable-background="new 0 0 24 24" xml:space="preserve">
-                                                        <g>
-                                                            <g>
-                                                                <path
-                                                                    d="M8,17c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l8-8c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-8,8C8.5,16.9,8.3,17,8,17z"
-                                                                    fill="#ffffff" />
-                                                            </g>
-                                                            <g>
-                                                                <path d="M16,17c-0.3,0-0.5-0.1-0.7-0.3l-8-8c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l8,8c0.4,0.4,0.4,1,0,1.4C16.5,16.9,16.3,17,16,17z
-                                                            " fill="#ffffff" />
-                                                            </g>
-                                                        </g>
-                                                    </svg>
-
-                                                </button>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -396,6 +327,62 @@
                         </div>
                     </ng-template>
                 </ng-template>
+            </div>
+
+            <div class="separador3" *ngIf="listaAlumnosPendientes.length != 0">
+                <div class="info-rankings">
+                    <div class="lista-pendientes">
+                        <h1>Alumnos pendientes:</h1>
+                        <div *ngFor="let pendientes of listaAlumnosPendientes; let i = index">
+                            <div class="btn-pendientes-flex">
+                                <p>{{pendientes.nombre}}</p>
+
+                                <button (click)="aceptarPendientes(pendientes)" class="btn-pendientes">
+                                    <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;"
+                                        xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                        width="24px" height="24px" viewBox="0 0 24 24"
+                                        enable-background="new 0 0 24 24" xml:space="preserve">
+                                        <g>
+                                            <g>
+                                                <path d="M11,16c-0.3,0-0.5-0.1-0.7-0.3l-3-3c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l3,3c0.4,0.4,0.4,1,0,1.4C11.5,15.9,11.3,16,11,16z
+                                            " fill="#ffffff" />
+                                            </g>
+                                            <g>
+                                                <path d="M11,16c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l6-6c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-6,6C11.5,15.9,11.3,16,11,16z
+                                            " fill="#ffffff" />
+                                            </g>
+                                        </g>
+                                    </svg>
+
+                                </button>
+
+                                <button (click)="denegarPendientes(pendientes)" class="btn-denegar-pendientes">
+                                    <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;"
+                                        xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                        width="24px" height="24px" viewBox="0 0 24 24"
+                                        enable-background="new 0 0 24 24" xml:space="preserve">
+                                        <g>
+                                            <g>
+                                                <path
+                                                    d="M8,17c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l8-8c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-8,8C8.5,16.9,8.3,17,8,17z"
+                                                    fill="#ffffff" />
+                                            </g>
+                                            <g>
+                                                <path d="M16,17c-0.3,0-0.5-0.1-0.7-0.3l-8-8c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l8,8c0.4,0.4,0.4,1,0,1.4C16.5,16.9,16.3,17,16,17z
+                                            " fill="#ffffff" />
+                                            </g>
+                                        </g>
+                                    </svg>
+
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
