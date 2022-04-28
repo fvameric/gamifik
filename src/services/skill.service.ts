@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map, take } from 'rxjs/operators';
 import { Skill } from 'app/interfaces/Skill';
-import { Observable } from 'rxjs';
 
 //const URL_READ_SKILLS = 'http://localhost:8080/skills/datosSkills.php'; // read skills
 //const URL_READ_SKILL_LEVEL = 'http://localhost:8080/skills/datosSkillLevel.php'; // read skills levels

@@ -107,10 +107,10 @@
                                     {{alumno.puntuacion}}
                                 </div>
                                 <div class="table-skills">
-                                    <div class="image-skill" *ngFor="let eval of evaluaciones.data">
+                                    <div class="image-skill" *ngFor="let eval of arrEvaluaciones">
                                         <div *ngIf="eval.id_alumno == alumno.id_alumno">
-                                            <div class="current-skills" *ngFor="let skill of skills">
-                                                <div *ngIf="eval.id_skill == skill.id_skill">
+                                            <div class="current-skills" *ngFor="let skill of skills; let i = index">
+                                                <div *ngIf="eval.id_skill == skill.id_skill && i <= skills.length">
                                                     <div class="skill_hover" *ngIf="showHover && alumnHover == alumno && skillHover == skill">
                                                         <div *ngIf="evaluacionAlumno != null; else noeval">
                                                             {{skill.nombre}}
