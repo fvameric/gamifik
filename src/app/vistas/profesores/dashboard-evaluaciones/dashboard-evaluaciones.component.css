@@ -20,23 +20,6 @@ div.content {
     height: 1000px;
 }
 
-.crear-ranking {
-    margin: 5%;
-    padding: 10px;
-    border-radius: 5px;
-    background: #56baed;
-    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-    backdrop-filter: blur(6px);
-    color: white;
-    border: none;
-    transition: 300ms;
-}
-
-.crear-ranking:hover {
-    background-color: #0000008c;
-    color: #ffffff;
-}
-
 .unirse-ranking {
     margin: 5%;
     padding: 10px;
@@ -63,15 +46,6 @@ div.content {
 
 .lista-rankings p {
     color: #ffffff;
-}
-
-.titulo-detalle-ranking {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-direction: column;
-    margin: 20px 0px 0px 20px;
-    width: 50%;
 }
 
 .codFlex {
@@ -107,12 +81,12 @@ div.content {
 .contenido-ranking:hover {
     transition: 200ms;
     color: white;
-    background-color: #56baed;
+    background-color: #1292f8;
 }
 
 .button-ranking-class:focus {
     color: white;
-    background-color: #56baed;
+    background-color: #1292f8;
 }
 
 .cantidad-alumnos {
@@ -150,7 +124,6 @@ div.content {
 }
 
 svg:hover {
-    color: #1292f8;
     cursor: pointer;
 }
 
@@ -286,6 +259,7 @@ svg:hover {
 }
 
 .texto-h3 {
+    font-size: 15px;
     color: #cccccc;
     margin: 5px;
 }

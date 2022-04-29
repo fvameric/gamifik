@@ -17,7 +17,6 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { LoadingInterceptorService } from 'services/loading-interceptor.service';
 import { LoaderComponent } from './plantillas/loader/loader.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoaderService } from 'services/loader.service';
 
 //plantillas
@@ -59,7 +58,6 @@ import { DashboardEvaluacionesComponent } from './vistas/profesores/dashboard-ev
     NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule,
     SkeletonLoaderModule
   ],
   providers: [

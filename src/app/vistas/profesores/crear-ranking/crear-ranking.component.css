@@ -1,12 +1,10 @@
 @import url("../../../../styles.css");
-
 input {
     color: black !important;
     border: 1px solid #f6f6f633 !important;
     margin-left: 2%;
     border-radius: 5px;
     width: 50%;
-
 }
 
 p {
@@ -37,6 +35,6 @@ p {
 }
 
 .crear-ranking:hover {
-    background-color: #0000008c;
+    background-color: #1292f8;
     color: #ffffff;
 }

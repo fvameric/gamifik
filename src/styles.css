@@ -32,8 +32,11 @@
     --backgound-color-skeleton-gradien: linear-gradient(110deg, #494949 8%, #292929 18%, #494949 33%);
 }
 
+* {
+    font-family: "Lato", sans-serif;
+}
+
 body {
-    font-family: "Poppins", sans-serif;
     height: 100vh;
     background: var( --background-color);
     background-repeat: no-repeat;
@@ -99,13 +102,15 @@ h2 {
     font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
-    display: inline-block;
-    margin: 40px 8px 10px 8px;
-    color: #cccccc;
+    color: #d1d1d1;
 }
 
 h2:hover {
     cursor: pointer;
+}
+
+h4 {
+    font-size: 15px;
 }
 
 
@@ -485,7 +490,6 @@ body {
 
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .main-content {
@@ -533,7 +537,21 @@ body {
 
 .cabecera-mis-rankings {
     display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+}
+
+.titulo-detalle-ranking {
+    display: flex;
+    justify-content: space-between;
     align-items: flex-start;
+    flex-direction: column;
+    margin: 5px 0px 0px 20px;
+    width: 50%;
+}
+
+.titulo-detalle-ranking h3 {
+    font-size: 15px;
 }
 
 

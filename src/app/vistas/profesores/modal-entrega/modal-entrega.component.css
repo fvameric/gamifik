@@ -1,5 +1,4 @@
 @import url("../../../../styles.css");
-
 input {
     color: black !important;
     width: 100% !important;
@@ -36,6 +35,5 @@ p {
 }
 
 svg:hover {
-    color: #1292f8;
     cursor: pointer;
 }
