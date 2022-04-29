@@ -51,6 +51,7 @@
 
                                     <div class="entregas-ranking" *ngIf="flagDesplegable && indiceRank == i">
                                         <div class="no-entregas" *ngIf="flagEntregas; else tieneEntregas">
+                                            <p>No tiene entregas</p>
                                             <button class="btn-crear-entrega" (click)="abrirModal(3)">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                     style="color: #56baed;" fill="currentColor"
@@ -59,7 +60,6 @@
                                                         d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z" />
                                                 </svg>
                                             </button>
-                                            <p>No tiene entregas</p>
                                         </div>
                                         <ng-template #tieneEntregas>
                                             <div class="header-entregas">
@@ -87,8 +87,6 @@
                                                     </svg>
                                                 </button>
                                             </div>
-                                            <hr class="hr-entrega">
-                                            <h3 class="texto-h3">Entrega:</h3>
                                             <div class="practicas-ranking" *ngFor="let entrega of arrEntregas">
                                                 <button (click)="detalleEntrega(entrega)" class="btn-entrega">{{entrega.nom_entrega}}</button>
                                             </div>

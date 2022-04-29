@@ -151,13 +151,13 @@ export class DashboardProfesorComponent implements OnInit {
     let btnRanks = this.elem.nativeElement.querySelectorAll(
       '.button-ranking-class'
     );
-    btnRanks[index].setAttribute('style', 'background-color: #56baed;');
+    btnRanks[index].setAttribute('style', 'background-color: #1292f8;');
     btnRanks[this.indiceRank].setAttribute(
       'style',
       'background-color: transparent;'
     );
     if (index == this.indiceRank) {
-      btnRanks[index].setAttribute('style', 'background-color: #56baed;');
+      btnRanks[index].setAttribute('style', 'background-color: #1292f8;');
     }
 
     this.obtenerAlumnosRank();

@@ -20,22 +20,6 @@ div.content {
     height: 1000px;
 }
 
-.crear-ranking {
-    margin: 5%;
-    padding: 10px;
-    border-radius: 5px;
-    background: #0000008c;
-    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-    color: #ffffff;
-    border: none;
-    transition: 0.3s;
-}
-
-.crear-ranking:hover {
-    background-color: #1292f8;
-    color: #ffffff;
-}
-
 .unirse-ranking {
     margin: 5%;
     padding: 10px;
@@ -100,11 +84,6 @@ div.content {
     background-color: #1292f8;
 }
 
-.button-ranking-class:focus {
-    color: white;
-    background-color: #1292f8;
-}
-
 .cantidad-alumnos {
     float: right;
 }
@@ -149,6 +128,11 @@ svg:hover {
 
 .no-ranks p {
     color: #ffffff;
+}
+
+.no-entregas {
+    display: flex;
+    justify-content: space-between;
 }
 
 .no-entregas p {
@@ -210,7 +194,6 @@ svg:hover {
     color: white;
     padding: 14px 16px;
     background-color: inherit;
-    font-family: inherit;
     margin: 0;
 }
 
@@ -282,7 +265,6 @@ svg:hover {
 
 .input-buscador {
     background: transparent;
-    border-radius: 5px;
     border: none;
     display: flex;
     justify-content: center;

@@ -84,11 +84,6 @@ div.content {
     background-color: #1292f8;
 }
 
-.button-ranking-class:focus {
-    color: white;
-    background-color: #1292f8;
-}
-
 .cantidad-alumnos {
     float: right;
 }
@@ -194,7 +189,6 @@ svg:hover {
     color: white;
     padding: 14px 16px;
     background-color: inherit;
-    font-family: inherit;
     margin: 0;
 }
 
