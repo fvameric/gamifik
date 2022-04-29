@@ -239,20 +239,29 @@ export class DashboardComponent implements OnInit {
       id_ranking: this.rankSeleccionado.id_rank,
     }
 
+    console.log(JSON.stringify(ids));
+    
+
+    
     this.evaluacionService.obtenerEvalEvaluadorId(ids)
       .pipe(
         takeUntil(this.subject)
       )
       .subscribe(val => {
-      this.evaluaciones = val;
-      if (this.evaluaciones.resultado == 'ok') {
-        this.evaluaciones.data.forEach((element: any) => {
-          if (element.id_evaluador == this.datosAlumno.id_alumno) {
-            this.arrEvaluaciones.push(element);
-          }
-        });
-      }
+        this.evaluaciones = val;
+
+        if (this.evaluaciones.resultado == 'ok') {
+          this.evaluaciones.data.forEach((element: any) => {
+            if (element.id_evaluador == this.datosAlumno.id_alumno) {
+              this.arrEvaluaciones.push(element);
+              
+            }
+          });
+        }
+
+        console.log(this.arrEvaluaciones);
     });
+    
   }
 
   checkPendiente(rank: any) {

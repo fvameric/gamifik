@@ -85,11 +85,9 @@ div.content {
 
 /* tabla alumnos */
 
-.container-lista-alumnos {}
-
 .container-lista-alumnos:nth-child(odd) {
     border-radius: 10px;
-    background-color: #002d52;
+    background-color: #002d5283;
 }
 
 .lista-alumnos-ranking {

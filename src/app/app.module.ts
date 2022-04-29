@@ -33,6 +33,7 @@ import { ModalPodiumComponent } from './plantillas/modal-podium/modal-podium.com
 import { ModalSkillComponent } from './vistas/alumnos/modal-skill/modal-skill.component';
 import { LandingComponent } from './vistas/landing/landing.component';
 import { DashboardEvaluacionesComponent } from './vistas/profesores/dashboard-evaluaciones/dashboard-evaluaciones.component';
+import { WavesComponent } from './plantillas/waves/waves.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +50,7 @@ import { DashboardEvaluacionesComponent } from './vistas/profesores/dashboard-ev
     ModalSkillComponent,
     LandingComponent,
     DashboardEvaluacionesComponent,
+    WavesComponent,
   ],
   imports: [
     BrowserModule,

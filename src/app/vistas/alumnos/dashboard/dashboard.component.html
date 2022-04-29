@@ -9,13 +9,22 @@
 </head>
 
 <body>
+    <app-header></app-header>
+
+    <div class="separador-titulo">
+        <div class="container-titulo">
+            <label><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="20" height="20" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve"><g><path xmlns="http://www.w3.org/2000/svg" d="M12,6A3,3,0,0,0,9,9V21a3,3,0,0,0,6,0V9A3,3,0,0,0,12,6Z" fill="#ffffff" data-original="#000000"/><path xmlns="http://www.w3.org/2000/svg" d="M21,0a3,3,0,0,0-3,3V21a3,3,0,0,0,6,0V3A3,3,0,0,0,21,0Z" fill="#ffffff" data-original="#000000"/><path xmlns="http://www.w3.org/2000/svg" d="M3,12a3,3,0,0,0-3,3v6a3,3,0,0,0,6,0V15A3,3,0,0,0,3,12Z" fill="#ffffff" data-original="#000000"/></g></svg> Mis Rankings</label>
+        </div>
+        <div class="separador"></div>
+    </div>
+
     <div class="main-content">
-        <app-header></app-header>
+
         <div class="main-separador">
             <div class="separador1">
                 <div class="sidebar">
                     <div class="cabecera-mis-rankings">
-                        <h2>Mis Rankings</h2>
+                        <h2>Rankings</h2>
                         <button class="unirse-ranking" (click)="unirseRanking()">
                             Unirse
                         </button>
@@ -108,6 +117,8 @@
                                 </div>
                                 <div class="table-skills">
                                     <div class="image-skill" *ngFor="let eval of arrEvaluaciones">
+
+                                        <!---->
                                         <div *ngIf="eval.id_alumno == alumno.id_alumno">
                                             <div class="current-skills" *ngFor="let skill of skills; let i = index">
                                                 <div *ngIf="eval.id_skill == skill.id_skill && i <= skills.length">
@@ -154,6 +165,7 @@
         </div>
     </div>
 
+    <app-waves></app-waves>
 </body>
 
 </html>
