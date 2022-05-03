@@ -127,9 +127,9 @@ svg:hover {
 
 .table-element {
     display: flex;
-    align-items: center;
     padding: 10px;
     border-radius: 10px;
+    flex-direction: column;
 }
 
 .table-element:nth-child(odd) {
@@ -153,6 +153,10 @@ svg:hover {
 
 .table-nombre {
     margin: 0 6px 0 10px;
+}
+
+.table-content {
+    display: flex;
 }
 
 
@@ -443,11 +447,8 @@ input[type="text"]:focus {
 }
 
 .separador3 {
+    width: 15%;
     height: 100%;
-    padding: 10px;
-    background-color: #0000008c;
-    border-radius: 5px;
-    color: #fff;
 }
 
 .filtros {
@@ -456,4 +457,18 @@ input[type="text"]:focus {
     flex-direction: column;
     justify-content: flex-start;
     height: auto;
+    background-color: #0000008c;
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px;
+}
+
+.btn-filtro-skill button:hover {
+    border-radius: 5px;
+    background-color: #0d8bf1;
+}
+
+.btn-filtro-skill button:focus {
+    border-radius: 5px;
+    background-color: #0d8bf1;
 }

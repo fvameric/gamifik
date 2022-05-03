@@ -9,7 +9,6 @@ import { AuthService } from 'services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   toggleMenu: boolean = false;
-
   user: any;
   
   constructor(private tokenService: TokenService,

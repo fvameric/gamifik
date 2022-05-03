@@ -44,6 +44,10 @@ export class DashboardEvaluacionesComponent implements OnInit {
   // skills
   skills: any;
   filtrado: boolean = false;
+  filtradoPorSkill: boolean = false;
+  filtradoPorEvaluado: boolean = false;
+  filtradoPorEvaluador: boolean = false;
+  oldSkill: any;
 
   sel: any;
   selEvaluador: any;
@@ -125,46 +129,80 @@ export class DashboardEvaluacionesComponent implements OnInit {
     this.skills = this.skillService.getSkills();
   }
 
-  filtrarSkill(skill: any) {
-    this.filtrado = true;
-    this.filteredArray = this.arrEvaluaciones.filter(f => f.id_skill == skill.id_skill);
-  }
 
-  restaurar() {
-    this.filtrado = false;
+  filtrarSkill(skill: any) {
+    if (this.filtradoPorSkill) {
+      this.filtradoPorSkill = false;
+    } else {
+      this.filtradoPorSkill = true;
+    }
+
+    console.log(this.filtradoPorSkill);
+    /*
+    if (this.oldSkill != skill) {
+      if (this.filtrado) {
+        this.filteredArray = this.filteredArray.filter(f => f.id_skill == skill.id_skill);
+      } else {
+        this.filteredArray = this.arrEvaluaciones.filter(f => f.id_skill == skill.id_skill);
+      }
+
+      this.filtrado = true;
+      this.oldSkill = skill;
+      this.filtradoPorSkill = true;
+    } else {
+      this.oldSkill = undefined;
+      this.filtrado = false;
+      this.filtradoPorSkill = false;
+    }
+    */
   }
 
   onChange() {
-    
+    if (this.filtradoPorEvaluado) {
+      this.filtradoPorEvaluado = false;
+    } else {
+      this.filtradoPorEvaluado = true;
+    }
+
+    console.log(this.filtradoPorEvaluado);
+    /*
+    console.log("seleccionado: " + this.sel);
+
+    if (this.filtrado) {
+      this.filteredArray = this.filteredArray.filter(f => f.id_alumno == this.sel);
+    } else {
+      this.filteredArray = this.arrEvaluaciones.filter(f => f.id_alumno == this.sel);
+    }
+
     if (this.sel == '') {
       this.filtrado = false;
     } else {
       this.filtrado = true;
     }
-    this.filteredArray = this.arrEvaluaciones.filter(f => f.id_alumno == this.sel);
+    */
   }
 
   onChangeEvaluador() {
-    
-    console.log(this.selEvaluador);
-    
+    if (this.filtradoPorEvaluador) {
+      this.filtradoPorEvaluador = false;
+    } else {
+      this.filtradoPorEvaluador = true;
+    }
+
+    console.log(this.filtradoPorEvaluador);
+    /*
+    if (this.filtrado) {
+      this.filteredArray = this.filteredArray.filter(f => f.id_alumno == this.sel);
+    } else {
+      this.filteredArray = this.arrEvaluaciones.filter(f => f.id_evaluador == this.selEvaluador);
+    }
+
     if (this.sel == '') {
       this.filtrado = false;
     } else {
       this.filtrado = true;
     }
-    this.filteredArray = this.arrEvaluaciones.filter(f => f.id_evaluador == this.selEvaluador);
-  }
-
-  eliminarEval(evaluacion: any) {
-    console.log(evaluacion);
-    this.evaluacionService.eliminarEvaluacion(evaluacion.id_evaluacion)
-    .pipe(
-      takeUntil(this.subject)
-    ).subscribe((val:any) => {
-      console.log(val);
-      this.obtenerDatosRankSelec();
-    });
+    */
   }
 
   onChangeDate() {
@@ -179,6 +217,23 @@ export class DashboardEvaluacionesComponent implements OnInit {
     console.log(this.dt2);
     this.filteredArray = this.arrEvaluaciones.filter(f => (f.fecha >= this.dt && f.fecha <= this.dt2));
     console.log(this.filteredArray);
+  }
+
+  restaurar() {
+    this.sel = '';
+    this.oldSkill = undefined;
+    this.filtrado = false;
+  }
+
+  eliminarEval(evaluacion: any) {
+    console.log(evaluacion);
+    this.evaluacionService.eliminarEvaluacion(evaluacion.id_evaluacion)
+    .pipe(
+      takeUntil(this.subject)
+    ).subscribe((val:any) => {
+      console.log(val);
+      this.obtenerDatosRankSelec();
+    });
   }
 
   ngOnDestroy() {
