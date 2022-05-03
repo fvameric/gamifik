@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Profesor } from 'app/interfaces/Profesor';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { EvaluacionService } from 'services/evaluacion.service';
 import { RankingService } from 'services/ranking.service';
 import { SkillService } from 'services/skill.service';
@@ -11,6 +13,8 @@ import { TokenService } from 'services/token.service';
   styleUrls: ['./dashboard-evaluaciones.component.css']
 })
 export class DashboardEvaluacionesComponent implements OnInit {
+
+  private subject = new Subject();
 
   datosProfesor: Profesor = {
     id_profe: 0,
@@ -43,6 +47,10 @@ export class DashboardEvaluacionesComponent implements OnInit {
 
   sel: any;
   selEvaluador: any;
+
+  // dates
+  dt: Date = new Date;
+  dt2: Date = new Date;
 
   constructor(
     private rankingService: RankingService,
@@ -81,11 +89,16 @@ export class DashboardEvaluacionesComponent implements OnInit {
 
   rankSelec(rank: any) {
     this.filtrado = false;
-    this.arrEvaluaciones = [];
     this.rankSeleccionado = rank;
+    this.obtenerDatosRankSelec();
+  }
+
+  obtenerDatosRankSelec() {
+    this.arrEvaluaciones = [];
+
     var ids = {
       id_profesor: this.datosProfesor.id_profe,
-      id_ranking: rank.id_rank
+      id_ranking: this.rankSeleccionado.id_rank
     }
     this.evaluacionService.obtenerEvalProfesorId(ids).subscribe(val => {
       console.log(val);
@@ -100,7 +113,6 @@ export class DashboardEvaluacionesComponent implements OnInit {
 
         if (!this.arrEvaluadores.find(x => x.id_evaluador == element.id_evaluador)) {
           console.log("push");
-          console.log(element);
           this.arrEvaluadores.push(element);
         }
       });
@@ -111,11 +123,6 @@ export class DashboardEvaluacionesComponent implements OnInit {
 
   obtenerSkills() {
     this.skills = this.skillService.getSkills();
-  }
-
-  ordenarFecha() {
-    console.log(this.arrEvaluaciones);
-    this.arrEvaluaciones.sort((a, b) => (a.fecha < b.fecha ? -1 : 1));
   }
 
   filtrarSkill(skill: any) {
@@ -147,6 +154,36 @@ export class DashboardEvaluacionesComponent implements OnInit {
       this.filtrado = true;
     }
     this.filteredArray = this.arrEvaluaciones.filter(f => f.id_evaluador == this.selEvaluador);
-    
   }
+
+  eliminarEval(evaluacion: any) {
+    console.log(evaluacion);
+    this.evaluacionService.eliminarEvaluacion(evaluacion.id_evaluacion)
+    .pipe(
+      takeUntil(this.subject)
+    ).subscribe((val:any) => {
+      console.log(val);
+      this.obtenerDatosRankSelec();
+    });
+  }
+
+  onChangeDate() {
+    this.filtrado = true;
+    console.log(this.dt);
+    this.filteredArray = this.arrEvaluaciones.filter(f => (f.fecha >= this.dt && f.fecha <= this.dt2));
+    console.log(this.filteredArray);
+  }
+
+  onChangeDate2() {
+    this.filtrado = true;
+    console.log(this.dt2);
+    this.filteredArray = this.arrEvaluaciones.filter(f => (f.fecha >= this.dt && f.fecha <= this.dt2));
+    console.log(this.filteredArray);
+  }
+
+  ngOnDestroy() {
+    this.subject.next();
+    this.subject.complete();
+  }
+
 }

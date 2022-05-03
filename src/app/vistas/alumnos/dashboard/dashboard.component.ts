@@ -21,6 +21,7 @@ import { EvaluacionService } from 'services/evaluacion.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  
   private subject = new Subject();
 
   datosAlumno: Alumno = {
@@ -102,8 +103,16 @@ export class DashboardComponent implements OnInit {
 
   obtenerDatosRanking() {
     this.arrRankings = [];
-    this.rankingService.obtenerRanking().subscribe(val => this.rankings = val);
-    this.rankingService.obtenerJoinRankingAlumno().subscribe((val: any) => {
+    this.rankingService.obtenerRanking()
+    .pipe(
+      takeUntil(this.subject)
+    ).subscribe(val => this.rankings = val);
+
+    this.rankingService.obtenerJoinRankingAlumno()
+    .pipe(
+      takeUntil(this.subject)
+    )
+    .subscribe((val: any) => {
       this.rankingsConAlumnos = val;
 
       if (this.rankingsConAlumnos == null) {
@@ -180,7 +189,11 @@ export class DashboardComponent implements OnInit {
               text: 'Se une al ranking'
             });
 
-            this.rankingService.insertarAlumnoEnRanking(rankId, this.datosAlumno.id_alumno).subscribe((val: any) => {
+            this.rankingService.insertarAlumnoEnRanking(rankId, this.datosAlumno.id_alumno)
+            .pipe(
+              takeUntil(this.subject)
+            )
+            .subscribe((val: any) => {
               if (val.resultado == 'ok') {
                 this.ngOnInit();
               } else {
@@ -206,6 +219,9 @@ export class DashboardComponent implements OnInit {
     this.rankSeleccionado = rank;
 
     this.rankingService.obtenerAlumnoPorRanking(this.rankSeleccionado.id_rank)
+    .pipe(
+      takeUntil(this.subject)
+    )
     .subscribe((val: any) => {
       this.listaAlumnos = val;
     });
@@ -217,29 +233,43 @@ export class DashboardComponent implements OnInit {
   obtenerSkills() {
     this.arrEvaluaciones = [];
     this.skills = this.skillService.getSkills();
-    console.log(this.rankSeleccionado);
 
     var ids = {
       id_evaluador: this.datosAlumno.id_alumno,
       id_ranking: this.rankSeleccionado.id_rank,
     }
 
-    this.evaluacionService.obtenerEvalEvaluadorId(ids).subscribe(val => {
-      this.evaluaciones = val;
-      if (this.evaluaciones.resultado == 'ok') {
-        this.evaluaciones.data.forEach((element: any) => {
-          if (element.id_evaluador == this.datosAlumno.id_alumno) {
-            this.arrEvaluaciones.push(element);
-          }
-        });
-      }
+    console.log(JSON.stringify(ids));
+    
 
-      console.log(this.arrEvaluaciones);
+    
+    this.evaluacionService.obtenerEvalEvaluadorId(ids)
+      .pipe(
+        takeUntil(this.subject)
+      )
+      .subscribe(val => {
+        this.evaluaciones = val;
+
+        if (this.evaluaciones.resultado == 'ok') {
+          this.evaluaciones.data.forEach((element: any) => {
+            if (element.id_evaluador == this.datosAlumno.id_alumno) {
+              this.arrEvaluaciones.push(element);
+              
+            }
+          });
+        }
+
+        console.log(this.arrEvaluaciones);
     });
+    
   }
 
   checkPendiente(rank: any) {
-    this.rankingService.checkAlumnoAceptado(rank).subscribe((val:any) => {
+    this.rankingService.checkAlumnoAceptado(rank)
+    .pipe(
+      takeUntil(this.subject)
+    )
+    .subscribe((val:any) => {
       if (val.data.aceptado == 0) {
         Swal.fire({
           icon: 'error',
@@ -272,7 +302,11 @@ export class DashboardComponent implements OnInit {
       id_skill: skill.id_skill,
     };
     
-    this.evaluacionService.obtenerEvalAlumnoRankIds(ids).subscribe(val => {
+    this.evaluacionService.obtenerEvalAlumnoRankIds(ids)
+    .pipe(
+      takeUntil(this.subject)
+    )
+    .subscribe(val => {
       this.dataEval = val;
       
       if (this.dataEval.resultado == 'ok') {
@@ -298,5 +332,10 @@ export class DashboardComponent implements OnInit {
     } else {
       this.skillDetails = true;
     }
+  }
+
+  ngOnDestroy() {
+    this.subject.next();
+    this.subject.complete();
   }
 }

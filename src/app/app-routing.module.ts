@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService, RoleGuardService] },
   { path: 'dashboardprofesor', component: DashboardProfesorComponent, canActivate: [AuthGuardService, RoleGuardService] },
-  { path: 'evaluaciones', component: DashboardEvaluacionesComponent },
+  { path: 'evaluaciones', component: DashboardEvaluacionesComponent, canActivate: [AuthGuardService, RoleGuardService]},
   { path: 'header', component: HeaderComponent, canActivate: [AuthGuardService] },
   { path: 'footer', component: FooterComponent },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuardService, RoleGuardService]},

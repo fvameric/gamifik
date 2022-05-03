@@ -31,6 +31,7 @@ export class RoleGuardService implements CanActivate {
       this.router.navigate(['dashboardprofesor']);
       return false;
     }
+    
     return true;
   }
 }

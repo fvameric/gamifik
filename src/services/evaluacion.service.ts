@@ -10,6 +10,8 @@ const URL_READ_EVAL_PROFESOR_ID = 'http://localhost:8080/evaluaciones/obtenerEva
 const URL_READ_EVAL_RANKING_ID = 'http://localhost:8080/evaluaciones/obtenerEvaluacionRankingId.php'; // read
 const URL_READ_EVAL_ALUMNO_RANK_ID = 'http://localhost:8080/evaluaciones/obtenerEvaluacionIds.php'; // read
 const URL_READ_EVAL_EVALUADOR_ID = 'http://localhost:8080/evaluaciones/obtenerEvaluacionEvaluadorId.php'; // read
+
+const URL_DELETE_EVAL = 'http://localhost:8080/evaluaciones/eliminarEvaluacion.php'; // delete
 @Injectable({
   providedIn: 'root'
 })
@@ -45,5 +47,9 @@ export class EvaluacionService {
   obtenerEvalEvaluadorId(ids: any) {
     console.log(ids);
     return this.http.post(URL_READ_EVAL_EVALUADOR_ID, JSON.stringify(ids));
+  }
+
+  eliminarEvaluacion(id: number) {
+    return this.http.delete(URL_DELETE_EVAL + `?id=${id}`);
   }
 }

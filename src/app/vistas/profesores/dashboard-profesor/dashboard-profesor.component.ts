@@ -20,6 +20,7 @@ import { ModalComponent } from '../modal/modal.component';
 import { Subject } from 'rxjs';
 import { AuthService } from '../../../../services/auth.service';
 import { Router } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard-profesor',
@@ -27,8 +28,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard-profesor.component.css'],
 })
 export class DashboardProfesorComponent implements OnInit {
-  //@ViewChildren('toggleButton') toggleBtn: ElementRef | undefined;
-  //@ViewChildren('despVisual') despVisual: ElementRef | undefined
+
+  private subject = new Subject();
 
   testpunts: any;
 
@@ -88,38 +89,19 @@ export class DashboardProfesorComponent implements OnInit {
     private elem: ElementRef,
     private authService: AuthService,
     private router: Router
-  ) {}
-
-  /*
-@HostListener('document:click', ['$event'])
-documentClick(event: any): void {
-  this.documentClickedTarget.next(event.target);
-}
-*/
+  ) { }
 
   ngOnInit(): void {
+    console.log("test");
+
     this.obtenerDatos();
     this.obtenerDatosRanking();
     this.obtenerDatosEntregas();
     this.crearformInput();
 
     this.authService.guardarRoute(this.router.url);
-
-    //this.documentClickedTarget.subscribe(val => this.documentClickListener(val));
   }
 
-  /*
-  documentClickListener(target: any): void {
-    console.log(target);
-    
-    if (this.toggleBtn?.nativeElement.contains(target) || this.despVisual?.nativeElement.contains(target)) {
-      console.log("entra");
-    } else {
-      console.log("no entra");
-      this.mostrarDesplegableVisual = false;
-    }
- }
- */
 
   obtenerDatos() {
     this.datosProfesor = this.tokenService.getUser();
@@ -127,70 +109,67 @@ documentClick(event: any): void {
 
   obtenerDatosRanking() {
     this.arrRankings = [];
-    this.rankingService
-      .obtenerRanking()
+    this.rankingService.obtenerRanking()
+      .pipe(
+        takeUntil(this.subject)
+      )
       .subscribe((val) => (this.rankings = val));
-    this.rankingService.obtenerJoinRankingProfes().subscribe((val: any) => {
-      this.rankingsConProfes = val;
 
-      if (this.rankingsConProfes == null) {
-        this.flagRanks = true;
-      } else {
-        this.flagRanks = false;
+    this.rankingService.obtenerJoinRankingProfes()
+      .pipe(
+        takeUntil(this.subject)
+      )
+      .subscribe((val: any) => {
+        this.rankingsConProfes = val;
 
-        val.forEach((element: any) => {
-          if (element.id_profe == this.datosProfesor.id_profe) {
-            this.arrRankings.push(element);
-          }
-        });
-      }
-    });
+        if (this.rankingsConProfes == null) {
+          this.flagRanks = true;
+        } else {
+          this.flagRanks = false;
+
+          val.forEach((element: any) => {
+            if (element.id_profe == this.datosProfesor.id_profe) {
+              this.arrRankings.push(element);
+            }
+          });
+        }
+      });
   }
 
   obtenerDatosEntregas() {
-    this.rankingService
-      .obtenerEntregas()
+    this.rankingService.obtenerEntregas()
+      .pipe(
+        takeUntil(this.subject)
+      )
       .subscribe((val) => (this.entregas = val));
   }
 
   rankSelec(rank: any, index: number) {
+    // ranks
     this.rankSeleccionado = rank;
 
     let btnRanks = this.elem.nativeElement.querySelectorAll(
       '.button-ranking-class'
     );
-    btnRanks[index].setAttribute('style', 'background-color: #56baed;');
+    btnRanks[index].setAttribute('style', 'background-color: #1292f8;');
     btnRanks[this.indiceRank].setAttribute(
       'style',
       'background-color: transparent;'
     );
     if (index == this.indiceRank) {
-      btnRanks[index].setAttribute('style', 'background-color: #56baed;');
+      btnRanks[index].setAttribute('style', 'background-color: #1292f8;');
     }
-    this.indiceRank = index;
+
+    this.obtenerAlumnosRank();
+
     this.templateFlag = true;
-    this.listaAlumnos = [];
-    this.listaAlumnosPendientes = [];
-    this.rankingService
-      .obtenerAlumnoPorRanking(this.rankSeleccionado.id_rank)
-      .subscribe((val: any) => {
-        if (val != null) {
-          val.forEach((element: any) => {
-            if (element.aceptado == 1) {
-              this.listaAlumnos.push(element);
-            } else {
-              this.listaAlumnosPendientes.push(element);
-            }
-          });
-        }
-      });
-
-    let arrows = this.elem.nativeElement.querySelectorAll('.svgArrow');
-
-    var oldIndex: number = this.indice;
-    this.arrEntregas = [];
-    this.indice = index;
+    this.indiceRank = index;
     this.rankDesplegable = rank;
+
+    // entregas
+    let arrows = this.elem.nativeElement.querySelectorAll('.svgArrow');
+    var oldIndex: number = this.indice;
+    this.indice = index;
 
     if (index == oldIndex) {
       if (this.flagDesplegable) {
@@ -206,17 +185,56 @@ documentClick(event: any): void {
       arrows[index].setAttribute('style', 'transform: rotate(90deg);');
     }
 
-    // búsqueda de entregas por ranking
-    if (this.entregas == null || this.entregas == undefined) {
-      this.flagEntregas = true;
-    } else {
-      this.flagEntregas = false;
-      this.entregas.forEach((element: any) => {
-        if (element.id_rank == this.rankDesplegable.id_rank) {
-          this.arrEntregas.push(element);
+    this.obtenerEntregasRank();
+  }
+
+  obtenerAlumnosRank() {
+    this.listaAlumnos = [];
+    this.listaAlumnosPendientes = [];
+
+    this.rankingService.obtenerAlumnoPorRanking(this.rankSeleccionado.id_rank)
+      .pipe(
+        takeUntil(this.subject)
+      )
+      .subscribe((val: any) => {
+        if (val != null) {
+          val.forEach((element: any) => {
+            if (element.aceptado == 1) {
+              this.listaAlumnos.push(element);
+            } else {
+              this.listaAlumnosPendientes.push(element);
+            }
+          });
         }
       });
-    }
+  }
+
+  obtenerEntregasRank() {
+    this.arrEntregas = [];
+    this.rankingService.obtenerEntregas()
+      .pipe(
+        takeUntil(this.subject)
+      )
+      .subscribe((val) => {
+        this.entregas = val;
+
+        // búsqueda de entregas por ranking
+        if (this.entregas != null || this.entregas != undefined) {
+          this.entregas.forEach((element: any) => {
+            if (element.id_rank == this.rankDesplegable.id_rank) {
+              this.arrEntregas.push(element);
+            }
+          });
+
+          if (this.arrEntregas.length > 0) {
+            this.flagEntregas = false;
+          } else {
+            this.flagEntregas = true;
+          }
+        } else {
+          this.flagEntregas = true;
+        }
+      });
   }
 
   generarCodRank() {
@@ -228,8 +246,10 @@ documentClick(event: any): void {
 
     this.rankSeleccionado.cod_rank = nuevoCod;
 
-    this.rankingService
-      .modificarRanking(this.rankSeleccionado)
+    this.rankingService.modificarRanking(this.rankSeleccionado)
+      .pipe(
+        takeUntil(this.subject)
+      )
       .subscribe((val: any) => {
         console.log(val);
       });
@@ -285,6 +305,9 @@ documentClick(event: any): void {
         }).then((result) => {
           this.rankingService
             .eliminarRanking(this.rankSeleccionado.id_rank)
+            .pipe(
+              takeUntil(this.subject)
+            )
             .subscribe((val: any) => {
               if (val.resultado == 'ok') {
                 this.obtenerDatosRanking();
@@ -329,6 +352,9 @@ documentClick(event: any): void {
 
     this.rankingService
       .obtenerAlumnoPorRankingApellido(entrega.id_rank)
+      .pipe(
+        takeUntil(this.subject)
+      )
       .subscribe((val: any) => {
         if (val != null) {
           val.forEach((element: any) => {
@@ -341,39 +367,6 @@ documentClick(event: any): void {
           });
         }
       });
-  }
-
-  eliminarEntrega() {
-    Swal.fire({
-      title: '¿Quieres eliminar esta entrega?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Ok',
-          text: 'Se eliminó la entrega',
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'Ok',
-        }).then((result) => {
-          this.rankingService
-            .eliminarEntregas(this.entregaSeleccionada)
-            .subscribe((val: any) => {
-              if (val.resultado == 'ok') {
-                window.location.reload();
-              } else {
-                console.log(val.mensaje);
-              }
-            });
-        });
-      } else if (result.isDenied) {
-        Swal.fire('No se ha eliminado la entrega', '', 'info');
-      }
-    });
   }
 
   async inputeliminarEntrega() {
@@ -399,9 +392,12 @@ documentClick(event: any): void {
         }).then((result) => {
           this.rankingService
             .eliminarEntregas(this.entregaSeleccionada)
+            .pipe(
+              takeUntil(this.subject)
+            )
             .subscribe((val: any) => {
               if (val.resultado == 'ok') {
-                window.location.reload();
+                this.obtenerEntregasRank();
               } else {
                 console.log(val.mensaje);
               }
@@ -436,14 +432,13 @@ documentClick(event: any): void {
           confirmButtonColor: '#3085d6',
           confirmButtonText: 'Ok',
         }).then((result) => {
-          this.rankingService
-            .quitarAlumnoRanking(
-              this.rankSeleccionado.id_rank,
-              alumno.id_alumno
+          this.rankingService.quitarAlumnoRanking(this.rankSeleccionado.id_rank, alumno.id_alumno)
+            .pipe(
+              takeUntil(this.subject)
             )
             .subscribe((val: any) => {
               if (val.resultado == 'ok') {
-                window.location.reload();
+                this.obtenerAlumnosRank();
               } else {
                 console.log(val.mensaje);
               }
@@ -482,6 +477,9 @@ documentClick(event: any): void {
               element.puntuacion_entrega = puntuacionAlumno;
               this.rankingService
                 .modificarRankAlumnos(element)
+                .pipe(
+                  takeUntil(this.subject)
+                )
                 .subscribe((val: any) => {
                   console.log(val);
                 });
@@ -495,9 +493,13 @@ documentClick(event: any): void {
   }
 
   aceptarPendientes(pendiente: any) {
+    console.log("entra en pendientes");
     pendiente.aceptado = 1;
     this.rankingService
       .aceptarAlumnosPendientes(pendiente)
+      .pipe(
+        takeUntil(this.subject)
+      )
       .subscribe((val) => this.insertarAlumnosJoin(pendiente, val));
   }
 
@@ -515,15 +517,23 @@ documentClick(event: any): void {
           arrPendientes.push(ids);
         }
       });
+
+      if (arrPendientes.length != 0) {
+        this.rankingService
+          .insertarEntregaJoin(arrPendientes)
+          .pipe(
+            takeUntil(this.subject)
+          )
+          .subscribe((val) => this.resultadoInsert(val));
+      } else {
+        this.resultadoInsert(val);
+      }
     }
-    this.rankingService
-      .insertarEntregaJoin(arrPendientes)
-      .subscribe((val) => this.resultadoInsert(val));
   }
 
   resultadoInsert(val: any) {
     if (val.resultado == 'ok') {
-      window.location.reload();
+      this.obtenerAlumnosRank();
     } else {
       console.log(val);
     }
@@ -561,41 +571,27 @@ documentClick(event: any): void {
 
         this.rankingService
           .modificarRankAlumnos(element)
+          .pipe(
+            takeUntil(this.subject)
+          )
           .subscribe((val: any) => {
             console.log(val);
           });
       });
     }
-
-    /*
-    this.puntuacionAlumno = (<HTMLInputElement>(
-      document.getElementById('puntuacionAlumno')
-    )).value;
-    
-    var numPuntuacion:number = this.puntuacionAlumno;
-    if (numPuntuacion > 100 || numPuntuacion < 0) {
-      console.log("No valido");
-      Swal.fire({
-        icon: 'error',
-        title: 'No se ha podido puntuar al alumno',
-        text: '¡Puntuación incorrecta, debes escribir un numero entre el 0 y el 100!',
-      })
-      
-    } else {
-      alumno.puntuacion = this.puntuacionAlumno;
-      this.rankingService.modificarRankAlumnos(alumno).subscribe((val: any) => {
-        console.log(val);
-      });
-    }
-    */
   }
 
   denegarPendientes(pendiente: any) {
+    var index = this.listaAlumnosPendientes.findIndex(x => x.id_alumno === pendiente.id_alumno);
+    this.listaAlumnosPendientes.splice(index,1)
+    
     this.rankingService
       .eliminarAlumnosPendientes(pendiente)
+      .pipe(
+        takeUntil(this.subject)
+      )
       .subscribe((val: any) => {
         console.log(val);
-        window.location.reload();
       });
   }
 
@@ -643,5 +639,10 @@ documentClick(event: any): void {
         }
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.subject.next();
+    this.subject.complete();
   }
 }

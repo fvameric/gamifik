@@ -1,7 +1,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <header id="header">
-    <div class="header-logo">
+    <div class="header-logo" *ngIf="user.tipo == 0">
         <a routerLink="/dashboard">
             <div class="containerlogo">
                 <div class="logotest">
@@ -13,87 +13,95 @@
             </div>
         </a>
     </div>
-    <div class="header-menu">
-        <ul id="nav-menu">
-            <li class="nav-items-right">
-                <div *ngIf="user.tipo == 0;else perfilProfe">
-                    <div class="dropdown">
-                        <!--<app-loader-skeleton Cwidth="50" Cheight="50" [circle]="true"></app-loader-skeleton>-->
-                        <img class="dropbtn" src={{user.imagen}} />
-                        <div class="dropdown-content">
-                            <a routerLink="/perfil"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            style="color: white; margin-right: 10px;" fill="currentColor"
-                                            class="bi bi-person-bounding-box" viewBox="0 0 16 16">
-                                            <path
-                                                d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
-                                            <path
-                                                d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                        </svg>
-                                        <!--<app-loader-skeleton Cwidth="140" Cheight="55"></app-loader-skeleton>-->
-                                        <p>Perfil</p>
-                                    </a>
-                            <a (click)="cerrarSesion()"><svg xmlns="http://www.w3.org/2000/svg"
-                                            style="color: white;  margin-right: 5px;" width="20" height="20" fill="currentColor"
-                                            class="bi bi-door-open-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
-                                        </svg>
-                                        <!--<app-loader-skeleton Cwidth="140" Cheight="55"></app-loader-skeleton>-->
-                                        <p>Cerrar Sesion</p>
-                                    </a>
-                        </div>
-                    </div>
+    <div class="header-logo" *ngIf="user.tipo == 1">
+        <a routerLink="/dashboardprofesor">
+            <div class="containerlogo">
+                <div class="logotest">
+                    <div class="barralogo1"></div>
+                    <div class="barralogo2"></div>
+                    <div class="barralogo3"></div>
+                    <div class="barralogo4"></div>
                 </div>
+            </div>
+        </a>
+    </div>
 
-                <ng-template #perfilProfe>
-                    <div class="dropdown">
-                        <!--<app-loader-skeleton Cwidth="50" Cheight="50" [circle]="true"></app-loader-skeleton>-->
-                        <img class="dropbtn" src={{user.imagen}} />
-                        <div class="dropdown-content">
-                            <a routerLink="/perfilprofesor"><svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                            height="20" style="color: white; margin-right: 5px;" fill="currentColor"
-                                            class="bi bi-person-bounding-box" viewBox="0 0 16 16">
-                                            <path
-                                                d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
-                                            <path
-                                                d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                        </svg>
-                                        <!--<app-loader-skeleton Cwidth="140" Cheight="55" [circle]="true"></app-loader-skeleton>-->
-                                        <p>Perfil</p>
-                                    </a>
-                            <a (click)="cerrarSesion()"><svg xmlns="http://www.w3.org/2000/svg"
-                                            style="color: white;  margin-right: 5px;" width="20" height="20" fill="currentColor"
-                                            class="bi bi-door-open-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
-                                        </svg>
-                                        <!--<app-loader-skeleton Cwidth="140" Cheight="55"[circle]="true"></app-loader-skeleton>-->
-                                        <p>Cerrar Sesion</p>
-                                    </a>
-                        </div>
-                    </div>
-                </ng-template>
+    <div class="header-menu" *ngIf="user.tipo == 0">
+        <div class="dropdown">
+            <!--<app-loader-skeleton Cwidth="50" Cheight="50" [circle]="true"></app-loader-skeleton>-->
+            <label>{{user.nick}}</label>
+            <img class="dropbtn" src={{user.imagen}} />
+            <div class="dropdown-content">
+                <a routerLink="/perfil">
 
-            </li>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="15" height="15" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve"><g>
+                        <g xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="256" cy="128" r="128" fill="#ffffff" data-original="#000000"/>
+                            <path d="M256,298.667c-105.99,0.118-191.882,86.01-192,192C64,502.449,73.551,512,85.333,512h341.333   c11.782,0,21.333-9.551,21.333-21.333C447.882,384.677,361.99,298.784,256,298.667z" fill="#ffffff" data-original="#000000"/>
+                        </g>
+                        
+                        </g></svg>
 
-            <li class="nav-items-right">
-                <!-- <img style="cursor: pointer;" routerLink="/perfilprofesor"  src={{user.imagen}} />-->
-            </li>
-            <li class="nav-items-right">
-                <a routerLink="/dashboard"> Mis Rankins</a>
-            </li>
-            <li class="nav-items-right">
-                <a routerLink="/evaluaciones">Evaluaciones</a>
-            </li>
-            <li class="nav-items-right">
-                <app-dark-mode></app-dark-mode>
-            </li>
+                    <!--<app-loader-skeleton Cwidth="140" Cheight="55"></app-loader-skeleton>-->
+                    <p>Perfil</p>
+                </a>
+                <a routerLink="/dashboard">
 
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="15" height="15" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve"><g><path xmlns="http://www.w3.org/2000/svg" d="M12,6A3,3,0,0,0,9,9V21a3,3,0,0,0,6,0V9A3,3,0,0,0,12,6Z" fill="#ffffff" data-original="#000000"/><path xmlns="http://www.w3.org/2000/svg" d="M21,0a3,3,0,0,0-3,3V21a3,3,0,0,0,6,0V3A3,3,0,0,0,21,0Z" fill="#ffffff" data-original="#000000"/><path xmlns="http://www.w3.org/2000/svg" d="M3,12a3,3,0,0,0-3,3v6a3,3,0,0,0,6,0V15A3,3,0,0,0,3,12Z" fill="#ffffff" data-original="#000000"/></g></svg>
 
-        </ul>
+                    <!--<app-loader-skeleton Cwidth="140" Cheight="55"></app-loader-skeleton>-->
+                    <p>Mis rankings</p>
+                </a>
+                <a (click)="cerrarSesion()">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="15" height="15" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve"><g><path xmlns="http://www.w3.org/2000/svg" d="M11.5,16A1.5,1.5,0,0,0,10,17.5v.8A2.7,2.7,0,0,1,7.3,21H5.7A2.7,2.7,0,0,1,3,18.3V5.7A2.7,2.7,0,0,1,5.7,3H7.3A2.7,2.7,0,0,1,10,5.7v.8a1.5,1.5,0,0,0,3,0V5.7A5.706,5.706,0,0,0,7.3,0H5.7A5.706,5.706,0,0,0,0,5.7V18.3A5.706,5.706,0,0,0,5.7,24H7.3A5.706,5.706,0,0,0,13,18.3v-.8A1.5,1.5,0,0,0,11.5,16Z" fill="#ffffff" data-original="#000000"/><path xmlns="http://www.w3.org/2000/svg" d="M22.561,9.525,17.975,4.939a1.5,1.5,0,0,0-2.121,2.122l3.411,3.411L7,10.5a1.5,1.5,0,0,0,0,3H7l12.318-.028-3.467,3.467a1.5,1.5,0,0,0,2.121,2.122l4.586-4.586A3.505,3.505,0,0,0,22.561,9.525Z" fill="#ffffff" data-original="#000000"/></g></svg>
+
+                    <!--<app-loader-skeleton Cwidth="140" Cheight="55"></app-loader-skeleton>-->
+                    <p>Cerrar Sesion</p>
+                </a>
+            </div>
+        </div>
+        <app-dark-mode></app-dark-mode>
+    </div>
+
+    <div class="header-menu" *ngIf="user.tipo == 1">
+        <div class="dropdown">
+            <!--<app-loader-skeleton Cwidth="50" Cheight="50" [circle]="true"></app-loader-skeleton>-->
+            <label>{{user.nick}}</label>
+            <img class="dropbtn" src={{user.imagen}} />
+            <div class="dropdown-content">
+                <a routerLink="/perfilprofesor">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="15" height="15" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve"><g>
+                        <g xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="256" cy="128" r="128" fill="#ffffff" data-original="#000000"/>
+                            <path d="M256,298.667c-105.99,0.118-191.882,86.01-192,192C64,502.449,73.551,512,85.333,512h341.333   c11.782,0,21.333-9.551,21.333-21.333C447.882,384.677,361.99,298.784,256,298.667z" fill="#ffffff" data-original="#000000"/>
+                        </g>
+                        
+                        </g></svg>
+                    <!--<app-loader-skeleton Cwidth="140" Cheight="55" [circle]="true"></app-loader-skeleton>-->
+                    <p>Perfil</p>
+                </a>
+                <a routerLink="/dashboardprofesor">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="15" height="15" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve"><g><path xmlns="http://www.w3.org/2000/svg" d="M12,6A3,3,0,0,0,9,9V21a3,3,0,0,0,6,0V9A3,3,0,0,0,12,6Z" fill="#ffffff" data-original="#000000"/><path xmlns="http://www.w3.org/2000/svg" d="M21,0a3,3,0,0,0-3,3V21a3,3,0,0,0,6,0V3A3,3,0,0,0,21,0Z" fill="#ffffff" data-original="#000000"/><path xmlns="http://www.w3.org/2000/svg" d="M3,12a3,3,0,0,0-3,3v6a3,3,0,0,0,6,0V15A3,3,0,0,0,3,12Z" fill="#ffffff" data-original="#000000"/></g></svg>
+                    <!--<app-loader-skeleton Cwidth="140" Cheight="55" [circle]="true"></app-loader-skeleton>-->
+                    <p>Mis rankins</p>
+                </a>
+                <a routerLink="/evaluaciones">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="15" height="15" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve"><g><path xmlns="http://www.w3.org/2000/svg" d="m24 8.48v11.52a1 1 0 0 1 -2 0v-8.248l-7.4 3.536a5 5 0 0 1 -2.577.694 5.272 5.272 0 0 1 -2.7-.739l-7.38-3.513a3.691 3.691 0 0 1 -.084-6.455c.027-.016.056-.031.084-.045l7.457-3.558a5.226 5.226 0 0 1 5.282.045l7.375 3.513a3.767 3.767 0 0 1 1.943 3.25zm-11.978 9.5a7.26 7.26 0 0 1 -3.645-.972l-4.377-2.089v2.7a5.007 5.007 0 0 0 3.519 4.778 15.557 15.557 0 0 0 4.481.603 15.557 15.557 0 0 0 4.481-.607 5.007 5.007 0 0 0 3.519-4.778v-2.691l-4.459 2.13a6.983 6.983 0 0 1 -3.519.928z" fill="#ffffff" data-original="#000000"/></g></svg>
+                    <!--<app-loader-skeleton Cwidth="140" Cheight="55" [circle]="true"></app-loader-skeleton>-->
+                    <p>Evaluaciones</p>
+                </a>
+                <a (click)="cerrarSesion()">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="15" height="15" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve"><g><path xmlns="http://www.w3.org/2000/svg" d="M11.5,16A1.5,1.5,0,0,0,10,17.5v.8A2.7,2.7,0,0,1,7.3,21H5.7A2.7,2.7,0,0,1,3,18.3V5.7A2.7,2.7,0,0,1,5.7,3H7.3A2.7,2.7,0,0,1,10,5.7v.8a1.5,1.5,0,0,0,3,0V5.7A5.706,5.706,0,0,0,7.3,0H5.7A5.706,5.706,0,0,0,0,5.7V18.3A5.706,5.706,0,0,0,5.7,24H7.3A5.706,5.706,0,0,0,13,18.3v-.8A1.5,1.5,0,0,0,11.5,16Z" fill="#ffffff" data-original="#000000"/><path xmlns="http://www.w3.org/2000/svg" d="M22.561,9.525,17.975,4.939a1.5,1.5,0,0,0-2.121,2.122l3.411,3.411L7,10.5a1.5,1.5,0,0,0,0,3H7l12.318-.028-3.467,3.467a1.5,1.5,0,0,0,2.121,2.122l4.586-4.586A3.505,3.505,0,0,0,22.561,9.525Z" fill="#ffffff" data-original="#000000"/></g></svg>
+                    <!--<app-loader-skeleton Cwidth="140" Cheight="55"[circle]="true"></app-loader-skeleton>-->
+                    <p>Cerrar Sesion</p>
+                </a>
+            </div>
+        </div>
+        <app-dark-mode></app-dark-mode>
     </div>
 
     <span id="abrir-menu" class="material-icons" (click)="onclickToggle()">
-                reorder
-            </span>
+        reorder
+    </span>
 </header>

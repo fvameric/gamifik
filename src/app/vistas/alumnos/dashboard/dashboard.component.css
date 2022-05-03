@@ -27,14 +27,13 @@ div.content {
     border-radius: 5px;
     background: #0000008c;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-    backdrop-filter: blur(6px);
-    color: #cccccc;
+    color: #ffffff;
     border: none;
-    transition: 1s;
+    transition: 0.1s;
 }
 
 .unirse-ranking:hover {
-    background-color: #56baed;
+    background-color: #1292f8;
 }
 
 .unirse-retangulo {
@@ -47,33 +46,6 @@ div.content {
 
 .lista-rankings p {
     color: #ffffff;
-}
-
-.titulo-detalle-ranking {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-direction: column;
-    margin: 20px;
-}
-
-.button-ranking-class {
-    background-color: transparent;
-    width: 100%;
-    height: 50px;
-    text-align: left;
-    border: none;
-    color: #cccccc;
-    cursor: pointer;
-    transition: 200ms;
-    border-radius: 7px;
-    word-wrap: break-word;
-}
-
-.button-ranking-class:hover {
-    transition: 200ms;
-    color: white;
-    background-color: #56baed;
 }
 
 .cantidad-alumnos {
@@ -113,11 +85,9 @@ div.content {
 
 /* tabla alumnos */
 
-.container-lista-alumnos {}
-
 .container-lista-alumnos:nth-child(odd) {
     border-radius: 10px;
-    background-color: #002d52;
+    background-color: #002d5283;
 }
 
 .lista-alumnos-ranking {

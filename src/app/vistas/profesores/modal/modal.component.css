@@ -1,40 +1,20 @@
 @import url("../../../../styles.css");
-
-.crear-ranking {
-    margin-left: 5%;
-    padding: 10px;
-    border-radius: 5px;
-    background: #0000008c;
-    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-    backdrop-filter: blur(6px);
-    color: #cccccc;
-    border: none;
-    transition: 300ms;
-}
-
-.crear-ranking:hover {
-    background-color: #56baed;
-    color: #ffffff;
-}
-
-.h1-modal{
+.h1-modal {
     color: var( --modal-color-text);
     font: 400 24px/32px Roboto, "Helvetica Neue", sans-serif;
 }
-
 
 ::ng-deep .modal-dialog {
     margin-top: 200px;
     z-index: 900000;
 }
 
-::ng-deep .modal-body{
+::ng-deep .modal-body {
     background-color: var(--modal-backgound-color);
     backdrop-filter: blur(6px);
-
 }
 
-::ng-deep .modal-header{
+::ng-deep .modal-header {
     background-color: var(--modal-backgound-header);
     backdrop-filter: blur(6px);
     opacity: 40px;

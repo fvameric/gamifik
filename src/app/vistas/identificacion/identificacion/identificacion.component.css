@@ -4,7 +4,6 @@ body {
 }
 
 p {
-    font-family: "Lato", sans-serif;
     letter-spacing: 1px;
     font-size: 14px;
     color: #333333;
@@ -32,15 +31,6 @@ p {
     text-align: center;
 }
 
-.waves {
-    position: relative;
-    width: 100%;
-    height: 15vh;
-    margin-bottom: -7px;
-    min-height: 100px;
-    max-height: 150px;
-}
-
 .content {
     position: relative;
     height: 20vh;
@@ -48,45 +38,6 @@ p {
     background-color: rgb(211, 83, 83);
 }
 
-.footer-waves {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    z-index: 1;
-}
-
-/* Animacion */
-
-.parallax > use {
-    animation: move-forever 30s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite alternate;
-    animation-timing-function: ease-in-out;
-    -webkit-animation-timing-function: ease-in-out;
-}
-
-.parallax > use:nth-child(1) {
-    animation-delay: -2s;
-    animation-duration: 20s;
-}
-
-.parallax > use:nth-child(2) {
-    animation-delay: -3s;
-    animation-duration: 20s;
-}
-
-.parallax > use:nth-child(3) {
-    animation-delay: -4s;
-    animation-duration: 20s;
-}
-
-@keyframes move-forever {
-    0% {
-        transform: translate3d(-90px, 0, 0);
-    }
-    100% {
-        transform: translate3d(85px, 0, 0);
-    }
-}
 
 /*Shrinking for mobile*/
 
@@ -103,6 +54,7 @@ p {
     }
 }
 
+
 /* logo animado */
 
 .containerlogo {
@@ -117,14 +69,14 @@ p {
     padding-top: 120px;
 }
 
-.h1-logotest{
+.h1-logotest {
     color: #007bff;
     letter-spacing: 5px;
     margin-left: 15px;
     animation: barra1 0.2s forwards;
 }
 
-.logotest > div {
+.logotest>div {
     position: absolute;
     width: 25px;
     margin: 2px;
@@ -159,11 +111,11 @@ p {
     right: 160px;
 }
 
-@keyframes h1{
-    0%{
+@keyframes h1 {
+    0% {
         height: 0%;
     }
-    100%{
+    100% {
         height: 100%;
     }
 }
@@ -204,7 +156,9 @@ p {
     }
 }
 
+
 /* bola icono */
+
 .iconoUser {
     position: relative;
     top: 100px;
@@ -232,20 +186,19 @@ p {
         -webkit-transform: translate3d(-100%, 0, 0);
         transform: translate3d(-100%, 0, 0);
     }
-
     to {
         opacity: 1;
         -webkit-transform: none;
         transform: none;
     }
 }
+
 @keyframes fadeInLeft {
     from {
         opacity: 0;
         -webkit-transform: translate3d(-100%, 0, 0);
         transform: translate3d(-100%, 0, 0);
     }
-
     to {
         opacity: 1;
         -webkit-transform: none;
@@ -335,12 +288,12 @@ p {
     }
 }
 
-@media (max-width: 600px){
-    .iconoUser{
+@media (max-width: 600px) {
+    .iconoUser {
         top: 0;
         left: 0;
     }
-    .cambio-form{
+    .cambio-form {
         top: 0;
         right: auto;
         left: auto;
