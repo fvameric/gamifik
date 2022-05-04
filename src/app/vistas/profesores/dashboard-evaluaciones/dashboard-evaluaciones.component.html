@@ -51,7 +51,7 @@
                             <!--<app-loader-skeleton Cwidth="546" Cheight="20" [circle]="false"></app-loader-skeleton>-->
                         </div>
 
-                        <div *ngIf="rankSeleccionado && !filtrado">
+                        <div *ngIf="rankSeleccionado">
                             <div class="table-element">
                                 Fecha - Evaluado - Evaluador - Apellidos - Skill - Puntos
                             </div>
@@ -71,27 +71,6 @@
 
                             </div>
                         </div>
-
-                        <div *ngIf="rankSeleccionado && filtrado">
-                            <div class="table-element">
-                                Fecha - Evaluado - Evaluador - Apellidos - Skill - Puntos
-                            </div>
-                            <div class="table-element" *ngFor="let eval of filteredArray; let i = index">
-                                <div class="table-content">
-                                    {{eval.fecha}} - {{eval.nombre}} {{eval.apellidos}} - {{eval.nom1}} {{eval.apellidos1}}
-                                    <div *ngFor="let skill of skills">
-                                        <div class="lista-skills" *ngIf="eval.id_skill == skill.id_skill">
-                                            <img src="{{skill.niveles.img1}}">
-                                        </div>
-                                    </div>
-                                    - {{eval.puntos}}
-                                </div>
-                                <div>
-                                    <button (click)="eliminarEval(eval)">Borrar</button>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
 
                     <ng-template #noselec>
