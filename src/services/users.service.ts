@@ -4,39 +4,7 @@ import { Profesor } from 'app/interfaces/Profesor';
 import { Alumno } from 'app/interfaces/Alumno';
 import { User } from 'app/interfaces/User';
 
-const URL = 'http://localhost:8080/';
-
-// URLS CRUD ALUMNOS
-const URL_CREATE_ALUMNOS = 'http://localhost:8080/alumnos/insertarAlumno.php'; // create
-const URL_READ_ALUMNOS = 'http://localhost:8080/alumnos/datosAlumno.php'; // read
-const URL_UPDATE_ALUMNOS = 'http://localhost:8080/alumnos/modificarAlumno.php'; // update
-const URL_DELETE_ALUMNOS = 'http://localhost:8080/alumnos/eliminarAlumno.php'; // delete
-const URL_GET_ALUMNO_ID = 'http://localhost:8080/alumnos/getAlumnoId.php'; // obtener alumnos específicos según su ID
-const URL_EMAIL_EXISTE_ALUMNOS =
-  'http://localhost:8080/alumnos/emailExiste.php'; // comprobar si un email ya está en uso
-const URL_USERNAME_EXISTE_ALUMNOS =
-  'http://localhost:8080/alumnos/usuarioExiste.php';
-
-const URL_PASS_EXISTE_ALUMNOS = 'http://localhost:8080/alumnos/passExiste.php';
-
-// URLS CRUD PROFESORES
-const URL_CREATE_PROFESORES =
-  'http://localhost:8080/profesores/insertarProfesor.php'; // create
-const URL_READ_PROFESORES =
-  'http://localhost:8080/profesores/datosProfesor.php'; // read
-const URL_UPDATE_PROFESORES =
-  'http://localhost:8080/profesores/modificarProfesor.php'; // update
-const URL_DELETE_PROFESORES =
-  'http://localhost:8080/profesores/eliminarProfesor.php'; // delete
-const URL_GET_PROFESOR_ID =
-  'http://localhost:8080/profesores/getProfesorId.php'; // obtener profesores específicos según su ID
-
-const URL_EMAIL_EXISTE_PROFESORES =
-  'http://localhost:8080/profesores/emailExiste.php'; // comprobar si un email ya está en uso
-const URL_USERNAME_EXISTE_PROFESORES =
-  'http://localhost:8080/profesores/usuarioExiste.php';
-
-const URL_PASS_EXISTE_PROFES = 'http://localhost:8080/profesores/passExiste.php';
+const URL_LOCALHOST = 'http://localhost:8888/';
 
 @Injectable({
   providedIn: 'root',
@@ -77,34 +45,34 @@ export class UsersService {
   // funciones alumnos
   // create alumno
   insertarAlumno(alumno: Alumno) {
-    return this.http.post(URL_CREATE_ALUMNOS, JSON.stringify(alumno));
+    return this.http.post(this.concatUrl('alumnos/insertarAlumno.php'), JSON.stringify(alumno));
   }
 
   // read alumno
   obtenerAlumnos() {
-    return this.http.get(URL_READ_ALUMNOS);
+    return this.http.get(this.concatUrl('alumnos/datosAlumno.php'));
   }
 
   // update alumno
   modificarAlumno(user: User) {
-    return this.http.put(URL_UPDATE_ALUMNOS, JSON.stringify(user));
+    return this.http.put(this.concatUrl('alumnos/modificarAlumno.php'), JSON.stringify(user));
   }
   // delete alumno
   eliminarAlumno() {
-    return this.http.get(URL_DELETE_ALUMNOS);
+    return this.http.get(this.concatUrl('alumnos/eliminarAlumno.php'));
   }
 
   // obtener alumnos específicos según su ID
   obtenerAlumnoPorId(id: number) {
-    return this.http.get(URL_GET_ALUMNO_ID + `?id=${id}`);
+    return this.http.get(this.concatUrl('alumnos/getAlumnoId.php') + `?id=${id}`);
   }
   // validar email alumnos
   validarEmailExisteAlumnos(email: string) {
-    return this.http.get(URL_EMAIL_EXISTE_ALUMNOS + `?email=${email}`);
+    return this.http.get(this.concatUrl('alumnos/emailExiste.php') + `?email=${email}`);
   }
   // validar username alumnos
   validarUsuarioExisteAlumnos(username: string) {
-    return this.http.get(URL_USERNAME_EXISTE_ALUMNOS + `?username=${username}`);
+    return this.http.get(this.concatUrl('alumnos/usuarioExiste.php') + `?username=${username}`);
   }
   // validar pass alumnos
   validarPassAlumnos(pass: string, id: number) {
@@ -112,41 +80,41 @@ export class UsersService {
       "pass": pass,
       "id": id
     }
-    return this.http.post(URL_PASS_EXISTE_ALUMNOS, JSON.stringify(user));
+    return this.http.post(this.concatUrl('alumnos/passExiste.php'), JSON.stringify(user));
   }
   
   // funciones profesores
   // create profesores
   insertarProfesores(alumno: Alumno) {
-    return this.http.post(URL_CREATE_PROFESORES, JSON.stringify(alumno));
+    return this.http.post(this.concatUrl('profesores/insertarProfesor.php'), JSON.stringify(alumno));
   }
 
   // read profesores
   obtenerProfesores() {
-    return this.http.get(URL_READ_PROFESORES);
+    return this.http.get(this.concatUrl('profesores/datosProfesor.php'));
   }
 
   // update profesores
   modificarProfesor(user: User) {
-    return this.http.put(URL_UPDATE_PROFESORES, JSON.stringify(user));
+    return this.http.put(this.concatUrl('profesores/modificarProfesor.php'), JSON.stringify(user));
   }
   // delete profesores
   eliminarProfesor() {
-    return this.http.get(URL_DELETE_PROFESORES);
+    return this.http.get(this.concatUrl('profesores/eliminarProfesor.php'));
   }
 
   // obtener profesores específicos según su ID
   obtenerProfesorPorId(id: number) {
-    return this.http.get(URL_GET_PROFESOR_ID + `?id=${id}`);
+    return this.http.get(this.concatUrl('profesores/getProfesorId.php') + `?id=${id}`);
   }
 
   //validar email profes
   validarEmailExisteProfes(email: string) {
-    return this.http.get(URL_EMAIL_EXISTE_PROFESORES + `?email=${email}`);
+    return this.http.get(this.concatUrl('profesores/emailExiste.php') + `?email=${email}`);
   }
   // validar username profes
   validarUsuarioExisteProfes(username: string) {
-    return this.http.get(URL_USERNAME_EXISTE_PROFESORES + `?username=${username}`);
+    return this.http.get(this.concatUrl('profesores/usuarioExiste.php') + `?username=${username}`);
   }
 
   // validar pass profes
@@ -155,6 +123,12 @@ export class UsersService {
       "pass": pass,
       "id": id
     }
-    return this.http.post(URL_PASS_EXISTE_PROFES, JSON.stringify(user));
+    return this.http.post(this.concatUrl('profesores/passExiste.php'), JSON.stringify(user));
+  }
+
+  // concatena la URL de localhost y la string que le pasemos
+  // ejemplo: "http://localhost:8888/string"
+  concatUrl(urlStr: string) {
+    return URL_LOCALHOST + urlStr;
   }
 }

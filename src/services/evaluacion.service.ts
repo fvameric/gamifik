@@ -1,17 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-
-const URL_CREATE_EVALUACION = 'http://localhost:8080/evaluaciones/crearEvaluacion.php'; // create
-const URL_READ_EVALUACIONES = 'http://localhost:8080/evaluaciones/obtenerEvaluaciones.php'; // read
-
-const URL_READ_EVAL_ALUMNO_ID = 'http://localhost:8080/evaluaciones/obtenerEvaluacionAlumnoId.php'; // read
-const URL_READ_EVAL_PROFESOR_ID = 'http://localhost:8080/evaluaciones/obtenerEvaluacionProfesorId.php'; // read
-const URL_READ_EVAL_RANKING_ID = 'http://localhost:8080/evaluaciones/obtenerEvaluacionRankingId.php'; // read
-const URL_READ_EVAL_ALUMNO_RANK_ID = 'http://localhost:8080/evaluaciones/obtenerEvaluacionIds.php'; // read
-const URL_READ_EVAL_EVALUADOR_ID = 'http://localhost:8080/evaluaciones/obtenerEvaluacionEvaluadorId.php'; // read
-
-const URL_DELETE_EVAL = 'http://localhost:8080/evaluaciones/eliminarEvaluacion.php'; // delete
+const URL_LOCALHOST = "http://localhost:8888/";
 @Injectable({
   providedIn: 'root'
 })
@@ -19,37 +9,50 @@ export class EvaluacionService {
 
   constructor(private http: HttpClient) { }
 
+  // CREATE Evaluación
   insertarEvaluacion(evaluacion: any) {
-    console.log(evaluacion);
-    return this.http.post(URL_CREATE_EVALUACION, JSON.stringify(evaluacion));
+    return this.http.post(this.concatUrl('evaluaciones/crearEvaluacion.php'), JSON.stringify(evaluacion));
   }
 
+  // READ Evaluaciones
   obtenerEval() {
-    return this.http.get(URL_READ_EVALUACIONES);
+    return this.http.get(this.concatUrl('evaluaciones/obtenerEvaluaciones.php'));
   }
 
+  // READ Evaluación mediante la id de alumno
   obtenerEvalAlumnoId(id: number) {
-    return this.http.get(URL_READ_EVAL_ALUMNO_ID + `?id=${id}`);
+    return this.http.get(this.concatUrl('evaluaciones/obtenerEvaluacionAlumnoId.php') + `?id=${id}`);
   }
 
+  // READ Evaluación mediante la id de profesor
   obtenerEvalProfesorId(ids: any) {
-    return this.http.post(URL_READ_EVAL_PROFESOR_ID, JSON.stringify(ids));
+    return this.http.post(this.concatUrl('evaluaciones/obtenerEvaluacionProfesorId.php'), JSON.stringify(ids));
   }
 
+  // READ Evaluación mediante la id del ranking
   obtenerEvalRankingId(id: number) {
-    return this.http.get(URL_READ_EVAL_RANKING_ID + `?id=${id}`);
+    return this.http.get(this.concatUrl('evaluaciones/obtenerEvaluacionRankingId.php') + `?id=${id}`);
   }
 
+  // READ Evaluación mediante la id del alumno, del ranking y la skill
   obtenerEvalAlumnoRankIds(ids: any) {
-    return this.http.post(URL_READ_EVAL_ALUMNO_RANK_ID, JSON.stringify(ids));
+    return this.http.post(this.concatUrl('evaluaciones/obtenerEvaluacionIds.php'), JSON.stringify(ids));
   }
 
+  // READ Evaluación mediante la id del alumno evaluador
   obtenerEvalEvaluadorId(ids: any) {
     console.log(ids);
-    return this.http.post(URL_READ_EVAL_EVALUADOR_ID, JSON.stringify(ids));
+    return this.http.post(this.concatUrl('evaluaciones/obtenerEvaluacionEvaluadorId.php'), JSON.stringify(ids));
   }
 
+  // DELETE Evaluación
   eliminarEvaluacion(id: number) {
-    return this.http.delete(URL_DELETE_EVAL + `?id=${id}`);
+    return this.http.delete(this.concatUrl('evaluaciones/eliminarEvaluacion.php') + `?id=${id}`);
+  }
+
+  // concatena la URL de localhost y la string que le pasemos
+  // ejemplo: "http://localhost:8888/string"
+  concatUrl(urlStr: string) {
+    return URL_LOCALHOST + urlStr;
   }
 }

@@ -12,15 +12,16 @@ import { Profesor } from '../../../interfaces/Profesor';
 import { UsersService } from 'services/users.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { RankingService } from 'services/ranking.service';
-import { TokenService } from 'services/token.service';
+import { TokenService } from 'services/auth/token.service';
 import Swal from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CrearRankingComponent } from '../crear-ranking/crear-ranking.component';
-import { ModalComponent } from '../modal/modal.component';
+import { ModalComponent } from '../../../plantillas/modal/modal.component';
 import { Subject } from 'rxjs';
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService } from '../../../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
+import { EntregasService } from 'services/entregas.service';
 
 @Component({
   selector: 'app-dashboard-profesor',
@@ -88,7 +89,8 @@ export class DashboardProfesorComponent implements OnInit {
     public formBuilder: FormBuilder,
     private elem: ElementRef,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private entregasService: EntregasService
   ) { }
 
   ngOnInit(): void {
@@ -137,7 +139,7 @@ export class DashboardProfesorComponent implements OnInit {
   }
 
   obtenerDatosEntregas() {
-    this.rankingService.obtenerEntregas()
+    this.entregasService.obtenerEntregas()
       .pipe(
         takeUntil(this.subject)
       )
@@ -211,7 +213,7 @@ export class DashboardProfesorComponent implements OnInit {
 
   obtenerEntregasRank() {
     this.arrEntregas = [];
-    this.rankingService.obtenerEntregas()
+    this.entregasService.obtenerEntregas()
       .pipe(
         takeUntil(this.subject)
       )
@@ -390,7 +392,7 @@ export class DashboardProfesorComponent implements OnInit {
           confirmButtonColor: '#3085d6',
           confirmButtonText: 'Ok',
         }).then((result) => {
-          this.rankingService
+          this.entregasService
             .eliminarEntregas(this.entregaSeleccionada)
             .pipe(
               takeUntil(this.subject)
@@ -519,7 +521,7 @@ export class DashboardProfesorComponent implements OnInit {
       });
 
       if (arrPendientes.length != 0) {
-        this.rankingService
+        this.entregasService
           .insertarEntregaJoin(arrPendientes)
           .pipe(
             takeUntil(this.subject)

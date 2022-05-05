@@ -11,7 +11,7 @@ import {
 import { Alumno } from 'app/interfaces/Alumno';
 import { Subject } from 'rxjs';
 import { debounce, debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
-import { AuthService } from 'services/auth.service';
+import { AuthService } from 'services/auth/auth.service';
 import { UsersService } from 'services/users.service';
 import Swal from 'sweetalert2';
 

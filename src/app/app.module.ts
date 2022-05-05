@@ -8,13 +8,13 @@ import { DatePipe } from '@angular/common';
 
 // Interceptor
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { InterceptorService } from 'services/interceptor.service';
+import { InterceptorService } from 'services/interceptors/interceptor.service';
 
 // JWT Token
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 // Loading
-import { LoadingInterceptorService } from 'services/loading-interceptor.service';
+import { LoadingInterceptorService } from 'services/interceptors/loading-interceptor.service';
 import { LoaderComponent } from './plantillas/loader/loader.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoaderService } from 'services/loader.service';

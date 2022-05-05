@@ -5,7 +5,7 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
-import { AuthService } from 'services/auth.service';
+import { AuthService } from 'services/auth/auth.service';
 import { Profesor } from 'app/interfaces/Profesor';
 import { UsersService } from 'services/users.service';
 import Swal from 'sweetalert2';

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Skill } from 'app/interfaces/Skill';
 
-//const URL_READ_SKILLS = 'http://localhost:8080/skills/datosSkills.php'; // read skills
-//const URL_READ_SKILL_LEVEL = 'http://localhost:8080/skills/datosSkillLevel.php'; // read skills levels
-
 @Injectable({
   providedIn: 'root'
 })
 export class SkillService {
 
+  // como las skills sabemos que no van a cambiar
+  // no las obtenemos de un servidor
+  // guardamos una array con cada skill y cada imagen
   arrSkills: Skill[] = [
     {
       id_skill: 0,
@@ -53,6 +53,7 @@ export class SkillService {
 
   constructor() { }
 
+  // para obtener la array de skills
   getSkills() {
     return this.arrSkills;
   }

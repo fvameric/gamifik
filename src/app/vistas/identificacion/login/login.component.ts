@@ -5,7 +5,7 @@ import { User } from 'app/interfaces/User';
 import { Observable, Subject, Subscription, throwError } from 'rxjs';
 import { catchError, takeUntil } from 'rxjs/operators';
 
-import { AuthService } from 'services/auth.service';
+import { AuthService } from 'services/auth/auth.service';
 
 @Component({
   selector: 'app-login',

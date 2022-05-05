@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RankingService } from 'services/ranking.service';
-import { TokenService } from 'services/token.service';
+import { TokenService } from 'services/auth/token.service';
 import { UsersService } from 'services/users.service';
 import { Ranking } from '../../../interfaces/Ranking';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

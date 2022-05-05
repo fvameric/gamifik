@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingInterceptorService } from 'services/loading-interceptor.service';
+import { LoadingInterceptorService } from 'services/interceptors/loading-interceptor.service';
 import { LoaderService } from 'services/loader.service';
 import { Subject } from 'rxjs';
 

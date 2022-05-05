@@ -7,8 +7,9 @@ import {
 } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RankingService } from 'services/ranking.service';
-import { TokenService } from 'services/token.service';
+import { TokenService } from 'services/auth/token.service';
 import { Entrega } from 'app/interfaces/Entrega';
+import { EntregasService } from 'services/entregas.service';
 
 @Component({
   selector: 'app-modal-editar-entrega',
@@ -27,7 +28,8 @@ export class ModalEditarEntregaComponent implements OnInit {
     private modalService: NgbModal,
     public formBuilder: FormBuilder,
     private tokenService: TokenService,
-    private rankService: RankingService
+    private rankService: RankingService,
+    private entregasService: EntregasService
   ) {}
 
   ngOnInit(): void {
@@ -61,7 +63,7 @@ export class ModalEditarEntregaComponent implements OnInit {
 
   checkNombre() {
     this.form.nomEntrega.valueChanges.subscribe((nombreEntrega) => {
-      this.rankService
+      this.entregasService
         .validarNombreExistePractica(this.entregaSelec.id_rank, nombreEntrega)
         .subscribe((val: any) => {
           if (nombreEntrega==this.entregaSelec.nom_entrega) {
@@ -86,7 +88,7 @@ export class ModalEditarEntregaComponent implements OnInit {
       };
       console.log(entrega);
 
-      this.rankService.modificarEntrega(entrega).subscribe();
+      this.entregasService.modificarEntrega(entrega).subscribe();
 
       window.location.reload();
     }

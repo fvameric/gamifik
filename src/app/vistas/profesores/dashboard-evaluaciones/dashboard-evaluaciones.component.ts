@@ -5,7 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { EvaluacionService } from 'services/evaluacion.service';
 import { RankingService } from 'services/ranking.service';
 import { SkillService } from 'services/skill.service';
-import { TokenService } from 'services/token.service';
+import { TokenService } from 'services/auth/token.service';
 
 @Component({
   selector: 'app-dashboard-evaluaciones',

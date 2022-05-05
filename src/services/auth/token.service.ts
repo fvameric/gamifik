@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
 
+const URL_LOCALHOST = 'http://localhost:8888/';
+
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
-const URL_REFRESCAR_TOKEN =  'http://localhost:8080/tokenJWT/refrescarToken.php';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -47,7 +47,13 @@ export class TokenService {
   }
   
   generarToken() {
-    this.http.get(URL_REFRESCAR_TOKEN);
+    this.http.get(this.concatUrl('tokenJWT/refrescarToken.php'));
+  }
+
+  // concatena la URL de localhost y la string que le pasemos
+  // ejemplo: "http://localhost:8888/string"
+  concatUrl(urlStr: string) {
+    return URL_LOCALHOST + urlStr;
   }
 
 }

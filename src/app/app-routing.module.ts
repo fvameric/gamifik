@@ -11,7 +11,7 @@ import { DashboardProfesorComponent } from './vistas/profesores/dashboard-profes
 
 import { AuthGuardService } from 'services/guards/auth-guard.service';
 import { RoleGuardService } from 'services/guards/role-guard.service';
-import { ModalComponent } from './vistas/profesores/modal/modal.component';
+import { ModalComponent } from './plantillas/modal/modal.component';
 import { CrearRankingComponent } from './vistas/profesores/crear-ranking/crear-ranking.component';
 import { ModalEntregaComponent } from './vistas/profesores/modal-entrega/modal-entrega.component';
 import { ModalPerfilAlumnoComponent } from './vistas/profesores/modal-perfil-alumno/modal-perfil-alumno.component';

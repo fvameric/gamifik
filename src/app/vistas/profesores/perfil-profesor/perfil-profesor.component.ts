@@ -9,8 +9,8 @@ import {
   FormControl,
 } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { TokenService } from 'services/token.service';
-import { AuthService } from 'services/auth.service';
+import { TokenService } from 'services/auth/token.service';
+import { AuthService } from 'services/auth/auth.service';
 import { Router } from '@angular/router';
 
 @Component({

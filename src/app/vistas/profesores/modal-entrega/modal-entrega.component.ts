@@ -6,11 +6,12 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
-import { TokenService } from '../../../../services/token.service';
+import { TokenService } from '../../../../services/auth/token.service';
 import { debounceTime, distinctUntilChanged, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { RankingService } from 'services/ranking.service';
 import { Entrega } from 'app/interfaces/Entrega';
 import { of, Subject } from 'rxjs';
+import { EntregasService } from 'services/entregas.service';
 
 
 @Component({
@@ -42,7 +43,8 @@ export class ModalEntregaComponent implements OnInit {
     private modalService: NgbModal,
     public formBuilder: FormBuilder,
     private tokenService: TokenService,
-    private rankService: RankingService
+    private rankService: RankingService,
+    private entregasService: EntregasService
   ) { }
 
   ngOnInit() {
@@ -88,7 +90,7 @@ export class ModalEntregaComponent implements OnInit {
     this.entrega.nom_entrega = this.nombrePractica.value;
     this.entrega.id_rank = this.rankSelec.id_rank;
 
-    this.rankService.insertarPractica(this.entrega).subscribe(val => this.insertarAlumnosJoin(val));
+    this.entregasService.insertarPractica(this.entrega).subscribe(val => this.insertarAlumnosJoin(val));
   }
 
   insertarAlumnosJoin(val: any) {
@@ -113,7 +115,7 @@ export class ModalEntregaComponent implements OnInit {
       }
     }
     
-    this.rankService.insertarEntregaJoin(paqueteAlumnos).subscribe(val => this.resultadoInsert(val));
+    this.entregasService.insertarEntregaJoin(paqueteAlumnos).subscribe(val => this.resultadoInsert(val));
   }
 
   resultadoInsert(val: any) {
@@ -129,7 +131,7 @@ export class ModalEntregaComponent implements OnInit {
     .pipe(
       debounceTime(400),
       distinctUntilChanged(),
-      switchMap(nom => this.rankService.validarNombreExistePractica(this.rankSelec.id_rank, nom)),
+      switchMap(nom => this.entregasService.validarNombreExistePractica(this.rankSelec.id_rank, nom)),
       takeUntil(this.subject)
     ).subscribe((val: any) => {
       this.pendingName = true;

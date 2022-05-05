@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Evaluacion } from 'app/interfaces/Evaluacion';
 import { EvaluacionService } from 'services/evaluacion.service';
 import { RankingService } from 'services/ranking.service';
-import { TokenService } from 'services/token.service';
+import { TokenService } from 'services/auth/token.service';
 
 @Component({
   selector: 'app-modal-skill',

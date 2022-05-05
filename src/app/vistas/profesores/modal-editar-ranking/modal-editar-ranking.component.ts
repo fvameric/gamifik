@@ -7,7 +7,7 @@ import {
   FormControl,
   Form,
 } from '@angular/forms';
-import { TokenService } from '../../../../services/token.service';
+import { TokenService } from '../../../../services/auth/token.service';
 import { debounceTime, tap } from 'rxjs/operators';
 import { RankingService } from 'services/ranking.service';
 import { Ranking } from '../../../interfaces/Ranking';
