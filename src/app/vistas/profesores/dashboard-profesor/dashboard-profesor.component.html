@@ -50,9 +50,12 @@
                                                     </path>
                                                 </g>
                                             </svg>
-                                            {{rank.nom_rank}}
+                                            <div class="nombre-ranking">
+                                                {{rank.nom_rank}}
+                                            </div>
+
                                             <div class="cantidad-alumnos">
-                                                {{rank.alumnos}} alumnos
+                                                {{rank.alumnos}}
                                             </div>
                                         </button>
                                     </div>
@@ -95,7 +98,7 @@
                                                     </svg>
                                                 </button>
                                             </div>
-                                            <div class="practicas-ranking" *ngFor="let entrega of arrEntregas">
+                                            <div *ngFor="let entrega of arrEntregas">
                                                 <button (click)="detalleEntrega(entrega)" class="btn-entrega">{{entrega.nom_entrega}}</button>
                                             </div>
                                         </ng-template>
@@ -198,7 +201,7 @@
                                     </svg>
                                 </button>
                                 <div *ngIf="this.mostrarDesplegableVisual && alumnoSelec.id_alumno == alumno.id_alumno">
-                                    <div #despVisual class="desplegableVisual">
+                                    <div #despVisual class="desplegable-alumno">
                                         <!--<app-modal-perfil-alumno [alumnoDetalle]="alumno"></app-modal-perfil-alumno>-->
 
                                         <a (click)="abrirModal(5)">
@@ -289,7 +292,7 @@
                                         </svg>
                                     </button>
                                     <div *ngIf="this.mostrarDesplegableVisual && alumnoSelec.id_alumno == alumno.id_alumno">
-                                        <div class="desplegableVisual">
+                                        <div class="desplegable-alumno">
                                             <a (click)="abrirModal(5)">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                                                     <path
@@ -320,6 +323,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
                     <ng-template #noselec>

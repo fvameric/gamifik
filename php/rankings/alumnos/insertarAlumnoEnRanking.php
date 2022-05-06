@@ -22,22 +22,16 @@
 
   // query
   $queryInsert = "INSERT INTO `rank_alumnos`(`id_rank_alumnos`, `id_rank`, `id_alumno`) VALUES (NULL, $ids->id_rank, $ids->id_alumno)";
-  //$queryUpdate = "UPDATE `ranking` SET `alumnos`= (SELECT COUNT(id_rank) FROM rank_alumnos WHERE id_rank = '$ids->id_rank') WHERE id_rank='$ids->id_rank'";
-
+  $queryUpdate = "UPDATE `ranking` SET `alumnos`= (SELECT COUNT(id_rank) FROM rank_alumnos WHERE id_rank = '$ids->id_rank') WHERE id_rank='$ids->id_rank'";
+  
   $resInsert = mysqli_query($con, $queryInsert);
 
   // validacion de la query
   if ($resInsert) {
-    /*
+    mysqli_query($con, $queryUpdate);
     $response->resultado = 'ok';
     $response->mensaje = 'Se registró correctamente';
     echo json_encode($response);
-    */
-    //$resUpdate = mysqli_query($con, $queryUpdate);
-
-    $response->resultado = 'ok';
-      $response->mensaje = 'Se registró correctamente';
-      echo json_encode($response);
   } else {
     $response->resultado = 'error';
     $response->mensaje = 'Hubo un error al registrar el ranking';

@@ -32,17 +32,6 @@
     --backgound-color-skeleton-gradien: linear-gradient(110deg, #494949 8%, #292929 18%, #494949 33%);
 }
 
-* {
-    font-family: "Lato", sans-serif;
-}
-
-body {
-    height: 100vh;
-    background: var( --background-color);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
 ::-webkit-scrollbar-thumb:hover {
     background-color: #007bff;
 }
@@ -60,6 +49,20 @@ body {
     border: 5px solid transparent;
     background-clip: content-box;
     background-color: #007bff;
+}
+
+
+/* Generales */
+
+* {
+    font-family: "Lato", sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: var( --background-color);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 a {
@@ -107,6 +110,147 @@ h2 {
 
 h4 {
     font-size: 15px;
+}
+
+
+/* separadores */
+
+.separador1 {
+    height: 100%;
+    width: 295px;
+}
+
+.separador2 {
+    justify-content: center;
+    margin: 0 20px 0 20px;
+    width: 50%;
+    height: auto;
+}
+
+
+/* Rankings Alumnos/Profesores */
+
+.lista-rankings p {
+    color: #ffffff;
+}
+
+
+/* nombres de cada botón de rankings */
+
+.nombre-ranking {
+    width: 240px;
+}
+
+
+/* botones de cada rankings */
+
+.button-ranking-class {
+    display: flex;
+    background-color: transparent;
+    width: 100%;
+    height: 50px;
+    text-align: left;
+    border: none;
+    color: #cccccc;
+    cursor: pointer;
+    transition: 200ms;
+    border-radius: 7px;
+    word-wrap: break-word;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.button-ranking-class:hover {
+    transition: 200ms;
+    color: white;
+    background-color: #1292f8;
+}
+
+.button-ranking-class:focus {
+    transition: 200ms;
+    color: white;
+    background-color: #1292f8;
+}
+
+
+/* Cabecera rankings */
+
+.info-superior {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* SVG dashboards */
+
+svg:hover {
+    cursor: pointer;
+}
+
+
+/* Tabla de alumnos */
+
+.table-element {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #122b3a59;
+    border: none;
+    color: #fff;
+}
+
+.table-element:nth-child(even) {
+    background-color: #2075cd29;
+}
+
+.table-imagen {
+    margin: 0 0 0 10px rgba(53, 53, 53, 0.349);
+}
+
+.table-imagen img {
+    width: 35px;
+    height: auto;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+.table-puntuacion {
+    margin-left: auto;
+}
+
+.table-nombre {
+    margin: 0 6px 0 10px;
+}
+
+.table-content {
+    display: flex;
+}
+
+.array-rankings p {
+    color: #cccccc;
+    margin: 5px;
+}
+
+
+/* En caso de que no existan rankings */
+
+.no-ranks p {
+    color: #ffffff;
+}
+
+
+/* Buscador de entregas */
+
+.input-buscador {
+    background: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    width: 90%;
+    color: #cccccc;
 }
 
 
@@ -577,31 +721,6 @@ body {
     color: #ffffff;
 }
 
-.button-ranking-class {
-    background-color: transparent;
-    width: 100%;
-    height: 50px;
-    text-align: left;
-    border: none;
-    color: #cccccc;
-    cursor: pointer;
-    transition: 200ms;
-    border-radius: 7px;
-    word-wrap: break-word;
-}
-
-.button-ranking-class:hover {
-    transition: 200ms;
-    color: white;
-    background-color: #1292f8;
-}
-
-.button-ranking-class:focus {
-    transition: 200ms;
-    color: white;
-    background-color: #1292f8;
-}
-
 .titulo-detalle-ranking {
     display: flex;
     justify-content: space-between;
@@ -675,4 +794,31 @@ body {
 
 .disponibilidad-black {
     color: #ffffff6b;
+}
+
+.desplegable-alumno {
+    position: absolute;
+    background-color: #031727;
+    color: black;
+    width: auto;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.desplegable-alumno a {
+    margin: 0;
+    margin-left: 10px;
+    color: #fff;
+    width: 120px;
+}
+
+.desplegable-alumno hr {
+    border-top: 1px solid rgba(255, 255, 255, 0.432);
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.desplegable-alumno label {
+    margin: 0.5rem;
+    cursor: pointer;
 }

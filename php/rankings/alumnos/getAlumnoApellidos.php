@@ -19,19 +19,23 @@
   // variable donde guardar los datos del fetch
   global $datos;
   
+  // input body
+  $json = file_get_contents('php://input');
+  $entrega = json_decode($json);
+  
   // query
   //$query = "SELECT * FROM alumno INNER JOIN rank_alumnos ON alumno.id_alumno = rank_alumnos.id_alumno WHERE rank_alumnos.id_rank = '$_GET[id]' ORDER BY alumno.apellidos ASC";
   $query = "SELECT alumno.id_alumno, rank_alumnos.id_rank, rank_entregas.id_entrega, puntuacion_entrega, nick, email, pass, nombre, apellidos, fecha_nacimiento, tipo, imagen, aceptado
   FROM alumno
   INNER JOIN rank_alumnos ON alumno.id_alumno = rank_alumnos.id_alumno
   INNER JOIN rank_entregas ON alumno.id_alumno = rank_entregas.id_alumno
-  WHERE rank_alumnos.id_rank = '$_GET[id]' ORDER BY alumno.apellidos ASC";
+  WHERE rank_alumnos.id_rank = '".$entrega->id_rank."' and rank_entregas.id_entrega= '".$entrega->id_entrega."' ORDER BY alumno.apellidos ASC";
   
   $res = mysqli_query($con, $query);
 
   // validación de la query
   if ($res) {
-    while ($registros = mysqli_fetch_array($res))
+    while ($registros = mysqli_fetch_array($res, MYSQLI_ASSOC))
     {
       $datos[] = $registros;
     }

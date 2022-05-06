@@ -1,25 +1,15 @@
 @import url("../../../../styles.css");
-body {
-    height: 100% !important;
-}
 
-.separador1 {
-    height: 100%;
-    width: 295px;
-}
-
-.separador2 {
-    justify-content: center;
-    margin: 0 20px 0 20px;
-    width: 50%;
-    height: auto;
-}
-
+/*
 div.content {
     margin-left: 200px;
     padding: 1px 16px;
     height: 1000px;
 }
+*/
+
+
+/* Botón unirse al ranking */
 
 .unirse-ranking {
     margin: 5%;
@@ -36,50 +26,21 @@ div.content {
     background-color: #1292f8;
 }
 
-.unirse-retangulo {
-    background: #1292f8;
-    float: left;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-}
 
-.lista-rankings p {
-    color: #ffffff;
-}
+/* Botón pendiente */
 
-.cantidad-alumnos {
-    float: right;
-}
-
-.info-superior {
-    width: 100%;
+.pendienteFlex {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 5px;
 }
 
-.contenido-icons {
-    margin: 10px 10px 10px 10px;
-    float: right;
-    width: 100%;
-}
-
-.button-icons {
-    float: right;
+.btn-pendiente {
+    padding: 5px 10px;
+    width: 45px;
     border: none;
-    background-color: transparent;
-    color: white;
-    cursor: pointer;
-    transition: 1s;
-}
-
-.button-icons:hover {
-    transition: 1s;
-    color: #1292f8;
-}
-
-.no-ranks p {
-    color: #ffffff;
+    background-color: #ffc333;
+    border-radius: 5px;
 }
 
 
@@ -96,42 +57,6 @@ div.content {
     align-items: center;
 }
 
-.table-element {
-    align-items: center;
-    padding: 10px;
-    border-radius: 10px;
-    width: 50px;
-    height: 50px;
-    background: none;
-    background-color: #00000059;
-    border: none;
-    color: #fff;
-}
-
-.table-element:hover,
-.table-element:nth-child(odd):hover {
-    background-color: #FFD700;
-}
-
-.table-imagen {
-    margin: 0 0 0 10px;
-}
-
-.table-imagen img {
-    width: 35px;
-    height: auto;
-    border-radius: 50%;
-    margin: 10px;
-}
-
-.table-puntuacion {
-    margin-left: auto;
-}
-
-.table-nombre {
-    margin: 0 6px 0 10px;
-}
-
 
 /* media */
 
@@ -141,35 +66,13 @@ div.content {
     }
 }
 
-.pendienteFlex {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-}
-
-.btn-pendiente {
-    padding: 5px 10px;
-    width: 45px;
-    border: none;
-    background-color: #ffc333;
-    border-radius: 5px;
-}
-
-.array-rankings p {
-    color: #cccccc;
-    margin: 5px;
-}
-
 .titulo-skills {
     display: flex;
     justify-content: space-between;
 }
 
-.skills-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
+/* Skills */
 
 .table-skills {
     display: flex;
@@ -221,8 +124,7 @@ div.content {
     display: flex;
 }
 
-.alumnos-ranking {
-    display: flex;
-    align-items: center;
-    width: 100%;
+.current-skills img {
+    width: 30px;
+    height: 30px;
 }

@@ -1,12 +1,7 @@
 import {
   Component,
   ElementRef,
-  HostListener,
   OnInit,
-  Output,
-  Renderer2,
-  ViewChild,
-  ViewChildren,
 } from '@angular/core';
 import { Profesor } from '../../../interfaces/Profesor';
 import { UsersService } from 'services/users.service';
@@ -15,7 +10,6 @@ import { RankingService } from 'services/ranking.service';
 import { TokenService } from 'services/auth/token.service';
 import Swal from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CrearRankingComponent } from '../crear-ranking/crear-ranking.component';
 import { ModalComponent } from '../../../plantillas/modal/modal.component';
 import { Subject } from 'rxjs';
 import { AuthService } from '../../../../services/auth/auth.service';
@@ -78,6 +72,8 @@ export class DashboardProfesorComponent implements OnInit {
   puntuacionAlumno: string = '';
 
   antiguaId: number = 0;
+
+  total_alumnos: number = 0;
 
   //documentClickedTarget: Subject<HTMLElement> = new Subject<HTMLElement>()
 
@@ -213,11 +209,14 @@ export class DashboardProfesorComponent implements OnInit {
 
   obtenerEntregasRank() {
     this.arrEntregas = [];
+
     this.entregasService.obtenerEntregas()
       .pipe(
         takeUntil(this.subject)
       )
       .subscribe((val) => {
+        console.log(val);
+
         this.entregas = val;
 
         // búsqueda de entregas por ranking
@@ -353,17 +352,20 @@ export class DashboardProfesorComponent implements OnInit {
     this.entregaSeleccionada = entrega;
 
     this.rankingService
-      .obtenerAlumnoPorRankingApellido(entrega.id_rank)
+      .obtenerAlumnoPorRankingApellido(entrega.id_rank, entrega.id_entrega)
       .pipe(
         takeUntil(this.subject)
       )
       .subscribe((val: any) => {
+
+        console.log(val);
+
         if (val != null) {
           val.forEach((element: any) => {
-            if (
-              element.aceptado == 1 &&
-              element.id_entrega == entrega.id_entrega
-            ) {
+            
+            console.log(element);
+
+            if (element.aceptado == 1) {
               this.listaAlumnosEntregas.push(element);
             }
           });

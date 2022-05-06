@@ -5,7 +5,7 @@ import { Alumno } from 'app/interfaces/Alumno';
 import { map, take } from 'rxjs/operators';
 import { Entrega } from '../app/interfaces/Entrega';
 
-const URL_LOCALHOST = 'http://localhost:8888/';
+const URL_LOCALHOST = 'http://localhost:8080/';
 
 @Injectable({
   providedIn: 'root',
@@ -40,18 +40,9 @@ export class RankingService {
     return this.http.put(this.concatUrl('rankings/modificarRanking.php'), JSON.stringify(rank));
   }
 
-  contarRankings() {
-    return this.http.get(this.concatUrl('rankings/contarRankings.php'));
-  }
-
   // delete ranking
   eliminarRanking(id: number) {
     return this.http.delete(this.concatUrl('rankings/eliminarRanking.php') + `?id=${id}`);
-  }
-
-  // obtener rankings específicos según su ID
-  obtenerRankingPorId(id: number) {
-    return this.http.get(this.concatUrl('rankings/getRankingId.php') + `?id=${id}`);
   }
 
   /*******************
@@ -63,16 +54,6 @@ export class RankingService {
   *                   *
   *                   *
   ********************/
-
-  // obtener ranking - alumnos
-  obtenerRankingAlumnos() {
-    return this.http.get(this.concatUrl('rankings/alumnos/getRankAlumnos.php'));
-  }
-
-  // obtener ranking - alumnos
-  obtenerRankingAlumnosId(id: number) {
-    return this.http.get(this.concatUrl('rankings/alumnos/getRankAlumnosId.php') + `?id=${id}`);
-  }
 
   obtenerJoinRankingAlumno() {
     return this.http.get(this.concatUrl('rankings/alumnos/getRankAlumnoId.php'));
@@ -91,8 +72,12 @@ export class RankingService {
     return this.http.get<any[]>(this.concatUrl('rankings/alumnos/getAlumnoPorRanking.php') + `?id=${id}`);
   }
 
-  obtenerAlumnoPorRankingApellido(id: number) {
-    return this.http.get<any[]>(this.concatUrl('rankings/alumnos/getAlumnoApellidos.php') + `?id=${id}`);
+  obtenerAlumnoPorRankingApellido(id_rank: number, id_entrega: number) {
+    var ids = {
+      id_rank: id_rank,
+      id_entrega: id_entrega,
+    };
+    return this.http.post<any[]>(this.concatUrl('rankings/alumnos/getAlumnoApellidos.php'), JSON.stringify(ids));
   }
 
   // quitar alumno del ranking
@@ -132,19 +117,9 @@ export class RankingService {
   *                   *
   ********************/
 
-  // obtener ranking - profes
-  obtenerRankingProfes() {
-    return this.http.get(this.concatUrl('rankings/profesores/getRankProfes.php'));
-  }
-
   // obtener profesor - rankings
   obtenerProfeRankId(id: number) {
     return this.http.get(this.concatUrl('rankings/profesores/getProfeRankId.php') + `?id=${id}`);
-  }
-
-  // obtener ranking - alumnos
-  obtenerRankingProfeId(id: number) {
-    return this.http.get(this.concatUrl('rankings/profesores/getRankProfesId.php') + `?id=${id}`);
   }
 
   obtenerJoinRankingProfes() {
@@ -182,7 +157,7 @@ export class RankingService {
   }
 
   // concatena la URL de localhost y la string que le pasemos
-  // ejemplo: "http://localhost:8888/string"
+  // ejemplo: "http://localhost:8080/string"
   concatUrl(urlStr: string) {
     return URL_LOCALHOST + urlStr;
   }

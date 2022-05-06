@@ -13,10 +13,11 @@ import { AuthService } from 'services/auth/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  // 1. pipe takeUntil
+  // pipe takeUntil
   private subject = new Subject();
-  // 2. objecto Suscription
-  private logProfSub = new Subscription();
+
+  loginAlumnos: any;
+  loginProfes: any;
 
   // variables formulario
   loginForm!: FormGroup;
@@ -29,7 +30,6 @@ export class LoginComponent implements OnInit {
   userNoExiste: boolean = false;
 
   alumnos: any;
-
 
   // variables token
   userRoles: any;
@@ -45,15 +45,6 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
-  }
-
-  ngOnDestroy(): void {
-    // 1. pipe takeUntil para unsuscribe en ngOnDestroy
-    this.subject.next();
-    this.subject.complete();
-
-    // 2. Unsuscribe del objecto Suscription
-    this.logProfSub.unsubscribe();
   }
 
   //Funció rebre valors del formulari
@@ -82,18 +73,15 @@ export class LoginComponent implements OnInit {
           .pipe(
             takeUntil(this.subject),
             catchError(err => throwError(err))
-          ).subscribe(val => {
-            this.authService.guardarLocalStorage(val);
-          });
+          ).subscribe(val => this.authService.guardarLocalStorage(val));
 
       } else if (this.router.url == '/identificacion-profesores') {
 
-        // 2. suscription, unsuscribe manual en ngondestroy
-        this.logProfSub = this.authService.loginProfesores(user).subscribe({
-          next: val => this.authService.guardarLocalStorage(val),
-          complete: () => console.log('logProfSub complete'),
-          error: val => console.log(`Error: ${val}`)
-        });
+        this.authService.loginProfesores(user)
+        .pipe(
+          takeUntil(this.subject),
+          catchError(err => throwError(err))
+        ).subscribe(val => this.authService.guardarLocalStorage(val));
       }
     }
   }
@@ -114,5 +102,11 @@ export class LoginComponent implements OnInit {
 
     document.getElementsByClassName('hola')[0].classList.toggle('dark');
     document.getElementsByClassName('toggle')[0].classList.toggle('active');
+  }
+
+  ngOnDestroy(): void {
+    // pipe takeUntil para unsuscribe en ngOnDestroy
+    this.subject.next();
+    this.subject.complete();
   }
 }

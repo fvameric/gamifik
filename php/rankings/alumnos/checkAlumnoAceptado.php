@@ -16,9 +16,9 @@
   class Result {}
   $response = new Result();
 
-    // input body
-    $json = file_get_contents('php://input');
-    $alumno = json_decode($json);
+  // input body
+  $json = file_get_contents('php://input');
+  $alumno = json_decode($json);
 
   // query
   $query = "SELECT aceptado FROM `rank_alumnos` WHERE id_rank='$alumno->id_rank' AND id_alumno='$alumno->id_alumno'";

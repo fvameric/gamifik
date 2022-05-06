@@ -45,7 +45,7 @@
     } else {
       // en caso de que no exista devolvemos error
       $response->resultado = 'error';
-      $response->mensaje = 'No se encontró este usuario';
+      $response->mensaje = 'No se encontró este alumno';
       echo json_encode($response);
     }
   } else {

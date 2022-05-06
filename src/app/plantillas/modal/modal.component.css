@@ -1,4 +1,4 @@
-@import url("../../../../styles.css");
+@import url("../../../styles.css");
 .h1-modal {
     color: var( --modal-color-text);
     font: 400 24px/32px Roboto, "Helvetica Neue", sans-serif;

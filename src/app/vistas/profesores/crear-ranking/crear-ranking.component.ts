@@ -38,7 +38,6 @@ export class CrearRankingComponent implements OnInit {
 
   user: any;
   id_profe: number = 0;
-  total_rankings: any;
 
   booltest: boolean = true;
 
@@ -61,8 +60,6 @@ export class CrearRankingComponent implements OnInit {
     this.checkNombre();
     this.codigoRanking = this.generaNss();
     this.id_profe = this.user.id_profe;
-
-    this.total_rankings = this.rankService.contarRankings().subscribe;
     
   }
 

@@ -4,7 +4,7 @@ import { Profesor } from 'app/interfaces/Profesor';
 import { Alumno } from 'app/interfaces/Alumno';
 import { User } from 'app/interfaces/User';
 
-const URL_LOCALHOST = 'http://localhost:8888/';
+const URL_LOCALHOST = 'http://localhost:8080/';
 
 @Injectable({
   providedIn: 'root',
@@ -62,10 +62,6 @@ export class UsersService {
     return this.http.get(this.concatUrl('alumnos/eliminarAlumno.php'));
   }
 
-  // obtener alumnos específicos según su ID
-  obtenerAlumnoPorId(id: number) {
-    return this.http.get(this.concatUrl('alumnos/getAlumnoId.php') + `?id=${id}`);
-  }
   // validar email alumnos
   validarEmailExisteAlumnos(email: string) {
     return this.http.get(this.concatUrl('alumnos/emailExiste.php') + `?email=${email}`);
@@ -84,28 +80,10 @@ export class UsersService {
   }
   
   // funciones profesores
-  // create profesores
-  insertarProfesores(alumno: Alumno) {
-    return this.http.post(this.concatUrl('profesores/insertarProfesor.php'), JSON.stringify(alumno));
-  }
-
-  // read profesores
-  obtenerProfesores() {
-    return this.http.get(this.concatUrl('profesores/datosProfesor.php'));
-  }
 
   // update profesores
   modificarProfesor(user: User) {
     return this.http.put(this.concatUrl('profesores/modificarProfesor.php'), JSON.stringify(user));
-  }
-  // delete profesores
-  eliminarProfesor() {
-    return this.http.get(this.concatUrl('profesores/eliminarProfesor.php'));
-  }
-
-  // obtener profesores específicos según su ID
-  obtenerProfesorPorId(id: number) {
-    return this.http.get(this.concatUrl('profesores/getProfesorId.php') + `?id=${id}`);
   }
 
   //validar email profes
@@ -127,7 +105,7 @@ export class UsersService {
   }
 
   // concatena la URL de localhost y la string que le pasemos
-  // ejemplo: "http://localhost:8888/string"
+  // ejemplo: "http://localhost:8080/string"
   concatUrl(urlStr: string) {
     return URL_LOCALHOST + urlStr;
   }

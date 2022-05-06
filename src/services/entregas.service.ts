@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Entrega } from '../app/interfaces/Entrega';
 
-const URL_LOCALHOST = 'http://localhost:8888/';
+const URL_LOCALHOST = 'http://localhost:8080/';
 
 @Injectable({
   providedIn: 'root'
@@ -12,40 +12,35 @@ export class EntregasService {
   constructor(private http: HttpClient) { }
 
   obtenerEntregas() {
-    return this.http.get(this.concatUrl('rankings/datosEntrega.php'));
+    return this.http.get(this.concatUrl('rankings/entregas/datosEntrega.php'));
   }
 
   eliminarEntregas(entrega: any) {
-    return this.http.post(this.concatUrl('rankings/eliminarEntrega.php'), JSON.stringify(entrega));
+    return this.http.post(this.concatUrl('rankings/entregas/eliminarEntrega.php'), JSON.stringify(entrega));
   }
 
   modificarEntrega(entrega: Entrega) {
-    return this.http.post(this.concatUrl('rankings/modificarEntrega.php'), JSON.stringify(entrega));
+    return this.http.post(this.concatUrl('rankings/entregas/modificarEntrega.php'), JSON.stringify(entrega));
   }
 
   insertarEntregaJoin(entrega: any) {
     console.log(entrega);
 
-    return this.http.post(this.concatUrl('rankings/insertarEntregaJoin.php'), JSON.stringify(entrega));
+    return this.http.post(this.concatUrl('rankings/entregas/insertarEntregaJoin.php'), JSON.stringify(entrega));
   }
 
   validarNombreExistePractica(id_rank: number, nombrePractica: string) {
-    return this.http.get(this.concatUrl('rankings/profesores/obtenerNombrePractica.php') + `?nom_practica=${nombrePractica}&id_rank=${id_rank}`
+    return this.http.get(this.concatUrl('rankings/entregas/obtenerNombrePractica.php') + `?nom_practica=${nombrePractica}&id_rank=${id_rank}`
     );
-  }
-
-  // obtener ranking - entregas
-  obtenerRankingEntregas() {
-    return this.http.get(this.concatUrl('rankings/getRankEntregas.php'));
   }
 
   // crear entrega
   insertarPractica(entrega: Entrega) {
-    return this.http.post(this.concatUrl('rankings/insertarEntrega.php'), JSON.stringify(entrega));
+    return this.http.post(this.concatUrl('rankings/entregas/insertarEntrega.php'), JSON.stringify(entrega));
   }
 
   // concatena la URL de localhost y la string que le pasemos
-  // ejemplo: "http://localhost:8888/string"
+  // ejemplo: "http://localhost:8080/string"
   concatUrl(urlStr: string) {
     return URL_LOCALHOST + urlStr;
   }

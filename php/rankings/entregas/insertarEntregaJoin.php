@@ -5,7 +5,7 @@ header("Access-Control-Allow-Headers: Authorization, Origin, X-Requested-With, C
 header('Content-Type: application/json');
 
 // includes
-include_once("../conexion/bd.php");
+include_once("../../conexion/bd.php");
 
 // clases
 // clase conexión

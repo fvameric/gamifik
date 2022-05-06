@@ -26,12 +26,20 @@
   $queryUpdateRelation = "DELETE FROM rank_entregas WHERE id_rank='$ids->id_rank' AND id_alumno='$ids->id_alumno'";
 
   mysqli_query($con, $query);
-  mysqli_query($con, $queryUpdate);
-  mysqli_query($con, $queryUpdateRelation);
 
-  $response->resultado = 'ok';
-  $response->mensaje = 'El alumno se eliminó quitó del ranking';
-  $response->params = $ids;
-  echo json_encode($response); // MUESTRA EL JSON GENERADO
+  if ($query) {
+    mysqli_query($con, $queryUpdate);
+    mysqli_query($con, $queryUpdateRelation);
+
+    $response->resultado = 'ok';
+    $response->mensaje = 'El alumno se eliminó del ranking';
+    $response->params = $ids;
+    echo json_encode($response);
+  } else {
+    $response->resultado = 'error';
+    $response->mensaje = 'El alumno se no se pudo eliminar del ranking';
+    echo json_encode($response);
+  }
+
 ?>
 

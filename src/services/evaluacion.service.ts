@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-const URL_LOCALHOST = "http://localhost:8888/";
+const URL_LOCALHOST = "http://localhost:8080/";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,19 +20,9 @@ export class EvaluacionService {
     return this.http.get(this.concatUrl('evaluaciones/obtenerEvaluaciones.php'));
   }
 
-  // READ Evaluación mediante la id de alumno
-  obtenerEvalAlumnoId(id: number) {
-    return this.http.get(this.concatUrl('evaluaciones/obtenerEvaluacionAlumnoId.php') + `?id=${id}`);
-  }
-
   // READ Evaluación mediante la id de profesor
   obtenerEvalProfesorId(ids: any) {
     return this.http.post(this.concatUrl('evaluaciones/obtenerEvaluacionProfesorId.php'), JSON.stringify(ids));
-  }
-
-  // READ Evaluación mediante la id del ranking
-  obtenerEvalRankingId(id: number) {
-    return this.http.get(this.concatUrl('evaluaciones/obtenerEvaluacionRankingId.php') + `?id=${id}`);
   }
 
   // READ Evaluación mediante la id del alumno, del ranking y la skill
@@ -51,7 +42,7 @@ export class EvaluacionService {
   }
 
   // concatena la URL de localhost y la string que le pasemos
-  // ejemplo: "http://localhost:8888/string"
+  // ejemplo: "http://localhost:8080/string"
   concatUrl(urlStr: string) {
     return URL_LOCALHOST + urlStr;
   }

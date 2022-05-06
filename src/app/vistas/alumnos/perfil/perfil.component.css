@@ -8,6 +8,7 @@
     box-sizing: border-box;
 }
 
+
 /* CONTACT ========================================== */
 
 .contact-area {
@@ -60,7 +61,7 @@
     border-radius: 5px;
     float: left;
     width: 100%;
-    background:var(--perfil-info-backgournd-color);
+    background: var(--perfil-info-backgournd-color);
 }
 
 .contact main section .content {
@@ -282,21 +283,22 @@ svg {
     margin-left: 5%;
 }
 
-input[type="file"]{
+input[type="file"] {
     color: var(--perfil-h5-color);
 }
 
 .h2-perfil {
     color: #007bff;
 }
-.h5-perfil{
+
+.h5-perfil {
     color: var(--perfil-h5-color);
     margin: 5px;
     font-size: 15px;
 }
 
-.p-perfil{
-color: var(--perfil-color-p);
+.p-perfil {
+    color: var(--perfil-color-p);
 }
 
 hr {
@@ -489,20 +491,6 @@ input[type=date] {
     transition: all 0.5s ease-in-out;
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
-}
-
-.unirse-ranking {
-    margin-left: 200px;
-    padding: 5px;
-    border-radius: 5px;
-    background-color: #56baed;
-    color: white;
-    border: none;
-    transition: 1s;
-}
-
-.unirse-ranking:hover {
-    background-color: #1292f8;
 }
 
 

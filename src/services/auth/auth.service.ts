@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { TokenService } from './token.service';
 
-const URL_LOCALHOST = "http://localhost:8888/";
+const URL_LOCALHOST = "http://localhost:8080/";
 const ROUTE_LS = 'userRoute';
 
 @Injectable({
@@ -87,14 +87,18 @@ export class AuthService {
   // se guarda el token y el usuario en localstorage para conocer su sesión
   guardarLocalStorage(data: any) {
     console.log(data);
-    if (data.data.tipo == 0) {
-      this.tokenService.saveToken(data.accessToken);
-      this.tokenService.saveUser(data.data);
-      this.router.navigate(['dashboard']);
+    if (data.resultado == 'ok') {
+      if (data.data.tipo == 0) {
+        this.tokenService.saveToken(data.accessToken);
+        this.tokenService.saveUser(data.data);
+        this.router.navigate(['dashboard']);
+      } else {
+        this.tokenService.saveToken(data.accessToken);
+        this.tokenService.saveUser(data.data);
+        this.router.navigate(['dashboardprofesor']);
+      }
     } else {
-      this.tokenService.saveToken(data.accessToken);
-      this.tokenService.saveUser(data.data);
-      this.router.navigate(['dashboardprofesor']);
+      this.generarSwal(data.mensaje);
     }
   }
 
@@ -110,7 +114,7 @@ export class AuthService {
   }
 
   // concatena la URL de localhost y la string que le pasemos
-  // ejemplo: "http://localhost:8888/string"
+  // ejemplo: "http://localhost:8080/string"
   concatUrl(urlStr: string) {
     return URL_LOCALHOST + urlStr;
   }

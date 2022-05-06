@@ -22,14 +22,11 @@
 
   // query
   $query = "UPDATE `rank_alumnos` SET `aceptado`='$alumno->aceptado' WHERE `id_rank`='$alumno->id_rank' AND `id_alumno`='$alumno->id_alumno'";
-  $queryUpdate = "UPDATE `ranking` SET `alumnos`= (SELECT COUNT(id_rank) FROM rank_alumnos WHERE id_rank = '$alumno->id_rank') WHERE id_rank='$alumno->id_rank'";
   
   $resInsert = mysqli_query($con, $query);
   
   // validacion de la query
   if ($resInsert) {
-    $resUpdate = mysqli_query($con, $queryUpdate);
-
     $response->resultado = 'ok';
     $response->mensaje = 'Se registró correctamente';
     echo json_encode($response);

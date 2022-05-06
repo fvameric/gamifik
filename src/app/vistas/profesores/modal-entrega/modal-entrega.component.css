@@ -16,7 +16,3 @@ p {
     border: none;
     color: white;
 }
-
-svg:hover {
-    cursor: pointer;
-}
