@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { TokenService } from './token.service';
 
-const URL_LOCALHOST = "http://localhost:8080/";
+const URL_LOCALHOST = "http://localhost:8888/";
 const ROUTE_LS = 'userRoute';
 
 @Injectable({
@@ -114,7 +114,7 @@ export class AuthService {
   }
 
   // concatena la URL de localhost y la string que le pasemos
-  // ejemplo: "http://localhost:8080/string"
+   
   concatUrl(urlStr: string) {
     return URL_LOCALHOST + urlStr;
   }

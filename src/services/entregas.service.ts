@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Entrega } from '../app/interfaces/Entrega';
 
-const URL_LOCALHOST = 'http://localhost:8080/';
+const URL_LOCALHOST = 'http://localhost:8888/';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +40,6 @@ export class EntregasService {
   }
 
   // concatena la URL de localhost y la string que le pasemos
-  // ejemplo: "http://localhost:8080/string"
   concatUrl(urlStr: string) {
     return URL_LOCALHOST + urlStr;
   }
