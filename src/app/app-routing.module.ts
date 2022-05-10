@@ -25,7 +25,7 @@ import { DashboardEvaluacionesComponent } from './vistas/profesores/dashboard-ev
 import { HomeComponent } from './plantillas/home/home.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'identificacion', pathMatch: 'full' },
+  { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: 'identificacion', component: IdentificacionComponent },
   { path: 'identificacion-profesores', component: IdentificacionProfesoresComponent },
   { path: 'login', component: LoginComponent },

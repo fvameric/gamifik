@@ -3,12 +3,18 @@
         <div class="container__menu">
             <div class="logo">
                 <img src="" alt="">
+                <h1 class="logopage">FBX</h1>
             </div>
             <div class="menu">
                 <nav>
                     <ul>
-                        <li><a href="#">Inicio</a></li>
-                        <li><a href="#">App</a></li>
+                        <li><a (click)="scroll()">Producto</a></li>
+                        <li><button [routerLink]="['/identificacion']" class="app">App <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                                </svg></button></li>
                     </ul>
                 </nav>
             </div>
@@ -18,13 +24,13 @@
         <div class="container__cover">
             <div class="cover">
                 <div class="text">
-                    <h1>Ayudamos a los profesores a para que creen alumnos competitivos</h1>
+                    <h1>Ayudamos a los profesores a crear alumnos competitivos</h1>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis quas ex aut hic laborum
                         incidunt,
                         iste voluptas maxime aliquid possimus eos! Voluptatibus iusto dolores atque voluptatum sit odio
                         omnis quidem?</p>
 
-                    <input type="button" value="Empieza Ya">
+                    <input type="button" [routerLink]="['/identificacion']" value="Empieza Ya">
                 </div>
                 <div class="svg">
                     <div class="containerlogo">
@@ -37,6 +43,53 @@
                     </div>
                 </div>
             </div>
+            <div class="contenido-info">
+                <h3 class="titulo1"> Servicios FBX</h3>
+                <h1 class="productotitulo">Te ayudamos a mejorar y optimizar todos tus cursos</h1>
+                <div class="section1">
+                    <div class="centrar">
+                        <img src="../../../assets/landing/undraw_Teacher_re_sico.png" alt="">
+                    </div>
+                    <div class="textProfe">
+                        <h1 class="texth1">Ayudamos a los profesores</h1>
+                        <p class="textp">
+                            Facilitamos a los profesores a tener un mayor control con sus clases , con sus alumnos y las
+                            parcticas.
+                        </p>
+                        <button [routerLink]="['/identificacion']" class="empezar">Empezar como alumno</button>
+
+                    </div>
+
+
+                </div>
+                <div class="section2">
+                    <div class="centrar">
+                        <img src="../../../assets/landing/undraw_mathematics_4otb.png" alt="">
+                    </div>
+                    <div class="textProfe">
+                        <h1 class="texth1">Potenciamos a los alumnos</h1>
+                        <p class="textp">
+                            Impulsamos a los alumnos a crecer en los ranking y subir su productovidad a la hora de
+                            entregar la practicas.
+                        </p>
+                        <button [routerLink]="['/identificacion-profesores']" class="empezar">Empezar como
+                            profesor</button>
+
+                    </div>
+                </div>
+
+                <div class="infoFinal">
+                    <h1>hola</h1>
+                </div>
+            </div>
+
         </div>
+
+
+
+
     </main>
+
+
+
 </body>
