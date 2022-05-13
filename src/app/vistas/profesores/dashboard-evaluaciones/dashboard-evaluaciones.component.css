@@ -128,8 +128,10 @@ svg:hover {
 .table-element {
     display: flex;
     padding: 10px;
+    height: 70px;
     border-radius: 10px;
     flex-direction: column;
+    justify-content: center;
 }
 
 .table-element:nth-child(odd) {
@@ -157,6 +159,7 @@ svg:hover {
 
 .table-content {
     display: flex;
+    justify-content: space-between;
 }
 
 
@@ -326,32 +329,6 @@ svg:hover {
     background-color: #56baed;
 }
 
-.desplegableVisual {
-    position: absolute;
-    background-color: #031727;
-    color: black;
-    width: auto;
-    margin: 5px;
-    border-radius: 5px;
-}
-
-.desplegableVisual a {
-    margin: 0;
-    margin-left: 10px;
-    color: #fff;
-}
-
-.desplegableVisual hr {
-    border-top: 1px solid rgba(255, 255, 255, 0.432);
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-}
-
-.desplegableVisual label {
-    margin: 0.5rem;
-    cursor: pointer;
-}
-
 .texto-desplegable {
     margin: 5px;
 }
@@ -432,6 +409,10 @@ input[type="text"]:focus {
     width: 90%;
 }
 
+.container-skills {
+    width: 100px;
+}
+
 .lista-skills {
     display: flex;
 }
@@ -455,12 +436,13 @@ input[type="text"]:focus {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-around;
     height: auto;
     background-color: #0000008c;
     border-radius: 5px;
     color: #fff;
     padding: 10px;
+    height: 420px;
 }
 
 .btn-filtro-skill button:hover {
@@ -471,4 +453,51 @@ input[type="text"]:focus {
 .btn-filtro-skill button:focus {
     border-radius: 5px;
     background-color: #0d8bf1;
+}
+
+.eval-elim-button button {
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #e12929;
+}
+
+.eval-elim-button button:hover {
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #830606;
+}
+
+.filter-dates input[type="date"] {
+    background-color: transparent;
+    border: none;
+    color: #fff !important;
+}
+
+.restaurar {
+    padding: 10px;
+    border-radius: 5px;
+    background: #0000008c;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    color: #ffffff;
+    border: none;
+    transition: 0.1s;
+}
+
+.restaurar:hover {
+    background-color: #1292f8;
+    color: #ffffff;
+}
+
+.skill_hover {
+    position: absolute;
+    width: 150px;
+    height: 60px;
+    bottom: 40px;
+    right: -55px;
+    /* left: -37px; */
+    background-color: #000000a6;
+    border-radius: 10px;
+    z-index: 9999;
 }

@@ -38,11 +38,13 @@ export class TokenService {
     return JSON.parse(localStorage.getItem(USER_KEY) || '');
   }
 
-  tokenExpired(token: string) {
-    console.log("expired: " + this.jwtHelper.isTokenExpired(token));
-    
-    if (this.jwtHelper.isTokenExpired(token)) {
-      this.signOut();
+  tokenExpired() {
+    const token = this.getToken();
+    if (token != '') {
+      console.log("expired: " + this.jwtHelper.isTokenExpired(token));
+      if (this.jwtHelper.isTokenExpired(token)) {
+        this.signOut();
+      }
     }
   }
   

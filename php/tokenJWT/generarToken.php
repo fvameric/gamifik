@@ -15,7 +15,7 @@
   $iat = time();
   $nbf = $iat + 10;
   //$exp = $nbf + 7200; // 2 horas
-  $exp = $nbf + 10;
+  $exp = $iat  + 7200;
   $payload = array(
       "iss" => "http://example.org",
       "aud" => "http://example.com",

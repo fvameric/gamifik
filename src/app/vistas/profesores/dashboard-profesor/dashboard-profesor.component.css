@@ -326,32 +326,6 @@ svg:hover {
     background-color: #56baed;
 }
 
-.desplegableVisual {
-    position: absolute;
-    background-color: #031727;
-    color: black;
-    width: auto;
-    margin: 5px;
-    border-radius: 5px;
-}
-
-.desplegableVisual a {
-    margin: 0;
-    margin-left: 10px;
-    color: #fff;
-}
-
-.desplegableVisual hr {
-    border-top: 1px solid rgba(255, 255, 255, 0.432);
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-}
-
-.desplegableVisual label {
-    margin: 0.5rem;
-    cursor: pointer;
-}
-
 .texto-desplegable {
     margin: 5px;
 }
