@@ -321,6 +321,28 @@ a {
   right: -10px;
 }
 
+.tituloFooter{
+  color: white;
+  text-align: center;
+}
+.tituloFooter1{
+  float: left;
+  color: white;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 10px;
+
+}
+
+.footerp{
+  float: right;
+  text-align: center;
+  color: white;
+  margin-top: 50px;
+  margin-bottom: 10px;
+
+}
+
 @keyframes h1 {
   0% {
     height: 200px;

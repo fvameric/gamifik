@@ -8,7 +8,6 @@
             <div class="menu">
                 <nav>
                     <ul>
-                        <li><a (click)="scroll()">Producto</a></li>
                         <li><button [routerLink]="['/identificacion']" class="app">App <svg
                                     xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                                     class="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -30,7 +29,7 @@
                         iste voluptas maxime aliquid possimus eos! Voluptatibus iusto dolores atque voluptatum sit odio
                         omnis quidem?</p>
 
-                    <input type="button" [routerLink]="['/identificacion']" value="Empieza Ya">
+                    <input type="button" (click)="scroll()" value="Empieza Ya">
                 </div>
                 <div class="svg">
                     <div class="containerlogo">
@@ -79,7 +78,10 @@
                 </div>
 
                 <div class="infoFinal">
-                    <h1>hola</h1>
+                    <p class="tituloFooter">   </p>
+                    <p class="tituloFooter1">Diseñado y desarrollado:
+                        Fran, biel y Xavier</p>
+                    <P class="footerp">  Creado por Grupo FBX,   &copy; Copyright 2022 </P>
                 </div>
             </div>
 
