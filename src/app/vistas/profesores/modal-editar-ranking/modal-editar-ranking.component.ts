@@ -8,9 +8,10 @@ import {
   Form,
 } from '@angular/forms';
 import { TokenService } from '../../../../services/auth/token.service';
-import { debounceTime, tap } from 'rxjs/operators';
+import { debounceTime, takeUntil, tap } from 'rxjs/operators';
 import { RankingService } from 'services/ranking.service';
 import { Ranking } from '../../../interfaces/Ranking';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-modal-editar-ranking',
@@ -18,10 +19,15 @@ import { Ranking } from '../../../interfaces/Ranking';
   styleUrls: ['./modal-editar-ranking.component.css'],
 })
 export class ModalEditarRankingComponent implements OnInit {
+  
+  private subject = new Subject();
+
   submitted: boolean = false;
   rank: any;
 
   modRankForm!: FormGroup;
+
+  rankings: any;
 
   @Input() rankSelec: any;
 
@@ -29,7 +35,7 @@ export class ModalEditarRankingComponent implements OnInit {
     private modalService: NgbModal,
     public formBuilder: FormBuilder,
     private tokenService: TokenService,
-    private rankService: RankingService
+    private rankingService: RankingService
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +43,14 @@ export class ModalEditarRankingComponent implements OnInit {
     this.checkNombre();
   }
 
+  obtenerDatosRanking() {
+    this.rankingService.obtenerRanking()
+      .pipe(
+        takeUntil(this.subject)
+      )
+      .subscribe((val) => (this.rankings = val));
+  }
+  
   crearForm() {
     this.modRankForm = this.formBuilder.group({
       nomRank: [this.rankSelec.nomRank, Validators.required],
@@ -66,7 +80,7 @@ export class ModalEditarRankingComponent implements OnInit {
   //FALTA PONER CHECK NOMBRE RANKING
   checkNombre() {
     this.form.nomRank.valueChanges.subscribe((nomRank) => {
-      this.rankService
+      this.rankingService
         .validarNombreExisteRanking(this.rankSelec.id_profe, nomRank)
         .subscribe((val: any) => {
           if (nomRank == this.rankSelec.nom_rank) {
@@ -89,9 +103,59 @@ export class ModalEditarRankingComponent implements OnInit {
         cod_rank: this.rankSelec.cod_rank,
       };
 
-      this.rankService.modificarRanking(ranking).subscribe();
+      this.rankingService.modificarRanking(ranking).subscribe();
 
       window.location.reload();
     }
+  }
+
+  generarCodRank() {
+    let nuevoCod = this.generaNss();
+
+    if (this.rankings != null || this.rankings != undefined) {
+      nuevoCod = this.validarCodigoRepetido(nuevoCod);
+    }
+
+    this.rankSelec.cod_rank = nuevoCod;
+
+    this.rankingService.modificarRanking(this.rankSelec)
+      .pipe(
+        takeUntil(this.subject)
+      )
+      .subscribe((val: any) => {
+        console.log(val);
+      });
+  }
+
+  //Funcion que genera el codigo
+  generaNss(): string {
+    let result = '';
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < 12; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+  }
+
+  validarCodigoRepetido(codigo: string) {
+    let codExiste: boolean = false;
+    this.rankings.forEach((element: any) => {
+      if (element.cod_rank == codigo) {
+        codExiste = true;
+      }
+    });
+
+    if (codExiste) {
+      codigo = this.validarCodigoRepetido(this.generaNss());
+    }
+    return codigo;
+  }
+
+  ngOnDestroy() {
+    this.subject.next();
+    this.subject.complete();
   }
 }

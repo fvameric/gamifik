@@ -30,7 +30,7 @@
 <form [formGroup]="crearPractica">
     <p>Nombre de la entrega:</p>
     <input type="text" formControlName="nombrePractica" [ngClass]="{ 'is-invalid': form.nombrePractica.errors }">
-    <button type="submit" class="crear-ranking" (click)="onSubmit()" [disabled]="!crearPractica.valid">Crear entrega</button> {{pendingName}}
+    <button type="submit" class="crear-ranking" (click)="onSubmit()" [disabled]="!crearPractica.valid">Crear entrega</button>
     <div *ngIf="pendingName" class="disponibilidad-white">
         Consultando disponibilidad del nombre
     </div>

@@ -49,11 +49,14 @@
                             <h1>{{rankSeleccionado.nom_rank}}</h1>
                         </div>
 
-                        <div *ngIf="rankSeleccionado">
-                            <div class="table-element" *ngFor="let eval of arrEvaluaciones; let i = index">
-                                <div class="table-content">
+                        <div class="alumnos-ranking" *ngIf="rankSeleccionado">
+                            <div class="table-eval" *ngFor="let eval of arrEvaluaciones; let i = index">
+                                <div class="eval-info">
                                     <div>
                                         {{eval.fecha}}
+                                    </div>
+                                    <div>
+                                        {{eval.puntos}}
                                     </div>
                                     <div>
                                         {{eval.nombre}} {{eval.apellidos}}
@@ -61,26 +64,23 @@
                                     <div>
                                         {{eval.nom1}} {{eval.apellidos1}}
                                     </div>
-                                    <div class="container-skills">
-                                        <div class="lista-skills" *ngFor="let skill of skills">
-                                            <div *ngIf="eval.id_skill == skill.id_skill">
-                                                <img src="{{skill.niveles.img1}}" (mouseover)='over(skill)' (mouseout)='out()'>
-                                            </div>
-                                            <div class="skill_hover" *ngIf="showHover && evalHover == eval && skillHover == skill">
-                                                {{skillHover.nombre}}
-                                            </div>
+                                </div>
+
+                                <div class="container-skills">
+                                    <div class="lista-skills" *ngFor="let skill of skills">
+                                        <div *ngIf="eval.id_skill == skill.id_skill">
+                                            <img src="{{skill.niveles.img1}}" (mouseover)='over(skill)' (mouseout)='out()'>
+                                        </div>
+                                        <div class="skill_hover" *ngIf="showHover && evalHover == eval && skillHover == skill">
+                                            {{skillHover.nombre}}
                                         </div>
                                     </div>
 
-                                    <div>
-                                        {{eval.puntos}}
-                                    </div>
-                                    <div class="eval-elim-button">
-                                        <button (click)="eliminarEval(eval)">Borrar</button>
-                                    </div>
                                 </div>
 
-
+                                <div class="eval-elim-button">
+                                    <button (click)="eliminarEval(eval)">Borrar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
 
             <div class="separador3" *ngIf="rankSeleccionado">
                 <div class="filtros">
-                    <button class="restaurar" (click)="restaurar()">Quitar filtros</button>
+                    <button class="restaurar" (click)="restaurar()">Restaurar lista</button>
                     <div class="lista-skills">
                         <div *ngFor="let skill of skills" class="btn-filtro-skill">
                             <button (click)="filtrarSkill(skill)"><img src="{{skill.niveles.img1}}"></button>

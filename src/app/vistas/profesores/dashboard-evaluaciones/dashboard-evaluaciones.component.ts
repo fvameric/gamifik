@@ -168,6 +168,7 @@ export class DashboardEvaluacionesComponent implements OnInit {
     } else {
       this.arrFiltros.skill = false;
       this.oldSkill = undefined;
+
       
     }
 

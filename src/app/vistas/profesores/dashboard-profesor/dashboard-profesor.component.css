@@ -6,22 +6,6 @@
 }
 
 
-/* autogenerar código */
-
-.codFlex {
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-    width: 200px;
-}
-
-.codFlex button {
-    padding: 0;
-    border: none;
-    background: none;
-}
-
-
 /* botones de la cabecera del ranking */
 
 .flex-cons {

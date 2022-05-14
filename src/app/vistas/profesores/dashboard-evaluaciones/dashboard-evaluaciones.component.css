@@ -1,39 +1,22 @@
 /* tabla alumnos */
 
-.table-element {
+.table-eval {
     display: flex;
+    align-items: center;
     padding: 10px;
-    height: 70px;
     border-radius: 10px;
-    flex-direction: column;
-    justify-content: center;
+    background-color: #122b3a59;
+    border: none;
+    color: #fff;
 }
 
-.table-element:nth-child(odd) {
-    background-color: #002d52;
+.table-eval:nth-child(even) {
+    background-color: #2075cd29;
 }
 
-.table-imagen {
-    margin: 0 0 0 10px;
-}
-
-.table-imagen img {
-    width: 35px;
-    height: auto;
-    border-radius: 50%;
-    margin: 10px;
-}
-
-.table-puntuacion {
-    margin-left: auto;
-}
-
-.table-nombre {
-    margin: 0 6px 0 10px;
-}
-
-.table-content {
+.eval-info {
     display: flex;
+    width: 35vw;
     justify-content: space-between;
 }
 
@@ -68,6 +51,8 @@ input[type="text"]:focus {
 
 .container-skills {
     width: 100px;
+    margin: 10px;
+    margin-left: auto;
 }
 
 .lista-skills {

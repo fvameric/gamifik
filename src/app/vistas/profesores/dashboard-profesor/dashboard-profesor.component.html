@@ -114,25 +114,25 @@
                     <div class="info-superior">
                         <div class="titulo-detalle-ranking">
                             <h1>{{rankSeleccionado.nom_rank}}</h1>
-                            <h3></h3>
-                            <div class="codFlex">
-                                <button (click)="generarCodRank()">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="20" height="20" x="0"
-                                        y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512"
-                                        xml:space="preserve">
-                                        <g>
-                                            <path xmlns="http://www.w3.org/2000/svg"
-                                                d="M12,2a10.032,10.032,0,0,1,7.122,3H16a1,1,0,0,0-1,1h0a1,1,0,0,0,1,1h4.143A1.858,1.858,0,0,0,22,5.143V1a1,1,0,0,0-1-1h0a1,1,0,0,0-1,1V3.078A11.981,11.981,0,0,0,.05,10.9a1.007,1.007,0,0,0,1,1.1h0a.982.982,0,0,0,.989-.878A10.014,10.014,0,0,1,12,2Z"
-                                                fill="#ffffff" data-original="#000000" />
-                                            <path xmlns="http://www.w3.org/2000/svg"
-                                                d="M22.951,12a.982.982,0,0,0-.989.878A9.986,9.986,0,0,1,4.878,19H8a1,1,0,0,0,1-1H9a1,1,0,0,0-1-1H3.857A1.856,1.856,0,0,0,2,18.857V23a1,1,0,0,0,1,1H3a1,1,0,0,0,1-1V20.922A11.981,11.981,0,0,0,23.95,13.1a1.007,1.007,0,0,0-1-1.1Z"
-                                                fill="#ffffff" data-original="#000000" />
-                                        </g>
-                                    </svg>
-                                </button>
-                                <h4>Codigo: {{rankSeleccionado.cod_rank}}</h4>
+
+                            <div *ngIf="listaAlumnos.length > 0">
+                                <form class="form-buscador" [formGroup]="buscadorInputAlumnos">
+                                    <div class="contenido-buscar">
+                                        <div class="svg-buscar">
+                                            <button class="button-buscar" click="buscadorAlumnos()">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                                    height="14" fill="currentColor" class="bi bi-search"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <input type="text" formControlName="nombreBuscadorAlumnos" class="input-buscador" id="buscadorIdAlumnos" (click)="buscadorAlumnos()" placeholder="Buscar alumno...">
+                                    </div>
+                                </form>
                             </div>
+
                         </div>
 
                         <div class="flex-cons">
@@ -167,10 +167,7 @@
                                 <img src="{{alumno.imagen}}">
                             </div>
                             <div class="table-nombre">
-                                {{alumno.nombre}}
-                            </div>
-                            <div class="table-apellidos">
-                                {{alumno.apellidos}}
+                                {{alumno.nombre}} {{alumno.apellidos}}
                             </div>
                             <div class="table-puntuacion">
                                 {{alumno.puntuacion}} puntuación
@@ -245,6 +242,22 @@
                             </div>
                         </div>
 
+                        <form class="form-buscador" [formGroup]="buscadorInputAlumnos">
+                            <div class="contenido-buscar">
+                                <div class="svg-buscar">
+                                    <button class="button-buscar" click="buscadorAlumnos()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                            height="14" fill="currentColor" class="bi bi-search"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <input type="text" formControlName="nombreBuscadorAlumnos" class="input-buscador" id="buscadorIdAlumnos" (click)="buscadorAlumnos()" placeholder="Buscar alumno...">
+                            </div>
+                        </form>
+
                         <div class="alumnos-ranking">
                             <div class="table-element" *ngFor="let alumno of listaAlumnosEntregas; let i = index">
                                 <div class="table-num">
@@ -286,6 +299,7 @@
                                             </a>
 
                                             <!--<app-modal-perfil-alumno [alumnoDetalle]="alumno"></app-modal-perfil-alumno>-->
+                                            <!--
                                             <hr>
                                             <a (click)="editarPuntuacionAlumno(alumno)">
                                                 <p class="texto-desplegable">
@@ -302,6 +316,7 @@
                                                     <label>Puntuación</label>
                                                 </p>
                                             </a>
+                                            -->
                                         </div>
                                     </div>
                                 </div>

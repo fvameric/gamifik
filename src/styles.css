@@ -799,7 +799,7 @@ body {
 .desplegable-alumno {
     position: absolute;
     background-color: #031727;
-    color: black;
+    color: #fff;
     width: auto;
     margin: 5px;
     border-radius: 5px;

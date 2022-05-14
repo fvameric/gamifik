@@ -44,8 +44,24 @@ export class DashboardProfesorComponent implements OnInit {
   mostrarDesplegablePracticaVisual: boolean = false;
   alumnoSelec: any;
   rankingSelec: number = 0;
-  buscadorInput!: FormGroup;
 
+  //buscador
+  filtro: any;
+  entregasPracticasBuscar: any;
+  splitArray: any;
+  i: any;
+  textoBuscador: any;
+  imputBuscador: any = undefined;
+
+  //buscador de alumnos
+  alumnosBuscar: any;
+  
+  // buscadores
+  buscadorInput!: FormGroup;
+  buscadorInputAlumnos!: FormGroup;
+  filtroAlumnos: any;
+
+  
   // rankings
   rankings: any;
   rankingsConProfes: any;
@@ -74,8 +90,6 @@ export class DashboardProfesorComponent implements OnInit {
   antiguaId: number = 0;
 
   total_alumnos: number = 0;
-
-  //documentClickedTarget: Subject<HTMLElement> = new Subject<HTMLElement>()
 
   constructor(
     private modalService: NgbModal,
@@ -236,51 +250,6 @@ export class DashboardProfesorComponent implements OnInit {
           this.flagEntregas = true;
         }
       });
-  }
-
-  generarCodRank() {
-    let nuevoCod = this.generaNss();
-
-    if (this.rankings != null || this.rankings != undefined) {
-      nuevoCod = this.validarCodigoRepetido(nuevoCod);
-    }
-
-    this.rankSeleccionado.cod_rank = nuevoCod;
-
-    this.rankingService.modificarRanking(this.rankSeleccionado)
-      .pipe(
-        takeUntil(this.subject)
-      )
-      .subscribe((val: any) => {
-        console.log(val);
-      });
-  }
-
-  //Funcion que genera el codigo
-  generaNss(): string {
-    let result = '';
-    const characters =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    for (let i = 0; i < 12; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-
-    return result;
-  }
-
-  validarCodigoRepetido(codigo: string) {
-    let codExiste: boolean = false;
-    this.rankings.forEach((element: any) => {
-      if (element.cod_rank == codigo) {
-        codExiste = true;
-      }
-    });
-
-    if (codExiste) {
-      codigo = this.validarCodigoRepetido(this.generaNss());
-    }
-    return codigo;
   }
 
   async inputBorrarRanking() {
@@ -609,22 +578,24 @@ export class DashboardProfesorComponent implements OnInit {
     modalRef.componentInstance.alumnoDetalle = this.alumnoSelec;
   }
 
-  //buscador
-  filtro: any;
-  entregasPracticasBuscar: any;
-  splitArray: any;
-  i: any;
-  textoBuscador: any;
-  imputBuscador: any = undefined;
+
 
   crearformInput() {
     this.buscadorInput = this.formBuilder.group({
       nombreBuscador: [''],
     });
+
+    this.buscadorInputAlumnos = this.formBuilder.group({
+      nombreBuscadorAlumnos: [''],
+    });
   }
 
   get nombreBuscador() {
     return this.buscadorInput.get('nombreBuscador') as FormControl;
+  }
+
+  get nombreBuscadorAlumnos() {
+    return this.buscadorInputAlumnos.get('nombreBuscadorAlumnos') as FormControl;
   }
 
   buscador(): any {
@@ -642,6 +613,27 @@ export class DashboardProfesorComponent implements OnInit {
           this.entregasPracticasBuscar[this.i].style.display = 'none';
         }
       }
+    });
+  }
+
+  buscadorAlumnos() {
+    this.nombreBuscadorAlumnos.valueChanges.subscribe((nombreBuscadorAlumnos) => {
+      this.imputBuscador = document.getElementById('buscadorIdAlumnos');
+      this.filtroAlumnos = nombreBuscadorAlumnos.toUpperCase();
+      this.alumnosBuscar = document.getElementsByClassName('table-element');
+      console.log(this.alumnosBuscar);
+
+      
+      for (var i = 0; i < this.alumnosBuscar.length; i++) {
+        var text = this.alumnosBuscar[i].innerText;
+        console.log(text);
+        if (text.toUpperCase().indexOf(this.filtroAlumnos) > -1) {
+          this.alumnosBuscar[i].style.display = '';
+        } else {
+          this.alumnosBuscar[i].style.display = 'none';
+        }
+      }
+      
     });
   }
 
