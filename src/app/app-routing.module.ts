@@ -1,28 +1,40 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './vistas/identificacion/login/login.component';
-import { DashboardComponent } from './vistas/alumnos/dashboard/dashboard.component';
-import { IdentificacionComponent } from './vistas/identificacion/identificacion/identificacion.component';
+
+// plantillas
 import { HeaderComponent } from './plantillas/header/header.component';
 import { FooterComponent } from './plantillas/footer/footer.component';
-import { PerfilComponent } from './vistas/alumnos/perfil/perfil.component';
-import { PerfilProfesorComponent } from './vistas/profesores/perfil-profesor/perfil-profesor.component';
-import { DashboardProfesorComponent } from './vistas/profesores/dashboard-profesor/dashboard-profesor.component';
 
-import { AuthGuardService } from 'services/guards/auth-guard.service';
-import { RoleGuardService } from 'services/guards/role-guard.service';
+// modals
 import { ModalComponent } from './plantillas/modal/modal.component';
-import { CrearRankingComponent } from './vistas/profesores/crear-ranking/crear-ranking.component';
 import { ModalEntregaComponent } from './vistas/profesores/modal-entrega/modal-entrega.component';
 import { ModalPerfilAlumnoComponent } from './vistas/profesores/modal-perfil-alumno/modal-perfil-alumno.component';
-import { IdentificacionProfesoresComponent } from './vistas/identificacion/identificacion-profesores/identificacion-profesores.component';
-import { PerfilPruebaComponent } from './vistas/alumnos/perfil-prueba/perfil-prueba.component';
 import { ModalEditarRankingComponent } from './vistas/profesores/modal-editar-ranking/modal-editar-ranking.component';
 import { DarkModeComponent } from './vistas/dark-mode/dark-mode.component';
-import { PodiumComponent } from './plantillas/podium/podium.component';
 import { LandingComponent } from './vistas/landing/landing.component';
-import { DashboardEvaluacionesComponent } from './vistas/profesores/dashboard-evaluaciones/dashboard-evaluaciones.component';
+
+// vistas
+import { LoginComponent } from './vistas/identificacion/login/login.component';
 import { HomeComponent } from './plantillas/home/home.component';
+
+// alumnos
+import { IdentificacionComponent } from './vistas/identificacion/identificacion/identificacion.component';
+import { PerfilComponent } from './vistas/alumnos/perfil/perfil.component';
+import { DashboardComponent } from './vistas/alumnos/dashboard/dashboard.component';
+
+// profesores
+import { IdentificacionProfesoresComponent } from './vistas/identificacion/identificacion-profesores/identificacion-profesores.component';
+import { PerfilProfesorComponent } from './vistas/profesores/perfil-profesor/perfil-profesor.component';
+import { DashboardProfesorComponent } from './vistas/profesores/dashboard-profesor/dashboard-profesor.component';
+import { CrearRankingComponent } from './vistas/profesores/crear-ranking/crear-ranking.component';
+import { DashboardEvaluacionesComponent } from './vistas/profesores/dashboard-evaluaciones/dashboard-evaluaciones.component';
+
+// guards
+import { AuthGuardService } from 'services/guards/auth-guard.service';
+import { RoleGuardService } from 'services/guards/role-guard.service';
+
+// tests
+import { PerfilPruebaComponent } from './vistas/alumnos/perfil-prueba/perfil-prueba.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'identificacion', pathMatch: 'full' },
@@ -32,20 +44,10 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService, RoleGuardService] },
   { path: 'dashboardprofesor', component: DashboardProfesorComponent, canActivate: [AuthGuardService, RoleGuardService] },
   { path: 'evaluaciones', component: DashboardEvaluacionesComponent, canActivate: [AuthGuardService, RoleGuardService]},
-  { path: 'header', component: HeaderComponent, canActivate: [AuthGuardService] },
-  { path: 'footer', component: FooterComponent },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuardService, RoleGuardService]},
   { path: 'perfil-prueba', component: PerfilPruebaComponent},
   { path: 'perfilprofesor', component: PerfilProfesorComponent, canActivate: [AuthGuardService, RoleGuardService] },
-  { path: 'crear-ranking', component: CrearRankingComponent },
-  { path: 'modal', component: ModalComponent }, 
-  { path: 'modal-entrega', component: ModalEntregaComponent }, 
-  { path: 'modal-perfil-alumno', component: ModalPerfilAlumnoComponent },
-  { path: 'modal-editar-ranking', component: ModalEditarRankingComponent },
-  { path: 'dark-mode', component: DarkModeComponent },
-  { path: 'podium', component: PodiumComponent},
-  { path: 'landing', component: LandingComponent},
-  { path: 'home', component: HomeComponent}
+  { path: 'landing', component: LandingComponent}
 ];
 
 @NgModule({
@@ -59,9 +61,11 @@ export const routingComponents = [
   LoginComponent,
   DashboardComponent,
   DashboardProfesorComponent,
+  DashboardEvaluacionesComponent,
   PerfilComponent,
   PerfilPruebaComponent,
   PerfilProfesorComponent,
+  LandingComponent,
   HeaderComponent,
   FooterComponent,
   CrearRankingComponent,
@@ -70,6 +74,5 @@ export const routingComponents = [
   ModalPerfilAlumnoComponent,
   ModalEditarRankingComponent,
   DarkModeComponent,
-  PodiumComponent,
   HomeComponent
 ];

@@ -6,6 +6,8 @@ import { EvaluacionService } from 'services/evaluacion.service';
 import { RankingService } from 'services/ranking.service';
 import { SkillService } from 'services/skill.service';
 import { TokenService } from 'services/auth/token.service';
+import { Skill } from 'app/interfaces/Skill';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dashboard-evaluaciones',
@@ -61,6 +63,23 @@ export class DashboardEvaluacionesComponent implements OnInit {
   dt: Date = new Date;
   dt2: Date = new Date;
 
+  
+  skillHover: Skill = {
+    id_skill: 0,
+    nombre: '',
+    descripcion: '',
+    niveles: {
+      lvl1: 0,
+      img1: '',
+      lvl2: 0,
+      img2: '',
+      lvl3: 0,
+      img3: ''
+    }
+  }
+  showHover: boolean = false;
+  evalHover: any;
+  
   constructor(
     private rankingService: RankingService,
     private tokenService: TokenService,
@@ -153,8 +172,6 @@ export class DashboardEvaluacionesComponent implements OnInit {
     }
 
     this.doFilters();
-
-    console.log(this.arrFiltros);
   }
 
   onChange() {
@@ -168,11 +185,32 @@ export class DashboardEvaluacionesComponent implements OnInit {
   }
 
   onChangeEvaluador() {
-
     if (this.selEvaluador == 0) {
       this.arrFiltros.evaluador = false;
     } else {
       this.arrFiltros.evaluador = true;
+    }
+
+    this.doFilters();
+  }
+
+  onChangeDate() {
+    if (this.dt == undefined) {
+      this.arrFiltros.dateFrom = false;
+    } else {
+      this.arrFiltros.dateFrom = true;
+    }
+
+    console.log(this.arrFiltros.dateFrom);
+
+    this.doFilters();
+  }
+
+  onChangeDate2() {
+    if (this.dt2 == undefined) {
+      this.arrFiltros.dateTo = false;
+    } else {
+      this.arrFiltros.dateTo = true;
     }
 
     this.doFilters();
@@ -191,6 +229,14 @@ export class DashboardEvaluacionesComponent implements OnInit {
       if (this.arrFiltros.evaluador) {
         this.arrEvaluaciones = this.arrEvaluaciones.filter(f => f.id_evaluador == this.selEvaluador);
       }
+
+      if (this.arrFiltros.dateFrom) {
+        this.arrEvaluaciones = this.arrEvaluaciones.filter(f => (f.fecha >= this.dt && f.fecha <= this.dt2));
+      }
+
+      if (this.arrFiltros.dateTo) {
+        this.arrEvaluaciones = this.arrEvaluaciones.filter(f => (f.fecha >= this.dt && f.fecha <= this.dt2));
+      }
     }
     
     if (this.arrFiltros.evaluado) {
@@ -202,6 +248,14 @@ export class DashboardEvaluacionesComponent implements OnInit {
 
       if (this.arrFiltros.evaluador) {
         this.arrEvaluaciones = this.arrEvaluaciones.filter(f => f.id_evaluador == this.selEvaluador);
+      }
+
+      if (this.arrFiltros.dateFrom) {
+        this.arrEvaluaciones = this.arrEvaluaciones.filter(f => (f.fecha >= this.dt && f.fecha <= this.dt2));
+      }
+
+      if (this.arrFiltros.dateTo) {
+        this.arrEvaluaciones = this.arrEvaluaciones.filter(f => (f.fecha >= this.dt && f.fecha <= this.dt2));
       }
     }
     
@@ -215,21 +269,57 @@ export class DashboardEvaluacionesComponent implements OnInit {
       if (this.arrFiltros.evaluado) {
         this.arrEvaluaciones = this.arrEvaluaciones.filter(f => f.id_alumno == this.sel);
       }
+
+      if (this.arrFiltros.dateFrom) {
+        this.arrEvaluaciones = this.arrEvaluaciones.filter(f => (f.fecha >= this.dt && f.fecha <= this.dt2));
+      }
+
+      if (this.arrFiltros.dateTo) {
+        this.arrEvaluaciones = this.arrEvaluaciones.filter(f => (f.fecha >= this.dt && f.fecha <= this.dt2));
+      }
     }
-  }
 
-  onChangeDate() {
-    this.filtrado = true;
-    console.log(this.dt);
-    this.filteredArray = this.arrEvaluaciones.filter(f => (f.fecha >= this.dt && f.fecha <= this.dt2));
-    console.log(this.filteredArray);
-  }
+    if (this.arrFiltros.dateFrom) {
+      this.arrEvaluaciones = this.arrEvaluaciones.filter(f => f.fecha >= this.dt);
 
-  onChangeDate2() {
-    this.filtrado = true;
-    console.log(this.dt2);
-    this.filteredArray = this.arrEvaluaciones.filter(f => (f.fecha >= this.dt && f.fecha <= this.dt2));
-    console.log(this.filteredArray);
+      if (this.arrFiltros.skill) {
+        this.arrEvaluaciones = this.arrEvaluaciones.filter(f => f.id_skill == this.actualSkill.id_skill);
+      }
+
+      if (this.arrFiltros.evaluado) {
+        this.arrEvaluaciones = this.arrEvaluaciones.filter(f => f.id_alumno == this.sel);
+      }
+
+      if (this.arrFiltros.evaluador) {
+        this.arrEvaluaciones = this.arrEvaluaciones.filter(f => f.id_evaluador == this.selEvaluador);
+      }
+
+      if (this.arrFiltros.dateTo) {
+        this.arrEvaluaciones = this.arrEvaluaciones.filter(f => (f.fecha >= this.dt && f.fecha <= this.dt2));
+      }
+    }
+
+    if (this.arrFiltros.dateTo) {
+      this.arrEvaluaciones = this.arrEvaluaciones.filter(f => f.fecha <= this.dt2);
+
+      if (this.arrFiltros.skill) {
+        this.arrEvaluaciones = this.arrEvaluaciones.filter(f => f.id_skill == this.actualSkill.id_skill);
+      }
+
+      if (this.arrFiltros.evaluado) {
+        this.arrEvaluaciones = this.arrEvaluaciones.filter(f => f.id_alumno == this.sel);
+      }
+
+      if (this.arrFiltros.evaluador) {
+        this.arrEvaluaciones = this.arrEvaluaciones.filter(f => f.id_evaluador == this.selEvaluador);
+      }
+
+      if (this.arrFiltros.dateFrom) {
+        this.arrEvaluaciones = this.arrEvaluaciones.filter(f => (f.fecha >= this.dt && f.fecha <= this.dt2));
+      }
+    }
+
+    console.log(this.arrEvaluaciones);
   }
 
   restaurar() {
@@ -241,13 +331,40 @@ export class DashboardEvaluacionesComponent implements OnInit {
 
   eliminarEval(evaluacion: any) {
     console.log(evaluacion);
-    this.evaluacionService.eliminarEvaluacion(evaluacion.id_evaluacion)
-    .pipe(
-      takeUntil(this.subject)
-    ).subscribe((val:any) => {
-      console.log(val);
-      this.obtenerDatosRankSelec();
+    Swal.fire({
+      title: "¿Quieres borrar esta evaluación?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Ok',
+          text: 'Se borró la evaluación'
+        });
+
+        this.evaluacionService.eliminarEvaluacion(evaluacion.id_evaluacion)
+        .pipe(
+          takeUntil(this.subject)
+        ).subscribe((val:any) => {
+          console.log(val);
+          this.obtenerDatosRankSelec();
+        });
+          }
     });
+  }
+
+  over(skill: Skill) {
+    this.showHover = true;
+    this.skillHover = skill;
+    console.log(skill);
+  }
+
+  out() {
+    this.showHover = false;
   }
 
   ngOnDestroy() {

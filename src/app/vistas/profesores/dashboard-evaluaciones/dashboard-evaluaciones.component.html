@@ -32,7 +32,6 @@
                     </div>
                     <div class="lista-rankings">
                         <ng-template #tieneRankings>
-                            <!--<app-loader-skeleton Cwidth="255" Cheight="50"></app-loader-skeleton>-->
                             <div class="array-rankings">
                                 <div *ngFor="let rank of arrRankings; let i = index" class="rank">
                                     <button class="button-ranking-class" (click)="rankSelec(rank)">{{rank.nom_rank}}</button>
@@ -48,26 +47,39 @@
                     <div class="titulo-skills">
                         <div class="titulo-detalle-ranking" *ngIf="rankSeleccionado;else noselec">
                             <h1>{{rankSeleccionado.nom_rank}}</h1>
-                            <!--<app-loader-skeleton Cwidth="546" Cheight="20" [circle]="false"></app-loader-skeleton>-->
                         </div>
 
                         <div *ngIf="rankSeleccionado">
-                            <div class="table-element">
-                                Fecha - Evaluado - Evaluador - Apellidos - Skill - Puntos
-                            </div>
                             <div class="table-element" *ngFor="let eval of arrEvaluaciones; let i = index">
                                 <div class="table-content">
-                                    {{eval.fecha}} - {{eval.nombre}} {{eval.apellidos}} - {{eval.nom1}} {{eval.apellidos1}}
-                                    <div class="lista-skills" *ngFor="let skill of skills">
-                                        <div *ngIf="eval.id_skill == skill.id_skill">
-                                            <img src="{{skill.niveles.img1}}">
+                                    <div>
+                                        {{eval.fecha}}
+                                    </div>
+                                    <div>
+                                        {{eval.nombre}} {{eval.apellidos}}
+                                    </div>
+                                    <div>
+                                        {{eval.nom1}} {{eval.apellidos1}}
+                                    </div>
+                                    <div class="container-skills">
+                                        <div class="lista-skills" *ngFor="let skill of skills">
+                                            <div *ngIf="eval.id_skill == skill.id_skill">
+                                                <img src="{{skill.niveles.img1}}" (mouseover)='over(skill)' (mouseout)='out()'>
+                                            </div>
+                                            <div class="skill_hover" *ngIf="showHover && evalHover == eval && skillHover == skill">
+                                                {{skillHover.nombre}}
+                                            </div>
                                         </div>
                                     </div>
-                                    - {{eval.puntos}}
+
+                                    <div>
+                                        {{eval.puntos}}
+                                    </div>
+                                    <div class="eval-elim-button">
+                                        <button (click)="eliminarEval(eval)">Borrar</button>
+                                    </div>
                                 </div>
-                                <div>
-                                    <button (click)="eliminarEval(eval)">Borrar</button>
-                                </div>
+
 
                             </div>
                         </div>
@@ -84,7 +96,7 @@
 
             <div class="separador3" *ngIf="rankSeleccionado">
                 <div class="filtros">
-                    <button (click)="restaurar()">Restaurar</button>
+                    <button class="restaurar" (click)="restaurar()">Quitar filtros</button>
                     <div class="lista-skills">
                         <div *ngFor="let skill of skills" class="btn-filtro-skill">
                             <button (click)="filtrarSkill(skill)"><img src="{{skill.niveles.img1}}"></button>
@@ -108,8 +120,10 @@
                             </option>
                         </select>
                     </div>
-                    <div>
+                    <div class="filter-dates">
+                        <label>Desde:</label>
                         <input type="date" [(ngModel)]="dt" (ngModelChange)="onChangeDate()">
+                        <label>Hasta:</label>
                         <input type="date" [(ngModel)]="dt2" (ngModelChange)="onChangeDate2()">
                     </div>
                 </div>

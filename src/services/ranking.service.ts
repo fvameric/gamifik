@@ -141,21 +141,6 @@ export class RankingService {
     );
   }
 
-  /*******************
-  *                   *
-  *                   *
-  *                   *
-  *     PODIUM        *
-  *                   *
-  *                   *
-  *                   *
-  ********************/
-
-  //cojer puntuacion podium
-  obtenerPuntuacionPodium() {
-    return this.http.get(this.concatUrl('rankings/podium/contarPodium.php'));
-  }
-
   // concatena la URL de localhost y la string que le pasemos
   concatUrl(urlStr: string) {
     return URL_LOCALHOST + urlStr;

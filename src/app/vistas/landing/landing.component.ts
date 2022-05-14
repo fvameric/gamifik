@@ -12,4 +12,8 @@ export class LandingComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  scroll(){
+    window.scrollTo(window.scrollX, window.scrollY + 1000);
+  }
+
 }

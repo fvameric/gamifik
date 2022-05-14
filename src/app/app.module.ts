@@ -19,38 +19,50 @@ import { LoaderComponent } from './plantillas/loader/loader.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoaderService } from 'services/loader.service';
 
-//plantillas
+// Plantillas
 import { HeaderComponent } from './plantillas/header/header.component';
 import { FooterComponent } from './plantillas/footer/footer.component';
+import { SkeletonLoaderModule } from './plantillas/loader-skeleton/skeleton-loader/skeleton-loader.module';
+import { HomeComponent } from './plantillas/home/home.component';
+import { WavesComponent } from './plantillas/waves/waves.component';
+
+// Landing
+import { LandingComponent } from './vistas/landing/landing.component';
+
+// Alumnos
 import { RegistroAlumnoComponent } from './vistas/identificacion/registro/registro-alumno/registro-alumno.component';
+import { ModalSkillComponent } from './vistas/alumnos/modal-skill/modal-skill.component';
+
+// Profesores
+import { DashboardEvaluacionesComponent } from './vistas/profesores/dashboard-evaluaciones/dashboard-evaluaciones.component';
 import { RegistroProfesorComponent } from './vistas/identificacion/registro/registro-profesor/registro-profesor.component';
 import { ModalEditarRankingComponent } from './vistas/profesores/modal-editar-ranking/modal-editar-ranking.component';
 import { ModalEditarEntregaComponent } from './vistas/profesores/modal-editar-entrega/modal-editar-entrega.component';
 import { VerDetallesAlumnoComponent } from './vistas/profesores/ver-detalles-alumno/ver-detalles-alumno.component';
-import { SkeletonLoaderModule } from './plantillas/loader-skeleton/skeleton-loader/skeleton-loader.module';
-import { HomeComponent } from './plantillas/home/home.component';
-import { ModalPodiumComponent } from './plantillas/modal-podium/modal-podium.component';
-import { ModalSkillComponent } from './vistas/alumnos/modal-skill/modal-skill.component';
-import { LandingComponent } from './vistas/landing/landing.component';
-import { DashboardEvaluacionesComponent } from './vistas/profesores/dashboard-evaluaciones/dashboard-evaluaciones.component';
-import { WavesComponent } from './plantillas/waves/waves.component';
+import { CrearRankingComponent } from './vistas/profesores/crear-ranking/crear-ranking.component';
+
+// Modal
+import { ModalComponent } from './plantillas/modal/modal.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    WavesComponent,
     RegistroAlumnoComponent,
     RegistroProfesorComponent,
     LoaderComponent,
-    routingComponents,
+    ModalEditarRankingComponent,
     ModalEditarEntregaComponent,
     VerDetallesAlumnoComponent,
     HomeComponent,
-    ModalPodiumComponent,
     ModalSkillComponent,
     LandingComponent,
     DashboardEvaluacionesComponent,
-    WavesComponent,
+    CrearRankingComponent,
+    ModalComponent,
+    routingComponents
   ],
   imports: [
     BrowserModule,

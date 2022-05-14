@@ -38,20 +38,17 @@ export class TokenService {
     return JSON.parse(localStorage.getItem(USER_KEY) || '');
   }
 
-  tokenExpired(token: string) {
-    console.log("expired: " + this.jwtHelper.isTokenExpired(token));
-    
-    if (this.jwtHelper.isTokenExpired(token)) {
-      this.signOut();
+  tokenExpired() {
+    const token = this.getToken();
+    if (token != '') {
+      console.log("expired: " + this.jwtHelper.isTokenExpired(token));
+      if (this.jwtHelper.isTokenExpired(token)) {
+        this.signOut();
+      }
     }
-  }
-  
-  generarToken() {
-    this.http.get(this.concatUrl('tokenJWT/refrescarToken.php'));
   }
 
   // concatena la URL de localhost y la string que le pasemos
-   
   concatUrl(urlStr: string) {
     return URL_LOCALHOST + urlStr;
   }

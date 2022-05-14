@@ -62,17 +62,6 @@
     </div>
 </div>
 
-<!-- Mostrar podio del ranking seleccionado -->
-<div *ngIf="idModal === 6">
-    <div class="modal-header">
-        <h2 class="h1-modal">Podium</h2>
-        <button type="button" class="close" data-dismiss="modal" (click)="retornar()">&times;</button>
-    </div>
-    <div class="modal-body">
-        <app-modal-podium [rankSelec]="rankSelec"></app-modal-podium>
-    </div>
-</div>
-
 <!-- skills -->
 <div *ngIf="idModal === 7">
     <div class="modal-header">

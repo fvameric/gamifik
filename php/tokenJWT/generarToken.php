@@ -14,11 +14,11 @@
   $key = "example_key";
   $iat = time();
   $nbf = $iat + 10;
-  //$exp = $nbf + 7200; // 2 horas
-  $exp = $nbf + 10;
+  $exp = $iat + 7200; // 2 horas
+
   $payload = array(
-      "iss" => "http://example.org",
-      "aud" => "http://example.com",
+      "iss" => "http://gamifik.org",
+      "aud" => "http://gamifik.com",
       "iat" => $iat,
       "nbf" => $nbf,
       "exp" => $exp
