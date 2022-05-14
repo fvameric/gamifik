@@ -1,5 +1,8 @@
 {{skillSelec.nombre}} <br> {{alumnoSelec.nick}} <br><br>
 <br> {{skillSelec.descripcion}}
 <br> Evaluar:
-<input type="number" [(ngModel)]="puntosInput" max={{datosAlumno.puntos_semanales}}> / {{datosAlumno.puntos_semanales}}
+<input type="number" [(ngModel)]="puntosInput" max={{puntos_semanales}}> / {{puntos_semanales}}
 <input type="submit" (click)="onSubmit()">
+<div *ngIf="puntosError" class="invalid-feedback">
+    La puntuación debe ser entre 0 y {{puntos_semanales}}
+</div>

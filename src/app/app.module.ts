@@ -23,7 +23,6 @@ import { LoaderService } from 'services/loader.service';
 import { HeaderComponent } from './plantillas/header/header.component';
 import { FooterComponent } from './plantillas/footer/footer.component';
 import { SkeletonLoaderModule } from './plantillas/loader-skeleton/skeleton-loader/skeleton-loader.module';
-import { HomeComponent } from './plantillas/home/home.component';
 import { WavesComponent } from './plantillas/waves/waves.component';
 
 // Landing
@@ -56,7 +55,6 @@ import { ModalComponent } from './plantillas/modal/modal.component';
     ModalEditarRankingComponent,
     ModalEditarEntregaComponent,
     VerDetallesAlumnoComponent,
-    HomeComponent,
     ModalSkillComponent,
     LandingComponent,
     DashboardEvaluacionesComponent,

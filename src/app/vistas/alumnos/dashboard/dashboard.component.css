@@ -128,3 +128,13 @@ div.content {
     width: 30px;
     height: 30px;
 }
+
+.btn-copa {
+    border: none;
+    background: none;
+}
+
+.btn-copa:hover {
+    background-color: #ffc333;
+    border-radius: 5px;
+}

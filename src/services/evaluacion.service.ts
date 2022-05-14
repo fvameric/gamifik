@@ -41,6 +41,21 @@ export class EvaluacionService {
     return this.http.delete(this.concatUrl('evaluaciones/eliminarEvaluacion.php') + `?id=${id}`);
   }
 
+  getPuntosSemanales(id_alumno: number) {
+    return this.http.get(this.concatUrl('evaluaciones/getPuntosSemanales.php') + `?id_alumno=${id_alumno}`);
+  }
+
+  checkFechaPuntosSemanales(id_alumno: number) {
+    return this.http.get(this.concatUrl('evaluaciones/checkFechaPuntos.php') + `?id_alumno=${id_alumno}`);
+  }
+
+  renovarPuntosSemanales(id_alumno: number) {
+    var ids = {
+      id_alumno: id_alumno
+    }
+    return this.http.post(this.concatUrl('evaluaciones/renovarPuntosSemanales.php'), JSON.stringify(ids));
+  }
+
   // concatena la URL de localhost y la string que le pasemos
   concatUrl(urlStr: string) {
     return URL_LOCALHOST + urlStr;

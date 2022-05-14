@@ -27,9 +27,13 @@ $querySelect = "SELECT * FROM `evaluaciones` WHERE `id_alumno`='$evaluacion->id_
 $queryUpdate = "UPDATE `evaluaciones` SET `puntos`= `puntos` + $evaluacion->puntos,`fecha`='$evaluacion->fecha' WHERE `id_alumno`='$evaluacion->id_alumno' AND `id_evaluador`='$evaluacion->id_evaluador' AND `id_profesor`='$evaluacion->id_profesor' AND `id_ranking`='$evaluacion->id_ranking' AND `id_skill`='$evaluacion->id_skill'";
 $queryInsert = "INSERT INTO `evaluaciones`(`id_evaluacion`, `id_alumno`, `id_evaluador`, `id_profesor`, `id_ranking`, `id_skill`, `puntos`, `fecha`)
 VALUES (NULL,'$evaluacion->id_alumno','$evaluacion->id_evaluador','$evaluacion->id_profesor','$evaluacion->id_ranking','$evaluacion->id_skill','$evaluacion->puntos','$evaluacion->fecha')";
+$queryUpdatePoints = "UPDATE `alumno` SET `puntos_semanales`=`puntos_semanales` - $evaluacion->puntos WHERE `id_alumno`='$evaluacion->id_evaluador'";
 
 $resSelect = mysqli_query($con, $querySelect);
 if ($resSelect) {
+
+    mysqli_query($con, $queryUpdatePoints);
+
     if (mysqli_num_rows($resSelect)==0) {
         $resInsert = mysqli_query($con, $queryInsert);
 

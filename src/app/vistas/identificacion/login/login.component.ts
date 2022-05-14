@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       if (this.router.url == '/identificacion') {
 
-        // 1. pipe takeUntil para unsuscribe en ngOnDestroy
+        // pipe y takeUntil para cortar el observable en ngOnDestroy
         this.authService.loginAlumnos(user)
           .pipe(
             takeUntil(this.subject),

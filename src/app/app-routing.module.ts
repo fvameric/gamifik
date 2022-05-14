@@ -15,7 +15,6 @@ import { LandingComponent } from './vistas/landing/landing.component';
 
 // vistas
 import { LoginComponent } from './vistas/identificacion/login/login.component';
-import { HomeComponent } from './plantillas/home/home.component';
 
 // alumnos
 import { IdentificacionComponent } from './vistas/identificacion/identificacion/identificacion.component';
@@ -73,6 +72,5 @@ export const routingComponents = [
   ModalEntregaComponent,
   ModalPerfilAlumnoComponent,
   ModalEditarRankingComponent,
-  DarkModeComponent,
-  HomeComponent
+  DarkModeComponent
 ];

@@ -1,17 +1,4 @@
-<!--
-    
-    <button type="button " class="crear-ranking" (click)="enviar(nombreModal)">Crear</button>
-<ng-template #nombreModal let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h1>Crear ranking</h1>
-        <button type="button" class="close" data-dismiss="modal" (click)="retornar()">&times;</button>
-    </div>
-    <div class="modal-body">
-        <app-crear-ranking></app-crear-ranking>
-    </div>
-</ng-template>
--->
-
+<!-- Crear ranking -->
 <div *ngIf="idModal === 1">
     <div class="modal-header">
         <h1 class="h1-modal">Crear ranking</h1>
@@ -22,6 +9,7 @@
     </div>
 </div>
 
+<!-- Editar ranking -->
 <div *ngIf="idModal === 2">
     <div class="modal-header">
         <h2 class="h1-modal">Editar ranking</h2>
@@ -32,6 +20,7 @@
     </div>
 </div>
 
+<!-- Crear entrega -->
 <div *ngIf="idModal === 3">
     <div class="modal-header">
         <h2 class="h1-modal">Crear entrega</h2>
@@ -42,6 +31,7 @@
     </div>
 </div>
 
+<!-- Editar entrega -->
 <div *ngIf="idModal === 4">
     <div class="modal-header">
         <h2 class="h1-modal">Editar entrega</h2>
@@ -52,6 +42,7 @@
     </div>
 </div>
 
+<!-- Ver detalle del alumno -->
 <div *ngIf="idModal === 5">
     <div class="modal-header">
         <h2 class="h1-modal">Ver detalle usuario</h2>
@@ -63,7 +54,7 @@
 </div>
 
 <!-- skills -->
-<div *ngIf="idModal === 7">
+<div *ngIf="idModal === 6">
     <div class="modal-header">
         <h2 class="h1-modal">Skill</h2>
         <button type="button" class="close" data-dismiss="modal" (click)="retornar()">&times;</button>

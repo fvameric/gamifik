@@ -4,6 +4,7 @@ import { User } from 'app/interfaces/User';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { TokenService } from './token.service';
+import { EvaluacionService } from 'services/evaluacion.service';
 
 const URL_LOCALHOST = "http://localhost:8888/";
 const ROUTE_LS = 'userRoute';
@@ -15,7 +16,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private evaluacionService: EvaluacionService
   ) { }
 
   // utiliza loginAlumnos.php donde se selecciona el alumno por su user y contraseña
@@ -89,6 +91,24 @@ export class AuthService {
     console.log(data);
     if (data.resultado == 'ok') {
       if (data.data.tipo == 0) {
+        this.evaluacionService.checkFechaPuntosSemanales(data.data.id_alumno).subscribe(val => {
+          var dataPuntos: any = val;
+          var dataNow = new Date();
+          console.log(dataPuntos);
+          if (dataPuntos.data != null) {
+            var lunes = this.obtenerLunes(dataPuntos.data.fecha);
+
+            if (dataNow.getTime() > lunes.getTime()) {
+              console.log('siguiente semana, recupera puntos');
+              this.evaluacionService.renovarPuntosSemanales(data.data.id_alumno).subscribe(val => console.log(val));
+            } else {
+              console.log('anterior o misma semana, no recupera puntos');
+            }
+          } else {
+            this.evaluacionService.renovarPuntosSemanales(data.data.id_alumno).subscribe(val => console.log(val));
+          }
+         
+        });
         this.tokenService.saveToken(data.accessToken);
         this.tokenService.saveUser(data.data);
         this.router.navigate(['dashboard']);
@@ -100,6 +120,13 @@ export class AuthService {
     } else {
       this.generarSwal(data.mensaje);
     }
+  }
+
+  obtenerLunes(dataPuntos: Date) {
+    dataPuntos = new Date(dataPuntos);
+    var day = dataPuntos.getDay(),
+        diff = dataPuntos.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+    return new Date(dataPuntos.setDate(diff));
   }
 
   // guarda la última ruta donde se ubica el usuario
