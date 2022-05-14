@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 20, 2022 at 09:41 PM
+-- Generation Time: May 14, 2022 at 11:11 AM
 -- Server version: 5.6.13
 -- PHP Version: 5.4.17
 
@@ -59,7 +59,7 @@ INSERT INTO `alumno` (`id_alumno`, `nick`, `email`, `pass`, `nombre`, `apellidos
 (31, 'Maria1', 'maria1@gmail.com', '1HV0/buaKLxYs135DRY7SbvsRFoSsk45W8CGZ9yOnG9', 'María', 'Rosa Blanco', '1990-06-18', 0, 0x2f6173736574732f61766174617264656661756c742e706e67, 0),
 (32, 'Josep1', 'josep1@gmail.com', '1HV0/buaKLxYs135DRY7SbvsRFoSsk45W8CGZ9yOnG9', 'Josep', 'Hernandez', '1990-06-18', 0, 0x2f6173736574732f61766174617264656661756c742e706e67, 0),
 (33, 'Joel1', 'joel1@gmail.com', '1HV0/buaKLxYs135DRY7SbvsRFoSsk45W8CGZ9yOnG9', 'Joel', 'Villamartin Espert', '1990-06-18', 0, 0x2f6173736574732f61766174617264656661756c742e706e67, 0),
-(34, 'Marc1', 'marc1@gmail.com', '1HV0/buaKLxYs135DRY7SbvsRFoSsk45W8CGZ9yOnG9', 'Marc', 'Castells Soliva', '1990-06-18', 0, 0x2f6173736574732f61766174617264656661756c742e706e67, 0),
+(34, 'Marc1', 'marc1@gmail.com', '1HV0/buaKLxYs135DRY7SbvsRFoSsk45W8CGZ9yOnG9', 'Marc', 'Castells Soliva', '1990-06-18', 0, 0x2f6173736574732f61766174617264656661756c742e706e67, 100),
 (35, 'Ana1', 'ana1@gmail.com', '1HV0/buaKLxYs135DRY7SbvsRFoSsk45W8CGZ9yOnG9', 'Ana', 'María Ortíz', '1990-06-18', 0, 0x2f6173736574732f61766174617264656661756c742e706e67, 0),
 (36, 'Silvia1', 'silvia1@gmail.com', '1HV0/buaKLxYs135DRY7SbvsRFoSsk45W8CGZ9yOnG9', 'Silvia', 'Moya', '1990-06-18', 0, 0x2f6173736574732f61766174617264656661756c742e706e67, 0),
 (37, 'Luisa1', 'luisa1@gmail.com', '1HV0/buaKLxYs135DRY7SbvsRFoSsk45W8CGZ9yOnG9', 'Luisa', 'Nieto', '1990-06-18', 0, 0x2f6173736574732f61766174617264656661756c742e706e67, 0),
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `entrega` (
   PRIMARY KEY (`id_entrega`),
   KEY `id_entrega` (`id_entrega`),
   KEY `id_rank` (`id_rank`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `entrega`
@@ -106,7 +106,8 @@ CREATE TABLE IF NOT EXISTS `entrega` (
 
 INSERT INTO `entrega` (`id_entrega`, `nom_entrega`, `id_rank`) VALUES
 (16, 'Practica 1', 102),
-(17, 'Practica 2', 102);
+(17, 'Practica 2', 102),
+(18, 'test', 103);
 
 -- --------------------------------------------------------
 
@@ -129,14 +130,19 @@ CREATE TABLE IF NOT EXISTS `evaluaciones` (
   KEY `id_profesor` (`id_profesor`),
   KEY `id_ranking` (`id_ranking`),
   KEY `id_skill` (`id_skill`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
 --
 -- Dumping data for table `evaluaciones`
 --
 
 INSERT INTO `evaluaciones` (`id_evaluacion`, `id_alumno`, `id_evaluador`, `id_profesor`, `id_ranking`, `id_skill`, `puntos`, `fecha`) VALUES
-(2, 45, 24, 14, 102, 1, 100, '2022-04-20');
+(2, 45, 24, 14, 102, 1, 100, '2022-02-20'),
+(4, 34, 24, 14, 102, 2, 560, '2020-04-22'),
+(7, 39, 24, 14, 102, 0, 2, '2022-04-23'),
+(14, 34, 24, 14, 102, 1, 234, '2022-04-24'),
+(18, 26, 24, 14, 103, 0, 234, '2022-04-27'),
+(20, 25, 24, 14, 103, 1, 157, '2022-04-29');
 
 -- --------------------------------------------------------
 
@@ -221,10 +227,10 @@ CREATE TABLE IF NOT EXISTS `ranking` (
 --
 
 INSERT INTO `ranking` (`id_rank`, `nom_rank`, `alumnos`, `cod_rank`) VALUES
-(102, 'Ranking daw2', 24, 'KAM3GYTK4rMS'),
+(102, 'Ranking daw2', 23, 'KAM3GYTK4rMS'),
 (103, 'Fonsis', 0, 'BpPJKce4Qbx5'),
-(104, 'Ilerna DAM1', 0, 'dqKZE4KM8rZP'),
-(105, 'Ranking Clase 2', 0, 'V38eD2gzrVhg'),
+(104, 'Ilerna DAM1', 10, 'dqKZE4KM8rZP'),
+(105, 'Ranking Clase 2', 8, 'V38eD2gzrVhg'),
 (106, 'Rank Gamifik', 0, '4ub6UyqdM3NY'),
 (107, 'Bucodental', 0, 'CG29M6pEpyDL'),
 (108, 'Farmacia', 0, 'gTQyUxux8jVx'),
@@ -257,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `rank_alumnos` (
   PRIMARY KEY (`id_rank_alumnos`),
   KEY `id_rank` (`id_rank`),
   KEY `id_alumno` (`id_alumno`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=53 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=72 ;
 
 --
 -- Dumping data for table `rank_alumnos`
@@ -275,7 +281,6 @@ INSERT INTO `rank_alumnos` (`id_rank_alumnos`, `id_rank`, `id_alumno`, `puntuaci
 (25, 102, 32, 0, 1),
 (26, 102, 33, 0, 1),
 (27, 102, 34, 12, 1),
-(28, 102, 35, 0, 1),
 (29, 102, 36, 0, 1),
 (30, 102, 37, 0, 1),
 (31, 102, 38, 0, 1),
@@ -292,14 +297,27 @@ INSERT INTO `rank_alumnos` (`id_rank_alumnos`, `id_rank`, `id_alumno`, `puntuaci
 (42, 103, 26, 0, 1),
 (43, 103, 27, 0, 1),
 (44, 103, 28, 0, 1),
-(45, 104, 25, 0, 1),
 (46, 104, 26, 0, 1),
 (47, 104, 27, 0, 1),
 (48, 104, 28, 0, 1),
 (49, 104, 29, 0, 1),
 (50, 104, 30, 0, 1),
 (51, 104, 31, 0, 1),
-(52, 104, 32, 0, 1);
+(52, 104, 32, 0, 1),
+(53, 105, 47, 0, 1),
+(54, 105, 29, 0, 1),
+(55, 105, 41, 0, 1),
+(56, 105, 39, 0, 1),
+(57, 105, 38, 0, 1),
+(58, 105, 32, 0, 1),
+(59, 105, 25, 0, 1),
+(60, 105, 28, 0, 1),
+(61, 103, 24, 0, 1),
+(62, 105, 24, 0, 1),
+(68, 104, 25, 0, 1),
+(69, 106, 25, 0, 0),
+(70, 104, 46, 0, 1),
+(71, 104, 44, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -319,7 +337,7 @@ CREATE TABLE IF NOT EXISTS `rank_entregas` (
   KEY `id_rank_2` (`id_rank`),
   KEY `id_entrega_2` (`id_entrega`),
   KEY `id_alumno` (`id_alumno`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=95 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=100 ;
 
 --
 -- Dumping data for table `rank_entregas`
@@ -338,7 +356,6 @@ INSERT INTO `rank_entregas` (`id_rank_entregas`, `id_rank`, `id_entrega`, `id_al
 (56, 102, 16, 45, 3),
 (57, 102, 16, 46, 0),
 (58, 102, 16, 36, 0),
-(59, 102, 16, 35, 0),
 (60, 102, 16, 25, 0),
 (61, 102, 16, 26, 0),
 (62, 102, 16, 27, 0),
@@ -362,7 +379,6 @@ INSERT INTO `rank_entregas` (`id_rank_entregas`, `id_rank`, `id_entrega`, `id_al
 (80, 102, 17, 44, 0),
 (81, 102, 17, 46, 0),
 (82, 102, 17, 36, 0),
-(83, 102, 17, 35, 0),
 (84, 102, 17, 25, 1),
 (85, 102, 17, 26, 0),
 (86, 102, 17, 27, 0),
@@ -373,7 +389,12 @@ INSERT INTO `rank_entregas` (`id_rank_entregas`, `id_rank`, `id_entrega`, `id_al
 (91, 102, 17, 32, 0),
 (92, 102, 17, 33, 0),
 (93, 102, 17, 34, 12),
-(94, 102, 17, 24, 0);
+(94, 102, 17, 24, 0),
+(95, 103, 18, 25, 0),
+(96, 103, 18, 26, 0),
+(97, 103, 18, 27, 0),
+(98, 103, 18, 28, 0),
+(99, 103, 18, 24, 0);
 
 -- --------------------------------------------------------
 
@@ -398,23 +419,23 @@ INSERT INTO `rank_profes` (`id_rank_profes`, `id_rank`, `id_profe`) VALUES
 (4, 102, 14),
 (5, 103, 14),
 (6, 104, 14),
-(7, 105, 14),
-(8, 106, 14),
-(9, 107, 14),
-(10, 108, 14),
-(11, 109, 14),
-(12, 110, 14),
-(13, 111, 14),
-(14, 112, 14),
-(15, 113, 14),
-(16, 114, 14),
-(17, 115, 14),
-(18, 116, 14),
-(19, 117, 14),
-(20, 118, 14),
-(21, 119, 14),
-(22, 120, 14),
-(23, 121, 14);
+(7, 105, 18),
+(8, 106, 18),
+(9, 107, 18),
+(10, 108, 19),
+(11, 109, 20),
+(12, 110, 20),
+(13, 111, 21),
+(14, 112, 22),
+(15, 113, 23),
+(16, 114, 24),
+(17, 115, 25),
+(18, 116, 26),
+(19, 117, 27),
+(20, 118, 28),
+(21, 119, 29),
+(22, 120, 30),
+(23, 121, 31);
 
 --
 -- Constraints for dumped tables
