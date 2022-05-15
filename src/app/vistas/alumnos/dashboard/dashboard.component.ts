@@ -136,10 +136,10 @@ export class DashboardComponent implements OnInit {
     this.obtenerDatosRanking();
     
     const { value: test } = await Swal.fire({
-      title: 'Input',
+      title: 'Unirse a un ranking',
       input: 'text',
-      inputLabel: 'Input test',
-      inputPlaceholder: 'Escribe algo',
+      inputLabel: 'Escribe el código del ranking',
+      inputPlaceholder: 'Código del ranking',
       showCancelButton: true
     });
 
