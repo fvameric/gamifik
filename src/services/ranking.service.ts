@@ -5,7 +5,7 @@ import { Alumno } from 'app/interfaces/Alumno';
 import { map, take } from 'rxjs/operators';
 import { Entrega } from '../app/interfaces/Entrega';
 
-const URL_LOCALHOST = 'http://localhost:8888/';
+const URL_LOCALHOST = 'http://localhost:8080/';
 
 @Injectable({
   providedIn: 'root',

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
 
-const URL_LOCALHOST = 'http://localhost:8888/';
+const URL_LOCALHOST = 'http://localhost:8080/';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';

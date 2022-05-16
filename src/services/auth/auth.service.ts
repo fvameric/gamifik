@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { TokenService } from './token.service';
 import { EvaluacionService } from 'services/evaluacion.service';
 
-const URL_LOCALHOST = "http://localhost:8888/";
+const URL_LOCALHOST = "http://localhost:8080/";
 const ROUTE_LS = 'userRoute';
 
 @Injectable({
