@@ -2,7 +2,7 @@
 class claseBD {
     private $servidor   = 'localhost';
     private $usuario    = 'root';
-    private $pass       = 'usbw';
+    private $pass       = '';
     private $bd         = 'gamifik';
     private $con;
 
